@@ -12,7 +12,7 @@ CGraphicDevice::~CGraphicDevice()
 {
 }
 
-int CGraphicDevice::GraphicInit(HWND _hWnd, UINT _width, UINT _height)
+bool CGraphicDevice::GraphicInit(HWND _hWnd, UINT _width, UINT _height)
 {
 	DeviceHeight = _height;
 	DeviceWidth = _width;
@@ -68,7 +68,7 @@ int CGraphicDevice::GraphicInit(HWND _hWnd, UINT _width, UINT _height)
 	// RenderTarget Buffer 持失
 	if (FAILED(mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)mRenderTarget.GetAddressOf())))
 	{
-		return;
+		return false;
 	}
 
 	// rendertarget view 持失
@@ -93,6 +93,7 @@ int CGraphicDevice::GraphicInit(HWND _hWnd, UINT _width, UINT _height)
 	depthStencilDesc.MipLevels = 0;
 
 	D3D11_SUBRESOURCE_DATA data;
+
 	return true;
 }
 
@@ -115,7 +116,7 @@ bool CGraphicDevice::CreateTexture(const D3D11_TEXTURE2D_DESC* desc, void* data)
 	depthStencilDesc.MiscFlags = 0;
 	depthStencilDesc.MipLevels = 0;
 
-	D3D11_SUBRESOURCE_DATA data;
+	D3D11_SUBRESOURCE_DATA data = {};
 
 	return false;
 }

@@ -29,7 +29,7 @@ public:
 	CGraphicDevice();
 	~CGraphicDevice();
 
-	int GraphicInit(HWND _hWnd, UINT _width, UINT _height);
+	bool  GraphicInit(HWND _hWnd, UINT _width, UINT _height);
 
 	bool CreateTexture(const D3D11_TEXTURE2D_DESC* desc, void* data);
 

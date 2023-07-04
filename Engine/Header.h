@@ -20,8 +20,8 @@
 //#include "CommonInclude.h"
 //#include "CEnums.h"
 #include "CMath.h"
-using namespace Math;
 
+using namespace Math;
 using namespace Microsoft::WRL;
 using std::vector;
 //using std::list;
