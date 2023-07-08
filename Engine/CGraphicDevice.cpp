@@ -22,9 +22,11 @@ bool CGraphicDevice::GraphicInit(HWND _hWnd, UINT _width, UINT _height)
 	// Create device, context
 	D3D_FEATURE_LEVEL featureLevel = (D3D_FEATURE_LEVEL)0;
 
-	D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, D3D11_CREATE_DEVICE_DEBUG,
-		nullptr, 0, D3D11_SDK_VERSION, mDevice.GetAddressOf(),
-		&featureLevel, mContext.GetAddressOf());
+	D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE
+		, nullptr, D3D11_CREATE_DEVICE_DEBUG
+		,nullptr, 0
+		, D3D11_SDK_VERSION, mDevice.GetAddressOf()
+		,&featureLevel, mContext.GetAddressOf());
 
 	
 	CreateSwapChain();
@@ -62,18 +64,18 @@ bool CGraphicDevice::CreateSwapChain()
 	swapChainDesc.OutputWindow = mHwnd;
 	swapChainDesc.Windowed = true;
 	swapChainDesc.BufferCount = 2;
+	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 	swapChainDesc.BufferDesc.Width = DeviceWidth;
 	swapChainDesc.BufferDesc.Height = DeviceHeight;
 	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
-	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
+	swapChainDesc.BufferDesc.RefreshRate.Numerator = 240;
 	swapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
 	swapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER::DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_DISCARD;
+	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_FLIP_DISCARD;
 
 	swapChainDesc.SampleDesc.Count = 1;
 	swapChainDesc.SampleDesc.Quality = 0;
-	swapChainDesc.Flags = 0;
 
 	if (FAILED(pDXGIFactory->CreateSwapChain(pDXGIDevice.Get(), &swapChainDesc, mSwapChain.GetAddressOf())))
 	{
@@ -91,8 +93,9 @@ bool CGraphicDevice::CreateBuffer()
 		return false;
 	}
 
+
 	// Create Rendertarget view
-	mDevice->CreateRenderTargetView((ID3D11Resource*)mRenderTarget.Get(), nullptr, mRenderTargetView.GetAddressOf());
+	HRESULT hr = mDevice->CreateRenderTargetView(mRenderTarget.Get(), nullptr, mRenderTargetView.GetAddressOf());
 
 	// Create DepthStencil Buffer
 	D3D11_TEXTURE2D_DESC depthStencilDesc = {};
@@ -130,7 +133,6 @@ bool CGraphicDevice::CreateBuffer()
 
 bool CGraphicDevice::CreateTexture(const D3D11_TEXTURE2D_DESC* desc, void* data)
 {
-
 	return false;
 }
 
