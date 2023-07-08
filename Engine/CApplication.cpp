@@ -1,5 +1,4 @@
 #include "CApplication.h"
-#include "CGraphicDevice.h"
 #include "CTimeMgr.h"
 #include "CKeyMgr.h"
 
@@ -20,7 +19,7 @@ void CApplication::AppRun()
 	AppRender();
 }
 
-void CApplication::AppInitialize()
+void CApplication::AppInit()
 {
 	CGraphicDevice::GetInst()->GraphicInit(mHwnd, AppWidth, AppHeight);
 	CKeyMgr::GetInst()->Init(mHwnd);
@@ -35,6 +34,8 @@ void CApplication::AppRender()
 {
 	// Manager Render
 	CTimeMgr::GetInst()->Render(mHwnd);
+
+	pGraphicDevice->ClearRenderTarget();
 }
 
 void CApplication::SetWindow(HWND hwnd, UINT width, UINT height)

@@ -15,11 +15,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CGraphicDevice.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CGraphicShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CKeyMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CPathMgr.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)CRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CSingleton.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CTimeMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Graphic.h" />
@@ -27,11 +29,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CGraphicDevice.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CGraphicShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CKeyMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CPathMgr.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)CRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CTimeMgr.cpp" />
   </ItemGroup>
   <ItemGroup>

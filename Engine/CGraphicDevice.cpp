@@ -19,14 +19,45 @@ bool CGraphicDevice::GraphicInit(HWND _hWnd, UINT _width, UINT _height)
 
 	mHwnd = _hWnd;
 
-	// create device, context
+	// Create device, context
 	D3D_FEATURE_LEVEL featureLevel = (D3D_FEATURE_LEVEL)0;
 
 	D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, D3D11_CREATE_DEVICE_DEBUG,
 		nullptr, 0, D3D11_SDK_VERSION, mDevice.GetAddressOf(),
 		&featureLevel, mContext.GetAddressOf());
 
-	// create swapchian
+	
+	CreateSwapChain();
+
+	CreateBuffer();
+
+
+
+	return true;
+}
+
+
+bool CGraphicDevice::CreateSwapChain()
+{
+	// Create IDXGI
+	ComPtr<IDXGIDevice>  pDXGIDevice = nullptr;
+	ComPtr<IDXGIAdapter> pDXGIAdapter = nullptr;
+	ComPtr<IDXGIFactory> pDXGIFactory = nullptr;
+
+	if (FAILED(mDevice->QueryInterface(__uuidof(IDXGIDevice), (void**)pDXGIDevice.GetAddressOf())))
+	{
+		return false;
+	}
+	if (FAILED(pDXGIDevice->GetParent(__uuidof(IDXGIAdapter), (void**)pDXGIAdapter.GetAddressOf())))
+	{
+		return false;
+	}
+	if (FAILED(pDXGIAdapter->GetParent(__uuidof(IDXGIFactory), (void**)pDXGIFactory.GetAddressOf())))
+	{
+		return false;
+	}
+
+	// Create SwapChain
 	DXGI_SWAP_CHAIN_DESC swapChainDesc = {};
 	swapChainDesc.OutputWindow = mHwnd;
 	swapChainDesc.Windowed = true;
@@ -44,37 +75,26 @@ bool CGraphicDevice::GraphicInit(HWND _hWnd, UINT _width, UINT _height)
 	swapChainDesc.SampleDesc.Quality = 0;
 	swapChainDesc.Flags = 0;
 
-	ComPtr<IDXGIDevice>  pDXGIDevice = nullptr;
-	ComPtr<IDXGIAdapter> pAdapter = nullptr;
-	ComPtr<IDXGIFactory> pFactory = nullptr;
-
-	if (FAILED(mDevice->QueryInterface(__uuidof(IDXGIDevice), (void**)pDXGIDevice.GetAddressOf())))
-	{
-		return false;
-	}
-	if (FAILED(pDXGIDevice->GetParent(__uuidof(IDXGIAdapter), (void**)pAdapter.GetAddressOf())))
-	{
-		return false;
-	}
-	if (FAILED(pAdapter->GetParent(__uuidof(IDXGIFactory), (void**)pFactory.GetAddressOf())))
-	{
-		return false;
-	}
-	if (FAILED(pFactory->CreateSwapChain(mDevice.Get(), &swapChainDesc, mSwapChain.GetAddressOf())))
+	if (FAILED(pDXGIFactory->CreateSwapChain(pDXGIDevice.Get(), &swapChainDesc, mSwapChain.GetAddressOf())))
 	{
 		return false;
 	}
 
-	// RenderTarget Buffer 持失
+	return true;
+}
+
+bool CGraphicDevice::CreateBuffer()
+{
+	// Create RenderTarget Buffer (Get rendertarget by swapchain)
 	if (FAILED(mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)mRenderTarget.GetAddressOf())))
 	{
 		return false;
 	}
 
-	// rendertarget view 持失
+	// Create Rendertarget view
 	mDevice->CreateRenderTargetView((ID3D11Resource*)mRenderTarget.Get(), nullptr, mRenderTargetView.GetAddressOf());
 
-	// Depthstencil Buffer 持失
+	// Create DepthStencil Buffer
 	D3D11_TEXTURE2D_DESC depthStencilDesc = {};
 	depthStencilDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
 	depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -91,30 +111,50 @@ bool CGraphicDevice::GraphicInit(HWND _hWnd, UINT _width, UINT _height)
 
 	depthStencilDesc.MiscFlags = 0;
 	depthStencilDesc.MipLevels = 0;
+
+	if (FAILED(mDevice->CreateTexture2D(&depthStencilDesc, nullptr, mDepthStencilBuffer.ReleaseAndGetAddressOf())))
+	{
+		return false;
+	}
+
+	// Create DepthStencil View
+	if (FAILED(mDevice->CreateDepthStencilView(mDepthStencilBuffer.Get(), nullptr, mDepthStencilView.GetAddressOf())))
+	{
+		return false;
+	}
 
 	return true;
 }
 
+
+
 bool CGraphicDevice::CreateTexture(const D3D11_TEXTURE2D_DESC* desc, void* data)
 {
-	D3D11_TEXTURE2D_DESC depthStencilDesc = {};
-	depthStencilDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
-	depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
-	depthStencilDesc.CPUAccessFlags = 0;
-
-	depthStencilDesc.Format = DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT;
-
-	depthStencilDesc.Width = DeviceWidth;
-	depthStencilDesc.Height = DeviceHeight;
-	depthStencilDesc.ArraySize = 1;
-
-	depthStencilDesc.SampleDesc.Count = 1;
-	depthStencilDesc.SampleDesc.Quality = 0;
-
-	depthStencilDesc.MiscFlags = 0;
-	depthStencilDesc.MipLevels = 0;
-
-	//D3D11_SUBRESOURCE_DATA data = {};
 
 	return false;
+}
+
+
+bool CGraphicDevice::CreateVertexShader()
+{
+	return false;
+}
+
+bool CGraphicDevice::CreatePixelShader()
+{
+	return false;
+}
+
+bool CGraphicDevice::CreateInputLayout()
+{
+	return false;
+}
+
+void CGraphicDevice::ClearRenderTarget()
+{
+	// rendertarget clear
+	FLOAT bgColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
+	mContext->ClearRenderTargetView(mRenderTargetView.Get(), bgColor);
+	mContext->ClearDepthStencilView(mDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, (UINT8)0.0f);
+	mContext->OMSetRenderTargets(1, mRenderTargetView.GetAddressOf(), mDepthStencilView.Get());
 }

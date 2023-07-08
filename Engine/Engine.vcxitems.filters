@@ -28,6 +28,12 @@
     <Filter Include="Common\Math">
       <UniqueIdentifier>{3c09a2dd-2abf-438a-9f07-3358b61aea04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphic\GraphicShader">
+      <UniqueIdentifier>{aad3808d-0ca0-465e-9387-933fdbb06b70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic\Mesh">
+      <UniqueIdentifier>{ce4dca45-d536-4a0d-9c60-0d8cece189d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -57,8 +63,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Graphic.h">
       <Filter>Graphic</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CRenderer.h">
-      <Filter>Graphic</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CEntity.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CGraphicShader.h">
+      <Filter>Graphic\GraphicShader</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CMesh.h">
+      <Filter>Graphic\Mesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,8 +92,14 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CMath.cpp">
       <Filter>Common\Math</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CRenderer.cpp">
-      <Filter>Graphic</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CEntity.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CGraphicShader.cpp">
+      <Filter>Graphic\GraphicShader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CMesh.cpp">
+      <Filter>Graphic\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

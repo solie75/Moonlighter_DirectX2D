@@ -1,4 +1,8 @@
 #pragma once
+
+#include <d3d11.h>
+#pragma comment(lib, "d3d11.lib")
+
 #include <string>
 #include <assert.h>
 #include <Windows.h>
@@ -21,3 +25,4 @@
 using namespace Math;
 using namespace Microsoft::WRL;
 using std::vector;
+
