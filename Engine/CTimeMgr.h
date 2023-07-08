@@ -21,6 +21,6 @@ public:
 	void Update();
 	void Render(HWND _hWnd);
 
-	float GetDeltaTime() { return mDeltaTime; }
+	double GetDeltaTime() { return mDeltaTime; }
 };
 

@@ -65,7 +65,7 @@ void CKeyMgr::Update()
 		POINT ptMousePos = {};
 		GetCursorPos(&ptMousePos);
 		ScreenToClient(mHwnd, &ptMousePos);
-		mMousePos = Vector2((double)ptMousePos.x, (double)ptMousePos.y);
+		mMousePos = Vector2((float)ptMousePos.x, (float)ptMousePos.y);
 	}
 	else // 해당 윈도우가 포커싱 상태가 아닌 경우
 	{

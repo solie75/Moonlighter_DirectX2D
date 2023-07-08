@@ -1,7 +1,6 @@
 #pragma once
-#include "Header.h"
 #include <math.h>
-
+#include <Windows.h>
 
 //https://github.com/microsoft/DirectXMath
 #if __has_include("DirectXMath.h")
@@ -13,7 +12,7 @@
 #include <DirectXCollision.h>
 #endif
 
-#define XM_CONSTEXPR
+//#define XM_CONSTEXPR
 
 using namespace DirectX;
 using namespace DirectX::PackedVector;

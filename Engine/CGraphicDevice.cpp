@@ -92,8 +92,6 @@ bool CGraphicDevice::GraphicInit(HWND _hWnd, UINT _width, UINT _height)
 	depthStencilDesc.MiscFlags = 0;
 	depthStencilDesc.MipLevels = 0;
 
-	D3D11_SUBRESOURCE_DATA data;
-
 	return true;
 }
 
@@ -116,7 +114,7 @@ bool CGraphicDevice::CreateTexture(const D3D11_TEXTURE2D_DESC* desc, void* data)
 	depthStencilDesc.MiscFlags = 0;
 	depthStencilDesc.MipLevels = 0;
 
-	D3D11_SUBRESOURCE_DATA data = {};
+	//D3D11_SUBRESOURCE_DATA data = {};
 
 	return false;
 }
