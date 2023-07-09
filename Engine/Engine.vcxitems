@@ -22,10 +22,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CPathMgr.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CRenderMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CSingleton.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CTimeMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Graphic.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Struct.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp" />
@@ -36,6 +38,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CPathMgr.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CRenderMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CTimeMgr.cpp" />
   </ItemGroup>
   <ItemGroup>

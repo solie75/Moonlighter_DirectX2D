@@ -31,9 +31,7 @@ bool CGraphicDevice::GraphicInit(HWND _hWnd, UINT _width, UINT _height)
 	
 	CreateSwapChain();
 
-	CreateBuffer();
-
-
+	CreateBufferAndView();
 
 	return true;
 }
@@ -85,14 +83,13 @@ bool CGraphicDevice::CreateSwapChain()
 	return true;
 }
 
-bool CGraphicDevice::CreateBuffer()
+bool CGraphicDevice::CreateBufferAndView()
 {
 	// Create RenderTarget Buffer (Get rendertarget by swapchain)
 	if (FAILED(mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)mRenderTarget.GetAddressOf())))
 	{
 		return false;
 	}
-
 
 	// Create Rendertarget view
 	HRESULT hr = mDevice->CreateRenderTargetView(mRenderTarget.Get(), nullptr, mRenderTargetView.GetAddressOf());
@@ -129,29 +126,6 @@ bool CGraphicDevice::CreateBuffer()
 	return true;
 }
 
-
-
-bool CGraphicDevice::CreateTexture(const D3D11_TEXTURE2D_DESC* desc, void* data)
-{
-	return false;
-}
-
-
-bool CGraphicDevice::CreateVertexShader()
-{
-	return false;
-}
-
-bool CGraphicDevice::CreatePixelShader()
-{
-	return false;
-}
-
-bool CGraphicDevice::CreateInputLayout()
-{
-	return false;
-}
-
 void CGraphicDevice::ClearRenderTarget()
 {
 	// rendertarget clear
@@ -159,4 +133,44 @@ void CGraphicDevice::ClearRenderTarget()
 	mContext->ClearRenderTargetView(mRenderTargetView.Get(), bgColor);
 	mContext->ClearDepthStencilView(mDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, (UINT8)0.0f);
 	mContext->OMSetRenderTargets(1, mRenderTargetView.GetAddressOf(), mDepthStencilView.Get());
+
+	//mSwapChain->Present(0, 0);
 }
+
+void CGraphicDevice::UpdateViewPort()
+{
+	RECT winRect = {};
+	GetClientRect(mHwnd, &winRect);
+	mViewPort = {
+			0.0f, 0.0f
+			, (float)(winRect.right - winRect.left)
+			, (float)(winRect.bottom - winRect.top)
+			, 0.0f, 1.0f
+	};
+
+	mContext->RSSetViewports(1, &mViewPort);
+}
+
+
+
+
+//bool CGraphicDevice::CreateTexture(const D3D11_TEXTURE2D_DESC* desc, void* data)
+//{
+//	return false;
+//}
+//
+//
+//bool CGraphicDevice::CreateVertexShader()
+//{
+//	return false;
+//}
+//
+//bool CGraphicDevice::CreatePixelShader()
+//{
+//	return false;
+//}
+//
+//bool CGraphicDevice::CreateInputLayout()
+//{
+//	return false;
+//}

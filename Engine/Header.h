@@ -20,9 +20,8 @@
 #include <filesystem>
 #include <wrl.h>
 
-#include "CMath.h"
+#include "Struct.h"
 
-using namespace Math;
 using namespace Microsoft::WRL;
 using std::vector;
 

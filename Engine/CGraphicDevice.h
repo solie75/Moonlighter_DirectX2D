@@ -29,15 +29,19 @@ public:
 
 	bool GraphicInit(HWND _hWnd, UINT _width, UINT _height);
 	bool CreateSwapChain();
-	bool CreateBuffer();
-	bool CreateTexture(const D3D11_TEXTURE2D_DESC* desc, void* data);
-	bool CreateVertexShader();
-	bool CreatePixelShader();
-	bool CreateInputLayout();
+	bool CreateBufferAndView();
+	//bool CreateTexture(const D3D11_TEXTURE2D_DESC* desc, void* data);
+	//bool CreateVertexShader();
+	//bool CreatePixelShader();
+	//bool CreateInputLayout();
 
 	void ClearRenderTarget();
 
+
 	ID3D11Device* GetDevice() { return mDevice.Get(); }
-	//ID3D11DeviceContext* GetDeviceContext() { return mContext.Get(); }
+	ID3D11DeviceContext* GetContext() { return mContext.Get(); }
+	IDXGISwapChain* GetSwapChain() { return mSwapChain.Get(); }
+
+	void UpdateViewPort();
 };
 

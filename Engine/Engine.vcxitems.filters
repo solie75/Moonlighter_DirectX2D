@@ -34,6 +34,9 @@
     <Filter Include="Graphic\Mesh">
       <UniqueIdentifier>{ce4dca45-d536-4a0d-9c60-0d8cece189d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\RenderMgr">
+      <UniqueIdentifier>{28316f77-aac3-44cf-9eb7-469065b52090}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -72,6 +75,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CMesh.h">
       <Filter>Graphic\Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Struct.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CRenderMgr.h">
+      <Filter>Manager\RenderMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -100,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CMesh.cpp">
       <Filter>Graphic\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CRenderMgr.cpp">
+      <Filter>Manager\RenderMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

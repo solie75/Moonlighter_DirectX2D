@@ -2,7 +2,7 @@
 
 #include "CSingleton.h"
 #include "Header.h"
-#include "CGraphicDevice.h"
+#include "CGraphicShader.h"
 
 class CApplication
 	: CSingleton<CApplication>
@@ -12,7 +12,7 @@ private:
 	UINT AppWidth;
 	UINT AppHeight;
 
-	CGraphicDevice* pGraphicDevice;
+	//CGraphicDevice* pGraphicDevice;
 
 public:
 	CApplication();
