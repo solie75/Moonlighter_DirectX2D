@@ -25,6 +25,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CRenderMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CSingleton.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CTimeMgr.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Enum.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Graphic.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Struct.h" />

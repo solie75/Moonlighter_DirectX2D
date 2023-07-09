@@ -25,13 +25,19 @@ void CApplication::AppInit()
 	// device, context, swapchain, rendertarget buffer&view, depthstencil buffer&view
 	CGraphicDevice::GetInst()->GraphicInit(mHwnd, AppWidth, AppHeight);
 
+	// viewport
+	CGraphicDevice::GetInst()->UpdateViewPort();
+
 	// VS & PS Shader, InputLayout
 	CGraphicShader::GetInst()->Init();
 
+	// Init Key Setting
 	CKeyMgr::GetInst()->Init(mHwnd);
+
+	// triangle vertexses, vertex buffer, index buffer
 	CRenderMgr::GetInst()->Init();
 
-	CGraphicDevice::GetInst()->UpdateViewPort();
+
 }
 
 void CApplication::AppUpdate()
@@ -58,6 +64,7 @@ void CApplication::AppRender()
 
 	// DrawIndexed, Present
 	CRenderMgr::GetInst()->Render();
+
 }
 
 void CApplication::SetWindow(HWND hwnd, UINT width, UINT height)

@@ -16,6 +16,9 @@ private:
 	D3D11_BUFFER_DESC mVBDesc;
 	D3D11_BUFFER_DESC mIBDesc;
 
+	ComPtr<ID3D11Buffer> mCBBuffer;
+	D3D11_BUFFER_DESC mCBDesc;
+
 public:
 	CRenderMgr();
 	~CRenderMgr();

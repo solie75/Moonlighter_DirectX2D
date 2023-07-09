@@ -81,6 +81,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CRenderMgr.h">
       <Filter>Manager\RenderMgr</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Enum.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
