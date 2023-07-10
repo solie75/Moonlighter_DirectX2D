@@ -18,19 +18,19 @@ enum class eShaderStage
 	End,
 };
 
-enum class CBType
+enum class eCBType
 {
 	Transform,
 	End,
 };
 
-struct Vertex
+struct tVertex
 {
 	Vector3 pos;
-	Vector4 Color;
+	Vector4 color;
 };
 
-struct Transform
+struct tTransform
 {
 	Vector4 pos;
 	Vector4 scale;

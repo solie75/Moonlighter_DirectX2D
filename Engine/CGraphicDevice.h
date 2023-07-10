@@ -42,6 +42,7 @@ public:
 	ID3D11DeviceContext* GetContext() { return mContext.Get(); }
 	IDXGISwapChain* GetSwapChain() { return mSwapChain.Get(); }
 
+
 	void UpdateViewPort();
 };
 
