@@ -1,6 +1,6 @@
-#include "CGraphicDevice.h"
+#include "CDevice.h"
 
-CGraphicDevice::CGraphicDevice()
+CDevice::CDevice()
 	: DeviceHeight(-1)
 	, DeviceWidth(-1)
 	, mViewPort{}
@@ -8,11 +8,11 @@ CGraphicDevice::CGraphicDevice()
 {
 }
 
-CGraphicDevice::~CGraphicDevice()
+CDevice::~CDevice()
 {
 }
 
-bool CGraphicDevice::GraphicInit(HWND _hWnd, UINT _width, UINT _height)
+bool CDevice::GraphicInit(HWND _hWnd, UINT _width, UINT _height)
 {
 	DeviceHeight = _height;
 	DeviceWidth = _width;
@@ -37,7 +37,7 @@ bool CGraphicDevice::GraphicInit(HWND _hWnd, UINT _width, UINT _height)
 }
 
 
-bool CGraphicDevice::CreateSwapChain()
+bool CDevice::CreateSwapChain()
 {
 	// Create IDXGI
 	ComPtr<IDXGIDevice>  pDXGIDevice = nullptr;
@@ -83,7 +83,7 @@ bool CGraphicDevice::CreateSwapChain()
 	return true;
 }
 
-bool CGraphicDevice::CreateBufferAndView()
+bool CDevice::CreateBufferAndView()
 {
 	// Create RenderTarget Buffer (Get rendertarget by swapchain)
 	if (FAILED(mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)mRenderTarget.GetAddressOf())))
@@ -126,7 +126,7 @@ bool CGraphicDevice::CreateBufferAndView()
 	return true;
 }
 
-void CGraphicDevice::ClearRenderTarget()
+void CDevice::ClearRenderTarget()
 {
 	// rendertarget clear
 	FLOAT bgColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
@@ -137,7 +137,7 @@ void CGraphicDevice::ClearRenderTarget()
 	//mSwapChain->Present(0, 0);
 }
 
-void CGraphicDevice::UpdateViewPort()
+void CDevice::UpdateViewPort()
 {
 	RECT winRect = {};
 	GetClientRect(mHwnd, &winRect);
@@ -154,23 +154,23 @@ void CGraphicDevice::UpdateViewPort()
 
 
 
-//bool CGraphicDevice::CreateTexture(const D3D11_TEXTURE2D_DESC* desc, void* data)
+//bool CDevice::CreateTexture(const D3D11_TEXTURE2D_DESC* desc, void* data)
 //{
 //	return false;
 //}
 //
 //
-//bool CGraphicDevice::CreateVertexShader()
+//bool CDevice::CreateVertexShader()
 //{
 //	return false;
 //}
 //
-//bool CGraphicDevice::CreatePixelShader()
+//bool CDevice::CreatePixelShader()
 //{
 //	return false;
 //}
 //
-//bool CGraphicDevice::CreateInputLayout()
+//bool CDevice::CreateInputLayout()
 //{
 //	return false;
 //}

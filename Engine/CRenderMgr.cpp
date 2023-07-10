@@ -5,7 +5,7 @@ CRenderMgr::CRenderMgr()
 	, mIBDesc{}
 	, mCB{}
 {
-	mGraphicContext = CGraphicDevice::GetInst()->GetContext();
+	mGraphicContext = CDevice::GetInst()->GetContext();
 }
 
 CRenderMgr::~CRenderMgr()
@@ -24,8 +24,8 @@ void CRenderMgr::Update()
 void CRenderMgr::Render()
 {
 	mGraphicContext->DrawIndexed(6, 0, 0);
-	//CGraphicDevice::GetInst()->GetContext()->Draw(4, 0);
-	HRESULT hr = CGraphicDevice::GetInst()->GetSwapChain()->Present(0, 0);
+	//CDevice::GetInst()->GetContext()->Draw(4, 0);
+	HRESULT hr = CDevice::GetInst()->GetSwapChain()->Present(0, 0);
 }
 
 bool CRenderMgr::CreateBuffer()
@@ -59,7 +59,7 @@ bool CRenderMgr::CreateBuffer()
 	subData.pSysMem = vertexes;
 
 	// Create VertexBuffer
-	CGraphicDevice::GetInst()->GetDevice()->CreateBuffer(&mVBDesc, &subData, mVertexBuffer.GetAddressOf());
+	CDevice::GetInst()->GetDevice()->CreateBuffer(&mVBDesc, &subData, mVertexBuffer.GetAddressOf());
 
 	// Init Index array
 	std::vector<UINT> indexes = {};
@@ -81,7 +81,7 @@ bool CRenderMgr::CreateBuffer()
 	subData.pSysMem = indexes.data();
 
 	// Create IndexBuffer
-	CGraphicDevice::GetInst()->GetDevice()->CreateBuffer(&mIBDesc, &subData, mIndexBuffer.GetAddressOf());
+	CDevice::GetInst()->GetDevice()->CreateBuffer(&mIBDesc, &subData, mIndexBuffer.GetAddressOf());
 	
 
 	// Set Constant Buffer Description
@@ -92,7 +92,7 @@ bool CRenderMgr::CreateBuffer()
 	mCB.eType = eCBType::Transform;
 
 	// Create Constant Buffer
-	CGraphicDevice::GetInst()->GetDevice()->CreateBuffer(&(mCB.mDesc), nullptr, mCB.mBuffer.GetAddressOf());
+	CDevice::GetInst()->GetDevice()->CreateBuffer(&(mCB.mDesc), nullptr, mCB.mBuffer.GetAddressOf());
 	
 	// Set Constant Buffer
 	Vector4 pos(0.3f, 0.0f, 0.0f, 1.0f);

@@ -3,8 +3,8 @@
 #include "Header.h"
 #include "CSingleton.h"
 
-class CGraphicDevice
-	: public CSingleton<CGraphicDevice>
+class CDevice
+	: public CSingleton<CDevice>
 {
 private:
 	ComPtr<ID3D11Device> mDevice;
@@ -24,8 +24,8 @@ private:
 
 	HWND mHwnd;
 public:
-	CGraphicDevice();
-	~CGraphicDevice();
+	CDevice();
+	~CDevice();
 
 	bool GraphicInit(HWND _hWnd, UINT _width, UINT _height);
 	bool CreateSwapChain();

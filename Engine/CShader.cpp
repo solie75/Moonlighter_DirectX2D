@@ -1,20 +1,20 @@
-#include "CGraphicShader.h"
+#include "CShader.h"
 
-CGraphicShader::CGraphicShader()
+CShader::CShader()
 {
 }
 
-CGraphicShader::~CGraphicShader()
+CShader::~CShader()
 {
 }
 
-void CGraphicShader::Init()
+void CShader::Init()
 {
 	CreateShader();
 	CreateInputLayout();
 }
 
-bool CGraphicShader::CreateShader()
+bool CShader::CreateShader()
 {
 	// Shader Path
 	std::filesystem::path shaderPath = std::filesystem::current_path().parent_path();
@@ -37,7 +37,7 @@ bool CGraphicShader::CreateShader()
 	}
 
 	// VertexShader 생성
-	CGraphicDevice::GetInst()->GetDevice()->CreateVertexShader(mVSBlob->GetBufferPointer()
+	CDevice::GetInst()->GetDevice()->CreateVertexShader(mVSBlob->GetBufferPointer()
 		, mVSBlob->GetBufferSize(), nullptr, mVSShader.GetAddressOf());
 
 	// PS shader Path
@@ -49,7 +49,7 @@ bool CGraphicShader::CreateShader()
 		, "main", "ps_5_0", 0, 0
 		, mPSBlob.GetAddressOf(), mErrorBlob.GetAddressOf());
 
-	CGraphicDevice::GetInst()->GetDevice()->CreatePixelShader(mPSBlob->GetBufferPointer()
+	CDevice::GetInst()->GetDevice()->CreatePixelShader(mPSBlob->GetBufferPointer()
 		, mPSBlob->GetBufferSize(), nullptr, mPSShader.GetAddressOf());
 
 	// Shader 컴파일 과정의 오류를 문자열로 보여줌.
@@ -62,7 +62,7 @@ bool CGraphicShader::CreateShader()
 	return true;
 }
 
-bool CGraphicShader::CreateInputLayout()
+bool CShader::CreateInputLayout()
 {
 	D3D11_INPUT_ELEMENT_DESC arrLayout[2] = {};
 	//D3D11_INPUT_ELEMENT_DESC arrLayout[3] = {};
@@ -89,21 +89,21 @@ bool CGraphicShader::CreateInputLayout()
 	//arrLayout[2].SemanticName = "TEXCOORD";
 	//arrLayout[2].SemanticIndex = 0;
 
-	CGraphicDevice::GetInst()->GetDevice()->CreateInputLayout(arrLayout, 2
+	CDevice::GetInst()->GetDevice()->CreateInputLayout(arrLayout, 2
 		, mVSBlob->GetBufferPointer(), mVSBlob->GetBufferSize()
 		, mInputLayout.GetAddressOf());
 
 	return true;
 }
 
-void CGraphicShader::BindsShader()
+void CShader::BindsShader()
 {
-	CGraphicDevice::GetInst()->GetContext()->VSSetShader(mVSShader.Get(), 0, 0);
-	CGraphicDevice::GetInst()->GetContext()->PSSetShader(mPSShader.Get(), 0, 0);
+	CDevice::GetInst()->GetContext()->VSSetShader(mVSShader.Get(), 0, 0);
+	CDevice::GetInst()->GetContext()->PSSetShader(mPSShader.Get(), 0, 0);
 }
 
-void CGraphicShader::BindInputLayout()
+void CShader::BindInputLayout()
 {
-	CGraphicDevice::GetInst()->GetContext()->IASetInputLayout(mInputLayout.Get());
-	CGraphicDevice::GetInst()->GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	CDevice::GetInst()->GetContext()->IASetInputLayout(mInputLayout.Get());
+	CDevice::GetInst()->GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }

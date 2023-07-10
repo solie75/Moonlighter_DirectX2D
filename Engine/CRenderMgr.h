@@ -1,7 +1,7 @@
 #pragma once
 #include "Header.h"
 #include "CSingleton.h"
-#include "CGraphicDevice.h"
+#include "CDevice.h"
 #include "Graphic.h"
 
 

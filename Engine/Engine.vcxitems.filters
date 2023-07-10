@@ -31,11 +31,14 @@
     <Filter Include="Graphic\GraphicShader">
       <UniqueIdentifier>{aad3808d-0ca0-465e-9387-933fdbb06b70}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphic\Mesh">
-      <UniqueIdentifier>{ce4dca45-d536-4a0d-9c60-0d8cece189d9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Manager\RenderMgr">
       <UniqueIdentifier>{28316f77-aac3-44cf-9eb7-469065b52090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{8731ec08-b804-4e60-b8c6-6f4042210ebf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Mesh">
+      <UniqueIdentifier>{ce4dca45-d536-4a0d-9c60-0d8cece189d9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -45,7 +48,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CApplication.h">
       <Filter>Application</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CGraphicDevice.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDevice.h">
       <Filter>Graphic\GraphicDevice</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CSingleton.h">
@@ -69,11 +72,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CEntity.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CGraphicShader.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)CShader.h">
       <Filter>Graphic\GraphicShader</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CMesh.h">
-      <Filter>Graphic\Mesh</Filter>
+      <Filter>Resource\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Struct.h">
       <Filter>Common</Filter>
@@ -89,7 +92,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
       <Filter>Application</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CGraphicDevice.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDevice.cpp">
       <Filter>Graphic\GraphicDevice</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CTimeMgr.cpp">
@@ -107,11 +110,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CEntity.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CGraphicShader.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)CShader.cpp">
       <Filter>Graphic\GraphicShader</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CMesh.cpp">
-      <Filter>Graphic\Mesh</Filter>
+      <Filter>Resource\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CRenderMgr.cpp">
       <Filter>Manager\RenderMgr</Filter>

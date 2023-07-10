@@ -1,9 +1,9 @@
 #pragma once
 #include "CSingleton.h"
 #include "Graphic.h"
-#include "CGraphicDevice.h"
+#include "CDevice.h"
 
-class CGraphicShader : public CSingleton<CGraphicShader>
+class CShader : public CSingleton<CShader>
 {
 private:
 	ComPtr<ID3DBlob> mErrorBlob = nullptr;
@@ -14,8 +14,8 @@ private:
 
 	ComPtr<ID3D11InputLayout> mInputLayout = nullptr;
 public:
-	CGraphicShader();
-	~CGraphicShader();
+	CShader();
+	~CShader();
 
 	void Init();
 
