@@ -22,22 +22,17 @@ void CApplication::AppRun()
 
 void CApplication::AppInit()
 {
+	// Init Key Setting
+	CKeyMgr::GetInst()->Init(mHwnd);
+
 	// device, context, swapchain, rendertarget buffer&view, depthstencil buffer&view
 	CGraphicDevice::GetInst()->GraphicInit(mHwnd, AppWidth, AppHeight);
-
-	// viewport
-	CGraphicDevice::GetInst()->UpdateViewPort();
 
 	// VS & PS Shader, InputLayout
 	CGraphicShader::GetInst()->Init();
 
-	// Init Key Setting
-	CKeyMgr::GetInst()->Init(mHwnd);
-
 	// triangle vertexses, vertex buffer, index buffer
 	CRenderMgr::GetInst()->Init();
-
-
 }
 
 void CApplication::AppUpdate()
