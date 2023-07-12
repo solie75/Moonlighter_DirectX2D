@@ -1,6 +1,13 @@
 #include "Header.hlsli"
 
+Texture2D smileTexture : register(t0);
+SamplerState pointSampler : register(s0);
+SamplerState anisotropicSampler : register(s1);
+
 float4 main(VSOut In) : SV_TARGET
 {
-    return In.Color;
+    float4 color = (float) 0.0f;
+    color = smileTexture.Sample(pointSampler, In.UV);
+    
+    return color;
 }

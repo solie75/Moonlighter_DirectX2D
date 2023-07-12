@@ -1,4 +1,5 @@
 #include "CRenderMgr.h"
+#include "CTexture.h"
 
 CRenderMgr::CRenderMgr()
 	: mCB{}
@@ -12,10 +13,30 @@ CRenderMgr::~CRenderMgr()
 
 void CRenderMgr::Init()
 {
+	// Create CShader
+	mShader = new CShader;
+	mShader->CreateShader();
+	mShader->CreateInputLayout();
+	mShader->BindsShader();
+	mShader->BindInputLayout();
+
+	// Create Mesh
 	mMesh = new CMesh;
 	mMesh->CreateBuffer();
 	mMesh->BindBuffer();
+
+	// Create & Bind CB
 	CreateConstantBuffer();
+	// Bind Constant Buffer	
+	BindConstantBuffer(eShaderStage::VS, mCB);
+
+	// Create Texture
+	CTexture* texture = new CTexture;
+	texture->ResourceLoad(L"Smile", L"..\\Resource\\Texture\\Smile.png");
+	texture->BindShaderResource(eShaderStage::PS, 0);
+
+	// Set Sampler
+	SetUpState();
 }
 
 void CRenderMgr::Update()
@@ -47,9 +68,6 @@ bool CRenderMgr::CreateConstantBuffer()
 	mGraphicContext->Map(mCB.mBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &subRes);
 	memcpy(subRes.pData, &pos, mCB.mDesc.ByteWidth);
 	mGraphicContext->Unmap(mCB.mBuffer.Get(), 0);
-
-	// Bind Constant Buffer	
-	BindConstantBuffer(eShaderStage::VS, mCB);
 
 	return true;
 }
@@ -83,4 +101,46 @@ void CRenderMgr::BindConstantBuffer(eShaderStage stage, tConstantBuffer tCB)
 	}
 }
 
+void CRenderMgr::SetUpState()
+{
+	D3D11_SAMPLER_DESC samplerDecs = {};
+	samplerDecs.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDecs.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDecs.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDecs.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+	HRESULT hr = CDevice::GetInst()->GetDevice()->CreateSamplerState(&samplerDecs, samplerState[(UINT)eSamplerType::Point].GetAddressOf());
+	BindSampler(eShaderStage::PS, 0, samplerState[(UINT)eSamplerType::Point].GetAddressOf());
 
+	samplerDecs.Filter = D3D11_FILTER_ANISOTROPIC;
+	CDevice::GetInst()->GetDevice()->CreateSamplerState(&samplerDecs, samplerState[(UINT)eSamplerType::Anisotropic].GetAddressOf());
+	BindSampler(eShaderStage::PS, 1, samplerState[(UINT)eSamplerType::Anisotropic].GetAddressOf());
+}
+
+void CRenderMgr::BindSampler(eShaderStage stage, UINT StartSlot, ID3D11SamplerState** ppSamplerState)
+{
+	switch (stage)
+	{
+	case eShaderStage::VS:
+		mGraphicContext->VSSetSamplers(StartSlot, 1, ppSamplerState);
+		break;
+	case eShaderStage::HS:
+		mGraphicContext->HSSetSamplers(StartSlot, 1, ppSamplerState);
+		break;
+	case eShaderStage::DS:
+		mGraphicContext->DSSetSamplers(StartSlot, 1, ppSamplerState);
+		break;
+	case eShaderStage::GS:
+		mGraphicContext->GSSetSamplers(StartSlot, 1, ppSamplerState);
+		break;
+	case eShaderStage::PS:
+		mGraphicContext->PSSetSamplers(StartSlot, 1, ppSamplerState);
+		break;
+	case eShaderStage::CS:
+		mGraphicContext->CSSetSamplers(StartSlot, 1, ppSamplerState);
+		break;
+	case eShaderStage::End:
+		break;
+	default:
+		break;
+	}
+}

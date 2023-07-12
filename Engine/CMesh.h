@@ -2,8 +2,10 @@
 #include "CEntity.h"
 #include "Graphic.h"
 #include "CDevice.h"
+#include "CResource.h"
+
 class CMesh :
-    public CEntity
+    public CResource
 {
 private:
     tVertex vertexes[4] = {};
@@ -13,11 +15,14 @@ private:
 
     D3D11_BUFFER_DESC mVBDesc;
     D3D11_BUFFER_DESC mIBDesc;
+
 public:
     CMesh();
     ~CMesh();
 
     void CreateBuffer();
     void BindBuffer();
+
+    virtual HRESULT ResourceLoad(const std::wstring name, const std::wstring& path) { return S_OK; }
 };
 

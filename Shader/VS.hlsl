@@ -11,7 +11,7 @@ VSOut main(VSIn In)
 
     Out.Pos = float4(In.Pos, 1.0f);
     Out.Pos.x += TransPos.x;
- 
+    Out.UV = In.UV;
     Out.Color = In.Color;
     
     return Out;

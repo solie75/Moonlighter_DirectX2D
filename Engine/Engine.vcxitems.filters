@@ -40,6 +40,9 @@
     <Filter Include="Resource\Mesh">
       <UniqueIdentifier>{ce4dca45-d536-4a0d-9c60-0d8cece189d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\Texture">
+      <UniqueIdentifier>{4368810a-3c6f-4388-98be-af29feb3770e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -87,6 +90,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Enum.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CTexture.h">
+      <Filter>Resource\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CResource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -119,6 +126,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CRenderMgr.cpp">
       <Filter>Manager\RenderMgr</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CTexture.cpp">
+      <Filter>Resource\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CResource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)CMath.inl">

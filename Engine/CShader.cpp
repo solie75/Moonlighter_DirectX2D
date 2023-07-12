@@ -1,6 +1,7 @@
 #include "CShader.h"
 
 CShader::CShader()
+	: CResource(eResourceType::Shader)
 {
 }
 
@@ -64,8 +65,7 @@ bool CShader::CreateShader()
 
 bool CShader::CreateInputLayout()
 {
-	D3D11_INPUT_ELEMENT_DESC arrLayout[2] = {};
-	//D3D11_INPUT_ELEMENT_DESC arrLayout[3] = {};
+	D3D11_INPUT_ELEMENT_DESC arrLayout[3] = {};
 
 	arrLayout[0].AlignedByteOffset = 0;
 	arrLayout[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
@@ -81,15 +81,15 @@ bool CShader::CreateInputLayout()
 	arrLayout[1].SemanticName = "COLOR";
 	arrLayout[1].SemanticIndex = 0;
 
-	//arrLayout[2].AlignedByteOffset = 28;
-	//arrLayout[2].Format = DXGI_FORMAT_R32G32_FLOAT;
-	//arrLayout[2].InputSlot = 0;
-	//arrLayout[2].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-	//arrLayout[2].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-	//arrLayout[2].SemanticName = "TEXCOORD";
-	//arrLayout[2].SemanticIndex = 0;
+	arrLayout[2].AlignedByteOffset = 28;
+	arrLayout[2].Format = DXGI_FORMAT_R32G32_FLOAT;
+	arrLayout[2].InputSlot = 0;
+	arrLayout[2].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+	arrLayout[2].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+	arrLayout[2].SemanticName = "TEXCOORD";
+	arrLayout[2].SemanticIndex = 0;
 
-	CDevice::GetInst()->GetDevice()->CreateInputLayout(arrLayout, 2
+	HRESULT hr = CDevice::GetInst()->GetDevice()->CreateInputLayout(arrLayout, 3
 		, mVSBlob->GetBufferPointer(), mVSBlob->GetBufferSize()
 		, mInputLayout.GetAddressOf());
 

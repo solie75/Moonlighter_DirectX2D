@@ -24,10 +24,19 @@ enum class eCBType
 	End,
 };
 
+enum class eSamplerType
+{
+	Point,
+	Anisotropic,
+	End,
+};
+
+
 struct tVertex
 {
 	Vector3 pos;
 	Vector4 color;
+	Vector2 uv;
 };
 
 struct tTransform

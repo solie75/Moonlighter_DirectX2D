@@ -2,6 +2,7 @@
 #include "CTimeMgr.h"
 #include "CKeyMgr.h"
 #include "CRenderMgr.h"
+#include "CTexture.h"
 
 CApplication::CApplication()
 	: AppHeight(-1)
@@ -29,7 +30,7 @@ void CApplication::AppInit()
 	CDevice::GetInst()->GraphicInit(mHwnd, AppWidth, AppHeight);
 
 	// VS & PS Shader, InputLayout
-	CShader::GetInst()->Init();
+	//CShader::GetInst()->Init();
 
 	// Create & Bind triangle vertexses, vertex buffer, index buffer, Constant Buffer
 	CRenderMgr::GetInst()->Init();
@@ -49,10 +50,12 @@ void CApplication::AppRender()
 	CDevice::GetInst()->ClearRenderTarget();
 
 	// Bind InputLayout into IA
-	CShader::GetInst()->BindInputLayout();
+	//CShader::GetInst()->BindInputLayout();
 
 	// Bind VS & PS
-	CShader::GetInst()->BindsShader();
+	//CShader::GetInst()->BindsShader();
+
+
 
 	// DrawIndexed, Present
 	CRenderMgr::GetInst()->Render();

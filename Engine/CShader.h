@@ -1,9 +1,10 @@
 #pragma once
-#include "CSingleton.h"
+//#include "CSingleton.h"
 #include "Graphic.h"
 #include "CDevice.h"
+#include "CResource.h"
 
-class CShader : public CSingleton<CShader>
+class CShader : public CResource
 {
 private:
 	ComPtr<ID3DBlob> mErrorBlob = nullptr;
@@ -32,5 +33,7 @@ public:
 
 	void BindsShader();
 	void BindInputLayout();
+
+	virtual HRESULT ResourceLoad(const std::wstring name, const std::wstring& path) { return S_OK; }
 };
 
