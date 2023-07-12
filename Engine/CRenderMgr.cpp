@@ -1,9 +1,7 @@
 #include "CRenderMgr.h"
 
 CRenderMgr::CRenderMgr()
-	: mVBDesc{}
-	, mIBDesc{}
-	, mCB{}
+	: mCB{}
 {
 	mGraphicContext = CDevice::GetInst()->GetContext();
 }
@@ -14,7 +12,10 @@ CRenderMgr::~CRenderMgr()
 
 void CRenderMgr::Init()
 {
-	CreateBuffer();
+	mMesh = new CMesh;
+	mMesh->CreateBuffer();
+	mMesh->BindBuffer();
+	CreateConstantBuffer();
 }
 
 void CRenderMgr::Update()
@@ -24,66 +25,11 @@ void CRenderMgr::Update()
 void CRenderMgr::Render()
 {
 	mGraphicContext->DrawIndexed(6, 0, 0);
-	//CDevice::GetInst()->GetContext()->Draw(4, 0);
 	HRESULT hr = CDevice::GetInst()->GetSwapChain()->Present(0, 0);
 }
 
-bool CRenderMgr::CreateBuffer()
+bool CRenderMgr::CreateConstantBuffer()
 {
-	// Triangle Vertex array
-	/*vertexes[0].pos = Vector3(0.0f, 0.5f, 0.0f);
-	vertexes[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-	vertexes[1].pos = Vector3(0.5f, -0.5f, 0.0f);
-	vertexes[1].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-	vertexes[2].pos = Vector3(-0.5f, -0.5f, 0.0f);
-	vertexes[2].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);*/
-
-	// Rectangle Vertex array
-	vertexes[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
-	vertexes[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-	vertexes[1].pos = Vector3(0.5f, 0.5f, 0.0f);
-	vertexes[1].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-	vertexes[2].pos = Vector3(0.5f, -0.5f, 0.0f);
-	vertexes[2].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-	vertexes[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
-	vertexes[3].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-
-	// Set VertexBuffer Description
-	mVBDesc.ByteWidth = sizeof(tVertex) * 4;
-	mVBDesc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
-	mVBDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
-	mVBDesc.CPUAccessFlags = 0;
-
-	// Set SubResourceData Desc
-	D3D11_SUBRESOURCE_DATA subData = {};
-	subData.pSysMem = vertexes;
-
-	// Create VertexBuffer
-	CDevice::GetInst()->GetDevice()->CreateBuffer(&mVBDesc, &subData, mVertexBuffer.GetAddressOf());
-
-	// Init Index array
-	std::vector<UINT> indexes = {};
-	indexes.push_back(0);
-	indexes.push_back(1);
-	indexes.push_back(2);
-
-	indexes.push_back(0);
-	indexes.push_back(2);
-	indexes.push_back(3);
-
-	// Set IndexBuffer Description
-	mIBDesc.ByteWidth = sizeof(UINT) * 6;
-	mIBDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_INDEX_BUFFER;
-	mIBDesc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
-	mIBDesc.CPUAccessFlags = 0;
-
-	// Set SubResourceData desc
-	subData.pSysMem = indexes.data();
-
-	// Create IndexBuffer
-	CDevice::GetInst()->GetDevice()->CreateBuffer(&mIBDesc, &subData, mIndexBuffer.GetAddressOf());
-	
-
 	// Set Constant Buffer Description
 	mCB.mDesc.ByteWidth = sizeof(Vector4);
 	mCB.mDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_CONSTANT_BUFFER;
@@ -102,21 +48,10 @@ bool CRenderMgr::CreateBuffer()
 	memcpy(subRes.pData, &pos, mCB.mDesc.ByteWidth);
 	mGraphicContext->Unmap(mCB.mBuffer.Get(), 0);
 
-	return true;
-}
-
-void CRenderMgr::BindBuffers()
-{
-
-	// Bind Vertex & Index Buffer
-	UINT stride = sizeof(tVertex);
-	UINT offset = 0;
-
-	mGraphicContext->IASetVertexBuffers(0, 1, mVertexBuffer.GetAddressOf(), &stride, &offset);
-	mGraphicContext->IASetIndexBuffer(mIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
-	
 	// Bind Constant Buffer	
 	BindConstantBuffer(eShaderStage::VS, mCB);
+
+	return true;
 }
 
 void CRenderMgr::BindConstantBuffer(eShaderStage stage, tConstantBuffer tCB)

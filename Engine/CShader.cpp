@@ -38,7 +38,7 @@ bool CShader::CreateShader()
 
 	// VertexShader 생성
 	CDevice::GetInst()->GetDevice()->CreateVertexShader(mVSBlob->GetBufferPointer()
-		, mVSBlob->GetBufferSize(), nullptr, mVSShader.GetAddressOf());
+		, mVSBlob->GetBufferSize(), nullptr, mVS.GetAddressOf());
 
 	// PS shader Path
 	std::filesystem::path psPath(shaderPath.c_str());
@@ -50,7 +50,7 @@ bool CShader::CreateShader()
 		, mPSBlob.GetAddressOf(), mErrorBlob.GetAddressOf());
 
 	CDevice::GetInst()->GetDevice()->CreatePixelShader(mPSBlob->GetBufferPointer()
-		, mPSBlob->GetBufferSize(), nullptr, mPSShader.GetAddressOf());
+		, mPSBlob->GetBufferSize(), nullptr, mPS.GetAddressOf());
 
 	// Shader 컴파일 과정의 오류를 문자열로 보여줌.
 	if (mErrorBlob)
@@ -98,8 +98,8 @@ bool CShader::CreateInputLayout()
 
 void CShader::BindsShader()
 {
-	CDevice::GetInst()->GetContext()->VSSetShader(mVSShader.Get(), 0, 0);
-	CDevice::GetInst()->GetContext()->PSSetShader(mPSShader.Get(), 0, 0);
+	CDevice::GetInst()->GetContext()->VSSetShader(mVS.Get(), 0, 0);
+	CDevice::GetInst()->GetContext()->PSSetShader(mPS.Get(), 0, 0);
 }
 
 void CShader::BindInputLayout()

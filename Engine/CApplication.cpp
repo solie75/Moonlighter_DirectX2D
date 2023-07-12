@@ -31,7 +31,7 @@ void CApplication::AppInit()
 	// VS & PS Shader, InputLayout
 	CShader::GetInst()->Init();
 
-	// triangle vertexses, vertex buffer, index buffer
+	// Create & Bind triangle vertexses, vertex buffer, index buffer, Constant Buffer
 	CRenderMgr::GetInst()->Init();
 }
 
@@ -47,9 +47,6 @@ void CApplication::AppRender()
 
 	// Clear Target
 	CDevice::GetInst()->ClearRenderTarget();
-
-	// Binds Vertex & Pixel Buffer into IA
-	CRenderMgr::GetInst()->BindBuffers();
 
 	// Bind InputLayout into IA
 	CShader::GetInst()->BindInputLayout();

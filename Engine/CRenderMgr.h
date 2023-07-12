@@ -1,8 +1,9 @@
 #pragma once
 #include "Header.h"
 #include "CSingleton.h"
-#include "CDevice.h"
-#include "Graphic.h"
+//#include "CDevice.h"
+//#include "Graphic.h"
+#include "CMesh.h"
 
 
 class CRenderMgr : public CSingleton<CRenderMgr>
@@ -16,17 +17,11 @@ public:
 	};
 
 private:
-	tVertex vertexes[4] = {};
-
-	ComPtr<ID3D11Buffer> mVertexBuffer;
-	ComPtr<ID3D11Buffer> mIndexBuffer;
-
-	D3D11_BUFFER_DESC mVBDesc;
-	D3D11_BUFFER_DESC mIBDesc;
-
 	tConstantBuffer mCB;
 
 	ID3D11DeviceContext* mGraphicContext;
+
+	CMesh* mMesh;
 
 public:
 	CRenderMgr();
@@ -36,8 +31,7 @@ public:
 	void Update();
 	void Render();
 
-	bool CreateBuffer();
-	void BindBuffers();
+	bool CreateConstantBuffer();
 	void BindConstantBuffer(eShaderStage stage, tConstantBuffer tCB);
 };
 
