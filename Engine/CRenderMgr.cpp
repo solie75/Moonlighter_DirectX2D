@@ -3,6 +3,7 @@
 
 CRenderMgr::CRenderMgr()
 	: mCB{}
+	, mGameObj(nullptr)
 {
 	mGraphicContext = CDevice::GetInst()->GetContext();
 }
@@ -13,30 +14,44 @@ CRenderMgr::~CRenderMgr()
 
 void CRenderMgr::Init()
 {
-	// Create CShader
-	mShader = new CShader;
-	mShader->CreateShader();
-	mShader->CreateInputLayout();
-	mShader->BindsShader();
-	mShader->BindInputLayout();
-
 	// Create Mesh
-	mMesh = new CMesh;
-	mMesh->CreateBuffer();
-	mMesh->BindBuffer();
+	//mMesh = new CMesh;
+	//mMesh->CreateBuffer();
+	//mMesh->BindBuffer();
 
 	// Create & Bind CB
 	CreateConstantBuffer();
 	// Bind Constant Buffer	
 	BindConstantBuffer(eShaderStage::VS, mCB);
 
-	// Create Texture
-	CTexture* texture = new CTexture;
-	texture->ResourceLoad(L"Smile", L"..\\Resource\\Texture\\Smile.png");
-	texture->BindShaderResource(eShaderStage::PS, 0);
-
 	// Set Sampler
 	SetUpState();
+
+	// Create Mesh
+	std::shared_ptr<CMesh> mesh = std::make_shared<CMesh>();
+	mesh->BindBuffer();
+	//CResourceMgr::GetInst()->Insert(L"Mesh", mesh);
+
+	// Create Shader
+	std::shared_ptr<CShader> shader = std::make_shared<CShader>();
+	//CResourceMgr::GetInst()->Insert(L"Shader", mesh);
+
+
+	// Create Texture
+	std::shared_ptr<CTexture> texture = std::make_shared<CTexture>();
+	texture->ResourceLoad(L"Smile", L"..\\Resource\\Texture\\Smile.png");
+	//CResourceMgr::GetInst()->Insert(L"Texture", texture);
+
+	// Create Material
+	std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>();
+	material->SetShader(shader);
+	material->SetTexture(texture);
+	//CResourceMgr::GetInst()->Insert(L"Material", material);
+
+	mGameObj = new CGameObject;
+	mGameObj->AddComponent<CMeshRender>();
+	mGameObj->GetComponent<CMeshRender>(eComponentType::MeshRender)->SetMesh(mesh);
+	mGameObj->GetComponent<CMeshRender>(eComponentType::MeshRender)->SetMaterial(material);
 }
 
 void CRenderMgr::Update()
@@ -45,8 +60,9 @@ void CRenderMgr::Update()
 
 void CRenderMgr::Render()
 {
-	mGraphicContext->DrawIndexed(6, 0, 0);
-	HRESULT hr = CDevice::GetInst()->GetSwapChain()->Present(0, 0);
+	/*mGraphicContext->DrawIndexed(6, 0, 0);*/
+	mGameObj->Render();
+	CDevice::GetInst()->GetSwapChain()->Present(0, 0);
 }
 
 bool CRenderMgr::CreateConstantBuffer()

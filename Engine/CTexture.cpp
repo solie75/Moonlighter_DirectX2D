@@ -79,3 +79,15 @@ void CTexture::BindShaderResource(eShaderStage stage, UINT startSlot)
 		break;
 	}
 }
+
+void CTexture::Clear()
+{
+	ID3D11ShaderResourceView* srv = nullptr;
+
+	mGraphicContext->VSSetShaderResources((UINT)eShaderStage::VS, 1, &srv);
+	mGraphicContext->HSSetShaderResources((UINT)eShaderStage::HS, 1, &srv);
+	mGraphicContext->DSSetShaderResources((UINT)eShaderStage::DS, 1, &srv);
+	mGraphicContext->GSSetShaderResources((UINT)eShaderStage::GS, 1, &srv);
+	mGraphicContext->PSSetShaderResources((UINT)eShaderStage::PS, 1, &srv);
+	mGraphicContext->CSSetShaderResources((UINT)eShaderStage::CS, 1, &srv);
+}

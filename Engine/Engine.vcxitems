@@ -15,9 +15,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CDevice.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CMaterial.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CGameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CMeshRender.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CResource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CResourceMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CKeyMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CMath.h" />
@@ -34,9 +39,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CDevice.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CMaterial.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CGameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CMeshRender.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CResource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CResourceMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CKeyMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CMath.cpp" />

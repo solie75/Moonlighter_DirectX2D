@@ -28,5 +28,7 @@ public:
 
 	virtual HRESULT ResourceLoad(const std::wstring name, const std::wstring& path) override;
 	void BindShaderResource(eShaderStage stage, UINT startSlot);
+
+	void Clear();
 };
 

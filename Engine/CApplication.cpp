@@ -29,10 +29,7 @@ void CApplication::AppInit()
 	// device, context, swapchain, rendertarget buffer&view, depthstencil buffer&view
 	CDevice::GetInst()->GraphicInit(mHwnd, AppWidth, AppHeight);
 
-	// VS & PS Shader, InputLayout
-	//CShader::GetInst()->Init();
-
-	// Create & Bind triangle vertexses, vertex buffer, index buffer, Constant Buffer
+	// Create & Bind triangle vertexses, vertex buffer, index buffer, Constant Buffer, Bind InputLayout into IA, Bind VS & PS
 	CRenderMgr::GetInst()->Init();
 }
 
@@ -48,14 +45,6 @@ void CApplication::AppRender()
 
 	// Clear Target
 	CDevice::GetInst()->ClearRenderTarget();
-
-	// Bind InputLayout into IA
-	//CShader::GetInst()->BindInputLayout();
-
-	// Bind VS & PS
-	//CShader::GetInst()->BindsShader();
-
-
 
 	// DrawIndexed, Present
 	CRenderMgr::GetInst()->Render();

@@ -1,9 +1,12 @@
 #pragma once
 #include "Header.h"
 #include "CSingleton.h"
+#include "CMaterial.h"
 #include "CMesh.h" //#include "CDevice.h" #include "Graphic.h"
 #include "CShader.h"
-
+#include "CGameObject.h"
+#include "CMeshRender.h"
+#include "CResourceMgr.h"
 
 class CRenderMgr : public CSingleton<CRenderMgr>
 {
@@ -20,8 +23,9 @@ private:
 
 	ID3D11DeviceContext* mGraphicContext;
 
-	CMesh* mMesh;
-	CShader* mShader;
+	//CMesh* mMesh;
+	//CMaterial* mMaterial;
+	CGameObject* mGameObj;
 
 	ComPtr<ID3D11SamplerState> samplerState[(UINT)eSamplerType::End];
 

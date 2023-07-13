@@ -5,10 +5,16 @@ CMesh::CMesh()
 	, mVBDesc{}
 	, mIBDesc{}
 {
+	CreateBuffer();
 }
 
 CMesh::~CMesh()
 {
+}
+
+void CMesh::Render()
+{
+	CDevice::GetInst()->GetContext()->DrawIndexed(6, 0, 0);
 }
 
 void CMesh::CreateBuffer()

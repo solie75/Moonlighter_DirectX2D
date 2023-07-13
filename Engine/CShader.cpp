@@ -3,16 +3,14 @@
 CShader::CShader()
 	: CResource(eResourceType::Shader)
 {
+	CreateShader();
+	CreateInputLayout();
+	BindsShader();
+	BindInputLayout();
 }
 
 CShader::~CShader()
 {
-}
-
-void CShader::Init()
-{
-	CreateShader();
-	CreateInputLayout();
 }
 
 bool CShader::CreateShader()

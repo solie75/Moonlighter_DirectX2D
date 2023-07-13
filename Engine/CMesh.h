@@ -20,6 +20,8 @@ public:
     CMesh();
     ~CMesh();
 
+    void Render();
+
     void CreateBuffer();
     void BindBuffer();
 

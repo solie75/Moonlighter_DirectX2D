@@ -43,6 +43,21 @@
     <Filter Include="Resource\Texture">
       <UniqueIdentifier>{4368810a-3c6f-4388-98be-af29feb3770e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\Material">
+      <UniqueIdentifier>{e4803747-a205-4f95-b4bb-1a60dce101b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{c67dd0d7-c9e1-4856-b293-cd2439336729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component">
+      <UniqueIdentifier>{9a7e2b42-2e01-4101-9add-c74a4754bb42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\MeshRender">
+      <UniqueIdentifier>{39ce232b-eb1c-4271-abfd-0754342e4813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\ResourceMgr">
+      <UniqueIdentifier>{d345893f-f9c8-424e-a5db-48e7bbd915b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -94,6 +109,21 @@
       <Filter>Resource\Texture</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CResource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CMaterial.h">
+      <Filter>Resource\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CGameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CComponent.h">
+      <Filter>GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CMeshRender.h">
+      <Filter>GameObject\Component\MeshRender</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CResourceMgr.h">
+      <Filter>Manager\ResourceMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -130,6 +160,21 @@
       <Filter>Resource\Texture</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CResource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CMaterial.cpp">
+      <Filter>Resource\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CGameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CComponent.cpp">
+      <Filter>GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CMeshRender.cpp">
+      <Filter>GameObject\Component\MeshRender</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CResourceMgr.cpp">
+      <Filter>Manager\ResourceMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)CMath.inl">

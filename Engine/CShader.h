@@ -26,8 +26,6 @@ public:
 	CShader();
 	~CShader();
 
-	void Init();
-
 	bool CreateShader();
 	bool CreateInputLayout();
 
