@@ -3,10 +3,9 @@
 #include "CSingleton.h"
 #include "CMaterial.h"
 #include "CMesh.h" //#include "CDevice.h" #include "Graphic.h"
-#include "CShader.h"
-#include "CGameObject.h"
-#include "CMeshRender.h"
+#include "CMeshRender.h" //#include "CShader.h" #include "CGameObject.h"
 #include "CResourceMgr.h"
+#include "CSceneMgr.h"
 
 class CRenderMgr : public CSingleton<CRenderMgr>
 {
@@ -25,7 +24,7 @@ private:
 
 	//CMesh* mMesh;
 	//CMaterial* mMaterial;
-	CGameObject* mGameObj;
+	//CGameObject* mGameObj;
 
 	ComPtr<ID3D11SamplerState> samplerState[(UINT)eSamplerType::End];
 

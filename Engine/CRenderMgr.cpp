@@ -1,9 +1,10 @@
 #include "CRenderMgr.h"
 #include "CTexture.h"
+#include "CPlayScene.h"
 
 CRenderMgr::CRenderMgr()
 	: mCB{}
-	, mGameObj(nullptr)
+	//, mGameObj(nullptr)
 {
 	mGraphicContext = CDevice::GetInst()->GetContext();
 }
@@ -14,11 +15,6 @@ CRenderMgr::~CRenderMgr()
 
 void CRenderMgr::Init()
 {
-	// Create Mesh
-	//mMesh = new CMesh;
-	//mMesh->CreateBuffer();
-	//mMesh->BindBuffer();
-
 	// Create & Bind CB
 	CreateConstantBuffer();
 	// Bind Constant Buffer	
@@ -30,28 +26,26 @@ void CRenderMgr::Init()
 	// Create Mesh
 	std::shared_ptr<CMesh> mesh = std::make_shared<CMesh>();
 	mesh->BindBuffer();
-	//CResourceMgr::GetInst()->Insert(L"Mesh", mesh);
+	CResourceMgr::GetInst()->Insert(L"Mesh", mesh);
 
 	// Create Shader
 	std::shared_ptr<CShader> shader = std::make_shared<CShader>();
-	//CResourceMgr::GetInst()->Insert(L"Shader", mesh);
+	CResourceMgr::GetInst()->Insert(L"Shader", mesh);
 
 
 	// Create Texture
 	std::shared_ptr<CTexture> texture = std::make_shared<CTexture>();
 	texture->ResourceLoad(L"Smile", L"..\\Resource\\Texture\\Smile.png");
-	//CResourceMgr::GetInst()->Insert(L"Texture", texture);
+	CResourceMgr::GetInst()->Insert(L"Texture", texture);
 
 	// Create Material
 	std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>();
 	material->SetShader(shader);
 	material->SetTexture(texture);
-	//CResourceMgr::GetInst()->Insert(L"Material", material);
+	CResourceMgr::GetInst()->Insert(L"Material", material);
 
-	mGameObj = new CGameObject;
-	mGameObj->AddComponent<CMeshRender>();
-	mGameObj->GetComponent<CMeshRender>(eComponentType::MeshRender)->SetMesh(mesh);
-	mGameObj->GetComponent<CMeshRender>(eComponentType::MeshRender)->SetMaterial(material);
+	// Create Scene
+	CSceneMgr::GetInst()->AddScene<CPlayScene>(L"PlayScene");
 }
 
 void CRenderMgr::Update()
@@ -61,7 +55,8 @@ void CRenderMgr::Update()
 void CRenderMgr::Render()
 {
 	/*mGraphicContext->DrawIndexed(6, 0, 0);*/
-	mGameObj->Render();
+	//mGameObj->Render();
+	CSceneMgr::GetInst()->Render();
 	CDevice::GetInst()->GetSwapChain()->Present(0, 0);
 }
 

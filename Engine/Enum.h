@@ -20,3 +20,13 @@ enum class eComponentType
 	Camera,
 	End,
 };
+
+enum class eLayerType
+{
+	Grid,
+	Player,
+	Monster,
+	UI,
+	Background,
+	End,
+};

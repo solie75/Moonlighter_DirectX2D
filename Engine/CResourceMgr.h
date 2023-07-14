@@ -15,12 +15,12 @@ public:
 	template <typename T>
 	static std::shared_ptr<T> Find(const std::wstring& key)
 	{
-		std::map<std::wstring, std::shared_ptr<CResource>>::iterator iter = mResources.find(key);
+		std::map<std::wstring, std::shared_ptr<CResource>>::iterator iter = CResourceMgr::GetInst()->mResources.find(key);
 
-		if (iter != mResources.end())
+		if (iter != CResourceMgr::GetInst()->mResources.end())
 		{
-			return iter->second;
-			//return std::dynamic_pointer_cast<T>(iter->second);
+			//return iter->second;
+			return std::dynamic_pointer_cast<T>(iter->second);
 		}
 
 		return nullptr;

@@ -58,6 +58,18 @@
     <Filter Include="Manager\ResourceMgr">
       <UniqueIdentifier>{d345893f-f9c8-424e-a5db-48e7bbd915b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{16820619-f6fd-4071-8e74-e15a3ca8b986}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Layer">
+      <UniqueIdentifier>{17c57cb3-05af-4c27-b1ab-65c3936d48d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\SceneMgr">
+      <UniqueIdentifier>{b8b6450c-b12e-4a00-af0c-c7514c94996b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\GameScene">
+      <UniqueIdentifier>{e8a3f225-1c85-4432-bb3e-f77d9581e52d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -124,6 +136,18 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CResourceMgr.h">
       <Filter>Manager\ResourceMgr</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CLayer.h">
+      <Filter>Scene\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CSceneMgr.h">
+      <Filter>Manager\SceneMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CPlayScene.h">
+      <Filter>Scene\GameScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -174,6 +198,18 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CResourceMgr.cpp">
       <Filter>Manager\ResourceMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CLayer.cpp">
+      <Filter>Scene\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CSceneMgr.cpp">
+      <Filter>Manager\SceneMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CPlayScene.cpp">
+      <Filter>Scene\GameScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
