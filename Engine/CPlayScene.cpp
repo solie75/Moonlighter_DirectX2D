@@ -26,7 +26,6 @@ void CPlayScene::Initialize()
 	mainCamera->GetComponent<CTransform>(eComponentType::Transform)->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 	CCamera* camComponent = mainCamera->AddComponent<CCamera>();
 	mainCamera->AddComponent<CCameraMoveScript>();
-
 }
 
 void CPlayScene::Update()
