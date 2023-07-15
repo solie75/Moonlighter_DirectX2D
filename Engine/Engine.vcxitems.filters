@@ -70,6 +70,27 @@
     <Filter Include="Scene\GameScene">
       <UniqueIdentifier>{e8a3f225-1c85-4432-bb3e-f77d9581e52d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Component\Transform">
+      <UniqueIdentifier>{ad437e27-945d-4312-9275-86de3d576471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Camera">
+      <UniqueIdentifier>{9f2aae80-02a4-498b-a7fd-46cd3f6152ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\CameraMgr">
+      <UniqueIdentifier>{9431eeb2-7e6e-484f-a8c1-c9b9b52af1f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic\ConstantBuffer">
+      <UniqueIdentifier>{e3d71157-12cd-4e06-8237-2d2aecf1a9bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Script">
+      <UniqueIdentifier>{6c5087b8-9060-4bc9-b895-79f83b59420a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Script\CameraMove">
+      <UniqueIdentifier>{0e10473e-6ed9-4c66-98d0-dc116b5e7189}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Script\PlayerMove">
+      <UniqueIdentifier>{d742bc4c-1e0c-4e55-b6e4-b05c1a96ddf7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -148,6 +169,27 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CPlayScene.h">
       <Filter>Scene\GameScene</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CTransform.h">
+      <Filter>GameObject\Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CCamera.h">
+      <Filter>GameObject\Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CCameraMgr.h">
+      <Filter>Manager\CameraMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CConstantBuffer.h">
+      <Filter>Graphic\ConstantBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CPlayerMoveScript.h">
+      <Filter>GameObject\Component\Script\PlayerMove</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CScript.h">
+      <Filter>GameObject\Component\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CCameraMoveScript.h">
+      <Filter>GameObject\Component\Script\CameraMove</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -210,6 +252,27 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CPlayScene.cpp">
       <Filter>Scene\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CTransform.cpp">
+      <Filter>GameObject\Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CCamera.cpp">
+      <Filter>GameObject\Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CCameraMgr.cpp">
+      <Filter>Manager\CameraMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CConstantBuffer.cpp">
+      <Filter>Graphic\ConstantBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CPlayerMoveScript.cpp">
+      <Filter>GameObject\Component\Script\PlayerMove</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CScript.cpp">
+      <Filter>GameObject\Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CCameraMoveScript.cpp">
+      <Filter>GameObject\Component\Script\CameraMove</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

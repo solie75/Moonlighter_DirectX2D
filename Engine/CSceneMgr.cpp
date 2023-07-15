@@ -1,6 +1,7 @@
 #include "CSceneMgr.h"
 
 CSceneMgr::CSceneMgr()
+	: mActiveScene(nullptr)
 {
 }
 

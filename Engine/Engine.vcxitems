@@ -15,18 +15,24 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CCameraMgr.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CCameraMoveScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CDevice.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CMeshRender.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CPlayerMoveScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CPlayScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CResourceMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CSceneMgr.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CKeyMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CMath.h" />
@@ -36,6 +42,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CSingleton.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CTimeMgr.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CTransform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Enum.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Graphic.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h" />
@@ -43,18 +50,24 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CCameraMgr.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CCameraMoveScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CDevice.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CMaterial.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CMeshRender.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CPlayerMoveScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CPlayScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CResourceMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CSceneMgr.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CKeyMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CMath.cpp" />
@@ -63,6 +76,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CRenderMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CTimeMgr.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CTransform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)CMath.inl" />

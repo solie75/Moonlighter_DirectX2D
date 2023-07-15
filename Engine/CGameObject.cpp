@@ -3,6 +3,7 @@
 CGameObject::CGameObject()
 	: mState(eState::Active)
 {
+	AddComponent<CTransform>();
 }
 
 CGameObject::~CGameObject()

@@ -1,5 +1,6 @@
 #pragma once
 #include "CComponent.h"
+#include "CTransform.h"
 #include "CMesh.h"
 #include "CMaterial.h"
 

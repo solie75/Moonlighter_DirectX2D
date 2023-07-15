@@ -13,11 +13,11 @@ public:
     CSceneMgr();
     ~CSceneMgr();
 
-    static void Initialize();
-    static void Update();
-    static void LateUpdate();
-    static void Render();
-    static void Release();
+    void Initialize();
+    void Update();
+    void LateUpdate();
+    void Render();
+    void Release();
 
     CScene* GetActiveScene() { return mActiveScene; }
     void SetActiveScene(CScene* scene) { mActiveScene = scene; }

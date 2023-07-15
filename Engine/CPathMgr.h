@@ -11,7 +11,7 @@ private:
 public:
 	CPathMgr();
 	~CPathMgr();
-	void init();
+	void Init();
 
 public:
 	const wchar_t* GetContextPath() { return mContentPath; }

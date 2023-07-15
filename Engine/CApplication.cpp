@@ -1,6 +1,7 @@
 #include "CApplication.h"
 #include "CTimeMgr.h"
 #include "CKeyMgr.h"
+#include "CPathMgr.h"
 #include "CRenderMgr.h"
 #include "CTexture.h"
 
@@ -18,6 +19,7 @@ CApplication::~CApplication()
 void CApplication::AppRun()
 {
 	AppUpdate();
+	AppLateUpdate();
 	AppRender();
 }
 
@@ -25,6 +27,9 @@ void CApplication::AppInit()
 {
 	// Init Key Setting
 	CKeyMgr::GetInst()->Init(mHwnd);
+
+	// Init Path
+	CPathMgr::GetInst()->Init();
 
 	// device, context, swapchain, rendertarget buffer&view, depthstencil buffer&view
 	CDevice::GetInst()->GraphicInit(mHwnd, AppWidth, AppHeight);
@@ -35,7 +40,15 @@ void CApplication::AppInit()
 
 void CApplication::AppUpdate()
 {
+	CTimeMgr::GetInst()->Update();
+	CKeyMgr::GetInst()->Update();
 	CDevice::GetInst()->UpdateViewPort();
+	CRenderMgr::GetInst()->Update();
+}
+
+void CApplication::AppLateUpdate()
+{
+	CRenderMgr::GetInst()->LateUpdate();
 }
 
 void CApplication::AppRender()
@@ -49,6 +62,7 @@ void CApplication::AppRender()
 	// DrawIndexed, Present
 	CRenderMgr::GetInst()->Render();
 
+	CDevice::GetInst()->GetSwapChain()->Present(0, 0);
 }
 
 void CApplication::SetWindow(HWND hwnd, UINT width, UINT height)

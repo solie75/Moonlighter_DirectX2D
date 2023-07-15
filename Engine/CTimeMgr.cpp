@@ -21,7 +21,7 @@ void CTimeMgr::Update()
 {
 	QueryPerformanceCounter(&mCurCount);
 
-	mDeltaTime = (double)(mCurCount.QuadPart = mPrevCount.QuadPart) / (double)(mFrequency.QuadPart);
+	mDeltaTime = (double)(mCurCount.QuadPart - mPrevCount.QuadPart) / (double)(mFrequency.QuadPart);
 	++mFPS;
 	mTime += mDeltaTime;
 	mPrevCount.QuadPart = mCurCount.QuadPart;
@@ -35,7 +35,7 @@ void CTimeMgr::Render(HWND _hWnd)
 		swprintf_s(szfloat, L"FPS : %d, DT : %f", mFPS, mDeltaTime);
 		SetWindowText(_hWnd, szfloat);
 
-		mDeltaTime = 0.f;
 		mFPS = 0;
+		mTime = 0;
 	}
 }

@@ -21,6 +21,7 @@ public:
 	void AppRun();
 	void AppInit();
 	void AppUpdate();
+	void AppLateUpdate();
 	void AppRender();
 	void SetWindow(HWND hwnd, UINT width, UINT height);
 };

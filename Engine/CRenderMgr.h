@@ -6,19 +6,23 @@
 #include "CMeshRender.h" //#include "CShader.h" #include "CGameObject.h"
 #include "CResourceMgr.h"
 #include "CSceneMgr.h"
+#include "CCameraMgr.h"
+#include "CConstantBuffer.h"
 
 class CRenderMgr : public CSingleton<CRenderMgr>
 {
-public:
-	struct tConstantBuffer
-	{
-		ComPtr<ID3D11Buffer> mBuffer;
-		D3D11_BUFFER_DESC mDesc;
-		eCBType eType;
-	};
+//public:
+//	struct tConstantBuffer
+//	{
+//		ComPtr<ID3D11Buffer> mBuffer;
+//		D3D11_BUFFER_DESC mDesc;
+//		eCBType eType;
+//	};
 
 private:
-	tConstantBuffer mCB;
+	//tConstantBuffer mCB;
+
+	CConstantBuffer* mCB;
 
 	ID3D11DeviceContext* mGraphicContext;
 
@@ -34,10 +38,11 @@ public:
 
 	void Init();
 	void Update();
+	void LateUpdate();
 	void Render();
 
-	bool CreateConstantBuffer();
-	void BindConstantBuffer(eShaderStage stage, tConstantBuffer tCB);
+	//bool CreateConstantBuffer();
+	void BindConstantBuffer(eShaderStage stage, CConstantBuffer* tCB);
 	void SetUpState();
 	void BindSampler(eShaderStage stage, UINT StartSlot, ID3D11SamplerState** ppSamplerState);
 };

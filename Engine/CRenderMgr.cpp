@@ -15,10 +15,10 @@ CRenderMgr::~CRenderMgr()
 
 void CRenderMgr::Init()
 {
-	// Create & Bind CB
-	CreateConstantBuffer();
-	// Bind Constant Buffer	
-	BindConstantBuffer(eShaderStage::VS, mCB);
+	//// Create & Bind CB
+	//CreateConstantBuffer();
+	//// Bind Constant Buffer	
+	//BindConstantBuffer(eShaderStage::VS, mCB);
 
 	// Set Sampler
 	SetUpState();
@@ -30,7 +30,7 @@ void CRenderMgr::Init()
 
 	// Create Shader
 	std::shared_ptr<CShader> shader = std::make_shared<CShader>();
-	CResourceMgr::GetInst()->Insert(L"Shader", mesh);
+	CResourceMgr::GetInst()->Insert(L"Shader", shader);
 
 
 	// Create Texture
@@ -50,60 +50,61 @@ void CRenderMgr::Init()
 
 void CRenderMgr::Update()
 {
+	CSceneMgr::GetInst()->Update();
+}
+
+void CRenderMgr::LateUpdate()
+{
+	CSceneMgr::GetInst()->LateUpdate();
 }
 
 void CRenderMgr::Render()
 {
-	/*mGraphicContext->DrawIndexed(6, 0, 0);*/
-	//mGameObj->Render();
 	CSceneMgr::GetInst()->Render();
-	CDevice::GetInst()->GetSwapChain()->Present(0, 0);
+
+	//CCameraMgr::GetInst()->Render();
 }
 
-bool CRenderMgr::CreateConstantBuffer()
-{
-	// Set Constant Buffer Description
-	mCB.mDesc.ByteWidth = sizeof(Vector4);
-	mCB.mDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_CONSTANT_BUFFER;
-	mCB.mDesc.Usage = D3D11_USAGE::D3D11_USAGE_DYNAMIC;
-	mCB.mDesc.CPUAccessFlags = D3D10_CPU_ACCESS_WRITE;
-	mCB.eType = eCBType::Transform;
+//bool CRenderMgr::CreateConstantBuffer()
+//{
+//	// Set Constant Buffer Description
+//	mCB->SetConstantType(eCBType::Transform);
+//
+//	// Create Constant Buffer
+//	CDevice::GetInst()->GetDevice()->CreateBuffer(mCB->GetConstantDesc(), nullptr, mCB->GetConstantBuffer().GetAddressOf());
+//	
+//	// Set Constant Buffer
+//	Vector4 pos(0.3f, 0.0f, 0.0f, 1.0f);
+//
+//	D3D11_MAPPED_SUBRESOURCE subRes = {};
+//	mGraphicContext->Map(mCB->GetConstantBuffer().Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &subRes);
+//	memcpy(subRes.pData, &pos, mCB->GetConstantDesc()->ByteWidth);
+//	mGraphicContext->Unmap(mCB->GetConstantBuffer().Get(), 0);
+//
+//	return true;
+//}
 
-	// Create Constant Buffer
-	CDevice::GetInst()->GetDevice()->CreateBuffer(&(mCB.mDesc), nullptr, mCB.mBuffer.GetAddressOf());
-	
-	// Set Constant Buffer
-	Vector4 pos(0.3f, 0.0f, 0.0f, 1.0f);
-
-	D3D11_MAPPED_SUBRESOURCE subRes = {};
-	mGraphicContext->Map(mCB.mBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &subRes);
-	memcpy(subRes.pData, &pos, mCB.mDesc.ByteWidth);
-	mGraphicContext->Unmap(mCB.mBuffer.Get(), 0);
-
-	return true;
-}
-
-void CRenderMgr::BindConstantBuffer(eShaderStage stage, tConstantBuffer tCB)
+void CRenderMgr::BindConstantBuffer(eShaderStage stage, CConstantBuffer* tCB)
 {
 	switch (stage)
 	{
 	case eShaderStage::VS:
-		mGraphicContext->VSSetConstantBuffers((UINT)tCB.eType, 1, (tCB.mBuffer).GetAddressOf());
+		mGraphicContext->VSSetConstantBuffers((UINT)tCB->GetConstantType(), 1, (tCB->GetConstantBuffer().GetAddressOf()));
 		break;
 	case eShaderStage::HS:
-		mGraphicContext->HSSetConstantBuffers((UINT)tCB.eType, 1, (tCB.mBuffer).GetAddressOf());
+		mGraphicContext->HSSetConstantBuffers((UINT)tCB->GetConstantType(), 1, (tCB->GetConstantBuffer().GetAddressOf()));
 		break;
 	case eShaderStage::DS:
-		mGraphicContext->DSSetConstantBuffers((UINT)tCB.eType, 1, (tCB.mBuffer).GetAddressOf());
+		mGraphicContext->DSSetConstantBuffers((UINT)tCB->GetConstantType(), 1, (tCB->GetConstantBuffer().GetAddressOf()));
 		break;
 	case eShaderStage::GS:
-		mGraphicContext->GSSetConstantBuffers((UINT)tCB.eType, 1, (tCB.mBuffer).GetAddressOf());
+		mGraphicContext->GSSetConstantBuffers((UINT)tCB->GetConstantType(), 1, (tCB->GetConstantBuffer().GetAddressOf()));
 		break;
 	case eShaderStage::PS:
-		mGraphicContext->PSSetConstantBuffers((UINT)tCB.eType, 1, (tCB.mBuffer).GetAddressOf());
+		mGraphicContext->PSSetConstantBuffers((UINT)tCB->GetConstantType(), 1, (tCB->GetConstantBuffer().GetAddressOf()));
 		break;
 	case eShaderStage::CS:
-		mGraphicContext->CSSetConstantBuffers((UINT)tCB.eType, 1, (tCB.mBuffer).GetAddressOf());
+		mGraphicContext->CSSetConstantBuffers((UINT)tCB->GetConstantType(), 1, (tCB->GetConstantBuffer().GetAddressOf()));
 		break;
 	case eShaderStage::End:
 		break;

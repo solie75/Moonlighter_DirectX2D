@@ -11,3 +11,10 @@ struct VSOut
     float4 Color : COLOR;
     float2 UV : TEXCOORD;
 };
+
+cbuffer Transform : register(b0)
+{
+    row_major matrix WorldMatrix;
+    row_major matrix ViewMatrix;
+    row_major matrix ProjectionMatrix;
+}
