@@ -41,6 +41,5 @@ void CMeshRender::Render()
 			OMSetBlendState(CRenderMgr::GetInst()->GetBlendState(mMaterial->GetShader()->GetBSType()).Get(), nullptr, 0xffffffff);
 	}
 
-
 	CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, tr->GetTransformCB());
 }

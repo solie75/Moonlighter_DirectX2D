@@ -2,6 +2,9 @@
 
 CShader::CShader()
 	: CResource(eResourceType::Shader)
+	, mRSType(eRSType::SolidBack)
+	, mDSType(eDSType::Less)
+	, mBSType(eBSType::AlphaBlend)
 {
 	CreateShader();
 	CreateInputLayout();
