@@ -27,17 +27,27 @@ void CRenderMgr::Init()
 	std::shared_ptr<CShader> shader = std::make_shared<CShader>();
 	CResourceMgr::GetInst()->Insert(L"Shader", shader);
 
-
+	// Add Link
 	// Create Texture
-	std::shared_ptr<CTexture> texture = std::make_shared<CTexture>();
-	texture->ResourceLoad(L"Smile", L"..\\Resource\\Texture\\Smile.png");
-	CResourceMgr::GetInst()->Insert(L"Texture", texture);
+	std::shared_ptr<CTexture> tex_Link = std::make_shared<CTexture>();
+	tex_Link->ResourceLoad(L"Link", L"..\\Resource\\Texture\\Link.png");
+	CResourceMgr::GetInst()->Insert(L"Texture", tex_Link);
 
 	// Create Material
-	std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>();
-	material->SetShader(shader);
-	material->SetTexture(texture);
-	CResourceMgr::GetInst()->Insert(L"Material", material);
+	std::shared_ptr<CMaterial> mt_Link = std::make_shared<CMaterial>();
+	mt_Link->SetShader(shader);
+	mt_Link->SetTexture(tex_Link);
+	CResourceMgr::GetInst()->Insert(L"mt_Link", mt_Link);
+
+	// Add Smile
+	std::shared_ptr<CTexture> tex_Smile = std::make_shared<CTexture>();
+	tex_Smile->ResourceLoad(L"Smile", L"..\\Resource\\Texture\\Smile.png");
+	CResourceMgr::GetInst()->Insert(L"Smile", tex_Smile);
+
+	std::shared_ptr<CMaterial> mt_Smile = std::make_shared<CMaterial>();
+	mt_Smile->SetShader(shader);
+	mt_Smile->SetTexture(tex_Smile);
+	CResourceMgr::GetInst()->Insert(L"mt_Smile", mt_Smile);
 
 	// Create Scene
 	CSceneMgr::GetInst()->AddScene<CPlayScene>(L"PlayScene");

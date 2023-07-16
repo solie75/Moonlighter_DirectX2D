@@ -8,6 +8,10 @@ CCamera::CCamera()
 	, mNear(1.0f)
 	, mFar(1000.0f)
 	, mSize(5.0f)
+	, mLayerMask{}
+	, mOpaqueGameObjects{}
+	, mCutOutGameObjects{}
+	, mTransparentGameObjects{}
 {
 }
 
@@ -17,6 +21,7 @@ CCamera::~CCamera()
 
 void CCamera::Initialize()
 {
+	EnableLayerMasks();
 }
 
 void CCamera::Update()
@@ -31,6 +36,9 @@ void CCamera::LateUpdate()
 
 void CCamera::Render()
 {
+	RenderOpaque();
+	RenderCutOut();
+	RenderTransparent();
 }
 
 bool CCamera::CreateViewMatrix()
@@ -78,5 +86,88 @@ bool CCamera::CreateProjectionMatrix(eProjectionType type)
 	}
 
 	return true;
+}
+
+void CCamera::SortGameObjects()
+{
+	mOpaqueGameObjects.clear();
+	mCutOutGameObjects.clear();
+	mTransparentGameObjects.clear();
+
+	CScene* scene = CSceneMgr::GetInst()->GetActiveScene();
+	for (size_t i = 0; i < (UINT)eLayerType::End; i++)
+	{
+		if (mLayerMask[i] == true)
+		{
+			// Mask 가 true 인 Layer 의 모든 게임 오브젝트들을 가져온다.
+			CLayer& layer = scene->GetLayer((eLayerType)i);
+			const std::vector<CGameObject*> gameObjs = layer.GetGameObjects();
+
+			for (CGameObject* obj : gameObjs)
+			{
+				CMeshRender* mr = obj->GetComponent<CMeshRender>(eComponentType::MeshRender);
+				if (mr == nullptr)
+				{
+					continue;
+				}
+				
+				std::shared_ptr<CMaterial> mt = mr->GetMaterial();
+				eRenderingMode renderMode = mt->GetRenderingMode();
+
+				switch (renderMode)
+				{
+				case eRenderingMode::Opaque :
+					mOpaqueGameObjects.push_back(obj);
+					break;
+				case eRenderingMode::CutOut :
+					mCutOutGameObjects.push_back(obj);
+					break;
+				case eRenderingMode::Transparent :
+					mTransparentGameObjects.push_back(obj);
+					break;
+				default :
+					break;
+				}
+			}
+		}
+	}
+}
+
+void CCamera::RenderOpaque()
+{
+	for (CGameObject* gameObj : mOpaqueGameObjects)
+	{
+		if (gameObj == nullptr)
+			continue;
+
+		gameObj->Render();
+	}
+}
+
+void CCamera::RenderCutOut()
+{
+	for (CGameObject* gameObj : mCutOutGameObjects)
+	{
+		if (gameObj == nullptr)
+			continue;
+
+		gameObj->Render();
+	}
+}
+
+void CCamera::RenderTransparent()
+{
+	for (CGameObject* gameObj : mTransparentGameObjects)
+	{
+		if (gameObj == nullptr)
+			continue;
+
+		gameObj->Render();
+	}
+}
+
+void CCamera::TurnLayerMask(eLayerType type, bool enable)
+{
+	mLayerMask.set((UINT)type, enable);
 }
 

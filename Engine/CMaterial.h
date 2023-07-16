@@ -10,6 +10,8 @@ private:
     std::shared_ptr<CShader> mShader;
     std::shared_ptr<CTexture> mTexture;
 
+    eRenderingMode mRenderMode;
+
 public:
     CMaterial();
     ~CMaterial();
@@ -22,4 +24,7 @@ public:
 
     void Bind();
     void Clear();
+
+    void SetRenderMode(eRenderingMode mode) { mRenderMode = mode; }
+    eRenderingMode GetRenderingMode() { return mRenderMode; }
 };

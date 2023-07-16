@@ -2,6 +2,7 @@
 
 CMaterial::CMaterial()
     : CResource(eResourceType::Material)
+    , mRenderMode(eRenderingMode::End)
 {
 }
 

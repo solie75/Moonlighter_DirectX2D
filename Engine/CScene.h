@@ -18,5 +18,17 @@ public:
 	virtual void Render();
 
 	void AddGameObject(eLayerType type, CGameObject* gameObj, const std::wstring& name);
+
+	CLayer& GetLayer(eLayerType type) { return mLayers[(UINT)type]; }
+
+	/*template <typename T>
+	std::vector<T*> FindObjectsOfType()
+	{
+		std::vector<T*> findObjs = {};
+		for (CLayer* layer : mLayers)
+		{
+			auto gameObjs = layer->GetGameObjects();
+		}
+	}*/
 };
 

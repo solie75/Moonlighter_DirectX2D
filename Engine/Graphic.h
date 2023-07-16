@@ -61,6 +61,14 @@ enum class eBSType
 	End,
 };
 
+enum class eRenderingMode
+{
+	Opaque,
+	CutOut,
+	Transparent,
+	End,
+};
+
 struct tVertex
 {
 	Vector3 pos;

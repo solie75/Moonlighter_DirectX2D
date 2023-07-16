@@ -2,6 +2,10 @@
 #include "CComponent.h"
 #include "CTransform.h"
 #include "CDevice.h"
+#include "CSceneMgr.h"
+#include "CMeshRender.h"
+
+class CGameObject;
 
 class CCamera :
     public CComponent
@@ -24,6 +28,11 @@ private:
 	float mFar;
 	float mSize;
 
+	std::bitset<(UINT)eLayerType::End> mLayerMask;
+	std::vector<CGameObject*> mOpaqueGameObjects;
+	std::vector<CGameObject*> mCutOutGameObjects;
+	std::vector<CGameObject*> mTransparentGameObjects;
+
 public:
 	CCamera();
 	~CCamera();
@@ -38,6 +47,15 @@ public:
 
 	static Matrix GetViewMatrix() { return mView; }
 	static Matrix GetmProjectionMatrix() { return mProjection; }
+
+	void SortGameObjects();
+	void RenderOpaque();
+	void RenderCutOut();
+	void RenderTransparent();
+
+	void TurnLayerMask(eLayerType type, bool enable = true);
+	void EnableLayerMasks() { mLayerMask.set(); }
+	void DisableLayerMasks() { mLayerMask.reset(); }
 };
 
 Matrix CCamera::mView =  Matrix::Identity;
