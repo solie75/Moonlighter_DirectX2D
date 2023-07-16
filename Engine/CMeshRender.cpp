@@ -32,5 +32,15 @@ void CMeshRender::Render()
 	mMesh->Render();
 	mMaterial->Bind();
 
+	{
+		CDevice::GetInst()->GetContext()->
+			RSSetState(CRenderMgr::GetInst()->GetRasterizerState(mMaterial->GetShader()->GetRSType()).Get());
+		CDevice::GetInst()->GetContext()->
+			OMSetDepthStencilState(CRenderMgr::GetInst()->GetDepthStencilState(mMaterial->GetShader()->GetDSType()).Get(), 0);
+		CDevice::GetInst()->GetContext()->
+			OMSetBlendState(CRenderMgr::GetInst()->GetBlendState(mMaterial->GetShader()->GetBSType()).Get(), nullptr, 0xffffffff);
+	}
+
+
 	CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, tr->GetTransformCB());
 }

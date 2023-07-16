@@ -22,6 +22,11 @@ private:
 	ComPtr<ID3D11PixelShader> mPS;
 
 	ComPtr<ID3D11InputLayout> mInputLayout = nullptr;
+
+	eRSType mRSType;
+	eDSType mDSType;
+	eBSType mBSType;
+
 public:
 	CShader();
 	~CShader();
@@ -33,5 +38,14 @@ public:
 	void BindInputLayout();
 
 	virtual HRESULT ResourceLoad(const std::wstring name, const std::wstring& path) { return S_OK; }
+
+	void SetRSType(eRSType type) { mRSType = type; }
+	void SetDSType(eDSType type) { mDSType = type; }
+	void SetBSType(eBSType type) { mBSType = type; }
+	
+	eRSType GetRSType() { return mRSType; }
+	eDSType GetDSType() { return mDSType; }
+	eBSType GetBSType() { return mBSType; }
+
 };
 

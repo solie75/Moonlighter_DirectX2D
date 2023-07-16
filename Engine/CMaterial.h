@@ -18,6 +18,7 @@ public:
 
     void SetShader(std::shared_ptr<CShader> shader) { mShader = shader; }
     void SetTexture(std::shared_ptr<CTexture> texture) { mTexture = texture; }
+    std::shared_ptr<CShader> GetShader() { return mShader; }
 
     void Bind();
     void Clear();

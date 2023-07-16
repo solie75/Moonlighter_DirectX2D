@@ -11,26 +11,16 @@
 
 class CRenderMgr : public CSingleton<CRenderMgr>
 {
-//public:
-//	struct tConstantBuffer
-//	{
-//		ComPtr<ID3D11Buffer> mBuffer;
-//		D3D11_BUFFER_DESC mDesc;
-//		eCBType eType;
-//	};
-
 private:
-	//tConstantBuffer mCB;
 
 	CConstantBuffer* mCB;
 
 	ID3D11DeviceContext* mGraphicContext;
 
-	//CMesh* mMesh;
-	//CMaterial* mMaterial;
-	//CGameObject* mGameObj;
-
 	ComPtr<ID3D11SamplerState> samplerState[(UINT)eSamplerType::End];
+	ComPtr<ID3D11RasterizerState> rasterizerStates[(UINT)eRSType::End] = {};
+	ComPtr<ID3D11DepthStencilState> depthStencilStates[(UINT)eDSType::End] = {};
+	ComPtr<ID3D11BlendState> blendStates[(UINT)eBSType::End] = {};
 
 public:
 	CRenderMgr();
@@ -45,5 +35,18 @@ public:
 	void BindConstantBuffer(eShaderStage stage, CConstantBuffer* tCB);
 	void SetUpState();
 	void BindSampler(eShaderStage stage, UINT StartSlot, ID3D11SamplerState** ppSamplerState);
+
+	ComPtr<ID3D11RasterizerState> GetRasterizerState(eRSType type)
+	{
+		return rasterizerStates[(UINT)type];
+	}
+	ComPtr<ID3D11DepthStencilState> GetDepthStencilState(eDSType type)
+	{
+		return depthStencilStates[(UINT)type];
+	}
+	ComPtr<ID3D11BlendState> GetBlendState(eBSType type)
+	{
+		return blendStates[(UINT)type];
+	}
 };
 
