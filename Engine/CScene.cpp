@@ -11,6 +11,10 @@ CScene::~CScene()
 
 void CScene::Initialize()
 {
+	for (int i = 0; i < mLayers.size(); i++)
+	{
+		mLayers[i].Initialize();
+	}
 }
 
 void CScene::Update()
@@ -31,10 +35,10 @@ void CScene::LateUpdate()
 
 void CScene::Render()
 {
-	for (int i = 0; i < mLayers.size(); i++)
-	{
-		mLayers[i].Render();
-	}
+//	for (int i = 0; i < mLayers.size(); i++)
+//	{
+//		mLayers[i].Render();
+//	}
 }
 
 void CScene::AddGameObject(eLayerType type, CGameObject* gameObj, const std::wstring& name)

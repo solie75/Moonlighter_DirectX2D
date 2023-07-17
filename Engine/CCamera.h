@@ -4,6 +4,7 @@
 #include "CDevice.h"
 #include "CSceneMgr.h"
 #include "CMeshRender.h"
+#include "CRenderMgr.h"
 
 class CGameObject;
 
@@ -19,8 +20,11 @@ public:
 	};
 
 private:
-	static Matrix mView;
-	static Matrix mProjection;
+	static Matrix staticView;
+	static Matrix staticProjection;
+
+	Matrix mView;
+	Matrix mProjection;
 
 	eProjectionType mType;
 	float mAspectRatio;
@@ -45,8 +49,8 @@ public:
 	bool CreateViewMatrix();
 	bool CreateProjectionMatrix(eProjectionType type);
 
-	static Matrix GetViewMatrix() { return mView; }
-	static Matrix GetmProjectionMatrix() { return mProjection; }
+	static Matrix GetViewMatrix() { return staticView; }
+	static Matrix GetmProjectionMatrix() { return staticProjection; }
 
 	void SortGameObjects();
 	void RenderOpaque();
@@ -58,5 +62,5 @@ public:
 	void DisableLayerMasks() { mLayerMask.reset(); }
 };
 
-Matrix CCamera::mView =  Matrix::Identity;
-Matrix CCamera::mProjection = Matrix::Identity;
+Matrix CCamera::staticView =  Matrix::Identity;
+Matrix CCamera::staticProjection = Matrix::Identity;

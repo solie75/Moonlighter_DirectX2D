@@ -38,6 +38,7 @@ void CPlayScene::Initialize()
 	mainCamComp->TurnLayerMask(eLayerType::UI, false);
 	mainCamera->AddComponent<CCameraMoveScript>();
 
+	// UI Camera
 	CGameObject* uiCamera = new CGameObject();
 	AddGameObject(eLayerType::Player, uiCamera, L"UICamera");
 	uiCamera->GetComponent<CTransform>(eComponentType::Transform)->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
@@ -57,5 +58,5 @@ void CPlayScene::LateUpdate()
 
 void CPlayScene::Render()
 {
-	CScene::Render();
+	//CScene::Render();
 }

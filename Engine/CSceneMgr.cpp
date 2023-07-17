@@ -11,6 +11,7 @@ CSceneMgr::~CSceneMgr()
 
 void CSceneMgr::Initialize()
 {
+	//CSceneMgr::GetInst()->mActiveScene->Initialize();
 }
 
 void CSceneMgr::Update()
@@ -25,7 +26,7 @@ void CSceneMgr::LateUpdate()
 
 void CSceneMgr::Render()
 {
-	CSceneMgr::GetInst()->mActiveScene->Render();
+//	//CSceneMgr::GetInst()->mActiveScene->Render();
 }
 
 void CSceneMgr::Release()

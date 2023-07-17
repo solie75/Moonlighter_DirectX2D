@@ -23,13 +23,6 @@ VSOut main(VSIn In)
     Out.Pos = proj;
     Out.Color = In.Color;
     Out.UV = In.UV;
-
-    /*
-    Out.Pos = float4(In.Pos, 1.0f);
-    Out.Pos.x += TransPos.x;
-    Out.UV = In.UV;
-    Out.Color = In.Color;
-    */
     
     return Out;
 }

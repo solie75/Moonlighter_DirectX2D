@@ -4,7 +4,7 @@
 
 CRenderMgr::CRenderMgr()
 	: mCB{}
-	//, mGameObj(nullptr)
+	, cameras{}
 {
 	mGraphicContext = CDevice::GetInst()->GetContext();
 }
@@ -37,6 +37,7 @@ void CRenderMgr::Init()
 	std::shared_ptr<CMaterial> mt_Link = std::make_shared<CMaterial>();
 	mt_Link->SetShader(shader);
 	mt_Link->SetTexture(tex_Link);
+	mt_Link->SetRenderMode(eRenderingMode::Opaque);
 	CResourceMgr::GetInst()->Insert(L"mt_Link", mt_Link);
 
 	// Add Smile
@@ -47,6 +48,7 @@ void CRenderMgr::Init()
 	std::shared_ptr<CMaterial> mt_Smile = std::make_shared<CMaterial>();
 	mt_Smile->SetShader(shader);
 	mt_Smile->SetTexture(tex_Smile);
+	mt_Smile->SetRenderMode(eRenderingMode::Transparent);
 	CResourceMgr::GetInst()->Insert(L"mt_Smile", mt_Smile);
 
 	// Create Scene
@@ -65,7 +67,15 @@ void CRenderMgr::LateUpdate()
 
 void CRenderMgr::Render()
 {
-	CSceneMgr::GetInst()->Render();
+	for (CCamera* cam : cameras)
+	{
+		if (cam == nullptr)
+		{
+			continue;
+		}
+		cam->Render();
+	}
+	cameras.clear();
 }
 
 void CRenderMgr::BindConstantBuffer(eShaderStage stage, CConstantBuffer* tCB)

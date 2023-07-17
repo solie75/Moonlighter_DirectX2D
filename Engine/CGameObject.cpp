@@ -21,6 +21,10 @@ CGameObject::~CGameObject()
 
 void CGameObject::Initialize()
 {
+	for (CComponent* comp : mComponent)
+	{
+		comp->Initialize();
+	}
 }
 
 void CGameObject::Update()

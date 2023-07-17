@@ -12,7 +12,10 @@ CCamera::CCamera()
 	, mOpaqueGameObjects{}
 	, mCutOutGameObjects{}
 	, mTransparentGameObjects{}
+	, mView(Matrix::Identity)
+	, mProjection(Matrix::Identity)
 {
+	EnableLayerMasks();
 }
 
 CCamera::~CCamera()
@@ -21,21 +24,26 @@ CCamera::~CCamera()
 
 void CCamera::Initialize()
 {
-	EnableLayerMasks();
+	
 }
 
 void CCamera::Update()
 {
+	CRenderMgr::GetInst()->AddCamera(this, this->GetOwner()->GetName());
 }
 
 void CCamera::LateUpdate()
 {
     CreateViewMatrix();
     CreateProjectionMatrix(mType);
+	SortGameObjects();
 }
 
 void CCamera::Render()
 {
+	staticView = mView;
+	staticProjection = mProjection;
+
 	RenderOpaque();
 	RenderCutOut();
 	RenderTransparent();
@@ -170,4 +178,5 @@ void CCamera::TurnLayerMask(eLayerType type, bool enable)
 {
 	mLayerMask.set((UINT)type, enable);
 }
+
 
