@@ -133,8 +133,6 @@ void CDevice::ClearRenderTarget()
 	mContext->ClearRenderTargetView(mRenderTargetView.Get(), bgColor);
 	mContext->ClearDepthStencilView(mDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, (UINT8)0.0f);
 	mContext->OMSetRenderTargets(1, mRenderTargetView.GetAddressOf(), mDepthStencilView.Get());
-
-	//mSwapChain->Present(0, 0);
 }
 
 void CDevice::UpdateViewPort()

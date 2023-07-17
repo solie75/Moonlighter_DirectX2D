@@ -29,9 +29,8 @@ void CMeshRender::Render()
 	tr->CreateConstantBuffer();
 
 	mMaterial->Clear();
-	mMesh->Render();
 	mMaterial->Bind();
-
+	
 	{
 		CDevice::GetInst()->GetContext()->
 			RSSetState(CRenderMgr::GetInst()->GetRasterizerState(mMaterial->GetShader()->GetRSType()).Get());
@@ -42,4 +41,6 @@ void CMeshRender::Render()
 	}
 
 	CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, tr->GetTransformCB());
+
+	mMesh->Render();
 }

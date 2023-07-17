@@ -48,7 +48,7 @@ void CRenderMgr::Init()
 	std::shared_ptr<CMaterial> mt_Smile = std::make_shared<CMaterial>();
 	mt_Smile->SetShader(shader);
 	mt_Smile->SetTexture(tex_Smile);
-	mt_Smile->SetRenderMode(eRenderingMode::Transparent);
+	mt_Smile->SetRenderMode(eRenderingMode::CutOut);
 	CResourceMgr::GetInst()->Insert(L"mt_Smile", mt_Smile);
 
 	// Create Scene

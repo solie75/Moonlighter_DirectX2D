@@ -42,7 +42,7 @@ void CApplication::AppUpdate()
 {
 	CTimeMgr::GetInst()->Update();
 	CKeyMgr::GetInst()->Update();
-	CDevice::GetInst()->UpdateViewPort();
+	
 	CRenderMgr::GetInst()->Update();
 }
 
@@ -58,6 +58,7 @@ void CApplication::AppRender()
 
 	// Clear Target
 	CDevice::GetInst()->ClearRenderTarget();
+	CDevice::GetInst()->UpdateViewPort();
 
 	// DrawIndexed, Present
 	CRenderMgr::GetInst()->Render();
