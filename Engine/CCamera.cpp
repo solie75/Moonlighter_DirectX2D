@@ -36,7 +36,7 @@ void CCamera::LateUpdate()
 {
     CreateViewMatrix();
     CreateProjectionMatrix(mType);
-	SortGameObjects();
+	
 }
 
 void CCamera::Render()
@@ -44,9 +44,14 @@ void CCamera::Render()
 	staticView = mView;
 	staticProjection = mProjection;
 
+	AlphaSortGameObjects();
+	ZSortTransparencyGameObjects();
+
+	EnableDepthStencilState();
 	RenderOpaque();
 	RenderCutOut();
 	RenderTransparent();
+	DisableDepthStencilState();
 }
 
 bool CCamera::CreateViewMatrix()
@@ -96,7 +101,7 @@ bool CCamera::CreateProjectionMatrix(eProjectionType type)
 	return true;
 }
 
-void CCamera::SortGameObjects()
+void CCamera::AlphaSortGameObjects()
 {
 	mOpaqueGameObjects.clear();
 	mCutOutGameObjects.clear();
@@ -141,6 +146,39 @@ void CCamera::SortGameObjects()
 	}
 }
 
+bool CompareZSort(CGameObject* a, CGameObject* b)
+{
+	if (a->GetComponent<CTransform>(eComponentType::Transform)->GetPosition().z
+		< b->GetComponent<CTransform>(eComponentType::Transform)->GetPosition().z)
+		return false;
+
+	return true;
+}
+
+void CCamera::ZSortTransparencyGameObjects()
+{
+	std::sort(mCutOutGameObjects.begin()
+		, mCutOutGameObjects.end()
+		, CompareZSort);
+	std::sort(mTransparentGameObjects.begin()
+		, mTransparentGameObjects.end()
+		, CompareZSort);
+}
+
+void CCamera::EnableDepthStencilState()
+{
+	ComPtr<ID3D11DepthStencilState> dsState
+		= CRenderMgr::GetInst()->GetDepthStencilState(eDSType::Less);
+	CDevice::GetInst()->GetContext()->OMSetDepthStencilState(dsState.Get(), 0);
+}
+
+void CCamera::DisableDepthStencilState()
+{
+	ComPtr<ID3D11DepthStencilState> dsState
+		= CRenderMgr::GetInst()->GetDepthStencilState(eDSType::None);
+	CDevice::GetInst()->GetContext()->OMSetDepthStencilState(dsState.Get(), 0);
+}
+
 void CCamera::RenderOpaque()
 {
 	for (CGameObject* gameObj : mOpaqueGameObjects)
@@ -173,6 +211,7 @@ void CCamera::RenderTransparent()
 		gameObj->Render();
 	}
 }
+
 
 void CCamera::TurnLayerMask(eLayerType type, bool enable)
 {

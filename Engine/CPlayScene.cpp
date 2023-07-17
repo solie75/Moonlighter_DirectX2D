@@ -20,6 +20,7 @@ void CPlayScene::Initialize()
 	CMeshRender* mr = player->AddComponent<CMeshRender>();
 	mr->SetMesh(CResourceMgr::Find<CMesh>(L"Mesh"));
 	mr->SetMaterial(CResourceMgr::Find<CMaterial>(L"mt_Link"));
+	player->GetComponent<CTransform>(eComponentType::Transform)->SetPosition(Vector3(0.0f, 0.0f, 1.01f));
 	player->AddComponent<CPlayerMoveScript>();
 
 	// Smile
@@ -28,7 +29,7 @@ void CPlayScene::Initialize()
 	CMeshRender* mr_smile = smile->AddComponent<CMeshRender>();
 	mr_smile->SetMesh(CResourceMgr::Find<CMesh>(L"Mesh"));
 	mr_smile->SetMaterial(CResourceMgr::Find<CMaterial>(L"mt_Smile"));
-	smile->GetComponent<CTransform>(eComponentType::Transform)->SetPosition(Vector3(0.2f, 0.0f, 0.0f));
+	smile->GetComponent<CTransform>(eComponentType::Transform)->SetPosition(Vector3(0.2f, 0.0f, 1.0f));
 
 	// Main Camera
 	CGameObject* mainCamera = new CGameObject();

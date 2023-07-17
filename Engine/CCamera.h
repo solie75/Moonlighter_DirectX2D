@@ -52,10 +52,13 @@ public:
 	static Matrix GetViewMatrix() { return staticView; }
 	static Matrix GetmProjectionMatrix() { return staticProjection; }
 
-	void SortGameObjects();
+	void AlphaSortGameObjects();
 	void RenderOpaque();
 	void RenderCutOut();
 	void RenderTransparent();
+	void ZSortTransparencyGameObjects();
+	void EnableDepthStencilState();
+	void DisableDepthStencilState();
 
 	void TurnLayerMask(eLayerType type, bool enable = true);
 	void EnableLayerMasks() { mLayerMask.set(); }
