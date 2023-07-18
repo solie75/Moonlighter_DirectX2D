@@ -27,32 +27,33 @@ void CRenderMgr::Init()
 	std::shared_ptr<CShader> shader = std::make_shared<CShader>();
 	CResourceMgr::GetInst()->Insert(L"Shader", shader);
 
-	// Add Link
-	// Create Texture
-	std::shared_ptr<CTexture> tex_Link = std::make_shared<CTexture>();
-	tex_Link->ResourceLoad(L"Link", L"..\\Resource\\Texture\\Link.png");
-	CResourceMgr::GetInst()->Insert(L"Texture", tex_Link);
+	LoadTexture(L"Link", L"..\\Resource\\Texture\\Link.png");
+	LoadMaterial(shader, L"Link", eRenderingMode::Opaque);
 
-	// Create Material
-	std::shared_ptr<CMaterial> mt_Link = std::make_shared<CMaterial>();
-	mt_Link->SetShader(shader);
-	mt_Link->SetTexture(tex_Link);
-	mt_Link->SetRenderMode(eRenderingMode::Opaque);
-	CResourceMgr::GetInst()->Insert(L"mt_Link", mt_Link);
-
-	// Add Smile
-	std::shared_ptr<CTexture> tex_Smile = std::make_shared<CTexture>();
-	tex_Smile->ResourceLoad(L"Smile", L"..\\Resource\\Texture\\Smile.png");
-	CResourceMgr::GetInst()->Insert(L"Smile", tex_Smile);
-
-	std::shared_ptr<CMaterial> mt_Smile = std::make_shared<CMaterial>();
-	mt_Smile->SetShader(shader);
-	mt_Smile->SetTexture(tex_Smile);
-	mt_Smile->SetRenderMode(eRenderingMode::CutOut);
-	CResourceMgr::GetInst()->Insert(L"mt_Smile", mt_Smile);
+	LoadTexture(L"Smile", L"..\\Resource\\Texture\\Smile.png");
+	LoadMaterial(shader, L"Smile", eRenderingMode::CutOut);
 
 	// Create Scene
 	CSceneMgr::GetInst()->AddScene<CPlayScene>(L"PlayScene");
+}
+
+void CRenderMgr::LoadTexture(const std::wstring& textureName, const std::wstring& path)
+{
+	std::shared_ptr<CTexture> tex = std::make_shared<CTexture>();
+	tex->ResourceLoad(textureName, path);
+	CResourceMgr::GetInst()->Insert(textureName, tex);
+}
+
+void CRenderMgr::LoadMaterial(std::shared_ptr<CShader> shader,const std::wstring& textureName, eRenderingMode renderMode)
+{
+	std::shared_ptr<CTexture> tex = CResourceMgr::GetInst()->Find<CTexture>(textureName);
+
+	std::shared_ptr<CMaterial> mt = std::make_shared<CMaterial>();
+	mt->SetShader(shader);
+	mt->SetTexture(tex);
+	mt->SetRenderMode(renderMode);
+	CResourceMgr::GetInst()->Insert(L"mt_" + textureName, mt);
+
 }
 
 void CRenderMgr::Update()
