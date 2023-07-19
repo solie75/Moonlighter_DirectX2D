@@ -1,4 +1,8 @@
 #include "CSceneMgr.h"
+#include "CVillageScene.h"
+#include "CStartMenuScene.h"
+#include "CShopScene.h"
+#include "CPlayScene.h"
 
 CSceneMgr::CSceneMgr()
 	: mActiveScene(nullptr)
@@ -11,22 +15,25 @@ CSceneMgr::~CSceneMgr()
 
 void CSceneMgr::Initialize()
 {
-	//CSceneMgr::GetInst()->mActiveScene->Initialize();
+	AddScene<CPlayScene>(L"TestScene");
+	AddScene<CStartMenuScene>(L"StartMenuScene");
+	AddScene<CVillageScene>(L"VillageScene");
+	AddScene<CShopScene>(L"CShopScene");
 }
 
 void CSceneMgr::Update()
 {
-	CSceneMgr::GetInst()->mActiveScene->Update();
+	mActiveScene->Update();
 }
 
 void CSceneMgr::LateUpdate()
 {
-	CSceneMgr::GetInst()->mActiveScene->LateUpdate();
+	mActiveScene->LateUpdate();
 }
 
 void CSceneMgr::Render()
 {
-//	//CSceneMgr::GetInst()->mActiveScene->Render();
+//	mActiveScene->Render();
 }
 
 void CSceneMgr::Release()

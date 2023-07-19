@@ -38,115 +38,302 @@ void CRenderMgr::Init()
 	}
 	{ // will
 		LoadTexture(L"Will", L"..\\Resource\\Texture\\Will.png");
-		LoadMaterial(shader, L"Will", eRenderingMode::CutOut);
+		LoadMaterial(shader, L"Will", eRenderingMode::Transparent);
 	}
 	{ // UI
-		LoadTexture(L"UI_Base_Circle", L"..\\Resource\\Texture\\UI_Base_Circle.png");
+		LoadTexture(L"UI_Base_Circle", L"..\\Resource\\Texture\\UI\\UI_Base_Circle.png");
 		LoadMaterial(shader, L"UI_Base_Circle", eRenderingMode::CutOut);
 
-		LoadTexture(L"HealthBar_Circle", L"..\\Resource\\Texture\\HealthBar_Circle.png");
+		LoadTexture(L"HealthBar_Circle", L"..\\Resource\\Texture\\UI\\HealthBar_Circle.png");
 		LoadMaterial(shader, L"HealthBar_Circle", eRenderingMode::CutOut);
 
-		LoadTexture(L"HealthBar_Base", L"..\\Resource\\Texture\\HealthBar_Base.png");
+		LoadTexture(L"HealthBar_Base", L"..\\Resource\\Texture\\UI\\HealthBar_Base.png");
 		LoadMaterial(shader, L"HealthBar_Base", eRenderingMode::CutOut);
 
-		LoadTexture(L"Gold4", L"..\\Resource\\Texture\\Gold4.png");
+		LoadTexture(L"Gold4", L"..\\Resource\\Texture\\UI\\Gold4.png");
 		LoadMaterial(shader, L"Gold4", eRenderingMode::CutOut);
 
-		LoadTexture(L"Health_Icon", L"..\\Resource\\Texture\\Health_Icon.png");
+		LoadTexture(L"Health_Icon", L"..\\Resource\\Texture\\UI\\Health_Icon.png");
 		LoadMaterial(shader, L"Health_Icon", eRenderingMode::CutOut);
 
-		LoadTexture(L"HUD_Set1", L"..\\Resource\\Texture\\HUD_Set1.png");
+		LoadTexture(L"HUD_Set1", L"..\\Resource\\Texture\\UI\\HUD_Set1.png");
 		LoadMaterial(shader, L"HUD_Set1", eRenderingMode::CutOut);
 
-		LoadTexture(L"HUD_Set2", L"..\\Resource\\Texture\\HUD_Set2.png");
+		LoadTexture(L"HUD_Set2", L"..\\Resource\\Texture\\UI\\HUD_Set2.png");
 		LoadMaterial(shader, L"HUD_Set2", eRenderingMode::CutOut);
 
-		LoadTexture(L"YesNo_Circle", L"..\\Resource\\Texture\\YesNo_Circle.png");
+		LoadTexture(L"YesNo_Circle", L"..\\Resource\\Texture\\UI\\YesNo_Circle.png");
 		LoadMaterial(shader, L"YesNo_Circle", eRenderingMode::CutOut);
+
+		LoadTexture(L"Bag", L"..\\Resource\\Texture\\UI\\Bag.png");
+		LoadMaterial(shader, L"Bag", eRenderingMode::CutOut);
+
+		LoadTexture(L"Button_E", L"..\\Resource\\Texture\\UI\\Button_E.png");
+		LoadMaterial(shader, L"Button_E", eRenderingMode::CutOut);
+
+		LoadTexture(L"Button_I", L"..\\Resource\\Texture\\UI\\Button_I.png");
+		LoadMaterial(shader, L"Button_I", eRenderingMode::CutOut);
+
+		LoadTexture(L"Button_J", L"..\\Resource\\Texture\\UI\\Button_J.png");
+		LoadMaterial(shader, L"Button_J", eRenderingMode::CutOut);
+
+		LoadTexture(L"Button_K", L"..\\Resource\\Texture\\UI\\Button_K.png");
+		LoadMaterial(shader, L"Button_K", eRenderingMode::CutOut);
+
+		LoadTexture(L"Button_Space", L"..\\Resource\\Texture\\UI\\Button_Space.png");
+		LoadMaterial(shader, L"Button_Space", eRenderingMode::CutOut);
+
+		LoadTexture(L"Button_Z", L"..\\Resource\\Texture\\UI\\Button_Z.png");
+		LoadMaterial(shader, L"Button_Z", eRenderingMode::CutOut);
+
+		LoadTexture(L"HUD_MiniRoll", L"..\\Resource\\Texture\\UI\\HUD_MiniRoll.png");
+		LoadMaterial(shader, L"HUD_MiniRoll", eRenderingMode::CutOut);
+
 	}
 	{ // Start Menu
-		LoadTexture(L"Start_Intro_Door_Left", L"..\\Resource\\Texture\\Start_Intro_Door_Left.png");
+		LoadTexture(L"Start_Intro_Door_Left", L"..\\Resource\\Texture\\Start_Menu\\Start_Intro_Door_Left.png");
 		LoadMaterial(shader, L"Start_Intro_Door_Left", eRenderingMode::CutOut);
 
-		LoadTexture(L"Start_Intro_Door_Right", L"..\\Resource\\Texture\\Start_Intro_Door_Right.png");
+		LoadTexture(L"Start_Intro_Door_Right", L"..\\Resource\\Texture\\Start_Menu\\Start_Intro_Door_Right.png");
 		LoadMaterial(shader, L"Start_Intro_Door_Right", eRenderingMode::CutOut);
+
+		LoadTexture(L"GameLogo", L"..\\Resource\\Texture\\Start_Menu\\GameLogo.png");
+		LoadMaterial(shader, L"GameLogo", eRenderingMode::CutOut);
+
+		{ // Animation sample
+			LoadTexture(L"Main_menu_1_1", L"..\\Resource\\Texture\\Start_Menu\\Main_menu_1_1.png");
+			LoadMaterial(shader, L"Main_menu_1_1", eRenderingMode::CutOut);
+
+			LoadTexture(L"Main_menu_2_1", L"..\\Resource\\Texture\\Start_Menu\\Main_menu_2_1.png");
+			LoadMaterial(shader, L"Main_menu_2_1", eRenderingMode::CutOut);
+		}
 	}
 	{ // Village
 		LoadTexture(L"Village_Background", L"..\\Resource\\Texture\\Village_Background.png");
-		LoadMaterial(shader, L"Village_Background", eRenderingMode::CutOut);
+		LoadMaterial(shader, L"Village_Background", eRenderingMode::Opaque);
 
-		LoadTexture(L"WillsHome", L"..\\Resource\\Texture\\WillsHome.png");
+		LoadTexture(L"WillsHome", L"..\\Resource\\Texture\\Village_house\\WillsHome.png");
 		LoadMaterial(shader, L"WillsHome", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_House_01", L"..\\Resource\\Texture\\Village_House_01.png");
+		LoadTexture(L"Village_House_01", L"..\\Resource\\Texture\\Village_house\\Village_House_01.png");
 		LoadMaterial(shader, L"Village_House_01", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_Blacksmith_House_old", L"..\\Resource\\Texture\\Village_Blacksmith_House_old.png");
+		LoadTexture(L"Village_Blacksmith_House_old", L"..\\Resource\\Texture\\Village_house\\Village_Blacksmith_House_old.png");
 		LoadMaterial(shader, L"Village_Blacksmith_House_old", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_Blacksmith_Roof_old", L"..\\Resource\\Texture\\Village_Blacksmith_Roof_old.png");
+		LoadTexture(L"Village_Blacksmith_Roof_old", L"..\\Resource\\Texture\\Village_house\\Village_Blacksmith_Roof_old.png");
 		LoadMaterial(shader, L"Village_Blacksmith_Roof_old", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_Blacksmith_Stand1_old", L"..\\Resource\\Texture\\Village_Blacksmith_Stand1_old.png");
+		LoadTexture(L"Village_Blacksmith_Stand1_old", L"..\\Resource\\Texture\\Village_house\\Village_Blacksmith_Stand1_old.png");
 		LoadMaterial(shader, L"Village_Blacksmith_Stand1_old", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_Blacksmith_Stand2_old", L"..\\Resource\\Texture\\Village_Blacksmith_Stand2_old.png");
+		LoadTexture(L"Village_Blacksmith_Stand2_old", L"..\\Resource\\Texture\\Village_house\\Village_Blacksmith_Stand2_old.png");
 		LoadMaterial(shader, L"Village_Blacksmith_Stand2_old", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_Blacksmith_Fence", L"..\\Resource\\Texture\\Village_Blacksmith_Fence.png");
+		LoadTexture(L"Village_Blacksmith_Fence", L"..\\Resource\\Texture\\Village_house\\Village_Blacksmith_Fence.png");
 		LoadMaterial(shader, L"Village_Blacksmith_Fence", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_House_06", L"..\\Resource\\Texture\\Village_House_06.png");
+		LoadTexture(L"Village_House_06", L"..\\Resource\\Texture\\Village_house\\Village_House_06.png");
 		LoadMaterial(shader, L"Village_House_06", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_House_05", L"..\\Resource\\Texture\\Village_House_05.png");
+		LoadTexture(L"Village_House_05", L"..\\Resource\\Texture\\Village_house\\Village_House_05.png");
 		LoadMaterial(shader, L"Village_House_05", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_House_02", L"..\\Resource\\Texture\\Village_House_02.png");
+		LoadTexture(L"Village_House_02", L"..\\Resource\\Texture\\Village_house\\Village_House_02.png");
 		LoadMaterial(shader, L"Village_House_02", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_Awning", L"..\\Resource\\Texture\\Village_Awning.png");
+		LoadTexture(L"Village_Awning", L"..\\Resource\\Texture\\Village_house\\Village_Awning.png");
 		LoadMaterial(shader, L"Village_Awning", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_Board", L"..\\Resource\\Texture\\Village_Board.png");
+		LoadTexture(L"Village_Board", L"..\\Resource\\Texture\\Village_house\\Village_Board.png");
 		LoadMaterial(shader, L"Village_Board", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_Fence_Column", L"..\\Resource\\Texture\\Village_Fence_Column.png");
+		LoadTexture(L"Village_Fence_Column", L"..\\Resource\\Texture\\Village_house\\Village_Fence_Column.png");
 		LoadMaterial(shader, L"Village_Fence_Column", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_Fence_Row", L"..\\Resource\\Texture\\Village_Fence_Row.png");
+		LoadTexture(L"Village_Fence_Row", L"..\\Resource\\Texture\\Village_house\\Village_Fence_Row.png");
 		LoadMaterial(shader, L"Village_Fence_Row", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_Witch_House_old", L"..\\Resource\\Texture\\Village_Witch_House_old.png");
+		LoadTexture(L"Village_Witch_House_old", L"..\\Resource\\Texture\\Village_house\\Village_Witch_House_old.png");
 		LoadMaterial(shader, L"Village_Witch_House_old", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_Witch_Roof_old", L"..\\Resource\\Texture\\Village_Witch_Roof_old.png");
+		LoadTexture(L"Village_Witch_Roof_old", L"..\\Resource\\Texture\\Village_house\\Village_Witch_Roof_old.png");
 		LoadMaterial(shader, L"Village_Witch_Roof_old", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_Witch_Table_old", L"..\\Resource\\Texture\\Village_Witch_Table_old.png");
+		LoadTexture(L"Village_Witch_Table_old", L"..\\Resource\\Texture\\Village_house\\Village_Witch_Table_old.png");
 		LoadMaterial(shader, L"Village_Witch_Table_old", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_Witch_Storage_old", L"..\\Resource\\Texture\\Village_Witch_Storage_old.png");
+		LoadTexture(L"Village_Witch_Storage_old", L"..\\Resource\\Texture\\Village_house\\Village_Witch_Storage_old.png");
 		LoadMaterial(shader, L"Village_Witch_Storage_old", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_Rival_House_old", L"..\\Resource\\Texture\\Village_Rival_House_old.png");
+		LoadTexture(L"Village_Rival_House_old", L"..\\Resource\\Texture\\Village_house\\Village_Rival_House_old.png");
 		LoadMaterial(shader, L"Village_Rival_House_old", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_Rival_Roof_old", L"..\\Resource\\Texture\\Village_Rival_Roof_old.png");
+		LoadTexture(L"Village_Rival_Roof_old", L"..\\Resource\\Texture\\Village_house\\Village_Rival_Roof_old.png");
 		LoadMaterial(shader, L"Village_Rival_Roof_old", eRenderingMode::CutOut);
 
-		LoadTexture(L"Village_Rival_Fountain_old", L"..\\Resource\\Texture\\Village_Rival_Fountain_old.png");
+		LoadTexture(L"Village_Rival_Fountain_old", L"..\\Resource\\Texture\\Village_house\\Village_Rival_Fountain_old.png");
 		LoadMaterial(shader, L"Village_Rival_Fountain_old", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Rival_Desk_old", L"..\\Resource\\Texture\\Village_house\\Village_Rival_Desk_old.png");
+		LoadMaterial(shader, L"Village_Rival_Desk_old", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_OilLamps_1", L"..\\Resource\\Texture\\Village_house\\Village_OilLamps_1.png"); // ÁÂÃø
+		LoadMaterial(shader, L"Village_OilLamps_1", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_OilLamps_2", L"..\\Resource\\Texture\\Village_house\\Village_OilLamps_2.png"); // Á¤¸é
+		LoadMaterial(shader, L"Village_OilLamps_2", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Sign_Desert", L"..\\Resource\\Texture\\Village_Sign\\Village_Sign_Desert.png"); 
+		LoadMaterial(shader, L"Village_Sign_Desert", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Sign_Golem", L"..\\Resource\\Texture\\Village_Sign\\Village_Sign_Golem.png");
+		LoadMaterial(shader, L"Village_Sign_Golem", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Sign_Forest", L"..\\Resource\\Texture\\Village_Sign\\Village_Sign_Forest.png");
+		LoadMaterial(shader, L"Village_Sign_Forest", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Sign_Tesla", L"..\\Resource\\Texture\\Village_Sign\\Village_Sign_Tesla.png");
+		LoadMaterial(shader, L"Village_Sign_Tesla", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Sign_DungeonRight", L"..\\Resource\\Texture\\Village_Sign\\Village_Sign_DungeonRight.png");
+		LoadMaterial(shader, L"Village_Sign_DungeonRight", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Sign_DungeonUp", L"..\\Resource\\Texture\\Village_Sign\\Village_Sign_DungeonUp.png");
+		LoadMaterial(shader, L"Village_Sign_DungeonUp", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Sign_EnemyLeft", L"..\\Resource\\Texture\\Village_Sign\\Village_Sign_EnemyLeft.png");
+		LoadMaterial(shader, L"Village_Sign_EnemyLeft", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Sign_BlacksmithRight", L"..\\Resource\\Texture\\Village_Sign\\Village_Sign_BlacksmithRight.png");
+		LoadMaterial(shader, L"Village_Sign_BlacksmithRight", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Sign_WitchDown", L"..\\Resource\\Texture\\Village_Sign\\Village_Sign_WitchDown.png");
+		LoadMaterial(shader, L"Village_Sign_WitchDown", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Sign_WitchLeft", L"..\\Resource\\Texture\\Village_Sign\\Village_Sign_WitchLeft.png");
+		LoadMaterial(shader, L"Village_Sign_WitchLeft", eRenderingMode::CutOut);
+
+		LoadTexture(L"Will_Shop_Sign", L"..\\Resource\\Texture\\Village_Sign\\Will_Shop_Sign.png");
+		LoadMaterial(shader, L"Will_Shop_Sign", eRenderingMode::CutOut);
+
+		LoadTexture(L"Will_Shop_Sign", L"..\\Resource\\Texture\\Village_Sign\\Will_Shop_Sign.png");
+		LoadMaterial(shader, L"Will_Shop_Sign", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Barrel_Right", L"..\\Resource\\Texture\\Village_house\\Village_Barrel_Right.png");
+		LoadMaterial(shader, L"Village_Barrel_Right", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Barrel_Left", L"..\\Resource\\Texture\\Village_house\\Village_Barrel_Left.png");
+		LoadMaterial(shader, L"Village_Barrel_Left", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Box_Right", L"..\\Resource\\Texture\\Village_house\\Village_Box_Right.png");
+		LoadMaterial(shader, L"Village_Box_Right", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Box_Left", L"..\\Resource\\Texture\\Village_house\\Village_Box_Left.png");
+		LoadMaterial(shader, L"Village_Box_Left", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Bench_1", L"..\\Resource\\Texture\\Village_house\\Village_Bench_1.png");
+		LoadMaterial(shader, L"Village_Bench_1", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Bench_2", L"..\\Resource\\Texture\\Village_house\\Village_Bench_2.png");
+		LoadMaterial(shader, L"Village_Bench_2", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Bench_3", L"..\\Resource\\Texture\\Village_house\\Village_Bench_3.png");
+		LoadMaterial(shader, L"Village_Bench_3", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Bench_4", L"..\\Resource\\Texture\\Village_house\\Village_Bench_4.png");
+		LoadMaterial(shader, L"Village_Bench_4", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_BigStone", L"..\\Resource\\Texture\\Village_house\\Village_BigStone.png");
+		LoadMaterial(shader, L"Village_BigStone", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Flowerpots_1", L"..\\Resource\\Texture\\Village_house\\Village_Flowerpots_1.png");
+		LoadMaterial(shader, L"Village_Flowerpots_1", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Flowerpots_2", L"..\\Resource\\Texture\\Village_house\\Village_Flowerpots_2.png");
+		LoadMaterial(shader, L"Village_Flowerpots_2", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Flowerpots_3", L"..\\Resource\\Texture\\Village_house\\Village_Flowerpots_3.png");
+		LoadMaterial(shader, L"Village_Flowerpots_3", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_CuttedTree_01", L"..\\Resource\\Texture\\Village_house\\Village_CuttedTree_01.png");
+		LoadMaterial(shader, L"Village_CuttedTree_01", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_CuttedTree_02", L"..\\Resource\\Texture\\Village_house\\Village_CuttedTree_02.png");
+		LoadMaterial(shader, L"Village_CuttedTree_02", eRenderingMode::CutOut);
+
+		LoadTexture(L"Village_Bush", L"..\\Resource\\Texture\\Village_house\\Village_Bush.png");
+		LoadMaterial(shader, L"Village_Bush", eRenderingMode::CutOut);
 	}
 	{ // shop
-		LoadTexture(L"Shop_Background", L"..\\Resource\\Texture\\Shop_Background.png");
-		LoadMaterial(shader, L"Shop_Background", eRenderingMode::CutOut);
+		LoadTexture(L"Shop_Background", L"..\\Resource\\Texture\\Shop\\Shop_Background.png");
+		LoadMaterial(shader, L"Shop_Background", eRenderingMode::Opaque);
+
+		LoadTexture(L"bed_carpet", L"..\\Resource\\Texture\\Shop\\bed_carpet.png");
+		LoadMaterial(shader, L"bed_carpet", eRenderingMode::CutOut);
+
+		LoadTexture(L"will_bed", L"..\\Resource\\Texture\\Shop\\will_bed.png");
+		LoadMaterial(shader, L"will_bed", eRenderingMode::CutOut);
+
+		LoadTexture(L"room_stove", L"..\\Resource\\Texture\\Shop\\room_stove.png");
+		LoadMaterial(shader, L"room_stove", eRenderingMode::CutOut);
+
+		LoadTexture(L"room_table", L"..\\Resource\\Texture\\Shop\\room_table.png");
+		LoadMaterial(shader, L"room_table", eRenderingMode::CutOut);
+
+		LoadTexture(L"room_stool", L"..\\Resource\\Texture\\Shop\\room_stool.png");
+		LoadMaterial(shader, L"room_stool", eRenderingMode::CutOut);
+
+		LoadTexture(L"room_mirror_frame", L"..\\Resource\\Texture\\Shop\\room_mirror_frame.png");
+		LoadMaterial(shader, L"room_mirror_frame", eRenderingMode::CutOut);
+
+		LoadTexture(L"room_mirror", L"..\\Resource\\Texture\\Shop\\room_mirror.png");
+		LoadMaterial(shader, L"room_mirror", eRenderingMode::CutOut);
+
+		LoadTexture(L"bed_chest", L"..\\Resource\\Texture\\Shop\\bed_chest.png");
+		LoadMaterial(shader, L"bed_chest", eRenderingMode::CutOut);
+
+		LoadTexture(L"shop_chest", L"..\\Resource\\Texture\\Shop\\shop_chest.png");
+		LoadMaterial(shader, L"shop_chest", eRenderingMode::CutOut);
+
+		LoadTexture(L"shop_stove", L"..\\Resource\\Texture\\Shop\\shop_stove.png");
+		LoadMaterial(shader, L"shop_stove", eRenderingMode::CutOut);
+
+		LoadTexture(L"shop_cauldron", L"..\\Resource\\Texture\\Shop\\shop_cauldron.png");
+		LoadMaterial(shader, L"shop_cauldron", eRenderingMode::CutOut);
+
+		LoadTexture(L"shop_main_table", L"..\\Resource\\Texture\\Shop\\shop_main_table.png");
+		LoadMaterial(shader, L"shop_main_table", eRenderingMode::CutOut);
+
+		LoadTexture(L"entrance_carpet", L"..\\Resource\\Texture\\Shop\\entrance_carpet.png");
+		LoadMaterial(shader, L"entrance_carpet", eRenderingMode::CutOut);
+
+		LoadTexture(L"shop_table", L"..\\Resource\\Texture\\Shop\\shop_table.png");
+		LoadMaterial(shader, L"shop_table", eRenderingMode::CutOut);
+
+		LoadTexture(L"cash_register", L"..\\Resource\\Texture\\Shop\\cash_register.png");
+		LoadMaterial(shader, L"cash_register", eRenderingMode::CutOut);
+
+		LoadTexture(L"shop_door", L"..\\Resource\\Texture\\Shop\\shop_door.png");
+		LoadMaterial(shader, L"shop_door", eRenderingMode::CutOut);
+
+		LoadTexture(L"shop_shoes", L"..\\Resource\\Texture\\Shop\\shop_shoes.png");
+		LoadMaterial(shader, L"shop_shoes", eRenderingMode::CutOut);
+	}
+	{ // item
+		LoadTexture(L"Item_Potion", L"..\\Resource\\Texture\\Item\\Item_Potion.png");
+		LoadMaterial(shader, L"Item_Potion", eRenderingMode::CutOut);
+
+		LoadTexture(L"Item_Coin", L"..\\Resource\\Texture\\Item\\Item_Coin.png");
+		LoadMaterial(shader, L"Item_Coin", eRenderingMode::CutOut);
 	}
 	
 	// Create Scene
-	CSceneMgr::GetInst()->AddScene<CPlayScene>(L"PlayScene");
+	/*CSceneMgr::GetInst()->AddScene<CPlayScene>(L"PlayScene");
+	CSceneMGr::GetInst()->AddScene<CVillageScene>*/
+	CSceneMgr::GetInst()->Initialize();
 }
+
 
 void CRenderMgr::LoadTexture(const std::wstring& textureName, const std::wstring& path)
 {

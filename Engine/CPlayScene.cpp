@@ -16,33 +16,27 @@ void CPlayScene::Initialize()
 {
 	// Link
 	CGameObject* player = new CGameObject();
-	AddGameObject(eLayerType::Player, player, L"Link");
-	CMeshRender* mr = player->AddComponent<CMeshRender>();
-	mr->SetMesh(CResourceMgr::Find<CMesh>(L"Mesh"));
-	mr->SetMaterial(CResourceMgr::Find<CMaterial>(L"mt_Link"));
-	player->GetComponent<CTransform>(eComponentType::Transform)->SetPosition(Vector3(0.0f, 0.0f, 1.01f));
+	AddGameObject(eLayerType::Player, player, L"Link", Vector3(0.0f, 0.0f, 1.01f),
+		Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_Link");
 	player->AddComponent<CPlayerMoveScript>();
 
 	// Smile
 	CGameObject* smile = new CGameObject();
-	AddGameObject(eLayerType::UI, smile, L"Smile");
-	CMeshRender* mr_smile = smile->AddComponent<CMeshRender>();
-	mr_smile->SetMesh(CResourceMgr::Find<CMesh>(L"Mesh"));
-	mr_smile->SetMaterial(CResourceMgr::Find<CMaterial>(L"mt_Smile"));
-	smile->GetComponent<CTransform>(eComponentType::Transform)->SetPosition(Vector3(0.2f, 0.0f, 1.0f));
+	AddGameObject(eLayerType::UI, smile, L"Smile", Vector3(0.2f, 0.0f, 1.0f),
+		Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_Smile");
 
 	// Main Camera
 	CGameObject* mainCamera = new CGameObject();
-	AddGameObject(eLayerType::Player, mainCamera, L"MainCamera");
-	mainCamera->GetComponent<CTransform>(eComponentType::Transform)->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+	AddGameObject(eLayerType::Player, mainCamera, L"MainCamera", Vector3(0.0f, 0.0f, -10.0f),
+		Vector3(1.0f, 1.0f, 1.0f), false, L"", L"");
 	CCamera* mainCamComp = mainCamera->AddComponent<CCamera>();
 	mainCamComp->TurnLayerMask(eLayerType::UI, false);
 	mainCamera->AddComponent<CCameraMoveScript>();
 
 	// UI Camera
 	CGameObject* uiCamera = new CGameObject();
-	AddGameObject(eLayerType::Player, uiCamera, L"UICamera");
-	uiCamera->GetComponent<CTransform>(eComponentType::Transform)->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+	AddGameObject(eLayerType::Player, uiCamera, L"UICamera", Vector3(0.0f, 0.0f, -10.0f),
+		Vector3(1.0f, 1.0f, 1.0f), false, L"", L"");
 	CCamera* uiCamComp = uiCamera->AddComponent<CCamera>();
 	uiCamComp->TurnLayerMask(eLayerType::Player, false);
 }
