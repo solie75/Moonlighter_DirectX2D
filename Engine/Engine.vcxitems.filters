@@ -67,9 +67,6 @@
     <Filter Include="Manager\SceneMgr">
       <UniqueIdentifier>{b8b6450c-b12e-4a00-af0c-c7514c94996b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\GameScene">
-      <UniqueIdentifier>{e8a3f225-1c85-4432-bb3e-f77d9581e52d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Component\Transform">
       <UniqueIdentifier>{ad437e27-945d-4312-9275-86de3d576471}</UniqueIdentifier>
     </Filter>
@@ -90,6 +87,18 @@
     </Filter>
     <Filter Include="GameObject\Component\Script\PlayerMove">
       <UniqueIdentifier>{d742bc4c-1e0c-4e55-b6e4-b05c1a96ddf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\TestScene">
+      <UniqueIdentifier>{e8a3f225-1c85-4432-bb3e-f77d9581e52d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\02.VillageScene">
+      <UniqueIdentifier>{80607246-b92d-4e22-a6a3-83c45f3442a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\03.ShopScene">
+      <UniqueIdentifier>{6e21a29b-b763-4cf8-9a08-77a8830ed0c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\01.StartMenuScene">
+      <UniqueIdentifier>{e1edfa83-059f-4841-8faf-a19a18f87afb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -167,7 +176,7 @@
       <Filter>Manager\SceneMgr</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CPlayScene.h">
-      <Filter>Scene\GameScene</Filter>
+      <Filter>Scene\TestScene</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CTransform.h">
       <Filter>GameObject\Component\Transform</Filter>
@@ -189,6 +198,15 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CCameraMoveScript.h">
       <Filter>GameObject\Component\Script\CameraMove</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CVillageScene.h">
+      <Filter>Scene\02.VillageScene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CStartMenuScene.h">
+      <Filter>Scene\01.StartMenuScene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CShopScene.h">
+      <Filter>Scene\03.ShopScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -251,7 +269,7 @@
       <Filter>Manager\SceneMgr</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CPlayScene.cpp">
-      <Filter>Scene\GameScene</Filter>
+      <Filter>Scene\TestScene</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CTransform.cpp">
       <Filter>GameObject\Component\Transform</Filter>
@@ -273,6 +291,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CCameraMoveScript.cpp">
       <Filter>GameObject\Component\Script\CameraMove</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CVillageScene.cpp">
+      <Filter>Scene\02.VillageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CStartMenuScene.cpp">
+      <Filter>Scene\01.StartMenuScene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CShopScene.cpp">
+      <Filter>Scene\03.ShopScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

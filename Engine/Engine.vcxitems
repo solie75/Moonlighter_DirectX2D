@@ -39,10 +39,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CPathMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CRenderMgr.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CShopScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CSingleton.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CStartMenuScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CTimeMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CTransform.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CVillageScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Enum.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Graphic.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h" />
@@ -74,9 +77,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CPathMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CRenderMgr.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CShopScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CStartMenuScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CTimeMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CTransform.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CVillageScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)CMath.inl" />
