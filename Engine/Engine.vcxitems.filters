@@ -100,6 +100,12 @@
     <Filter Include="Scene\01.StartMenuScene">
       <UniqueIdentifier>{e1edfa83-059f-4841-8faf-a19a18f87afb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\04.CDungeonsEntranceScene">
+      <UniqueIdentifier>{bc125221-aa0a-47e0-a9f5-a239fce283d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Script\Grid">
+      <UniqueIdentifier>{a52324ff-88eb-445e-8968-97c443eb286d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -208,6 +214,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CShopScene.h">
       <Filter>Scene\03.ShopScene</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDungeonsEntranceScene.h">
+      <Filter>Scene\04.CDungeonsEntranceScene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CGridScript.h">
+      <Filter>GameObject\Component\Script\Grid</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -300,6 +312,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CShopScene.cpp">
       <Filter>Scene\03.ShopScene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDungeonsEntranceScene.cpp">
+      <Filter>Scene\04.CDungeonsEntranceScene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CGridScript.cpp">
+      <Filter>GameObject\Component\Script\Grid</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

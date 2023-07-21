@@ -56,3 +56,11 @@ void CScene::AddGameObject(eLayerType type, CGameObject* gameObj, const std::wst
 	}
 
 }
+
+void CScene::Destroy()
+{
+	for (CLayer& layer : mLayers)
+	{
+		layer.Destroy();
+	}
+}

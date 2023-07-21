@@ -19,6 +19,8 @@ public:
     void Render();
     void Release();
 
+    void Destroy();
+
     CScene* GetActiveScene() { return mActiveScene; }
     void SetActiveScene(CScene* scene) { mActiveScene = scene; }
 

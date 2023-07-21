@@ -6,63 +6,99 @@ CShader::CShader()
 	, mDSType(eDSType::Less)
 	, mBSType(eBSType::AlphaBlend)
 {
-	CreateShader();
-	CreateInputLayout();
-	BindsShader();
+	//CreateInputLayout();
 	BindInputLayout();
 }
 
 CShader::~CShader()
 {
 }
-
-bool CShader::CreateShader()
+bool CShader::CreateShader(eShaderStage shaderStage, const std::wstring& shaderName, const std::string& entrypointName)
 {
-	// Shader Path
 	std::filesystem::path shaderPath = std::filesystem::current_path().parent_path();
 	shaderPath += L"\\Shader\\";
 
-	// VS shader Path
-	std::filesystem::path vsPath(shaderPath.c_str());
-	vsPath += L"VS.hlsl";
-
-	// VS Shader Compiling into Blob value
-	D3DCompileFromFile(vsPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
-		, "main", "vs_5_0", 0, 0
-		, mVSBlob.GetAddressOf(), mErrorBlob.GetAddressOf());
-
-	// Shader 컴파일 과정의 오류를 문자열로 보여줌.
-	if (mErrorBlob)
+	if (shaderStage == eShaderStage::VS)
 	{
-		OutputDebugStringA((char*)mErrorBlob->GetBufferPointer());
-		mErrorBlob->Release();
+		std::filesystem::path vsPath = shaderPath;
+		vsPath += shaderName;
+
+		D3DCompileFromFile(vsPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
+			entrypointName.c_str(), "vs_5_0", 0, 0
+			, mVSBlob.GetAddressOf(), mErrorBlob.GetAddressOf());
+
+		if (mErrorBlob)
+		{
+			OutputDebugStringA((char*)mErrorBlob->GetBufferPointer());
+			mErrorBlob->Release();
+		}
+
+		CDevice::GetInst()->GetDevice()->CreateVertexShader(mVSBlob->GetBufferPointer()
+			, mVSBlob->GetBufferSize(), nullptr, mVS.GetAddressOf());
 	}
-
-	// VertexShader 생성
-	CDevice::GetInst()->GetDevice()->CreateVertexShader(mVSBlob->GetBufferPointer()
-		, mVSBlob->GetBufferSize(), nullptr, mVS.GetAddressOf());
-
-	// PS shader Path
-	std::filesystem::path psPath(shaderPath.c_str());
-	psPath += L"PS.hlsl";
-
-	// PS Shader Compiling into Blob value
-	D3DCompileFromFile(psPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
-		, "main", "ps_5_0", 0, 0
-		, mPSBlob.GetAddressOf(), mErrorBlob.GetAddressOf());
-
-	CDevice::GetInst()->GetDevice()->CreatePixelShader(mPSBlob->GetBufferPointer()
-		, mPSBlob->GetBufferSize(), nullptr, mPS.GetAddressOf());
-
-	// Shader 컴파일 과정의 오류를 문자열로 보여줌.
-	if (mErrorBlob)
+	else if (shaderStage == eShaderStage::PS)
 	{
-		OutputDebugStringA((char*)mErrorBlob->GetBufferPointer());
-		mErrorBlob->Release();
+		std::filesystem::path psPath = shaderPath;
+		psPath += shaderName;
+
+		D3DCompileFromFile(psPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
+			entrypointName.c_str(), "ps_5_0", 0, 0
+			, mPSBlob.GetAddressOf(), mErrorBlob.GetAddressOf());
+
+		CDevice::GetInst()->GetDevice()->CreatePixelShader(mPSBlob->GetBufferPointer()
+			, mPSBlob->GetBufferSize(), nullptr, mPS.GetAddressOf());
 	}
 
 	return true;
 }
+
+//bool CShader::CreateShader()
+//{
+//	// Shader Path
+//	std::filesystem::path shaderPath = std::filesystem::current_path().parent_path();
+//	shaderPath += L"\\Shader\\";
+//
+//	// VS shader Path
+//	std::filesystem::path vsPath(shaderPath.c_str());
+//	vsPath += L"VS.hlsl";
+//
+//	// VS Shader Compiling into Blob value
+//	D3DCompileFromFile(vsPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
+//		, "main", "vs_5_0", 0, 0
+//		, mVSBlob.GetAddressOf(), mErrorBlob.GetAddressOf());
+//
+//	// Shader 컴파일 과정의 오류를 문자열로 보여줌.
+//	if (mErrorBlob)
+//	{
+//		OutputDebugStringA((char*)mErrorBlob->GetBufferPointer());
+//		mErrorBlob->Release();
+//	}
+//
+//	// VertexShader 생성
+//	CDevice::GetInst()->GetDevice()->CreateVertexShader(mVSBlob->GetBufferPointer()
+//		, mVSBlob->GetBufferSize(), nullptr, mVS.GetAddressOf());
+//
+//	// PS shader Path
+//	std::filesystem::path psPath(shaderPath.c_str());
+//	psPath += L"PS.hlsl";
+//
+//	// PS Shader Compiling into Blob value
+//	D3DCompileFromFile(psPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
+//		, "main", "ps_5_0", 0, 0
+//		, mPSBlob.GetAddressOf(), mErrorBlob.GetAddressOf());
+//
+//	CDevice::GetInst()->GetDevice()->CreatePixelShader(mPSBlob->GetBufferPointer()
+//		, mPSBlob->GetBufferSize(), nullptr, mPS.GetAddressOf());
+//
+//	// Shader 컴파일 과정의 오류를 문자열로 보여줌.
+//	if (mErrorBlob)
+//	{
+//		OutputDebugStringA((char*)mErrorBlob->GetBufferPointer());
+//		mErrorBlob->Release();
+//	}
+//
+//	return true;
+//}
 
 bool CShader::CreateInputLayout()
 {
@@ -99,6 +135,7 @@ bool CShader::CreateInputLayout()
 
 void CShader::BindsShader()
 {
+	BindInputLayout();
 	CDevice::GetInst()->GetContext()->VSSetShader(mVS.Get(), 0, 0);
 	CDevice::GetInst()->GetContext()->PSSetShader(mPS.Get(), 0, 0);
 }

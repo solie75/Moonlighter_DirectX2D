@@ -17,6 +17,8 @@ public:
 	virtual void LateUpdate();
 	virtual void Render();
 
+	virtual void Destroy();
+
 	void AddGameObject(eLayerType type, CGameObject* gameObj, const std::wstring& objName
 		, Vector3 position, Vector3 scale, bool meshRenderBool, const std::wstring& meshName, const std::wstring& materialName);
 

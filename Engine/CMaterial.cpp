@@ -17,8 +17,15 @@ HRESULT CMaterial::ResourceLoad(const std::wstring name, const std::wstring& pat
 
 void CMaterial::Bind()
 {
-    mTexture->BindShaderResource(eShaderStage::PS, 0);
-    mShader->BindsShader();
+    if (mTexture)
+    {
+        mTexture->BindShaderResource(eShaderStage::PS, 0);
+    }
+    if (mShader)
+    {
+        mShader->BindsShader();
+    }
+
 }
 
 void CMaterial::Clear()

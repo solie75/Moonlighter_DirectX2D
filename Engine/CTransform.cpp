@@ -53,7 +53,7 @@ void CTransform::CreateConstantBuffer()
 	TransformCB trCB = {};
 	trCB.mWorld = mWorld;
 	trCB.mView = CCamera::GetViewMatrix();
-	trCB.mProjection = CCamera::GetmProjectionMatrix();
+	trCB.mProjection = CCamera::GetProjectionMatrix();
 
 	mTransformCB->InitConstantBuffer(sizeof(TransformCB), eCBType::Transform, &trCB);
 }

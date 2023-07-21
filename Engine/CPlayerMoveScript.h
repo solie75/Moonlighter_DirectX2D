@@ -8,6 +8,6 @@ class CPlayerMoveScript :
 {
 public:
 
-    virtual void Update() override;
+    virtual void Update();
 };
 

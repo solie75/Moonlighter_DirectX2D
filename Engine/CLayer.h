@@ -16,6 +16,8 @@ public:
     virtual void LateUpdate();
     //virtual void Render();
 
+    virtual void Destroy();
+
     void AddGameObject(CGameObject* gameObj);
 
     const std::vector<CGameObject*> GetGameObjects()

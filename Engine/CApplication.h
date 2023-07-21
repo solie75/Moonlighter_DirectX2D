@@ -24,4 +24,5 @@ public:
 	void AppLateUpdate();
 	void AppRender();
 	void SetWindow(HWND hwnd, UINT width, UINT height);
+	void AppDestroy();
 };

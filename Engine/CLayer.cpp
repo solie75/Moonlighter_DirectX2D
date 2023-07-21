@@ -49,6 +49,39 @@ void CLayer::LateUpdate()
 //	}
 //}
 
+void CLayer::Destroy()
+{
+	// Dead Object list
+	std::set<CGameObject*> deadGameObjs = {};
+	for (CGameObject* gameObj : mGameObjects)
+	{
+		if (gameObj->GetState() == CGameObject::eState::Dead)
+		{
+			deadGameObjs.insert(gameObj);
+		}
+	}
+
+	// layer 에서 Dead 상태 오브젝트 제외
+	typedef std::vector<CGameObject*>::iterator GameObjIter;
+	for (GameObjIter iter = mGameObjects.begin(); iter != mGameObjects.end();)
+	{
+		std::set<CGameObject*>::iterator deleteIter = deadGameObjs.find(*(iter));
+		if (deleteIter != deadGameObjs.end())
+		{
+			iter = mGameObjects.erase(iter);
+			continue;
+		}
+		iter++;
+	}
+
+	// 메모리 해제
+	for (CGameObject* gameObj : deadGameObjs)
+	{
+		delete gameObj;
+		gameObj = nullptr;
+	}
+}
+
 void CLayer::AddGameObject(CGameObject* gameObj)
 {
 	mGameObjects.push_back(gameObj);

@@ -21,6 +21,7 @@ void CApplication::AppRun()
 	AppUpdate();
 	AppLateUpdate();
 	AppRender();
+	AppDestroy();
 }
 
 void CApplication::AppInit()
@@ -78,4 +79,9 @@ void CApplication::SetWindow(HWND hwnd, UINT width, UINT height)
 	SetWindowPos(mHwnd, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, 0);
 	ShowWindow(mHwnd, true);
 	UpdateWindow(mHwnd);
+}
+
+void CApplication::AppDestroy()
+{
+	CSceneMgr::GetInst()->Destroy();
 }

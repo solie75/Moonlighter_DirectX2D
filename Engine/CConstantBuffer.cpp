@@ -12,7 +12,6 @@ CConstantBuffer::~CConstantBuffer()
 
 bool CConstantBuffer::InitConstantBuffer(size_t size, eCBType type, void* data)
 {
-	this;
 	mDesc.ByteWidth = (UINT)size;
 	mDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_CONSTANT_BUFFER;
 	mDesc.Usage = D3D11_USAGE::D3D11_USAGE_DYNAMIC;

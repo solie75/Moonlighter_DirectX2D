@@ -50,7 +50,7 @@ public:
 	bool CreateProjectionMatrix(eProjectionType type);
 
 	static Matrix GetViewMatrix() { return staticView; }
-	static Matrix GetmProjectionMatrix() { return staticProjection; }
+	static Matrix GetProjectionMatrix() { return staticProjection; }
 
 	void AlphaSortGameObjects();
 	void RenderOpaque();
@@ -63,6 +63,8 @@ public:
 	void TurnLayerMask(eLayerType type, bool enable = true);
 	void EnableLayerMasks() { mLayerMask.set(); }
 	void DisableLayerMasks() { mLayerMask.reset(); }
+
+	float GetSize() { return mSize; }
 };
 
 Matrix CCamera::staticView =  Matrix::Identity;

@@ -10,6 +10,8 @@
 #define CB_GETBINDSLOT(name) __CBUFFERBINDSLOT__##name##__
 #define CBUFFER(name, slot) static const int CB_GETBINDSLOT(name) = slot; struct alignas(16) name 
 #define CBSLOT_TRANSFORM		0
+//#define CBSLOT_PARTICLE		1
+#define CBSLOT_GRID		2
 
 enum class eShaderStage
 {
@@ -25,6 +27,7 @@ enum class eShaderStage
 enum class eCBType
 {
 	Transform,
+	Grid,
 	End,
 };
 
@@ -82,4 +85,11 @@ CBUFFER(TransformCB, CBSLOT_TRANSFORM)
 	Matrix mWorld;
 	Matrix mView;
 	Matrix mProjection;
+};
+
+CBUFFER(GridCB, CBSLOT_GRID)
+{
+	Vector4 CameraPosition;
+	Vector2 CameraScale;
+	Vector2 Resolution;
 };

@@ -9,11 +9,12 @@
 #include "CCameraMgr.h"
 #include "CConstantBuffer.h"
 
+
 class CRenderMgr : public CSingleton<CRenderMgr>
 {
 private:
 
-	CConstantBuffer* mCB;
+	std::vector<CConstantBuffer*> mCB;
 
 	ID3D11DeviceContext* mGraphicContext;
 
@@ -58,5 +59,16 @@ public:
 		cameras.push_back(cam);
 		cam->SetName(name);
 	}
+
+
+	//CCamera* GetCamera(const std::wstring& cameraName)
+	//{
+	//	find(cameras.begin(), cameras.end(), )
+	//		for (cameraIter iter = cameras.begin(); iter != cameras.end();)
+	//		{
+	//			CCamera* camera =
+	//		}
+	//}
+	//std::map<std::wstring, CScene*>::iterator iter = CSceneMgr::GetInst()->mScenes.find(sceneName);
 };
 

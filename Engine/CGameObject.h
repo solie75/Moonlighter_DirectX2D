@@ -51,5 +51,8 @@ public:
 
         return nullptr;
     }
+
+    void Destroy() { mState = eState::Dead; }
+    eState GetState() { return mState; }
 };
 

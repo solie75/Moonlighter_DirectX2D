@@ -25,8 +25,24 @@ void CRenderMgr::Init()
 
 	// Create Shader
 	std::shared_ptr<CShader> shader = std::make_shared<CShader>();
+	shader->CreateShader(eShaderStage::VS, L"VS.hlsl", "main");
+	shader->CreateShader(eShaderStage::PS, L"PS.hlsl", "main");
+	shader->CreateInputLayout();
+
 	CResourceMgr::GetInst()->Insert(L"Shader", shader);
 
+	std::shared_ptr<CShader> gridShader = std::make_shared<CShader>();
+	gridShader->CreateShader(eShaderStage::VS, L"GridVS.hlsl", "main");
+	gridShader->CreateShader(eShaderStage::PS, L"GridPS.hlsl", "main");
+	gridShader->CreateInputLayout();
+	CResourceMgr::GetInst()->Insert(L"GridShader", gridShader);
+
+	// Create Grid Material
+	std::shared_ptr<CMaterial> mt_Grid = std::make_shared<CMaterial>();
+	mt_Grid->SetShader(gridShader);
+	mt_Grid->SetTexture(nullptr);
+	mt_Grid->SetRenderMode(eRenderingMode::End);
+	CResourceMgr::Insert(L"mt_Grid", mt_Grid);
 
 	// Load Texture and Mateiral
 	{ // Test
@@ -320,6 +336,34 @@ void CRenderMgr::Init()
 		LoadTexture(L"shop_shoes", L"..\\Resource\\Texture\\Shop\\shop_shoes.png");
 		LoadMaterial(shader, L"shop_shoes", eRenderingMode::CutOut);
 	}
+	{ // DungeonsEntrance
+		LoadTexture(L"DungeonsEntrance_Background", L"..\\Resource\\Texture\\DungeonsEntrance\\DungeonsEntrance_Background.png");
+		LoadMaterial(shader, L"DungeonsEntrance_Background", eRenderingMode::CutOut);
+
+		LoadTexture(L"DungeonsEntrance_Background_Cover", L"..\\Resource\\Texture\\DungeonsEntrance\\DungeonsEntrance_Background_Cover.png");
+		LoadMaterial(shader, L"DungeonsEntrance_Background_Cover", eRenderingMode::CutOut);
+
+		LoadTexture(L"LockedPortal_1", L"..\\Resource\\Texture\\DungeonsEntrance\\LockedPortal_1.png");
+		LoadMaterial(shader, L"LockedPortal_1", eRenderingMode::CutOut);
+
+		LoadTexture(L"LockedPortal_2", L"..\\Resource\\Texture\\DungeonsEntrance\\LockedPortal_2.png");
+		LoadMaterial(shader, L"LockedPortal_2", eRenderingMode::CutOut);
+
+		LoadTexture(L"LockedPortal_3", L"..\\Resource\\Texture\\DungeonsEntrance\\LockedPortal_3.png");
+		LoadMaterial(shader, L"LockedPortal_3", eRenderingMode::CutOut);
+
+		LoadTexture(L"DungeonEntrance_5thDoor", L"..\\Resource\\Texture\\DungeonsEntrance\\DungeonEntrance_5thDoor.png");
+		LoadMaterial(shader, L"DungeonEntrance_5thDoor", eRenderingMode::CutOut);
+
+		LoadTexture(L"DungeonEntrance_Fabric", L"..\\Resource\\Texture\\DungeonsEntrance\\DungeonEntrance_Fabric.png");
+		LoadMaterial(shader, L"DungeonEntrance_Fabric", eRenderingMode::CutOut);
+
+		LoadTexture(L"DungeonEntrance_Pillar", L"..\\Resource\\Texture\\DungeonsEntrance\\DungeonEntrance_Pillar.png");
+		LoadMaterial(shader, L"DungeonEntrance_Pillar", eRenderingMode::CutOut);
+
+		LoadTexture(L"DungeonEntrance_Wall", L"..\\Resource\\Texture\\DungeonsEntrance\\DungeonEntrance_Wall.png");
+		LoadMaterial(shader, L"DungeonEntrance_Wall", eRenderingMode::CutOut);
+	}
 	{ // item
 		LoadTexture(L"Item_Potion", L"..\\Resource\\Texture\\Item\\Item_Potion.png");
 		LoadMaterial(shader, L"Item_Potion", eRenderingMode::CutOut);
@@ -351,7 +395,6 @@ void CRenderMgr::LoadMaterial(std::shared_ptr<CShader> shader,const std::wstring
 	mt->SetTexture(tex);
 	mt->SetRenderMode(renderMode);
 	CResourceMgr::GetInst()->Insert(L"mt_" + textureName, mt);
-
 }
 
 void CRenderMgr::Update()

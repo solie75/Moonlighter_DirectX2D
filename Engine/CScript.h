@@ -7,9 +7,9 @@ public:
 	CScript();
 	~CScript();
 
-	virtual void Initialize() override;
-	virtual void Update() override;
-	virtual void LateUpdate() override;
-	virtual void Render() override;
+	virtual void Initialize();
+	virtual void Update();
+	virtual void LateUpdate();
+	virtual void Render();
 };
 

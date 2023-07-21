@@ -31,7 +31,8 @@ public:
 	CShader();
 	~CShader();
 
-	bool CreateShader();
+	bool CreateShader(eShaderStage shaderStage, const std::wstring& shaderName, const std::string& entrypointName);
+	//bool CreateShader();
 	bool CreateInputLayout();
 
 	void BindsShader();
