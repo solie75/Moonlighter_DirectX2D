@@ -12,7 +12,7 @@
 #define CBSLOT_TRANSFORM		0
 //#define CBSLOT_PARTICLE		1
 #define CBSLOT_GRID		2
-#define CBSLOT_ANIMATION2D		3
+#define CBSLOT_ANIMATION2D		12
 
 enum class eShaderStage
 {
@@ -94,4 +94,13 @@ CBUFFER(GridCB, CBSLOT_GRID)
 	Vector4 CameraPosition;
 	Vector2 CameraScale;
 	Vector2 Resolution;
+};
+
+CBUFFER(AnimatorCB, CBSLOT_ANIMATION2D)
+{
+	Vector2 spriteLeftTop;
+	Vector2 spriteSize;
+	Vector2 spriteOffset;
+	Vector2 atlasSize;
+	UINT animationType;
 };

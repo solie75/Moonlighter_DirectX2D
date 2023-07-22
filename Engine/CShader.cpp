@@ -23,7 +23,7 @@ bool CShader::CreateShader(eShaderStage shaderStage, const std::wstring& shaderN
 		std::filesystem::path vsPath = shaderPath;
 		vsPath += shaderName;
 
-		D3DCompileFromFile(vsPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
+		HRESULT hr = D3DCompileFromFile(vsPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
 			entrypointName.c_str(), "vs_5_0", 0, 0
 			, mVSBlob.GetAddressOf(), mErrorBlob.GetAddressOf());
 
@@ -32,7 +32,6 @@ bool CShader::CreateShader(eShaderStage shaderStage, const std::wstring& shaderN
 			OutputDebugStringA((char*)mErrorBlob->GetBufferPointer());
 			mErrorBlob->Release();
 		}
-
 		CDevice::GetInst()->GetDevice()->CreateVertexShader(mVSBlob->GetBufferPointer()
 			, mVSBlob->GetBufferSize(), nullptr, mVS.GetAddressOf());
 	}
@@ -41,9 +40,15 @@ bool CShader::CreateShader(eShaderStage shaderStage, const std::wstring& shaderN
 		std::filesystem::path psPath = shaderPath;
 		psPath += shaderName;
 
-		D3DCompileFromFile(psPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
+		HRESULT hr =  D3DCompileFromFile(psPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
 			entrypointName.c_str(), "ps_5_0", 0, 0
 			, mPSBlob.GetAddressOf(), mErrorBlob.GetAddressOf());
+
+		if (mErrorBlob)
+		{
+			OutputDebugStringA((char*)mErrorBlob->GetBufferPointer());
+			mErrorBlob->Release();
+		}
 
 		CDevice::GetInst()->GetDevice()->CreatePixelShader(mPSBlob->GetBufferPointer()
 			, mPSBlob->GetBufferSize(), nullptr, mPS.GetAddressOf());

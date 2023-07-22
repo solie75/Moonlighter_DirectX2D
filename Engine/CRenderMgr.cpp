@@ -37,6 +37,11 @@ void CRenderMgr::Init()
 	gridShader->CreateInputLayout();
 	CResourceMgr::GetInst()->Insert(L"GridShader", gridShader);
 
+	std::shared_ptr<CShader> aniShader = std::make_shared<CShader>();
+	aniShader->CreateShader(eShaderStage::VS, L"AnimationVS.hlsl", "main");
+	aniShader->CreateShader(eShaderStage::PS, L"AnimationPS.hlsl", "main");
+	CResourceMgr::GetInst()->Insert(L"AnimationShader", aniShader);
+
 	// Create Grid Material
 	std::shared_ptr<CMaterial> mt_Grid = std::make_shared<CMaterial>();
 	mt_Grid->SetShader(gridShader);
@@ -372,7 +377,10 @@ void CRenderMgr::Init()
 		LoadTexture(L"Item_Coin", L"..\\Resource\\Texture\\Item\\Item_Coin.png");
 		LoadMaterial(shader, L"Item_Coin", eRenderingMode::CutOut);
 	}
-	
+	{ // Atlas
+		LoadTexture(L"linkSprites", L"..\\Resource\\Texture\\linkSprites.png");
+		LoadMaterial(aniShader, L"linkSprites", eRenderingMode::CutOut);
+	}
 	// Create Scene
 	/*CSceneMgr::GetInst()->AddScene<CPlayScene>(L"PlayScene");
 	CSceneMGr::GetInst()->AddScene<CVillageScene>*/

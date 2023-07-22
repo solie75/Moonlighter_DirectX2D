@@ -4,6 +4,7 @@
 #include "CCameraMoveScript.h"
 #include "CPlayerMoveScript.h"
 #include "CGridScript.h"
+#include "CAnimator.h"
 
 CPlayScene::CPlayScene()
 {
@@ -16,10 +17,10 @@ CPlayScene::~CPlayScene()
 void CPlayScene::Initialize()
 {
 	// Link
-	CGameObject* player = new CGameObject();
-	AddGameObject(eLayerType::Player, player, L"Link", Vector3(0.0f, 0.0f, 1.01f),
-		Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_Link");
-	player->AddComponent<CPlayerMoveScript>();
+	//CGameObject* player = new CGameObject();
+	//AddGameObject(eLayerType::Player, player, L"Link", Vector3(0.0f, 0.0f, 1.01f),
+	//	Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_Link");
+	//player->AddComponent<CPlayerMoveScript>();
 
 	// Smile
 	CGameObject* smile = new CGameObject();
@@ -48,6 +49,21 @@ void CPlayScene::Initialize()
 		Vector3(1.0f, 1.0, 1.0f), true, L"Mesh", L"mt_Grid");
 	CGridScript* gridScript = grid->AddComponent<CGridScript>();
 
+	// Link Animation
+	CGameObject* player = new CGameObject();
+	CMeshRender* mr = player->AddComponent<CMeshRender>();
+	
+	
+	std::shared_ptr<CTexture> atlas
+		= CResourceMgr::GetInst()->Load<CTexture>(L"linkSprites", L"..\\Resources\\Texture\\linkSprites.png");
+
+	CAnimator* at = player->AddComponent<CAnimator>();
+	at->Create(L"linkSprites", atlas, Vector2(0.0f, 0.0f), Vector2(120.f, 130.f), 3);
+	at->PlayAnimation(L"Idle", true);
+	player->AddComponent<CPlayerMoveScript>();
+	
+	
+	
 	CScene::Initialize();
 }
 

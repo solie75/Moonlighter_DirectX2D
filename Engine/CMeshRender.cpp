@@ -1,6 +1,7 @@
 #include "CMeshRender.h"
 #include "CGameObject.h"
 #include "CRenderMgr.h"
+#include "CAnimator.h"
 
 CMeshRender::CMeshRender()
 	: CComponent(eComponentType::MeshRender)
@@ -41,6 +42,12 @@ void CMeshRender::Render()
 	}
 
 	CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, tr->GetTransformCB());
+
+	CAnimator* animator = GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
+	if (animator)
+	{
+		animator->Binds();
+	}
 
 	mMesh->Render();
 }

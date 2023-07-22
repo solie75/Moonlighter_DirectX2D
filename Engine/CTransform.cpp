@@ -56,4 +56,5 @@ void CTransform::CreateConstantBuffer()
 	trCB.mProjection = CCamera::GetProjectionMatrix();
 
 	mTransformCB->InitConstantBuffer(sizeof(TransformCB), eCBType::Transform, &trCB);
+
 }

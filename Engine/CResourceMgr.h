@@ -29,14 +29,14 @@ public:
 	template <typename T>
 	static std::shared_ptr<T> Load(const std::wstring& key, const std::wstring& path)
 	{
-		std::shared_ptr<T> resource = CResource::Find<T>(key);
+		std::shared_ptr<T> resource = CResourceMgr::Find<T>(key);
 		if (resource != nullptr)
 		{
 			return resource;
 		}
 
 		resource = std::make_shared<T>();
-		if (FAILED(resource->ResourceLoad(path)))
+		if (FAILED(resource->ResourceLoad(key, path)))
 		{
 			assert(false);
 			return nullptr;

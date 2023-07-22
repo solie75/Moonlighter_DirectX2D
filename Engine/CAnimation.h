@@ -1,8 +1,9 @@
 #pragma once
 #include "CResource.h"
 #include "CTexture.h"
-#include "CAnimator.h"
+#include "CConstantBuffer.h"
 
+class CAnimator;
 class CAnimation
 	: public CResource
 {
@@ -12,12 +13,14 @@ public:
 		Vector2 leftTop;
 		Vector2 size;
 		Vector2 Offset;
+		Vector2 atlasSize;
 		float duration;
 
 		Sprite()
 			: leftTop(Vector2::Zero)
 			, size(Vector2::Zero)
 			, Offset(Vector2::Zero)
+			, atlasSize(Vector2::Zero)
 			, duration(0.0f)
 		{ }
 	};
@@ -28,6 +31,8 @@ private:
 	int mIndex;
 	float mTime;
 	bool mbComplete;
+
+
 public:
 	CAnimation();
 	~CAnimation();
@@ -44,9 +49,11 @@ public:
 		, Vector2 offset = Vector2::Zero
 		, float duration = 0.0f);
 
-	void Binds();
+	void Binds(CConstantBuffer* aniCB);
 	void Reset();
 
-	virtual HRESULT Load(const std::wstring& path) { return S_FALSE; }
+	bool IsComplete() { return mbComplete; }
+
+	virtual HRESULT ResourceLoad(const std::wstring name, const std::wstring& path) { return S_FALSE; }
 };
 
