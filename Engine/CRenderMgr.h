@@ -14,7 +14,7 @@ class CRenderMgr : public CSingleton<CRenderMgr>
 {
 private:
 
-	std::vector<CConstantBuffer*> mCB;
+	CConstantBuffer* mCB[(UINT)eCBType::End] = {};
 
 	ID3D11DeviceContext* mGraphicContext;
 

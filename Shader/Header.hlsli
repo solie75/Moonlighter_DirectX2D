@@ -1,5 +1,4 @@
 
-
 cbuffer Transform : register(b0)
 {
     row_major matrix WorldMatrix;
@@ -13,3 +12,7 @@ cbuffer Grid : register(b2)
     float2 CameraScale;
     float2 Resolution;
 }
+
+Texture2D smileTexture : register(t0);
+SamplerState pointSampler : register(s0);
+SamplerState anisotropicSampler : register(s1);

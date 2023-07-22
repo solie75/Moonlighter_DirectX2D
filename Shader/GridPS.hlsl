@@ -15,7 +15,7 @@ float4 main(VSOut In) : SV_Target
 {
     float4 Out = float4(1.0f, 1.0f, 1.0f, 1.0f);
     
-    const int width = 100;
+    /*const int width = 100;
     const int height = 100;
     
     int gridX = (int) In.GridPos.x;
@@ -30,7 +30,7 @@ float4 main(VSOut In) : SV_Target
         return Out;
     }
 
-    discard;
+    discard;*/
     
     return Out;
 }

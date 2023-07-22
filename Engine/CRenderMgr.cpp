@@ -41,7 +41,8 @@ void CRenderMgr::Init()
 	std::shared_ptr<CMaterial> mt_Grid = std::make_shared<CMaterial>();
 	mt_Grid->SetShader(gridShader);
 	mt_Grid->SetTexture(nullptr);
-	mt_Grid->SetRenderMode(eRenderingMode::End);
+	mt_Grid->SetRenderMode(eRenderingMode::Opaque);
+	mt_Grid->SetName(L"mt_Grid");
 	CResourceMgr::Insert(L"mt_Grid", mt_Grid);
 
 	// Load Texture and Mateiral
@@ -391,6 +392,7 @@ void CRenderMgr::LoadMaterial(std::shared_ptr<CShader> shader,const std::wstring
 	std::shared_ptr<CTexture> tex = CResourceMgr::GetInst()->Find<CTexture>(textureName);
 
 	std::shared_ptr<CMaterial> mt = std::make_shared<CMaterial>();
+	mt->SetName(L"mt_" + textureName);
 	mt->SetShader(shader);
 	mt->SetTexture(tex);
 	mt->SetRenderMode(renderMode);

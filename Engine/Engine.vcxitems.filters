@@ -106,6 +106,12 @@
     <Filter Include="GameObject\Component\Script\Grid">
       <UniqueIdentifier>{a52324ff-88eb-445e-8968-97c443eb286d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Component\Animator">
+      <UniqueIdentifier>{ad26b884-53d6-4718-9529-287cd2792a77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Animation">
+      <UniqueIdentifier>{744accfd-1b89-48db-9f8f-f992ec2601e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -156,7 +162,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CTexture.h">
       <Filter>Resource\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CMaterial.h">
       <Filter>Resource\Material</Filter>
     </ClInclude>
@@ -220,6 +225,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CGridScript.h">
       <Filter>GameObject\Component\Script\Grid</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CAnimator.h">
+      <Filter>GameObject\Component\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CAnimation.h">
+      <Filter>Resource\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -255,7 +269,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CTexture.cpp">
       <Filter>Resource\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CMaterial.cpp">
       <Filter>Resource\Material</Filter>
     </ClCompile>
@@ -318,6 +331,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CGridScript.cpp">
       <Filter>GameObject\Component\Script\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CAnimator.cpp">
+      <Filter>GameObject\Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CAnimation.cpp">
+      <Filter>Resource\Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

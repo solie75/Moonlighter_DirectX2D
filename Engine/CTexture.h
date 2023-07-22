@@ -29,6 +29,9 @@ public:
 	virtual HRESULT ResourceLoad(const std::wstring name, const std::wstring& path) override;
 	void BindShaderResource(eShaderStage stage, UINT startSlot);
 
+	size_t GetWidth() { return mImage.GetMetadata().width; }
+	size_t GetHeight() { return mImage.GetMetadata().height; }
+
 	void Clear();
 };
 

@@ -6,6 +6,7 @@ enum class eResourceType
 	Shader,
 	Material,
 	Mesh,
+	Animation,
 	End,
 };
 
@@ -16,6 +17,7 @@ enum class eComponentType
 	Mesh, // Mesh 생성
 	MeshRender, // World, View, Projection 변환 상수 버퍼로 shader 에 전달
 	Particle,
+	Animator,
 	Script, // object 의 변화
 	Camera, // view, Projection 변환
 	End,

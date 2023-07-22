@@ -30,5 +30,8 @@ void CMaterial::Bind()
 
 void CMaterial::Clear()
 {
-    mTexture->Clear();
+    if (mTexture)
+    {
+        mTexture->Clear();
+    }
 }
