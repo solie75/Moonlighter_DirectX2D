@@ -41,6 +41,9 @@ public:
 	void LoadTexture(const std::wstring& textureName, const std::wstring& path);
 	void LoadMaterial(std::shared_ptr<CShader> shader, const std::wstring& textureName, eRenderingMode renderMode);
 
+	//void CreateAtlas(const std::wstring& path, const std::wstring& spriteName, int spriteNum);
+	void CreateAtlas(const std::wstring& spriteName, int spriteNum);
+
 	ComPtr<ID3D11RasterizerState> GetRasterizerState(eRSType type)
 	{
 		return rasterizerStates[(UINT)type];

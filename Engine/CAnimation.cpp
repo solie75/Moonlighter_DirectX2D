@@ -98,3 +98,5 @@ void CAnimation::Reset()
 	mbComplete = false;
 	mIndex = 0;
 }
+
+

@@ -32,6 +32,22 @@ public:
 	size_t GetWidth() { return mImage.GetMetadata().width; }
 	size_t GetHeight() { return mImage.GetMetadata().height; }
 
+	const Image* GetScratchImage() { return mImage.GetImages(); }
+	ComPtr<ID3D11ShaderResourceView> GetSRV() { return mSRV; }
+
+	void CreateSRV(ScratchImage* image)
+	{
+		CreateShaderResourceView(
+			CDevice::GetInst()->GetDevice()
+			, (*image).GetImages()
+			, (*image).GetImageCount()
+			, (*image).GetMetadata()
+			, mSRV.GetAddressOf()
+		);
+
+		mSRV->GetResource((ID3D11Resource**)mTexture.GetAddressOf());
+	};
+
 	void Clear();
 };
 

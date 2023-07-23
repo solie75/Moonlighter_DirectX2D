@@ -381,6 +381,8 @@ void CRenderMgr::Init()
 	{ // Atlas
 		LoadTexture(L"linkSprites", L"..\\Resource\\Texture\\linkSprites.png");
 		LoadMaterial(aniShader, L"linkSprites", eRenderingMode::CutOut);
+
+		CreateAtlas( L"Will_Idle_Down", 10);
 	}
 	// Create Scene
 	/*CSceneMgr::GetInst()->AddScene<CPlayScene>(L"PlayScene");
@@ -603,4 +605,48 @@ void CRenderMgr::BindSampler(eShaderStage stage, UINT StartSlot, ID3D11SamplerSt
 	default:
 		break;
 	}
+}
+
+//void CRenderMgr::CreateAtlas(const std::wstring& path, const std::wstring& spriteName, int spriteNum)
+void CRenderMgr::CreateAtlas(const std::wstring& spriteName, int spriteNum)
+{
+
+	ScratchImage atlasImage; // 최종 아틀라스 이미지
+	bool isMade = false; // 아틀라스 이미지의 처음 규격 생성 여부
+	std::filesystem::path Path = std::filesystem::current_path().parent_path();
+	Path += L"\\Resource\\Texture\\Animation\\";
+	Path += spriteName;  // 폴더명
+	Path += L"\\";
+	Path += spriteName;  // 폴더명과 같은 각 sprite 의 공통된 이름
+	Path += L"_";
+
+	std::shared_ptr<CTexture> tex = std::make_shared<CTexture>();
+
+	for (int i = 0; i < spriteNum; i++)
+	{
+		Path += std::to_wstring(i + 1);
+		HRESULT hr = tex->ResourceLoad(spriteName, Path);
+
+		if (hr == S_OK)
+		{
+			if (isMade == false)
+			{
+				atlasImage.Initialize2D(DXGI_FORMAT_R8G8B8A8_UNORM, (tex->GetWidth()) * 10, (tex->GetHeight()) * ((spriteNum / 10.f) + 1), 1, 1);
+				isMade = true;
+			}
+		}
+
+		hr = CopyRectangle(
+			*tex->GetScratchImage(),
+			Rect(0, 0, tex->GetWidth(), tex->GetHeight()),
+			*atlasImage.GetImages(),
+			TEX_FILTER_DEFAULT,
+			(i % 10) * (tex->GetWidth()),
+			(i / 10) * (tex->GetHeight())
+		);
+
+		tex->CreateSRV(&atlasImage);
+	}
+
+	CResourceMgr::GetInst()->Insert(L"atlas_" + spriteName, tex);
 }
