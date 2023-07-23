@@ -62,7 +62,28 @@ void CPlayScene::Initialize()
 	at->PlayAnimation(L"LinkIdle", true);
 	player->AddComponent<CPlayerMoveScript>();
 	
-	
+	// Atlas Test Object
+
+	CGameObject* Will_Idle_Down = new CGameObject();
+	AddGameObject(eLayerType::Player, Will_Idle_Down, L"atlas_Will_Idle_Down", Vector3(3.0f, 0.0f, 1.0002f)
+		, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down");
+
+	std::shared_ptr<CTexture> atlas_Will_Idle_Down = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Idle_Down", L"");
+
+	CAnimator* at_Will_Idle_Down = Will_Idle_Down->AddComponent<CAnimator>();
+	at_Will_Idle_Down->Create(L"Will_Idle_Down", atlas_Will_Idle_Down, Vector2(0.0f, 0.0f), Vector2(24.f, 41.f), 10);
+	at_Will_Idle_Down->PlayAnimation(L"Will_Idle_Down", true);
+
+	// 2
+	CGameObject* Will_Idle_Left = new CGameObject();
+	AddGameObject(eLayerType::Player, Will_Idle_Left, L"atlas_Will_Idle_Left", Vector3(3.0f, 2.0f, 1.0003f)
+		, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Left");
+
+	std::shared_ptr<CTexture> atlas_Will_Idle_Left = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Idle_Left", L"");
+
+	CAnimator* at_Will_Idle_Left = Will_Idle_Left->AddComponent<CAnimator>();
+	at_Will_Idle_Left->Create(L"Will_Idle_Left", atlas_Will_Idle_Left, Vector2(0.0f, 0.0f), Vector2(32.f, 40.f), 10);
+	at_Will_Idle_Left->PlayAnimation(L"Will_Idle_Left", true);
 	
 	CScene::Initialize();
 }

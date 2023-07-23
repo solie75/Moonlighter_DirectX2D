@@ -33,20 +33,21 @@ public:
 	size_t GetHeight() { return mImage.GetMetadata().height; }
 
 	const Image* GetScratchImage() { return mImage.GetImages(); }
+	void InitScratImage(size_t width, size_t hight) {	mImage.Initialize2D(DXGI_FORMAT_R8G8B8A8_UNORM, width, hight, 1, 1); }
+
 	ComPtr<ID3D11ShaderResourceView> GetSRV() { return mSRV; }
 
-	void CreateSRV(ScratchImage* image)
-	{
-		CreateShaderResourceView(
+	void CreateSRV() {
+		CreateShaderResourceView
+		(
 			CDevice::GetInst()->GetDevice()
-			, (*image).GetImages()
-			, (*image).GetImageCount()
-			, (*image).GetMetadata()
+			, mImage.GetImages()
+			, mImage.GetImageCount()
+			, mImage.GetMetadata()
 			, mSRV.GetAddressOf()
 		);
-
 		mSRV->GetResource((ID3D11Resource**)mTexture.GetAddressOf());
-	};
+	}
 
 	void Clear();
 };

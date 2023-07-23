@@ -53,8 +53,9 @@ void CScene::AddGameObject(eLayerType type, CGameObject* gameObj, const std::wst
 		CMeshRender* mr = gameObj->AddComponent<CMeshRender>();
 		mr->SetMesh(CResourceMgr::Find<CMesh>(meshName));
 		mr->SetMaterial(CResourceMgr::Find<CMaterial>(materialName));
+		int a = 0;
 	}
-
+	
 }
 
 void CScene::Destroy()

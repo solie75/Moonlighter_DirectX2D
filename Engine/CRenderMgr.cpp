@@ -382,7 +382,13 @@ void CRenderMgr::Init()
 		LoadTexture(L"linkSprites", L"..\\Resource\\Texture\\linkSprites.png");
 		LoadMaterial(aniShader, L"linkSprites", eRenderingMode::CutOut);
 
-		CreateAtlas( L"Will_Idle_Down", 10);
+		 ( L"Will_Idle_Down", 10);
+		LoadMaterial(aniShader, L"atlas_Will_Idle_Down", eRenderingMode::CutOut);
+
+		CreateAtlas(L"Will_Idle_Left", 10);
+		LoadMaterial(aniShader, L"atlas_Will_Idle_Left", eRenderingMode::CutOut);
+
+		
 	}
 	// Create Scene
 	/*CSceneMgr::GetInst()->AddScene<CPlayScene>(L"PlayScene");
@@ -610,43 +616,68 @@ void CRenderMgr::BindSampler(eShaderStage stage, UINT StartSlot, ID3D11SamplerSt
 //void CRenderMgr::CreateAtlas(const std::wstring& path, const std::wstring& spriteName, int spriteNum)
 void CRenderMgr::CreateAtlas(const std::wstring& spriteName, int spriteNum)
 {
-
-	ScratchImage atlasImage; // 최종 아틀라스 이미지
+	std::shared_ptr<CTexture> atlasTex = std::make_shared<CTexture>(); // 최종 아틀라스 텍스쳐
+	std::shared_ptr<CTexture> tex = std::make_shared<CTexture>(); // 각 Sprite 가 담길 
 	bool isMade = false; // 아틀라스 이미지의 처음 규격 생성 여부
-	std::filesystem::path Path = std::filesystem::current_path().parent_path();
-	Path += L"\\Resource\\Texture\\Animation\\";
+	std::filesystem::path Path = L"..\\Resource\\Texture\\Animation\\";
 	Path += spriteName;  // 폴더명
 	Path += L"\\";
 	Path += spriteName;  // 폴더명과 같은 각 sprite 의 공통된 이름
 	Path += L"_";
 
-	std::shared_ptr<CTexture> tex = std::make_shared<CTexture>();
+	ScratchImage atlasImage;
+	size_t atlasImageWidth;
+	size_t atlasImageHeight;
 
 	for (int i = 0; i < spriteNum; i++)
 	{
-		Path += std::to_wstring(i + 1);
-		HRESULT hr = tex->ResourceLoad(spriteName, Path);
-
+		std::filesystem::path path = Path;
+		path += std::to_wstring(i + 1);
+		path += L".png";
+		HRESULT hr = tex->ResourceLoad(spriteName, path);
 		if (hr == S_OK)
 		{
 			if (isMade == false)
 			{
-				atlasImage.Initialize2D(DXGI_FORMAT_R8G8B8A8_UNORM, (tex->GetWidth()) * 10, (tex->GetHeight()) * ((spriteNum / 10.f) + 1), 1, 1);
+				atlasImageWidth = (tex->GetWidth()) * spriteNum;
+				atlasImageHeight = tex->GetHeight();
+				atlasImage.Initialize2D(DXGI_FORMAT_R8G8B8A8_UNORM, atlasImageWidth, atlasImageHeight, 1, 1);
 				isMade = true;
 			}
 		}
 
-		hr = CopyRectangle(
+		/*hr = CopyRectangle(
 			*tex->GetScratchImage(),
 			Rect(0, 0, tex->GetWidth(), tex->GetHeight()),
 			*atlasImage.GetImages(),
 			TEX_FILTER_DEFAULT,
 			(i % 10) * (tex->GetWidth()),
 			(i / 10) * (tex->GetHeight())
+		);*/
+
+		hr = CopyRectangle(
+			*tex->GetScratchImage(),
+			Rect(0, 0, tex->GetWidth(), tex->GetHeight()),
+			*atlasImage.GetImages(),
+			TEX_FILTER_DEFAULT,
+			i * (tex->GetWidth()),
+			0
 		);
 
-		tex->CreateSRV(&atlasImage);
+		//tex->CreateSRV(&atlasImage);
 	}
 
-	CResourceMgr::GetInst()->Insert(L"atlas_" + spriteName, tex);
+	atlasTex->InitScratImage(atlasImageWidth, atlasImageHeight);
+
+	CopyRectangle(
+		*atlasImage.GetImages(),
+		Rect(0, 0, atlasImage.GetMetadata().width, atlasImage.GetMetadata().height),
+		*atlasTex->GetScratchImage(),
+		TEX_FILTER_DEFAULT,
+		0, 0
+	);
+
+	atlasTex->CreateSRV();
+
+	CResourceMgr::GetInst()->Insert(L"atlas_" + spriteName, atlasTex);
 }
