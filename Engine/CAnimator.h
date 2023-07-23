@@ -26,8 +26,8 @@ public:
 	void Create(const std::wstring& name
 		, std::shared_ptr<CTexture> atlas
 		, Vector2 leftTop
-		, Vector2 size
-		, UINT columnLength
+		, Vector2 spriteSize
+		, UINT spriteNum
 		, Vector2 offset = Vector2::Zero
 		, float duration = 0.1f);
 	CAnimation* FindAnimation(const std::wstring& aniName);

@@ -50,7 +50,7 @@ void CAnimation::Render()
 {
 }
 
-void CAnimation::CreateAnimation(std::wstring aniName, std::shared_ptr<CTexture> atlas, Vector2 LeftTop, Vector2 size, UINT columnLength, Vector2 offset, float duration)
+void CAnimation::CreateAnimation(std::wstring aniName, std::shared_ptr<CTexture> atlas, Vector2 LeftTop, Vector2 spriteSize, UINT spriteNum, Vector2 offset, float duration)
 {
 	SetKey(aniName);
 	mAtlas = atlas;
@@ -58,14 +58,16 @@ void CAnimation::CreateAnimation(std::wstring aniName, std::shared_ptr<CTexture>
 	float width = (float)atlas->GetWidth();
 	float height = (float)atlas->GetHeight();
 
-	for (size_t i = 0 ; i < columnLength; i++)
+	for (int i = 0 ; i < spriteNum; i++)
 	{
 		Sprite sprite = {};
-		sprite.leftTop.x = LeftTop.x + (i * size.x) / width; // 이해 가지 않는다. width/atlasNum * i 여야 하는것 아닌가
-		sprite.leftTop.y = LeftTop.y / height; // 가로의 sprite 개수를 10 개로 한정하고 다음 가로줄로 넘어가는 거면 안되나
-		sprite.size = size; 
+		//sprite.leftTop.x = LeftTop.x + (i * size.x) / width; // 이해 가지 않는다. width/atlasNum * i 여야 하는것 아닌가
+		sprite.leftTop.x = LeftTop.x + i * (width / 10.f);
+		//sprite.leftTop.y = LeftTop.y / height; // 가로의 sprite 개수를 10 개로 한정하고 다음 가로줄로 넘어가는 거면 안되나
+		sprite.leftTop.y = LeftTop.y + ((int)i / 10) * spriteSize.y;
+		sprite.spriteSize = spriteSize;
 		sprite.Offset = offset;
-		sprite.atlasSize = Vector2(200.0f / width, 200.0f / height);
+		sprite.atlasSize = Vector2(width, height);
 		sprite.duration = duration;
 		
 		mSprites.push_back(sprite);
@@ -77,13 +79,13 @@ void CAnimation::Binds(CConstantBuffer* aniCB)
 	// texture bind'
 	mAtlas->BindShaderResource(eShaderStage::PS, 12);
 
-	// Animation CB
+	Vector2 scale = Vector2(mSprites[mIndex].spriteSize.x / mSprites[mIndex].atlasSize.x, mSprites[mIndex].spriteSize.y / mSprites[mIndex].atlasSize.y);
+	Vector2 offset = Vector2(mIndex * scale.x, (mIndex / 10) * scale.y);
+
 	AnimatorCB cb;
-	cb.spriteLeftTop = mSprites[mIndex].leftTop;
-	cb.spriteSize = mSprites[mIndex].size;
-	cb.spriteOffset = mSprites[mIndex].Offset;
-	cb.atlasSize = mSprites[mIndex].atlasSize;
-	cb.animationType = 1;
+	cb.SpriteSize = scale;
+	cb.Offset = offset;
+	cb.AnimationType = 1;
 
 	aniCB->InitConstantBuffer(sizeof(AnimatorCB), eCBType::Animator, &cb);
 	CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, aniCB);

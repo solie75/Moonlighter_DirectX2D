@@ -13,12 +13,20 @@ cbuffer Grid : register(b2)
     float2 Resolution;
 }
 
-cbuffer Animator : register(b3)
+/*cbuffer Animator : register(b3)
 {
     float2 SpriteLeftTop;
     float2 SpriteSize;
     float2 SpriteOffset;
     float2 AtlasSize;
+    uint PrintSpriteIndex;
+    uint AnimationType;
+}*/
+
+cbuffer Animator : register(b3)
+{
+    float2 SpriteSize;
+    float2 Offset;
     uint AnimationType;
 }
 

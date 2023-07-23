@@ -28,6 +28,7 @@ enum class eShaderStage
 enum class eCBType
 {
 	Transform,
+	Particle,
 	Grid,
 	Animator,
 	End,
@@ -98,9 +99,14 @@ CBUFFER(GridCB, CBSLOT_GRID)
 
 CBUFFER(AnimatorCB, CBSLOT_ANIMATION2D)
 {
-	Vector2 spriteLeftTop;
-	Vector2 spriteSize;
-	Vector2 spriteOffset;
-	Vector2 atlasSize;
-	UINT animationType;
+	//Vector2 spriteLeftTop;
+	//Vector2 spriteSize;
+	//Vector2 spriteOffset;
+	//Vector2 atlasSize;
+
+	Vector2 SpriteSize;
+	Vector2 Offset;
+
+	//UINT printSpriteIndex;
+	UINT AnimationType;
 };

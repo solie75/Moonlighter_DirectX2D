@@ -11,14 +11,14 @@ public:
 	struct Sprite
 	{
 		Vector2 leftTop;
-		Vector2 size;
+		Vector2 spriteSize;
 		Vector2 Offset;
 		Vector2 atlasSize;
 		float duration;
 
 		Sprite()
 			: leftTop(Vector2::Zero)
-			, size(Vector2::Zero)
+			, spriteSize(Vector2::Zero)
 			, Offset(Vector2::Zero)
 			, atlasSize(Vector2::Zero)
 			, duration(0.0f)
@@ -44,8 +44,8 @@ public:
 	void CreateAnimation(std::wstring aniName
 		, std::shared_ptr<CTexture> atlas
 		, Vector2 LeftTop
-		, Vector2 size
-		, UINT columnLength
+		, Vector2 spriteSize
+		, UINT spriteNum
 		, Vector2 offset = Vector2::Zero
 		, float duration = 0.0f);
 

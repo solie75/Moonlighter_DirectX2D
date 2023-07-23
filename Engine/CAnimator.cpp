@@ -40,7 +40,7 @@ void CAnimator::Render()
 {
 }
 
-void CAnimator::Create(const std::wstring& aniName, std::shared_ptr<CTexture> atlas, Vector2 leftTop, Vector2 size, UINT columnLength, Vector2 offset, float duration)
+void CAnimator::Create(const std::wstring& aniName, std::shared_ptr<CTexture> atlas, Vector2 leftTop, Vector2 spriteSize, UINT spriteNum, Vector2 offset, float duration)
 {
 	CAnimation* ani = FindAnimation(aniName);
 	if (nullptr != ani)
@@ -54,8 +54,8 @@ void CAnimator::Create(const std::wstring& aniName, std::shared_ptr<CTexture> at
 	ani->CreateAnimation(aniName
 		, atlas
 		, leftTop
-		, size
-		, columnLength
+		, spriteSize
+		, spriteNum
 		, offset
 		, duration);
 
