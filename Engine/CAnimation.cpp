@@ -75,7 +75,7 @@ void CAnimation::CreateAnimation(std::wstring aniName, std::shared_ptr<CTexture>
 void CAnimation::Binds(CConstantBuffer* aniCB)
 {
 	// texture bind'
-	mAtlas->BindShaderResource(eShaderStage::PS, 3);
+	mAtlas->BindShaderResource(eShaderStage::PS, 12);
 
 	// Animation CB
 	AnimatorCB cb;

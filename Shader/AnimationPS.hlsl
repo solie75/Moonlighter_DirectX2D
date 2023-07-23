@@ -16,9 +16,9 @@ struct VSOut
 
 float4 main(VSOut In) : SV_TARGET
 {
-	float4 color = (float4) 0.0f;
+	float4 color = (float4) 1.0f;
 
-	color = albedoTexture.Sample(anisotropicSampler, In.UV);
+	color = atlasTexture.Sample(anisotropicSampler, In.UV);
 
 	if (AnimationType == 1)
 	{

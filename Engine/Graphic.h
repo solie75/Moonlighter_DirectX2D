@@ -12,7 +12,7 @@
 #define CBSLOT_TRANSFORM		0
 //#define CBSLOT_PARTICLE		1
 #define CBSLOT_GRID		2
-#define CBSLOT_ANIMATION2D		12
+#define CBSLOT_ANIMATION2D		3
 
 enum class eShaderStage
 {

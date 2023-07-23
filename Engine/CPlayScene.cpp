@@ -17,10 +17,10 @@ CPlayScene::~CPlayScene()
 void CPlayScene::Initialize()
 {
 	// Link
-	//CGameObject* player = new CGameObject();
-	//AddGameObject(eLayerType::Player, player, L"Link", Vector3(0.0f, 0.0f, 1.01f),
-	//	Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_Link");
-	//player->AddComponent<CPlayerMoveScript>();
+	CGameObject* player1 = new CGameObject();
+	AddGameObject(eLayerType::Player, player1, L"Link", Vector3(0.0f, 0.0f, 1.01f),
+		Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_Link");
+	player1->AddComponent<CPlayerMoveScript>();
 
 	// Smile
 	CGameObject* smile = new CGameObject();
@@ -43,7 +43,7 @@ void CPlayScene::Initialize()
 	CCamera* uiCamComp = uiCamera->AddComponent<CCamera>();
 	uiCamComp->TurnLayerMask(eLayerType::Player, false);
 
-	// Grid Camera
+	// Grid
 	CGameObject* grid = new CGameObject();
 	AddGameObject(eLayerType::Grid, grid, L"Grid", Vector3(0.0f, 0.0f, 0.0f),
 		Vector3(1.0f, 1.0, 1.0f), true, L"Mesh", L"mt_Grid");
@@ -51,15 +51,15 @@ void CPlayScene::Initialize()
 
 	// Link Animation
 	CGameObject* player = new CGameObject();
-	CMeshRender* mr = player->AddComponent<CMeshRender>();
-	
+	AddGameObject(eLayerType::Player, player, L"linkSprites", Vector3(-2.0f, 0.0f, 1.0001f)
+		, Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_linkSprites");
 	
 	std::shared_ptr<CTexture> atlas
 		= CResourceMgr::GetInst()->Load<CTexture>(L"linkSprites", L"..\\Resources\\Texture\\linkSprites.png");
 
 	CAnimator* at = player->AddComponent<CAnimator>();
 	at->Create(L"linkSprites", atlas, Vector2(0.0f, 0.0f), Vector2(120.f, 130.f), 3);
-	at->PlayAnimation(L"Idle", true);
+	at->PlayAnimation(L"linkSprites", true);
 	player->AddComponent<CPlayerMoveScript>();
 	
 	

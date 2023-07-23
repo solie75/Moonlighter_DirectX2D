@@ -40,6 +40,7 @@ void CRenderMgr::Init()
 	std::shared_ptr<CShader> aniShader = std::make_shared<CShader>();
 	aniShader->CreateShader(eShaderStage::VS, L"AnimationVS.hlsl", "main");
 	aniShader->CreateShader(eShaderStage::PS, L"AnimationPS.hlsl", "main");
+	aniShader->CreateInputLayout();
 	CResourceMgr::GetInst()->Insert(L"AnimationShader", aniShader);
 
 	// Create Grid Material
