@@ -1,5 +1,5 @@
-﻿  unity_5JIU3AB1M012738W.cpp
-C:\Users\shinjoongeun\Documents\GitHub\Moonlighter_DirectX2D\Engine\CAnimation.cpp(34,44): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\shinjoongeun\Documents\GitHub\Moonlighter_DirectX2D\Engine\CAnimation.cpp(43,32): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\shinjoongeun\Documents\GitHub\Moonlighter_DirectX2D\Engine\CAnimation.cpp(61,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  Client.vcxproj -> C:\Users\shinjoongeun\Documents\GitHub\Moonlighter_DirectX2D\x64\Debug\Client.exe
+﻿  unity_FEPT6HI1BSCHRA41.cpp
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CAnimation.cpp(34,44): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CAnimation.cpp(43,32): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CAnimation.cpp(61,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Client.vcxproj -> D:\shinjoongeun\Moonlighter_DirectX2D\x64\Debug\Client.exe

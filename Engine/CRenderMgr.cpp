@@ -382,13 +382,30 @@ void CRenderMgr::Init()
 		LoadTexture(L"linkSprites", L"..\\Resource\\Texture\\linkSprites.png");
 		LoadMaterial(aniShader, L"linkSprites", eRenderingMode::CutOut);
 
-		 ( L"Will_Idle_Down", 10);
+		CreateAtlas( L"Will_Idle_Down", 10);
 		LoadMaterial(aniShader, L"atlas_Will_Idle_Down", eRenderingMode::CutOut);
 
 		CreateAtlas(L"Will_Idle_Left", 10);
 		LoadMaterial(aniShader, L"atlas_Will_Idle_Left", eRenderingMode::CutOut);
 
+		CreateAtlas(L"Will_Idle_Right", 10);
+		LoadMaterial(aniShader, L"atlas_Will_Idle_Right", eRenderingMode::CutOut);
 		
+		CreateAtlas(L"Will_Idle_Up", 10);
+		LoadMaterial(aniShader, L"atlas_Will_Idle_Up", eRenderingMode::CutOut);
+
+		CreateAtlas(L"Will_Roll_Down", 8);
+		LoadMaterial(aniShader, L"atlas_Will_Roll_Down", eRenderingMode::CutOut);
+
+		CreateAtlas(L"Will_Roll_Right", 8);
+		LoadMaterial(aniShader, L"atlas_Will_Roll_Right", eRenderingMode::CutOut);
+
+		CreateAtlas(L"Will_Roll_Left", 8);
+		LoadMaterial(aniShader, L"atlas_Will_Roll_Left", eRenderingMode::CutOut);
+
+		CreateAtlas(L"Will_Roll_Down", 8);
+		LoadMaterial(aniShader, L"atlas_Will_Roll_Down", eRenderingMode::CutOut);
+
 	}
 	// Create Scene
 	/*CSceneMgr::GetInst()->AddScene<CPlayScene>(L"PlayScene");
@@ -617,7 +634,7 @@ void CRenderMgr::BindSampler(eShaderStage stage, UINT StartSlot, ID3D11SamplerSt
 void CRenderMgr::CreateAtlas(const std::wstring& spriteName, int spriteNum)
 {
 	std::shared_ptr<CTexture> atlasTex = std::make_shared<CTexture>(); // 최종 아틀라스 텍스쳐
-	std::shared_ptr<CTexture> tex = std::make_shared<CTexture>(); // 각 Sprite 가 담길 
+	
 	bool isMade = false; // 아틀라스 이미지의 처음 규격 생성 여부
 	std::filesystem::path Path = L"..\\Resource\\Texture\\Animation\\";
 	Path += spriteName;  // 폴더명
@@ -631,10 +648,13 @@ void CRenderMgr::CreateAtlas(const std::wstring& spriteName, int spriteNum)
 
 	for (int i = 0; i < spriteNum; i++)
 	{
+		CTexture* tex = new CTexture; // 각 Sprite 가 담길 
 		std::filesystem::path path = Path;
 		path += std::to_wstring(i + 1);
+		std::wstring sn = spriteName + L"_";
+		sn += std::to_wstring(i + 1);
 		path += L".png";
-		HRESULT hr = tex->ResourceLoad(spriteName, path);
+		HRESULT hr = tex->ResourceLoad(sn, path);
 		if (hr == S_OK)
 		{
 			if (isMade == false)

@@ -82,8 +82,10 @@ void CPlayScene::Initialize()
 	std::shared_ptr<CTexture> atlas_Will_Idle_Left = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Idle_Left", L"");
 
 	CAnimator* at_Will_Idle_Left = Will_Idle_Left->AddComponent<CAnimator>();
-	at_Will_Idle_Left->Create(L"Will_Idle_Left", atlas_Will_Idle_Left, Vector2(0.0f, 0.0f), Vector2(32.f, 40.f), 10);
+	at_Will_Idle_Left->Create(L"Will_Idle_Left", atlas_Will_Idle_Left, Vector2(0.0f, 0.0f), Vector2(32.f, 42.f), 10);
 	at_Will_Idle_Left->PlayAnimation(L"Will_Idle_Left", true);
+
+
 	
 	CScene::Initialize();
 }
