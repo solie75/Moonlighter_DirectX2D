@@ -1,6 +1,7 @@
 #include "CVillageScene.h"
 #include "CCameraMoveScript.h"
 #include "CPlayerMoveScript.h"
+#include "CAnimator.h"
 
 CVillageScene::CVillageScene()
 {
@@ -14,10 +15,59 @@ void CVillageScene::Initialize()
 {
 	// Create GameObejct
 	{
-		CGameObject* Will = new CGameObject();
+		/*CGameObject* Will = new CGameObject();
 		AddGameObject(eLayerType::Background, Will, L"Will", Vector3(0.0f, 0.0f, -0.1f),
 			Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_Will");
-		Will->AddComponent<CPlayerMoveScript>();
+		Will->AddComponent<CPlayerMoveScript>();*/
+
+		CGameObject* Will = new CGameObject();
+		AddGameObject(eLayerType::Player, Will, L"Will", Vector3(3.0f, 0.0f, 1.0002f)
+			, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down");
+		CAnimator* Will_Animator = Will->AddComponent<CAnimator>();
+		CMeshRender* mr = Will->GetComponent<CMeshRender>(eComponentType::MeshRender);
+		CPlayerMoveScript* pmScript = Will->AddComponent<CPlayerMoveScript>();
+		{
+			// Idle Atlas
+			std::shared_ptr<CTexture> atlas_Will_Idle_Down = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Idle_Down", L"");
+			Will_Animator->Create(L"Will_Idle_Down", atlas_Will_Idle_Down, Vector2(0.0f, 0.0f), Vector2(24.f, 41.f), 10);
+
+			std::shared_ptr<CTexture> atlas_Will_Idle_Left = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Idle_Left", L"");
+			Will_Animator->Create(L"Will_Idle_Left", atlas_Will_Idle_Left, Vector2(0.0f, 0.0f), Vector2(32.f, 42.f), 10);
+
+			std::shared_ptr<CTexture> atlas_Will_Idle_Right = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Idle_Right", L"");
+			Will_Animator->Create(L"Will_Idle_Right", atlas_Will_Idle_Right, Vector2(0.0f, 0.0f), Vector2(32.f, 42.f), 10);
+
+			std::shared_ptr<CTexture> atlas_Will_Idle_Up = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Idle_Up", L"");
+			Will_Animator->Create(L"Will_Idle_Up", atlas_Will_Idle_Up, Vector2(0.0f, 0.0f), Vector2(25.f, 42.f), 10);
+
+			// Walk Atlas
+			std::shared_ptr<CTexture> atlas_Will_Walk_Down = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Walk_Down", L"");
+			Will_Animator->Create(L"Will_Walk_Down", atlas_Will_Walk_Down, Vector2(0.0f, 0.0f), Vector2(24.f, 39.f), 8);
+
+			std::shared_ptr<CTexture> atlas_Will_Walk_Left = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Walk_Left", L"");
+			Will_Animator->Create(L"Will_Walk_Left", atlas_Will_Walk_Left, Vector2(0.0f, 0.0f), Vector2(35.f, 40.f), 8);
+
+			std::shared_ptr<CTexture> atlas_Will_Walk_Right = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Walk_Right", L"");
+			Will_Animator->Create(L"Will_Walk_Right", atlas_Will_Walk_Right, Vector2(0.0f, 0.0f), Vector2(35.f, 40.f), 8);
+
+			std::shared_ptr<CTexture> atlas_Will_Walk_Up = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Walk_Up", L"");
+			Will_Animator->Create(L"Will_Walk_Up", atlas_Will_Walk_Up, Vector2(0.0f, 0.0f), Vector2(25.f, 43.f), 8);
+
+			// Roll Atlas
+			std::shared_ptr<CTexture> atlas_Will_Roll_Down = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Roll_Down", L"");
+			Will_Animator->Create(L"Will_Roll_Down", atlas_Will_Roll_Down, Vector2(0.0f, 0.0f), Vector2(29.f, 42.f), 8);
+
+			std::shared_ptr<CTexture> atlas_Will_Roll_Left = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Roll_Left", L"");
+			Will_Animator->Create(L"Will_Roll_Left", atlas_Will_Roll_Left, Vector2(0.0f, 0.0f), Vector2(35.f, 40.f), 8);
+
+			std::shared_ptr<CTexture> atlas_Will_Roll_Right = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Roll_Right", L"");
+			Will_Animator->Create(L"Will_Roll_Right", atlas_Will_Roll_Right, Vector2(0.0f, 0.0f), Vector2(35.f, 42.f), 8);
+
+			std::shared_ptr<CTexture> atlas_Will_Roll_Up = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Roll_Up", L"");
+			Will_Animator->Create(L"Will_Roll_Up", atlas_Will_Roll_Up, Vector2(0.0f, 0.0f), Vector2(26.f, 41.f), 8);
+		}
+
+		Will_Animator->PlayAnimation(L"Will_Idle_Down", true); //맨 처음 화면에 나오는 애니메이션
 	}
 	{ // Background
 		CGameObject* Village_Background = new CGameObject();

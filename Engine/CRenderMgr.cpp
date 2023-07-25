@@ -379,9 +379,11 @@ void CRenderMgr::Init()
 		LoadMaterial(shader, L"Item_Coin", eRenderingMode::CutOut);
 	}
 	{ // Atlas
+		// test
 		LoadTexture(L"linkSprites", L"..\\Resource\\Texture\\linkSprites.png");
 		LoadMaterial(aniShader, L"linkSprites", eRenderingMode::CutOut);
 
+		// Will_Idle
 		CreateAtlas( L"Will_Idle_Down", 10);
 		LoadMaterial(aniShader, L"atlas_Will_Idle_Down", eRenderingMode::CutOut);
 
@@ -394,6 +396,7 @@ void CRenderMgr::Init()
 		CreateAtlas(L"Will_Idle_Up", 10);
 		LoadMaterial(aniShader, L"atlas_Will_Idle_Up", eRenderingMode::CutOut);
 
+		// Will Roll
 		CreateAtlas(L"Will_Roll_Down", 8);
 		LoadMaterial(aniShader, L"atlas_Will_Roll_Down", eRenderingMode::CutOut);
 
@@ -403,8 +406,23 @@ void CRenderMgr::Init()
 		CreateAtlas(L"Will_Roll_Left", 8);
 		LoadMaterial(aniShader, L"atlas_Will_Roll_Left", eRenderingMode::CutOut);
 
-		CreateAtlas(L"Will_Roll_Down", 8);
-		LoadMaterial(aniShader, L"atlas_Will_Roll_Down", eRenderingMode::CutOut);
+		CreateAtlas(L"Will_Roll_Up", 8);
+		LoadMaterial(aniShader, L"atlas_Will_Roll_Up", eRenderingMode::CutOut);
+
+		// Will_Work
+
+		CreateAtlas(L"Will_Walk_Down", 8);
+		LoadMaterial(aniShader, L"atlas_Will_Walk_Down", eRenderingMode::CutOut);
+
+		CreateAtlas(L"Will_Walk_Left", 8);
+		LoadMaterial(aniShader, L"atlas_Will_Walk_Left", eRenderingMode::CutOut);
+
+		CreateAtlas(L"Will_Walk_Right", 8);
+		LoadMaterial(aniShader, L"atlas_Will_Walk_Right", eRenderingMode::CutOut);
+
+		CreateAtlas(L"Will_Walk_Up", 8);
+		LoadMaterial(aniShader, L"atlas_Will_Walk_Up", eRenderingMode::CutOut);
+
 
 	}
 	// Create Scene

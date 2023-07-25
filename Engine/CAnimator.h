@@ -7,11 +7,36 @@
 class CAnimator :
     public CComponent
 {
+public:
+	struct Event
+	{
+		std::function<void()> mEvent;
+
+		void operator=(std::function<void()> func)
+		{
+			mEvent = std::move(func);
+		}
+		void operator()()
+		{
+			if (mEvent)
+			{
+				mEvent();
+			}
+		}
+	};
+
+	struct Events
+	{
+		Event startEvent;
+		Event completeEvent;
+		Event endEvent;
+	};
+
 private:
 	std::map<std::wstring, CAnimation*> mAnimations;
 	CAnimation* mActiveAnimation;
 	bool mbLoop;
-	//std::map<std::wstring, Events*> mEvents;
+	std::map<std::wstring, Events*> mEvents;
 	CConstantBuffer* mAniCB;
 
 public:
@@ -31,7 +56,13 @@ public:
 		, Vector2 offset = Vector2::Zero
 		, float duration = 0.1f);
 	CAnimation* FindAnimation(const std::wstring& aniName);
+	Events* FindEvents(const std::wstring& name);
 	void PlayAnimation(const std::wstring& aniName, bool loop);
 	void Binds();
+
+
+	std::function<void()>& StartEvent(const std::wstring key);
+	std::function<void()>& CompleteEvent(const std::wstring key);
+	std::function<void()>& EndEvent(const std::wstring key);
 };
 
