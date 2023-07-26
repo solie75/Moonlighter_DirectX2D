@@ -42,3 +42,12 @@ enum class eLightType
 	Spot,
 	End,
 };
+
+enum class eColliderType
+{
+	Rect,
+	Circle,
+	Sphere,
+	Cube,
+	End,
+};

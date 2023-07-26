@@ -22,7 +22,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CCameraMoveScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CConstantBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDebugObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CDungeonsEntranceScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CEditor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CDevice.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CGridScript.h" />
@@ -66,7 +68,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CCameraMoveScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CConstantBuffer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDebugObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CDungeonsEntranceScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CEditor.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CDevice.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CGridScript.cpp" />

@@ -102,6 +102,18 @@ struct LightAttribute
 	int pad;
 };
 
+struct DebugMesh
+{
+	eColliderType type;
+	Vector3 position;
+	Vector3 rotation;
+	Vector3 scale;
+
+	float radius;
+	float duration;
+	float time;
+};
+
 CBUFFER(TransformCB, CBSLOT_TRANSFORM)
 {
 	Matrix mWorld;

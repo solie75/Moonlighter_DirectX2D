@@ -118,6 +118,12 @@
     <Filter Include="Graphic\StructedBuffer">
       <UniqueIdentifier>{f5270d58-c5ff-4de5-a953-e9712f994077}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Editor">
+      <UniqueIdentifier>{2bff9598-fc75-4d5b-bdbb-6da11da1037a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor\DebugObject">
+      <UniqueIdentifier>{83fc826d-bcd8-4e33-86a5-fbdcfcac0fe4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -246,6 +252,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CStructedBuffer.h">
       <Filter>Graphic\StructedBuffer</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CEditor.h">
+      <Filter>Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDebugObject.h">
+      <Filter>Editor\DebugObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -358,6 +370,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CStructedBuffer.cpp">
       <Filter>Graphic\StructedBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CEditor.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDebugObject.cpp">
+      <Filter>Editor\DebugObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
