@@ -22,15 +22,17 @@ void CCameraMgr::LateUpdate()
 
 void CCameraMgr::Render()
 {
-	for (CCamera* cam : mCameras)
+	typedef std::map<CCamera*, eCameraType>::iterator CamIter;
+
+	for (CamIter iter = mCameras.begin(); iter != mCameras.end();)
 	{
-		if (cam == nullptr)
+		if (nullptr == iter->first)
 		{
 			continue;
 		}
-		cam->Render();
+		iter->first->Render();
+		iter++;
 	}
-	mCameras.clear();
 }
 
 void CCameraMgr::Release()

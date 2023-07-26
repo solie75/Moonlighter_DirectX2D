@@ -25,7 +25,7 @@ private:
 	ComPtr<ID3D11DepthStencilState> depthStencilStates[(UINT)eDSType::End] = {};
 	ComPtr<ID3D11BlendState> blendStates[(UINT)eBSType::End] = {};
 
-	std::vector<CCamera*> cameras;
+	//std::vector<CCamera*> cameras;
 	std::vector<CLight*> lights;
 	CStructedBuffer* lightsBuffer;
 
@@ -62,11 +62,11 @@ public:
 		return blendStates[(UINT)type];
 	}
 
-	void AddCamera(CCamera* cam, const std::wstring& name)
+	/*void AddCamera(CCamera* cam, const std::wstring& name)
 	{ 
 		cameras.push_back(cam);
 		cam->SetName(name);
-	}
+	}*/
 
 	void BindLights();
 };

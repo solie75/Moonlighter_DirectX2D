@@ -6,7 +6,7 @@ class CCameraMgr :
     public CSingleton<CCameraMgr>
 {
 private:
-    vector<CCamera*> mCameras = {};
+    std::map<CCamera*, eCameraType> mCameras = {};
 
 public:
     CCameraMgr();
@@ -18,6 +18,15 @@ public:
     void Render();
     void Release();
 
-    CCamera* AddCamera(CCamera* camera) { mCameras.push_back(camera); return camera; }
+    CCamera* AddCamera(CCamera* camera, eCameraType type, const std::wstring& name) {
+        mCameras.insert(std::make_pair(camera, type));
+        camera->SetName(name);
+        return camera; 
+    }
+
+    void ClearCamera()
+    {
+        mCameras.clear();
+    }
 };
 

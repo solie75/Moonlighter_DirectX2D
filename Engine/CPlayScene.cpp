@@ -32,6 +32,7 @@ void CPlayScene::Initialize()
 	AddGameObject(eLayerType::Player, mainCamera, L"MainCamera", Vector3(0.0f, 0.0f, -10.0f),
 		Vector3(1.0f, 1.0f, 1.0f), false, L"", L"");
 	CCamera* mainCamComp = mainCamera->AddComponent<CCamera>();
+	mainCamComp->SetCameraType(eCameraType::Main);
 	mainCamComp->TurnLayerMask(eLayerType::UI, false);
 	//mainCamComp->TurnLayerMask(eLayerType::Grid, false);
 	mainCamera->AddComponent<CCameraMoveScript>();
@@ -41,13 +42,14 @@ void CPlayScene::Initialize()
 	AddGameObject(eLayerType::Player, uiCamera, L"UICamera", Vector3(0.0f, 0.0f, -10.0f),
 		Vector3(1.0f, 1.0f, 1.0f), false, L"", L"");
 	CCamera* uiCamComp = uiCamera->AddComponent<CCamera>();
+	mainCamComp->SetCameraType(eCameraType::UI);
 	uiCamComp->TurnLayerMask(eLayerType::Player, false);
 
 	// Grid
-	CGameObject* grid = new CGameObject();
+	/*CGameObject* grid = new CGameObject();
 	AddGameObject(eLayerType::Grid, grid, L"Grid", Vector3(0.0f, 0.0f, 0.0f),
 		Vector3(1.0f, 1.0, 1.0f), true, L"Mesh", L"mt_Grid");
-	CGridScript* gridScript = grid->AddComponent<CGridScript>();
+	CGridScript* gridScript = grid->AddComponent<CGridScript>();*/
 
 	// Link Animation
 	CGameObject* player = new CGameObject();

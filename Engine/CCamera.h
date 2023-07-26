@@ -27,6 +27,8 @@ private:
 	Matrix mProjection;
 
 	eProjectionType mType;
+	eCameraType mCamType;
+
 	float mAspectRatio;
 	float mNear;
 	float mFar;
@@ -65,6 +67,7 @@ public:
 	void DisableLayerMasks() { mLayerMask.reset(); }
 
 	float GetSize() { return mSize; }
+	void SetCameraType(eCameraType type) { mCamType = type; }
 };
 
 Matrix CCamera::staticView =  Matrix::Identity;

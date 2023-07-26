@@ -4,7 +4,7 @@
 
 CRenderMgr::CRenderMgr()
 	: mCB{}
-	, cameras{}
+	//, cameras{}
 	, lights{}
 	, lightsBuffer(nullptr)
 {
@@ -469,15 +469,8 @@ void CRenderMgr::Render()
 {
 	BindLights();
 
-	for (CCamera* cam : cameras)
-	{
-		if (cam == nullptr)
-		{
-			continue;
-		}
-		cam->Render();
-	}
-	cameras.clear();
+	CCameraMgr::GetInst()->Render();
+	CCameraMgr::GetInst()->ClearCamera();
 	lights.clear();
 }
 

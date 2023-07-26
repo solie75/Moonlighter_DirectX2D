@@ -51,3 +51,10 @@ enum class eColliderType
 	Cube,
 	End,
 };
+
+enum class eCameraType
+{
+	Main,
+	UI,
+	End,
+};

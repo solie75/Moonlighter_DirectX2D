@@ -4,6 +4,7 @@
 CCamera::CCamera()
 	: CComponent(eComponentType::Camera)
 	, mType(eProjectionType::OrthoGraphic)
+	, mCamType(eCameraType::End)
 	, mAspectRatio(1.0f)
 	, mNear(1.0f)
 	, mFar(1000.0f)
@@ -29,7 +30,8 @@ void CCamera::Initialize()
 
 void CCamera::Update()
 {
-	CRenderMgr::GetInst()->AddCamera(this, this->GetOwner()->GetName());
+	//CRenderMgr::GetInst()->AddCamera(this, this->GetOwner()->GetName());
+	CCameraMgr::GetInst()->AddCamera(this, mCamType, this->GetOwner()->GetName());
 }
 
 void CCamera::LateUpdate()
