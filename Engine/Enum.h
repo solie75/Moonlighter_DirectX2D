@@ -19,6 +19,7 @@ enum class eComponentType
 	Particle,
 	Animator,
 	Script, // object 의 변화
+	Light,
 	Camera, // view, Projection 변환
 	End,
 };
@@ -28,7 +29,16 @@ enum class eLayerType
 	Grid,
 	Player,
 	Monster,
+	Light,
 	UI,
 	Background,
+	End,
+};
+
+enum class eLightType
+{
+	Directional,
+	Point,
+	Spot,
 	End,
 };

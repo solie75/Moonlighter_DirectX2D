@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Header.h"
+#include "Graphic.h"
 #include "CSingleton.h"
 
 class CDevice
@@ -41,6 +42,7 @@ public:
 	UINT GetDeviceHeight() { return DeviceHeight; }
 	UINT GetDeviceWidth() { return DeviceWidth; }
 
+	void BindShaderResource(eShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV);
 
 	void UpdateViewPort();
 };

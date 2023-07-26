@@ -13,16 +13,6 @@ cbuffer Grid : register(b2)
     float2 Resolution;
 }
 
-/*cbuffer Animator : register(b3)
-{
-    float2 SpriteLeftTop;
-    float2 SpriteSize;
-    float2 SpriteOffset;
-    float2 AtlasSize;
-    uint PrintSpriteIndex;
-    uint AnimationType;
-}*/
-
 cbuffer Animator : register(b3)
 {
     float2 SpriteSize;
@@ -30,9 +20,23 @@ cbuffer Animator : register(b3)
     uint AnimationType;
 }
 
+struct LightAttribute
+{
+    float4 color;
+    float4 position;
+    float4 direction;
+    
+    uint type;
+    float radius;
+    float angle;
+    int pad;
+};
+
+
 //Texture2D smileTexture : register(t0);
 Texture2D albedoTexture : register(t0);
 Texture2D atlasTexture : register(t12);
+StructuredBuffer<LightAttribute> lightsAttribute : register(t13);
 
 SamplerState pointSampler : register(s0);
 SamplerState anisotropicSampler : register(s1);

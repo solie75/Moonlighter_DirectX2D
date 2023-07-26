@@ -8,6 +8,8 @@
 #include "CSceneMgr.h"
 #include "CCameraMgr.h"
 #include "CConstantBuffer.h"
+#include "CLight.h"
+#include "CStructedBuffer.h"
 
 
 class CRenderMgr : public CSingleton<CRenderMgr>
@@ -24,6 +26,8 @@ private:
 	ComPtr<ID3D11BlendState> blendStates[(UINT)eBSType::End] = {};
 
 	std::vector<CCamera*> cameras;
+	std::vector<CLight*> lights;
+	CStructedBuffer* lightsBuffer;
 
 public:
 	CRenderMgr();
@@ -34,15 +38,16 @@ public:
 	void LateUpdate();
 	void Render();
 
+	void AddLight(CLight* light) { lights.push_back(light); }
+
 	//bool CreateConstantBuffer();
 	void BindConstantBuffer(eShaderStage stage, CConstantBuffer* tCB);
 	void SetUpState();
 	void BindSampler(eShaderStage stage, UINT StartSlot, ID3D11SamplerState** ppSamplerState);
 	void LoadTexture(const std::wstring& textureName, const std::wstring& path);
 	void LoadMaterial(std::shared_ptr<CShader> shader, const std::wstring& textureName, eRenderingMode renderMode);
-
-	//void CreateAtlas(const std::wstring& path, const std::wstring& spriteName, int spriteNum);
 	void CreateAtlas(const std::wstring& spriteName, int spriteNum);
+
 
 	ComPtr<ID3D11RasterizerState> GetRasterizerState(eRSType type)
 	{
@@ -63,15 +68,6 @@ public:
 		cam->SetName(name);
 	}
 
-
-	//CCamera* GetCamera(const std::wstring& cameraName)
-	//{
-	//	find(cameras.begin(), cameras.end(), )
-	//		for (cameraIter iter = cameras.begin(); iter != cameras.end();)
-	//		{
-	//			CCamera* camera =
-	//		}
-	//}
-	//std::map<std::wstring, CScene*>::iterator iter = CSceneMgr::GetInst()->mScenes.find(sceneName);
+	void BindLights();
 };
 

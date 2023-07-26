@@ -21,5 +21,6 @@ float4 main(VSOut In) : SV_TARGET
     float2 modifiendTexcoord = In.UV * SpriteSize + Offset;
     color = atlasTexture.Sample(anisotropicSampler, modifiendTexcoord);
 	
+    color *= lightsAttribute[0].color;
 	return color;
 }

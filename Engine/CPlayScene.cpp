@@ -113,7 +113,14 @@ void CPlayScene::Initialize()
 	
 	Will_Animator->PlayAnimation(L"Will_Idle_Down", true); //맨 처음 화면에 나오는 애니메이션
 
-
+	{ // light
+		CGameObject* light = new CGameObject();
+		light->SetName(L"light");
+		AddGameObject(eLayerType::Light, light, L"light", Vector3(0.0f, 0.0f,  0.0f), Vector3(0.0f, 0.0f, 0.0f), false, L"", L"");
+		CLight* lightComp = light->AddComponent<CLight>();
+		lightComp->SetType(eLightType::Directional);
+		lightComp->SetColor(Vector4(1.0f, 0.0f, 1.0f, 1.0f));
+	}
 	
 	CScene::Initialize();
 }

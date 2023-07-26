@@ -76,9 +76,6 @@
     <Filter Include="Manager\CameraMgr">
       <UniqueIdentifier>{9431eeb2-7e6e-484f-a8c1-c9b9b52af1f8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphic\ConstantBuffer">
-      <UniqueIdentifier>{e3d71157-12cd-4e06-8237-2d2aecf1a9bd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Component\Script">
       <UniqueIdentifier>{6c5087b8-9060-4bc9-b895-79f83b59420a}</UniqueIdentifier>
     </Filter>
@@ -111,6 +108,15 @@
     </Filter>
     <Filter Include="Resource\Animation">
       <UniqueIdentifier>{744accfd-1b89-48db-9f8f-f992ec2601e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Light">
+      <UniqueIdentifier>{2485240f-b156-4a29-bd4c-67d4eea43348}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic\ConstantBuffer">
+      <UniqueIdentifier>{e3d71157-12cd-4e06-8237-2d2aecf1a9bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic\StructedBuffer">
+      <UniqueIdentifier>{f5270d58-c5ff-4de5-a953-e9712f994077}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -234,6 +240,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CAnimation.h">
       <Filter>Resource\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CLight.h">
+      <Filter>GameObject\Component\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CStructedBuffer.h">
+      <Filter>Graphic\StructedBuffer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -340,6 +352,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CAnimation.cpp">
       <Filter>Resource\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CLight.cpp">
+      <Filter>GameObject\Component\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CStructedBuffer.cpp">
+      <Filter>Graphic\StructedBuffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 #pragma once
 #include "Header.h"
+#include "Enum.h"
 #include <wrl.h>
 #include <d3d11.h>
 #include <d3dcompiler.h>
@@ -76,11 +77,29 @@ enum class eRenderingMode
 	End,
 };
 
+enum class eSRVType
+{
+	None,
+	End,
+};
+
 struct tVertex
 {
 	Vector3 pos;
 	Vector4 color;
 	Vector2 uv;
+};
+
+struct LightAttribute
+{
+	Vector4 color;
+	Vector4 position;
+	Vector4 direction;
+
+	eLightType type;
+	float radius;
+	float angle;
+	int pad;
 };
 
 CBUFFER(TransformCB, CBSLOT_TRANSFORM)

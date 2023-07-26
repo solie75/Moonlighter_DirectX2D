@@ -17,11 +17,11 @@ CSceneMgr::~CSceneMgr()
 void CSceneMgr::Initialize()
 {
 	AddScene<CStartMenuScene>(L"StartMenuScene");
-	
 	AddScene<CShopScene>(L"CShopScene");
 	AddScene<CDungeonsEntranceScene>(L"CDungeonsEntranceScene");
-	AddScene<CPlayScene>(L"TestScene");
+	
 	AddScene<CVillageScene>(L"VillageScene");
+	AddScene<CPlayScene>(L"TestScene");
 }
 
 void CSceneMgr::Update()
