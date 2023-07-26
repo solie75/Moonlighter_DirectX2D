@@ -203,6 +203,7 @@ void CShopScene::Initialize()
 		AddGameObject(eLayerType::Player, mainCamera, L"MainCamera", Vector3(0.0f, 0.0f, -10.0f),
 			Vector3(1.0f, 1.0f, 1.0f), false, L"", L"");
 		CCamera* mainCamComp = mainCamera->AddComponent<CCamera>();
+		mainCamComp->SetCameraType(eCameraType::Main);
 		mainCamComp->TurnLayerMask(eLayerType::UI, false);
 		mainCamera->AddComponent<CCameraMoveScript>();
 
@@ -211,6 +212,7 @@ void CShopScene::Initialize()
 		AddGameObject(eLayerType::Player, uiCamera, L"UICamera", Vector3(0.0f, 0.0f, -10.0f),
 			Vector3(1.0f, 1.0f, 1.0f), false, L"", L"");
 		CCamera* uiCamComp = uiCamera->AddComponent<CCamera>();
+		uiCamComp->SetCameraType(eCameraType::UI);
 		uiCamComp->TurnLayerMask(eLayerType::Player, false);
 		uiCamComp->TurnLayerMask(eLayerType::Background, false);
 	}

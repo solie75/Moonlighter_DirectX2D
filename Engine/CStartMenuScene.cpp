@@ -47,6 +47,7 @@ void CStartMenuScene::Initialize()
 		AddGameObject(eLayerType::Player, mainCamera, L"MainCamera", Vector3(0.0f, 0.0f, -10.0f),
 			Vector3(1.0f, 1.0f, 1.0f), false, L"", L"");
 		CCamera* mainCamComp = mainCamera->AddComponent<CCamera>();
+		mainCamComp->SetCameraType(eCameraType::Main);
 		mainCamera->AddComponent<CCameraMoveScript>();
 	}
 }

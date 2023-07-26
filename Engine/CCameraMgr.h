@@ -28,5 +28,18 @@ public:
     {
         mCameras.clear();
     }
+
+    CCamera* GetMainCamera()
+    {
+        typedef std::map<CCamera*, eCameraType>::iterator CamIter;
+        for (CamIter iter = mCameras.begin(); iter != mCameras.end();)
+        {
+            if (iter->second == eCameraType::Main)
+            {
+                return iter->first;
+            }
+            iter++;
+        }
+    }
 };
 

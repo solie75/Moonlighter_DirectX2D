@@ -25,9 +25,9 @@ private:
 	ComPtr<ID3D11DepthStencilState> depthStencilStates[(UINT)eDSType::End] = {};
 	ComPtr<ID3D11BlendState> blendStates[(UINT)eBSType::End] = {};
 
-	//std::vector<CCamera*> cameras;
 	std::vector<CLight*> lights;
 	CStructedBuffer* lightsBuffer;
+	static std::vector<DebugMesh> debugMeshs;
 
 public:
 	CRenderMgr();
@@ -47,6 +47,12 @@ public:
 	void LoadTexture(const std::wstring& textureName, const std::wstring& path);
 	void LoadMaterial(std::shared_ptr<CShader> shader, const std::wstring& textureName, eRenderingMode renderMode);
 	void CreateAtlas(const std::wstring& spriteName, int spriteNum);
+	void AddDebugMesh(DebugMesh mesh)
+	{
+		debugMeshs.push_back(mesh);
+	}
+	vector<DebugMesh> GetDebugMesh() { return debugMeshs; }
+	void ClearDebugMesh() { debugMeshs.clear(); }
 
 
 	ComPtr<ID3D11RasterizerState> GetRasterizerState(eRSType type)
@@ -71,3 +77,4 @@ public:
 	void BindLights();
 };
 
+std::vector<DebugMesh> CRenderMgr::debugMeshs = {};

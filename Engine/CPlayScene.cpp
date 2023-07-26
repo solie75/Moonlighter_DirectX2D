@@ -42,7 +42,7 @@ void CPlayScene::Initialize()
 	AddGameObject(eLayerType::Player, uiCamera, L"UICamera", Vector3(0.0f, 0.0f, -10.0f),
 		Vector3(1.0f, 1.0f, 1.0f), false, L"", L"");
 	CCamera* uiCamComp = uiCamera->AddComponent<CCamera>();
-	mainCamComp->SetCameraType(eCameraType::UI);
+	uiCamComp->SetCameraType(eCameraType::UI);
 	uiCamComp->TurnLayerMask(eLayerType::Player, false);
 
 	// Grid

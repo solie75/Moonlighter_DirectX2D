@@ -41,10 +41,21 @@ void CEditor::LateUpdate()
 
 void CEditor::Render()
 {
+	vector<DebugMesh> meshs = CRenderMgr::GetInst()->GetDebugMesh();
+	for (const DebugMesh& mesh : meshs)
+	{
+		DebugRender(mesh);
+	}
+	CRenderMgr::GetInst()->ClearDebugMesh();
 }
 
 void CEditor::Release()
 {
+	for (auto debugObj : mDebugObjects)
+	{
+		delete debugObj;
+		debugObj = nullptr;
+	}
 }
 
 void CEditor::DebugRender(const DebugMesh& mesh)
@@ -60,4 +71,11 @@ void CEditor::DebugRender(const DebugMesh& mesh)
 	tr->SetRotation(mesh.rotation);
 
 	tr->LateUpdate();
+
+	// 현재 씬의 메인 카메라의 view 와 projection 을 다른 곳에서도 사용하기 위해 전역 변수 matrix 로 변경한다.
+	CCamera* mainCamera = CCameraMgr::GetInst()->GetMainCamera();
+	CCamera::SetStaticViewMatrix(mainCamera->GetViewMatrix());
+	CCamera::SetStaticProjectionMatrix(mainCamera->GetProjectionMatrix());
+
+	debugObj->Render();
 }

@@ -68,6 +68,11 @@ public:
 
 	float GetSize() { return mSize; }
 	void SetCameraType(eCameraType type) { mCamType = type; }
+
+	static Matrix& GetStaticViewMatrix() { return staticView; }
+	static void SetStaticViewMatrix(Matrix view) { staticView = view; }
+	static Matrix& GEtStaticProjectionMatix() { return staticProjection; }
+	static void SetStaticProjectionMatrix(Matrix projection) { staticProjection = projection; }
 };
 
 Matrix CCamera::staticView =  Matrix::Identity;
