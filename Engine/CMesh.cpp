@@ -81,3 +81,4 @@ void CMesh::BindBuffer()
 	CDevice::GetInst()->GetContext()->IASetVertexBuffers(0, 1, mVB.GetAddressOf(), &stride, &offset);
 	CDevice::GetInst()->GetContext()->IASetIndexBuffer(mIB.Get(), DXGI_FORMAT_R32_UINT, 0);
 }
+

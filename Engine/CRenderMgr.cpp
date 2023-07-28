@@ -28,6 +28,10 @@ void CRenderMgr::Init()
 	mesh->BindBuffer();
 	CResourceMgr::GetInst()->Insert(L"Mesh", mesh);
 
+	std::shared_ptr<CMesh> debugMesh = std::make_shared<CMesh>();
+	CResourceMgr::GetInst()->Insert(L"DebugMesh", debugMesh);
+
+
 	// Create Shader
 	std::shared_ptr<CShader> shader = std::make_shared<CShader>();
 	shader->CreateShader(eShaderStage::VS, L"VS.hlsl", "main");
@@ -49,12 +53,12 @@ void CRenderMgr::Init()
 	CResourceMgr::GetInst()->Insert(L"AnimationShader", aniShader);
 
 	// Create Grid Material
-	std::shared_ptr<CMaterial> mt_Grid = std::make_shared<CMaterial>();
-	mt_Grid->SetShader(gridShader);
-	mt_Grid->SetTexture(nullptr);
-	mt_Grid->SetRenderMode(eRenderingMode::Opaque);
-	mt_Grid->SetName(L"mt_Grid");
-	CResourceMgr::Insert(L"mt_Grid", mt_Grid);
+	//std::shared_ptr<CMaterial> mt_Grid = std::make_shared<CMaterial>();
+	//mt_Grid->SetShader(gridShader);
+	//mt_Grid->SetTexture(nullptr);
+	//mt_Grid->SetRenderMode(eRenderingMode::Opaque);
+	//mt_Grid->SetName(L"mt_Grid");
+	//CResourceMgr::Insert(L"mt_Grid", mt_Grid);
 
 	// Load Texture and Mateiral
 	{

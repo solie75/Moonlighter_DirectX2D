@@ -124,6 +124,9 @@
     <Filter Include="Editor\DebugObject">
       <UniqueIdentifier>{83fc826d-bcd8-4e33-86a5-fbdcfcac0fe4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Component\Collider2D">
+      <UniqueIdentifier>{08ec273d-83fd-4eb1-861a-64727412a38b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -258,6 +261,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CDebugObject.h">
       <Filter>Editor\DebugObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CCollider2D.h">
+      <Filter>GameObject\Component\Collider2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -376,6 +382,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CDebugObject.cpp">
       <Filter>Editor\DebugObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CCollider2D.cpp">
+      <Filter>GameObject\Component\Collider2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
