@@ -14,6 +14,7 @@ void CDebugObject::Initialize()
 
 void CDebugObject::Update()
 {
+	CGameObject::Update();
 }
 
 void CDebugObject::LateUpdate()

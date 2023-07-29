@@ -72,7 +72,30 @@ void CCollisionMgr::ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCo
 		iter = mCollisionMap.find(colID.CollisionId);
 	}
 
-	if (Intersect(leftCol, rightCol));
+	if (Intersect(leftCol, rightCol))
+	{
+		// 충돌
+		if (iter->second == false)
+		{
+			// 최초 충돌
+			leftCol->OnCollisionEnter(rightCol);
+			rightCol->OnCollisionEnter(leftCol);
+		}
+		else
+		{
+			// 충돌 중
+			leftCol->OnCollisionStay(rightCol);
+			rightCol->OnCollisionStay(leftCol);
+		}
+	}
+	else
+	{
+		if (iter->second == true) // 원래 충돌 상태였다가 현재 충돌 상태가 아니게 된 경우
+		{
+			leftCol->OnCollisionExit(rightCol);
+			rightCol->OnCollisionExit(leftCol);
+		}
+	}
 }
 
 bool CCollisionMgr::Intersect(CCollider2D* leftCol, CCollider2D* rightCol)

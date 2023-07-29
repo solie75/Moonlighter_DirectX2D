@@ -447,7 +447,6 @@ void CRenderMgr::Init()
 	}
 	// Create Scene
 	CSceneMgr::GetInst()->Initialize();
-	CEditor::GetInst()->Initialize();
 }
 
 

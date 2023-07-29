@@ -5,6 +5,7 @@
 #include "CRenderMgr.h"
 #include "CTexture.h"
 #include "CCollisionMgr.h"
+#include "CEditor.h"
 
 CApplication::CApplication()
 	: AppHeight(-1)
@@ -38,14 +39,16 @@ void CApplication::AppInit()
 
 	// Create & Bind triangle vertexses, vertex buffer, index buffer, Constant Buffer, Bind InputLayout into IA, Bind VS & PS
 	CRenderMgr::GetInst()->Init();
+
+	CEditor::GetInst()->Initialize();
 }
 
 void CApplication::AppUpdate()
 {
 	CTimeMgr::GetInst()->Update();
 	CKeyMgr::GetInst()->Update();
-	CCollisionMgr::GetInst()->Update();
 	CRenderMgr::GetInst()->Update();
+	CCollisionMgr::GetInst()->Update();
 }
 
 void CApplication::AppLateUpdate()

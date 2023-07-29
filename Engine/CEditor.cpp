@@ -18,7 +18,7 @@ void CEditor::Initialize()
 	std::shared_ptr<CMaterial> material = CResourceMgr::Find<CMaterial>(L"mt_Debug");
 
 	mDebugObjects[(UINT)eColliderType::Rect] = new CDebugObject();
-	mDebugObjects[(UINT)eColliderType::Rect]->AddComponent<CTransform>();
+	//mDebugObjects[(UINT)eColliderType::Rect]->AddComponent<CTransform>();
 	// DebugObject 는 CGameObject 를 상속 받았기 때문에 기본적으로 CTransform 컴포넌트를 갖고 있지 않나>
 	CMeshRender* mr = mDebugObjects[(UINT)eColliderType::Rect]->AddComponent<CMeshRender>();
 	mr->SetMaterial(material);
@@ -65,7 +65,7 @@ void CEditor::DebugRender(const DebugMesh& mesh)
 
 	CTransform* tr = debugObj->GetComponent<CTransform>(eComponentType::Transform);
 	Vector3 pos = mesh.position;
-	pos.z -= 0.01f;
+	pos.z -= 0.00001f;
 
 	tr->SetPosition(pos);
 	tr->SetScale(mesh.scale);
