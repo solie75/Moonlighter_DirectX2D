@@ -43,8 +43,22 @@ void CCollider2D::LateUpdate()
     debugMesh.rotation = tr->GetRotation();
     debugMesh.type = eColliderType::Rect;
 
+    CRenderMgr::GetInst()->AddDebugMesh(debugMesh);
 }
 
 void CCollider2D::Render()
+{
+}
+
+void CCollider2D::OnCollisionEnter(CCollider2D* other)
+{
+    const std::vector<
+}
+
+void CCollider2D::OnCollisionStay(CCollider2D* other)
+{
+}
+
+void CCollider2D::OnCollisionExit(CCollider2D* other)
 {
 }

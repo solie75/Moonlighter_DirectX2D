@@ -31,6 +31,10 @@ public:
     void SetSize(Vector2 size) { mSize = size; }
     void SetCenter(Vector2 size) { mCenter = size; }
     UINT GetColliderID() { return mColliderID; }
+
+    void OnCollisionEnter(CCollider2D* other);
+    void OnCollisionStay(CCollider2D* other);
+    void OnCollisionExit(CCollider2D* other);
 };
 
-UINT CCollider2D::mColliderNumver = 0;
+UINT CCollider2D::mColliderNumber = 0;

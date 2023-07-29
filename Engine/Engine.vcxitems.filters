@@ -127,6 +127,9 @@
     <Filter Include="GameObject\Component\Collider2D">
       <UniqueIdentifier>{08ec273d-83fd-4eb1-861a-64727412a38b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\CollisionMgr">
+      <UniqueIdentifier>{bad25fb5-f6ab-4b2b-a900-c318db92315b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -264,6 +267,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CCollider2D.h">
       <Filter>GameObject\Component\Collider2D</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CCollisionMgr.h">
+      <Filter>Manager\CollisionMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -385,6 +391,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CCollider2D.cpp">
       <Filter>GameObject\Component\Collider2D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CCollisionMgr.cpp">
+      <Filter>Manager\CollisionMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

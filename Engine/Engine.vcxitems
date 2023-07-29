@@ -21,6 +21,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CCameraMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CCameraMoveScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CCollider2D.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CCollisionMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CDebugObject.h" />
@@ -68,6 +69,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CCameraMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CCameraMoveScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CCollider2D.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CCollisionMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CDebugObject.cpp" />
