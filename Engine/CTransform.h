@@ -50,5 +50,7 @@ public:
 	Vector3 Up() { return mUp; }
 
 	CConstantBuffer* GetTransformCB() { return mTransformCB; }
+
+	Matrix& GetWorldMatrix() { return mWorld; }
 };
 

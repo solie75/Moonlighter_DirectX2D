@@ -52,7 +52,7 @@ void CCollider2D::Render()
 
 void CCollider2D::OnCollisionEnter(CCollider2D* other)
 {
-    const std::vector<
+    //const std::vector<
 }
 
 void CCollider2D::OnCollisionStay(CCollider2D* other)

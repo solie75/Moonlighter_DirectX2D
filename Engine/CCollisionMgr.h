@@ -29,7 +29,9 @@ public:
 	void Update();
 	void ObjectCollision(eLayerType leftLayer, eLayerType rightLayer);
 	void ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCol);
-	bool Intersect(CCollider2D* leftCol, CCollider2D* right);
+	bool Intersect(CCollider2D* leftCol, CCollider2D* rightCol);
+	void SetCollideLayer(eLayerType leftLayer, eLayerType rightLeyer, bool enable);
+	void Clear();
 };
 
 

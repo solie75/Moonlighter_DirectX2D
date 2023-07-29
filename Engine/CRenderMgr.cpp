@@ -37,8 +37,14 @@ void CRenderMgr::Init()
 	shader->CreateShader(eShaderStage::VS, L"VS.hlsl", "main");
 	shader->CreateShader(eShaderStage::PS, L"PS.hlsl", "main");
 	shader->CreateInputLayout();
-
 	CResourceMgr::GetInst()->Insert(L"Shader", shader);
+
+	std::shared_ptr<CShader> debugShader = std::make_shared<CShader>();
+	debugShader->CreateShader(eShaderStage::VS, L"DebugVS.hlsl", "main");
+	debugShader->CreateShader(eShaderStage::PS, L"DebugPS.hlsl", "main");
+	debugShader->SetRSType(eRSType::WireframeNone);
+	CResourceMgr::GetInst()->Insert(L"DebugShader", debugShader);
+	
 
 	std::shared_ptr<CShader> gridShader = std::make_shared<CShader>();
 	gridShader->CreateShader(eShaderStage::VS, L"GridVS.hlsl", "main");
@@ -62,6 +68,9 @@ void CRenderMgr::Init()
 
 	// Load Texture and Mateiral
 	{
+		{ // Debug Mateiral
+			LoadMaterial(debugShader, L"DebugShader", eRenderingMode::CutOut);
+		}
 
 		{ // Test
 			LoadTexture(L"Link", L"..\\Resource\\Texture\\Link.png");

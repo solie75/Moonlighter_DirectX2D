@@ -5,6 +5,7 @@
 #include "CPlayerMoveScript.h"
 #include "CGridScript.h"
 #include "CAnimator.h"
+#include "CCollisionMgr.h"
 
 CPlayScene::CPlayScene()
 {
@@ -16,6 +17,8 @@ CPlayScene::~CPlayScene()
 
 void CPlayScene::Initialize()
 {
+	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Player, eLayerType::Monster, true);
+
 	// Link
 	CGameObject* player1 = new CGameObject();
 	AddGameObject(eLayerType::Player, player1, L"Link", Vector3(0.0f, 0.0f, 1.01f),
@@ -26,6 +29,7 @@ void CPlayScene::Initialize()
 	CGameObject* smile = new CGameObject();
 	AddGameObject(eLayerType::UI, smile, L"Smile", Vector3(0.2f, 0.0f, 1.0f),
 		Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_Smile");
+	//CCollider2D* cd = smile->AddComponent<CCollider2D>();
 
 	// Main Camera
 	CGameObject* mainCamera = new CGameObject();
@@ -55,6 +59,9 @@ void CPlayScene::Initialize()
 	CGameObject* player = new CGameObject();
 	AddGameObject(eLayerType::Player, player, L"linkSprites", Vector3(-2.0f, 0.0f, 1.0001f)
 		, Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_linkSprites");
+
+	CCollider2D* col2D = player->AddComponent<CCollider2D>();
+	col2D->SetSize(Vector2(0.7f, 0.7f));
 	
 	std::shared_ptr<CTexture> atlas
 		= CResourceMgr::GetInst()->Load<CTexture>(L"linkSprites", L"..\\Resources\\Texture\\linkSprites.png");
