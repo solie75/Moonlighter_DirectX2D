@@ -4,8 +4,6 @@
 class CDebugObject :
     public CGameObject
 {
-
-
 public:
     CDebugObject();
     ~CDebugObject();

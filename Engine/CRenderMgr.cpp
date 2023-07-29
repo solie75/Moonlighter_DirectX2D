@@ -1,6 +1,7 @@
 #include "CRenderMgr.h"
 #include "CTexture.h"
 #include "CPlayScene.h"
+#include "CEditor.h"
 
 CRenderMgr::CRenderMgr()
 	: mCB{}
@@ -69,7 +70,7 @@ void CRenderMgr::Init()
 	// Load Texture and Mateiral
 	{
 		{ // Debug Mateiral
-			LoadMaterial(debugShader, L"DebugShader", eRenderingMode::CutOut);
+			LoadMaterial(debugShader, L"Debug", eRenderingMode::CutOut);
 		}
 
 		{ // Test
@@ -446,6 +447,7 @@ void CRenderMgr::Init()
 	}
 	// Create Scene
 	CSceneMgr::GetInst()->Initialize();
+	CEditor::GetInst()->Initialize();
 }
 
 
@@ -481,8 +483,14 @@ void CRenderMgr::LateUpdate()
 void CRenderMgr::Render()
 {
 	BindLights();
-
 	CCameraMgr::GetInst()->Render();
+
+	for (const DebugMesh& debugMesh : debugMeshs)
+	{
+		CEditor::GetInst()->DebugRender(debugMesh);
+	}
+	debugMeshs.clear();
+
 	CCameraMgr::GetInst()->ClearCamera();
 	lights.clear();
 }

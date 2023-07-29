@@ -4,6 +4,7 @@
 #include "CPathMgr.h"
 #include "CRenderMgr.h"
 #include "CTexture.h"
+#include "CCollisionMgr.h"
 
 CApplication::CApplication()
 	: AppHeight(-1)
@@ -43,7 +44,7 @@ void CApplication::AppUpdate()
 {
 	CTimeMgr::GetInst()->Update();
 	CKeyMgr::GetInst()->Update();
-	
+	CCollisionMgr::GetInst()->Update();
 	CRenderMgr::GetInst()->Update();
 }
 

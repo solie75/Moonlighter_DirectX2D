@@ -29,7 +29,7 @@ void CPlayScene::Initialize()
 	CGameObject* smile = new CGameObject();
 	AddGameObject(eLayerType::UI, smile, L"Smile", Vector3(0.2f, 0.0f, 1.0f),
 		Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_Smile");
-	//CCollider2D* cd = smile->AddComponent<CCollider2D>();
+	CCollider2D* cd = smile->AddComponent<CCollider2D>();
 
 	// Main Camera
 	CGameObject* mainCamera = new CGameObject();

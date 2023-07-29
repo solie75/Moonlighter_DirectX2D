@@ -1,7 +1,9 @@
 #pragma once
 #include "CDebugObject.h"
+#include "CSingleton.h"
 
 class CEditor
+	: public CSingleton<CEditor>
 {
 private:
 	static std::vector<CDebugObject*> mDebugObjects;
