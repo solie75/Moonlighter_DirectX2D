@@ -33,6 +33,7 @@ enum class eLayerType
 	Light,
 	UI,
 	Background,
+	Camera,
 	End,
 };
 

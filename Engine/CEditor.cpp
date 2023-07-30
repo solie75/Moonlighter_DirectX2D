@@ -64,16 +64,18 @@ void CEditor::DebugRender(const DebugMesh& mesh)
 	CDebugObject* debugObj = mDebugObjects[(UINT)mesh.type];
 
 	CTransform* tr = debugObj->GetComponent<CTransform>(eComponentType::Transform);
+	// 이러면 mDebugObjects[ColliderType::Rect]의 Transform이 바뀌에 되지 않나?
+
 	Vector3 pos = mesh.position;
-	pos.z -= 0.00001f;
+	pos.z -= 0.0001f;// 1.0002f
 
 	tr->SetPosition(pos);
 	tr->SetScale(mesh.scale);
 	tr->SetRotation(mesh.rotation);
 
-	tr->LateUpdate();
+	tr->LateUpdate(); // 월드 변환 완성
 
-	// 현재 씬의 메인 카메라의 view 와 projection 을 다른 곳에서도 사용하기 위해 전역 변수 matrix 로 변경한다.
+	// debugObj 가 렌더링 되기 전에 그에 대한 viewMatrix 와 projection matrix 의 기준은 maincamera 여야 한다.
 	CCamera* mainCamera = CCameraMgr::GetInst()->GetMainCamera();
 	CCamera::SetStaticViewMatrix(mainCamera->GetViewMatrix());
 	CCamera::SetStaticProjectionMatrix(mainCamera->GetProjectionMatrix());

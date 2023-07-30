@@ -21,19 +21,19 @@ void CPlayScene::Initialize()
 
 	// Link
 	CGameObject* player1 = new CGameObject();
-	AddGameObject(eLayerType::Player, player1, L"Link", Vector3(0.0f, 0.0f, 1.01f),
+	AddGameObject(eLayerType::Monster, player1, L"Link", Vector3(0.0f, 0.0f, 1.01f),
 		Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_Link");
-	/*player1->AddComponent<CPlayerMoveScript>();*/
+	CCollider2D* cd = player1->AddComponent<CCollider2D>();
 
 	// Smile
 	CGameObject* smile = new CGameObject();
 	AddGameObject(eLayerType::UI, smile, L"Smile", Vector3(0.2f, 0.0f, 1.0f),
 		Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_Smile");
-	CCollider2D* cd = smile->AddComponent<CCollider2D>();
+
 
 	// Main Camera
 	CGameObject* mainCamera = new CGameObject();
-	AddGameObject(eLayerType::Player, mainCamera, L"MainCamera", Vector3(0.0f, 0.0f, -10.0f),
+	AddGameObject(eLayerType::Camera, mainCamera, L"MainCamera", Vector3(0.0f, 0.0f, -10.0f),
 		Vector3(1.0f, 1.0f, 1.0f), false, L"", L"");
 	CCamera* mainCamComp = mainCamera->AddComponent<CCamera>();
 	mainCamComp->SetCameraType(eCameraType::Main);
@@ -43,11 +43,12 @@ void CPlayScene::Initialize()
 
 	// UI Camera
 	CGameObject* uiCamera = new CGameObject();
-	AddGameObject(eLayerType::Player, uiCamera, L"UICamera", Vector3(0.0f, 0.0f, -10.0f),
+	AddGameObject(eLayerType::Camera, uiCamera, L"UICamera", Vector3(0.0f, 0.0f, -10.0f),
 		Vector3(1.0f, 1.0f, 1.0f), false, L"", L"");
 	CCamera* uiCamComp = uiCamera->AddComponent<CCamera>();
 	uiCamComp->SetCameraType(eCameraType::UI);
 	uiCamComp->TurnLayerMask(eLayerType::Player, false);
+	uiCamComp->TurnLayerMask(eLayerType::Monster, false);
 
 	// Grid
 	/*CGameObject* grid = new CGameObject();
@@ -60,9 +61,6 @@ void CPlayScene::Initialize()
 	AddGameObject(eLayerType::Player, player, L"linkSprites", Vector3(-2.0f, 0.0f, 1.0001f)
 		, Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_linkSprites");
 
-	CCollider2D* col2D = player->AddComponent<CCollider2D>();
-	col2D->SetSize(Vector2(0.7f, 0.7f));
-	
 	std::shared_ptr<CTexture> atlas
 		= CResourceMgr::GetInst()->Load<CTexture>(L"linkSprites", L"..\\Resources\\Texture\\linkSprites.png");
 
@@ -79,6 +77,8 @@ void CPlayScene::Initialize()
 	CAnimator* Will_Animator = Will->AddComponent<CAnimator>();
 	CMeshRender* mr = Will->GetComponent<CMeshRender>(eComponentType::MeshRender);
 	CPlayerMoveScript* pmScript = Will->AddComponent<CPlayerMoveScript>();
+	CCollider2D* col2D = Will->AddComponent<CCollider2D>();
+	col2D->SetSize(Vector2(0.7f, 0.7f));
 	{
 		// Idle Atlas
 		std::shared_ptr<CTexture> atlas_Will_Idle_Down = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Idle_Down", L"");

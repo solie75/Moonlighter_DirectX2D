@@ -14,26 +14,26 @@ public:
         Dead,
     };
 
-    enum eBehave
-    {
-        Idle,
-        Walk,
-        Roll,
-    };
+    //enum eBehave
+    //{
+    //    Idle,
+    //    Walk,
+    //    Roll,
+    //};
 
-    enum eDirection
-    {
-        Down,
-        Left,
-        Right,
-        Up,
-    };
+    //enum eDirection
+    //{
+    //    Down,
+    //    Left,
+    //    Right,
+    //    Up,
+    //};
 
 private:
     eState mState;
-    eBehave mCurBehave;
-    eBehave mPrevBehave;
-    eDirection mDirection;
+    //eBehave mCurBehave;
+    //eBehave mPrevBehave;
+    //eDirection mDirection;
     std::vector<CComponent*> mComponent;
 
 public:
@@ -73,10 +73,10 @@ public:
     void Destroy() { mState = eState::Dead; }
 
     eState GetState() { return mState; }
-    eBehave GetBehave() { return mCurBehave; }
-    eBehave GetPrevBehave() { return mPrevBehave; }
-    void SetBehave(eBehave behave) { mPrevBehave = mCurBehave; mCurBehave = behave; }
-    eDirection GetDirection() { return mDirection; }
-    void SetDirection(eDirection direction) { mDirection = direction; }
+    //eBehave GetBehave() { return mCurBehave; }
+    //eBehave GetPrevBehave() { return mPrevBehave; }
+    //void SetBehave(eBehave behave) { mPrevBehave = mCurBehave; mCurBehave = behave; }
+    //eDirection GetDirection() { return mDirection; }
+    //void SetDirection(eDirection direction) { mDirection = direction; }
 };
 

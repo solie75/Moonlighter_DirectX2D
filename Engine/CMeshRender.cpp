@@ -29,6 +29,10 @@ void CMeshRender::Render()
 	CTransform* tr = GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	tr->CreateConstantBuffer();
 
+	CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, tr->GetTransformCB());
+
+	mMesh->BindBuffer();
+
 	mMaterial->Clear();
 	mMaterial->Bind();
 	
@@ -40,8 +44,6 @@ void CMeshRender::Render()
 		CDevice::GetInst()->GetContext()->
 			OMSetBlendState(CRenderMgr::GetInst()->GetBlendState(mMaterial->GetShader()->GetBSType()).Get(), nullptr, 0xffffffff);
 	}
-
-	CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, tr->GetTransformCB());
 
 	CAnimator* animator = GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
 	if (animator)

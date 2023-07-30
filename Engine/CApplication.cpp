@@ -89,3 +89,10 @@ void CApplication::AppDestroy()
 {
 	CSceneMgr::GetInst()->Destroy();
 }
+
+void CApplication::AppRelease()
+{
+	CRenderMgr::GetInst()->Release();
+	CEditor::GetInst()->Release();
+	CSceneMgr::GetInst()->Release();
+}

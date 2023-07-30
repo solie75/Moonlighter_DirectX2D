@@ -2,9 +2,9 @@
 
 CGameObject::CGameObject()
 	: mState(eState::Active)
-	, mCurBehave(eBehave::Idle)
-	, mPrevBehave(eBehave::Idle)
-	, mDirection(eDirection::Down)
+	//, mCurBehave(eBehave::Idle)
+	//, mPrevBehave(eBehave::Idle)
+	//, mDirection(eDirection::Down)
 {
 	AddComponent<CTransform>();
 }

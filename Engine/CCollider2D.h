@@ -31,6 +31,7 @@ public:
     void SetSize(Vector2 size) { mSize = size; }
     void SetCenter(Vector2 size) { mCenter = size; }
     UINT GetColliderID() { return mColliderID; }
+    void SetColPositionOffset(Vector3 offset);
 
     void OnCollisionEnter(CCollider2D* other);
     void OnCollisionStay(CCollider2D* other);

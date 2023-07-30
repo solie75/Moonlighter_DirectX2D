@@ -7,7 +7,7 @@ CShader::CShader()
 	, mBSType(eBSType::AlphaBlend)
 {
 	//CreateInputLayout();
-	BindInputLayout();
+	//BindInputLayout();
 }
 
 CShader::~CShader()

@@ -26,10 +26,11 @@ void CRenderMgr::Init()
 
 	// Create Mesh
 	std::shared_ptr<CMesh> mesh = std::make_shared<CMesh>();
-	mesh->BindBuffer();
+	//mesh->BindBuffer();
 	CResourceMgr::GetInst()->Insert(L"Mesh", mesh);
 
 	std::shared_ptr<CMesh> debugMesh = std::make_shared<CMesh>();
+	//debugMesh->BindBuffer();
 	CResourceMgr::GetInst()->Insert(L"DebugMesh", debugMesh);
 
 
@@ -44,6 +45,7 @@ void CRenderMgr::Init()
 	debugShader->CreateShader(eShaderStage::VS, L"DebugVS.hlsl", "main");
 	debugShader->CreateShader(eShaderStage::PS, L"DebugPS.hlsl", "main");
 	debugShader->SetRSType(eRSType::WireframeNone);
+	debugShader->CreateInputLayout();
 	CResourceMgr::GetInst()->Insert(L"DebugShader", debugShader);
 	
 
@@ -70,7 +72,7 @@ void CRenderMgr::Init()
 	// Load Texture and Mateiral
 	{
 		{ // Debug Mateiral
-			LoadMaterial(debugShader, L"Debug", eRenderingMode::CutOut);
+			LoadMaterial(debugShader, L"Debug", eRenderingMode::End);
 		}
 
 		{ // Test
@@ -482,16 +484,23 @@ void CRenderMgr::LateUpdate()
 void CRenderMgr::Render()
 {
 	BindLights();
-	CCameraMgr::GetInst()->Render();
+
+	CCameraMgr::GetInst()->Render(); // Camera 에 ViewMatrix와 Projection Matrix 가 있기 때문에 Camera 부터 Rendering 되어야 한다.
 
 	for (const DebugMesh& debugMesh : debugMeshs)
 	{
 		CEditor::GetInst()->DebugRender(debugMesh);
 	}
-	debugMeshs.clear();
+
+
 
 	CCameraMgr::GetInst()->ClearCamera();
+	debugMeshs.clear();
 	lights.clear();
+}
+
+void CRenderMgr::Release()
+{
 }
 
 void CRenderMgr::BindConstantBuffer(eShaderStage stage, CConstantBuffer* tCB)

@@ -37,6 +37,7 @@ public:
 	void Update();
 	void LateUpdate();
 	void Render();
+	void Release();
 
 	void AddLight(CLight* light) { lights.push_back(light); }
 

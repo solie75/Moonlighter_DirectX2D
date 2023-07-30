@@ -38,16 +38,23 @@ void CCollider2D::LateUpdate()
 
     mPosition = pos;
     DebugMesh debugMesh = {};
-    debugMesh.position = pos;
+    debugMesh.position = mPosition;
     debugMesh.scale = scale;
     debugMesh.rotation = tr->GetRotation();
     debugMesh.type = eColliderType::Rect;
-
+    
     CRenderMgr::GetInst()->AddDebugMesh(debugMesh);
 }
 
 void CCollider2D::Render()
 {
+}
+
+void CCollider2D::SetColPositionOffset(Vector3 offset)
+{
+    mPosition.x += offset.x;
+    mPosition.y += offset.y;
+    mPosition.z += offset.z;
 }
 
 void CCollider2D::OnCollisionEnter(CCollider2D* other)
