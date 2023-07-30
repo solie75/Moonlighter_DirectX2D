@@ -55,7 +55,7 @@ void CLayer::Destroy()
 	std::set<CGameObject*> deadGameObjs = {};
 	for (CGameObject* gameObj : mGameObjects)
 	{
-		if (gameObj->GetState() == CGameObject::eState::Dead)
+		if (gameObj->GetState() == CGameObject::eObjectState::Dead)
 		{
 			deadGameObjs.insert(gameObj);
 		}

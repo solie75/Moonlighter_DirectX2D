@@ -60,3 +60,11 @@ enum class eCameraType
 	UI,
 	End,
 };
+
+enum class eCreatureType
+{
+	Player,
+	Monster,
+	NPC,
+	End,
+};

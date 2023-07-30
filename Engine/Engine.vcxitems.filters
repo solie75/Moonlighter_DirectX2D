@@ -136,6 +136,15 @@
     <Filter Include="GameObject\Object\CreatureObject">
       <UniqueIdentifier>{26a5156b-6299-4985-9a4f-3d7f4d00da58}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Object\State">
+      <UniqueIdentifier>{746daf6d-37a9-4ffe-88d5-d1a8de34e5f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object\Player">
+      <UniqueIdentifier>{d74cfedf-6f02-4d38-8931-571427fb48b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object\AimSight">
+      <UniqueIdentifier>{3c11e92c-a5f7-4edd-98cb-445549174b50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -279,6 +288,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CCreatureObject.h">
       <Filter>GameObject\Object\CreatureObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CState.h">
+      <Filter>GameObject\Object\State</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CPlayer.h">
+      <Filter>GameObject\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CAimSight.h">
+      <Filter>GameObject\Object\AimSight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -406,6 +424,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CCreatureObject.cpp">
       <Filter>GameObject\Object\CreatureObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CState.cpp">
+      <Filter>GameObject\Object\State</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CPlayer.cpp">
+      <Filter>GameObject\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CAimSight.cpp">
+      <Filter>GameObject\Object\AimSight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

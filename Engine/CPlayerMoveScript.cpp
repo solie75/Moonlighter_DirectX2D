@@ -1,7 +1,7 @@
 #include "CPlayerMoveScript.h"
 #include "CTimeMgr.h"
 #include "CAnimator.h"
-#include "CCreatureObject.h"
+#include "CPlayer.h"
 
 
 CPlayerMoveScript::CPlayerMoveScript()
@@ -13,40 +13,36 @@ CPlayerMoveScript::CPlayerMoveScript()
 {
 }
 
-CPlayerMoveScript::~CPlayerMoveScript()
-{
-}
+CPlayerMoveScript::~CPlayerMoveScript() {}
 
-void CPlayerMoveScript::Initialize()
-{
-	/*CAnimator* at = GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
-	at->CompleteEvent(L"Will_Idle_Down");*/
-}
+void CPlayerMoveScript::Initialize() {}
 
 void CPlayerMoveScript::Update()
 {
 	CTransform* tr = GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	Vector3 pos = tr->GetPosition();
 	CAnimator* at = GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
-	CCreatureObject* creatureObj = dynamic_cast<CCreatureObject*>(GetOwner());
+	CPlayer* player = dynamic_cast<CPlayer*>(GetOwner());
+	CState* state = player->GetState();
+	CAimSight* aimSight = player->GetAimSight();
 
 
 	// 방향전환
 	if (CKeyMgr::GetInst()->GetKeyState(KEY::LEFT) == KEY_STATE::TAP)
 	{
-		creatureObj->SetAimSight(CCreatureObject::eAimSight::Left);
+		aimSight->SetAimSight(eAimSight::Left);
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY::RIGHT) == KEY_STATE::TAP)
 	{
-		creatureObj->SetAimSight(CCreatureObject::eAimSight::Right);
+		aimSight->SetAimSight(eAimSight::Right);
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY::UP) == KEY_STATE::TAP)
 	{
-		creatureObj->SetAimSight(CCreatureObject::eAimSight::Up);
+		aimSight->SetAimSight(eAimSight::Up);
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY::DOWN) == KEY_STATE::TAP)
 	{
-		creatureObj->SetAimSight(CCreatureObject::eAimSight::Down);
+		aimSight->SetAimSight(eAimSight::Down);
 	}
 
 	// 캐릭터 위치 변화
@@ -54,133 +50,56 @@ void CPlayerMoveScript::Update()
 	{
 		pos.x -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 		tr->SetPosition(pos);
-		//at->PlayAnimation(L"Will_Walk_Left", true);
+		state->SetState(eState::Walk);
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY::RIGHT) == KEY_STATE::PRESSED)
 	{
 		pos.x += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 		tr->SetPosition(pos);
-		//at->PlayAnimation(L"Will_Walk_Right", true);
+		state->SetState(eState::Walk);
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY::UP) == KEY_STATE::PRESSED)
 	{
 		pos.y += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 		tr->SetPosition(pos);
-		//at->PlayAnimation(L"Will_Walk_Up", true);
+		state->SetState(eState::Walk);
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY::DOWN) == KEY_STATE::PRESSED)
 	{
 		pos.y -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 		tr->SetPosition(pos);
-		//at->PlayAnimation(L"Will_Walk_Down", true);
+		state->SetState(eState::Walk);
 	}
 
 	// 방향키에서 손을 떼면 Idle 상태로
 	if (CKeyMgr::GetInst()->GetKeyState(KEY::LEFT) == KEY_STATE::RELEASE)
 	{
-		creatureObj->SetState(CCreatureObject::eState::Idle);
+		state->SetState(eState::Idle);
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY::RIGHT) == KEY_STATE::RELEASE)
 	{
-		creatureObj->SetState(CCreatureObject::eState::Idle);
+		state->SetState(eState::Idle);
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY::UP) == KEY_STATE::RELEASE)
 	{
-		creatureObj->SetState(CCreatureObject::eState::Idle);
+		state->SetState(eState::Idle);
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY::DOWN) == KEY_STATE::RELEASE)
 	{
-		creatureObj->SetState(CCreatureObject::eState::Idle);
+		state->SetState(eState::Idle);
 	}
 
+	// 스페이스바로 구르기 상태로 변환
 	if (CKeyMgr::GetInst()->GetKeyState(KEY::SPACE) == KEY_STATE::TAP)
 	{
-		creatureObj->SetState(CCreatureObject::eState::Roll);
+		state->SetState(eState::Roll);
 	}
 
 
-	// Idle 상태일 때
-	if (creatureObj->GetState() == CCreatureObject::eState::Idle)
-	{
-		switch (creatureObj->GetAimSight())
-		{
-		case CCreatureObject::eAimSight::Left :
-			at->PlayAnimation(L"Will_Idle_Left", true);
-			break;
-		case CCreatureObject::eAimSight::Right:
-			at->PlayAnimation(L"Will_Idle_Right", true);
-			break;
-		case CCreatureObject::eAimSight::Up:
-			at->PlayAnimation(L"Will_Idle_Up", true);
-			break;
-		case CCreatureObject::eAimSight::Down:
-			at->PlayAnimation(L"Will_Idle_Down", true);
-			break;
-		}
-	}
 
-	if (creatureObj->GetState() == CCreatureObject::eState::Idle)
-	{
-		switch (creatureObj->GetAimSight())
-		{
-		case CCreatureObject::eAimSight::Left:
-			at->PlayAnimation(L"Will_Roll_Left", true);
-			break;
-		case CCreatureObject::eAimSight::Right:
-			at->PlayAnimation(L"Will_Roll_Right", true);
-			break;
-		case CCreatureObject::eAimSight::Up:
-			at->PlayAnimation(L"Will_Roll_Up", true);
-			break;
-		case CCreatureObject::eAimSight::Down:
-			at->PlayAnimation(L"Will_Roll_Down", true);
-			break;
-		}
-	}
 
 	
 	
-//	if (bAni == true)
-//	{
-//		if (CKeyMgr::GetInst()->GetKeyState(KEY::LEFT) == KEY_STATE::PRESSED)
-//		{
-//			GetOwner()->SetBehave(CGameObject::eBehave::Walk);
-//			GetOwner()->SetDirection(CGameObject::eDirection::Left);
-//			pos.x -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-//			tr->SetPosition(pos);
-//		}
-//		if (CKeyMgr::GetInst()->GetKeyState(KEY::RIGHT) == KEY_STATE::PRESSED)
-//		{
-//			GetOwner()->SetBehave(CGameObject::eBehave::Walk);
-//			GetOwner()->SetDirection(CGameObject::eDirection::Right);
-//			pos.x += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-//			tr->SetPosition(pos);
-//		}
-//		if (CKeyMgr::GetInst()->GetKeyState(KEY::UP) == KEY_STATE::PRESSED)
-//		{
-//			GetOwner()->SetBehave(CGameObject::eBehave::Walk);
-//			GetOwner()->SetDirection(CGameObject::eDirection::Up);
-//			pos.y += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-//			tr->SetPosition(pos);
-//		}
-//		if (CKeyMgr::GetInst()->GetKeyState(KEY::DOWN) == KEY_STATE::PRESSED)
-//		{
-//			GetOwner()->SetBehave(CGameObject::eBehave::Walk);
-//			GetOwner()->SetDirection(CGameObject::eDirection::Down);
-//			pos.y -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-//			tr->SetPosition(pos);
-//		}
-//
-//		//
-//		if (CKeyMgr::GetInst()->GetKeyState(KEY::LEFT) == KEY_STATE::NONE
-//			&& CKeyMgr::GetInst()->GetKeyState(KEY::RIGHT) == KEY_STATE::NONE
-//			&& CKeyMgr::GetInst()->GetKeyState(KEY::UP) == KEY_STATE::NONE
-//			&& CKeyMgr::GetInst()->GetKeyState(KEY::DOWN) == KEY_STATE::NONE)
-//		{
-//			GetOwner()->SetBehave(CGameObject::eBehave::Idle);
-//		}
-//	}
-//	
 //	if (CKeyMgr::GetInst()->GetKeyState(KEY::SPACE) == KEY_STATE::TAP)
 //	{
 //		GetOwner()->SetBehave(CGameObject::eBehave::Roll);
@@ -222,63 +141,4 @@ void CPlayerMoveScript::Update()
 
 void CPlayerMoveScript::LateUpdate()
 {
-	//CAnimator* at = GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
-	//if (GetOwner()->GetBehave() == CGameObject::eBehave::Roll && bAni == true)
-	//{
-	//	switch (GetOwner()->GetDirection())
-	//	{
-	//	case CGameObject::eDirection::Down:
-	//		bAni = false;
-	//		at->PlayAnimation(L"Will_Roll_Down", false);
-	//		break;
-	//	case CGameObject::eDirection::Left:
-	//		bAni = false;
-	//		at->PlayAnimation(L"Will_Roll_Left", false);
-	//		break;
-	//	case CGameObject::eDirection::Right:
-	//		bAni = false;
-	//		at->PlayAnimation(L"Will_Roll_Right", false);
-	//		break;
-	//	case CGameObject::eDirection::Up:
-	//		bAni = false;
-	//		at->PlayAnimation(L"Will_Roll_Up", false);
-	//		break;
-	//	}
-	//}
-	//if (GetOwner()->GetBehave() == CGameObject::eBehave::Walk && GetOwner()->GetPrevBehave() != CGameObject::eBehave::Walk)
-	//{
-	//	switch (GetOwner()->GetDirection())
-	//	{
-	//	case CGameObject::eDirection::Down :
-	//		at->PlayAnimation(L"Will_Walk_Down", true);
-	//		break;
-	//	case CGameObject::eDirection::Left :
-	//		at->PlayAnimation(L"Will_Walk_Left", true);
-	//		break;
-	//	case CGameObject::eDirection::Right :
-	//		at->PlayAnimation(L"Will_Walk_Right", true);
-	//		break;
-	//	case CGameObject::eDirection::Up :
-	//		at->PlayAnimation(L"Will_Walk_Up", true);
-	//		break;
-	//	}
-	//}
-	//if (GetOwner()->GetBehave() == CGameObject::eBehave::Idle && GetOwner()->GetPrevBehave() != CGameObject::eBehave::Idle)
-	//{
-	//	switch (GetOwner()->GetDirection())
-	//	{
-	//	case CGameObject::eDirection::Down:
-	//		at->PlayAnimation(L"Will_Idle_Down", true);
-	//		break;
-	//	case CGameObject::eDirection::Left:
-	//		at->PlayAnimation(L"Will_Idle_Left", true);
-	//		break;
-	//	case CGameObject::eDirection::Right:
-	//		at->PlayAnimation(L"Will_Idle_Right", true);
-	//		break;
-	//	case CGameObject::eDirection::Up:
-	//		at->PlayAnimation(L"Will_Idle_Up", true);
-	//		break;
-	//	}
-	//}
 }

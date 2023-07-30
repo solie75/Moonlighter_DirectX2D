@@ -7,7 +7,7 @@ class CGameObject :
     public CEntity
 {
 public:
-    enum eState
+    enum eObjectState
     {
         Active,
         Paused,
@@ -15,7 +15,7 @@ public:
     };
 
 private:
-    eState mState;
+    eObjectState mState;
     std::vector<CComponent*> mComponent;
 
 public:
@@ -52,8 +52,8 @@ public:
         return nullptr;
     }
 
-    void Destroy() { mState = eState::Dead; }
+    void Destroy() { mState = eObjectState::Dead; }
 
-    eState GetState() { return mState; }
+    eObjectState GetState() { return mState; }
 };
 

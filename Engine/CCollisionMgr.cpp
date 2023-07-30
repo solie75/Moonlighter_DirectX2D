@@ -36,7 +36,7 @@ void CCollisionMgr::ObjectCollision(eLayerType leftLayer, eLayerType rightLayer)
 	{
 		CCollider2D* leftCol = leftObj->GetComponent<CCollider2D>(eComponentType::Collider2D);
 
-		if (leftCol == nullptr || leftObj->GetState() != CGameObject::eState::Active)
+		if (leftCol == nullptr || leftObj->GetState() != CGameObject::eObjectState::Active)
 		{
 			continue;
 		}
@@ -48,7 +48,7 @@ void CCollisionMgr::ObjectCollision(eLayerType leftLayer, eLayerType rightLayer)
 			{
 				continue;
 			}
-			if (rightCol == nullptr || rightObj->GetState() != CGameObject::eState::Active);
+			if (rightCol == nullptr || rightObj->GetState() != CGameObject::eObjectState::Active);
 			{
 				continue;
 			}

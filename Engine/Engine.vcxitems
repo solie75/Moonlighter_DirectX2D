@@ -14,6 +14,7 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CAimSight.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CAnimation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CApplication.h" />
@@ -36,6 +37,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CMeshRender.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CPlayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CPlayerMoveScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CPlayScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CResource.h" />
@@ -52,6 +54,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CShopScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CSingleton.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CStartMenuScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CState.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CStructedBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CTimeMgr.h" />
@@ -63,6 +66,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Struct.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CAimSight.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CAnimation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp" />
@@ -85,6 +89,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CMaterial.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CMeshRender.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CPlayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CPlayerMoveScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CPlayScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CResource.cpp" />
@@ -100,6 +105,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CRenderMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CShopScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CStartMenuScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CState.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CStructedBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CTimeMgr.cpp" />
