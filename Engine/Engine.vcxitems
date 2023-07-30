@@ -24,6 +24,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CCollisionMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CConstantBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CCreatureObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CDebugObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CDungeonsEntranceScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CEditor.h" />
@@ -72,6 +73,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CCollisionMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CConstantBuffer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CCreatureObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CDebugObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CDungeonsEntranceScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CEditor.cpp" />

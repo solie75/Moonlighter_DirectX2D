@@ -2,6 +2,7 @@
 
 CAnimator::CAnimator()
 	: CComponent(eComponentType::Animator)
+	, mbChange(false)
 {
 	mAniCB = new CConstantBuffer();
 }
@@ -112,6 +113,7 @@ void CAnimator::PlayAnimation(const std::wstring& aniName, bool loop)
 	Events* events;
 	if (prevAnimation != nullptr)
 	{
+		// 원래의 애니메이션의 종료
 		events = FindEvents(prevAnimation->GetKey());
 		if (events)
 		{
@@ -122,9 +124,11 @@ void CAnimator::PlayAnimation(const std::wstring& aniName, bool loop)
 	CAnimation* ani = FindAnimation(aniName);
 	if (ani)
 	{
+		// 새로운 애니메이션
 		mActiveAnimation = ani;
 	}
 
+	// 새로운 애니메이션의 시작
 	events = FindEvents(mActiveAnimation->GetKey());
 	if (events)
 	{

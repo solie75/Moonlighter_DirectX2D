@@ -6,6 +6,7 @@
 #include "CGridScript.h"
 #include "CAnimator.h"
 #include "CCollisionMgr.h"
+#include "CCreatureObject.h"
 
 CPlayScene::CPlayScene()
 {
@@ -71,9 +72,22 @@ void CPlayScene::Initialize()
 	
 	// Atlas Test Object
 
-	CGameObject* Will = new CGameObject();
+	/*CGameObject* Will = new CGameObject();
 	AddGameObject(eLayerType::Player, Will, L"Will", Vector3(3.0f, 0.0f, 1.0002f)
 		, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down");
+	CAnimator* Will_Animator = Will->AddComponent<CAnimator>();
+	CMeshRender* mr = Will->GetComponent<CMeshRender>(eComponentType::MeshRender);
+	CPlayerMoveScript* pmScript = Will->AddComponent<CPlayerMoveScript>();
+	CCollider2D* col2D = Will->AddComponent<CCollider2D>();
+	col2D->SetSize(Vector2(0.7f, 0.7f));*/
+
+	CCreatureObject* Will = new CCreatureObject();
+	AddGameObject(eLayerType::Player, Will, L"Will", Vector3(3.0f, 0.0f, 1.0002f)
+		, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down");
+	Will->SetCreatureType(CCreatureObject::eCreatureType::Player);
+	Will->SetAimSight(CCreatureObject::eAimSight::Down);
+	Will->SetState(CCreatureObject::eState::Idle);
+
 	CAnimator* Will_Animator = Will->AddComponent<CAnimator>();
 	CMeshRender* mr = Will->GetComponent<CMeshRender>(eComponentType::MeshRender);
 	CPlayerMoveScript* pmScript = Will->AddComponent<CPlayerMoveScript>();

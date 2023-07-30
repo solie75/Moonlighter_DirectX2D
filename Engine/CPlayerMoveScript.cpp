@@ -1,6 +1,7 @@
 #include "CPlayerMoveScript.h"
 #include "CTimeMgr.h"
 #include "CAnimator.h"
+#include "CCreatureObject.h"
 
 
 CPlayerMoveScript::CPlayerMoveScript()
@@ -18,35 +19,126 @@ CPlayerMoveScript::~CPlayerMoveScript()
 
 void CPlayerMoveScript::Initialize()
 {
-	CAnimator* at = GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
-	at->CompleteEvent(L"Will_Idle_Down");
+	/*CAnimator* at = GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
+	at->CompleteEvent(L"Will_Idle_Down");*/
 }
 
 void CPlayerMoveScript::Update()
 {
 	CTransform* tr = GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	Vector3 pos = tr->GetPosition();
+	CAnimator* at = GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
+	CCreatureObject* creatureObj = dynamic_cast<CCreatureObject*>(GetOwner());
 
+
+	// 방향전환
+	if (CKeyMgr::GetInst()->GetKeyState(KEY::LEFT) == KEY_STATE::TAP)
+	{
+		creatureObj->SetAimSight(CCreatureObject::eAimSight::Left);
+	}
+	if (CKeyMgr::GetInst()->GetKeyState(KEY::RIGHT) == KEY_STATE::TAP)
+	{
+		creatureObj->SetAimSight(CCreatureObject::eAimSight::Right);
+	}
+	if (CKeyMgr::GetInst()->GetKeyState(KEY::UP) == KEY_STATE::TAP)
+	{
+		creatureObj->SetAimSight(CCreatureObject::eAimSight::Up);
+	}
+	if (CKeyMgr::GetInst()->GetKeyState(KEY::DOWN) == KEY_STATE::TAP)
+	{
+		creatureObj->SetAimSight(CCreatureObject::eAimSight::Down);
+	}
+
+	// 캐릭터 위치 변화
 	if (CKeyMgr::GetInst()->GetKeyState(KEY::LEFT) == KEY_STATE::PRESSED)
 	{
 		pos.x -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 		tr->SetPosition(pos);
+		//at->PlayAnimation(L"Will_Walk_Left", true);
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY::RIGHT) == KEY_STATE::PRESSED)
 	{
 		pos.x += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 		tr->SetPosition(pos);
+		//at->PlayAnimation(L"Will_Walk_Right", true);
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY::UP) == KEY_STATE::PRESSED)
 	{
 		pos.y += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 		tr->SetPosition(pos);
+		//at->PlayAnimation(L"Will_Walk_Up", true);
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY::DOWN) == KEY_STATE::PRESSED)
 	{
 		pos.y -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 		tr->SetPosition(pos);
+		//at->PlayAnimation(L"Will_Walk_Down", true);
 	}
+
+	// 방향키에서 손을 떼면 Idle 상태로
+	if (CKeyMgr::GetInst()->GetKeyState(KEY::LEFT) == KEY_STATE::RELEASE)
+	{
+		creatureObj->SetState(CCreatureObject::eState::Idle);
+	}
+	if (CKeyMgr::GetInst()->GetKeyState(KEY::RIGHT) == KEY_STATE::RELEASE)
+	{
+		creatureObj->SetState(CCreatureObject::eState::Idle);
+	}
+	if (CKeyMgr::GetInst()->GetKeyState(KEY::UP) == KEY_STATE::RELEASE)
+	{
+		creatureObj->SetState(CCreatureObject::eState::Idle);
+	}
+	if (CKeyMgr::GetInst()->GetKeyState(KEY::DOWN) == KEY_STATE::RELEASE)
+	{
+		creatureObj->SetState(CCreatureObject::eState::Idle);
+	}
+
+	if (CKeyMgr::GetInst()->GetKeyState(KEY::SPACE) == KEY_STATE::TAP)
+	{
+		creatureObj->SetState(CCreatureObject::eState::Roll);
+	}
+
+
+	// Idle 상태일 때
+	if (creatureObj->GetState() == CCreatureObject::eState::Idle)
+	{
+		switch (creatureObj->GetAimSight())
+		{
+		case CCreatureObject::eAimSight::Left :
+			at->PlayAnimation(L"Will_Idle_Left", true);
+			break;
+		case CCreatureObject::eAimSight::Right:
+			at->PlayAnimation(L"Will_Idle_Right", true);
+			break;
+		case CCreatureObject::eAimSight::Up:
+			at->PlayAnimation(L"Will_Idle_Up", true);
+			break;
+		case CCreatureObject::eAimSight::Down:
+			at->PlayAnimation(L"Will_Idle_Down", true);
+			break;
+		}
+	}
+
+	if (creatureObj->GetState() == CCreatureObject::eState::Idle)
+	{
+		switch (creatureObj->GetAimSight())
+		{
+		case CCreatureObject::eAimSight::Left:
+			at->PlayAnimation(L"Will_Roll_Left", true);
+			break;
+		case CCreatureObject::eAimSight::Right:
+			at->PlayAnimation(L"Will_Roll_Right", true);
+			break;
+		case CCreatureObject::eAimSight::Up:
+			at->PlayAnimation(L"Will_Roll_Up", true);
+			break;
+		case CCreatureObject::eAimSight::Down:
+			at->PlayAnimation(L"Will_Roll_Down", true);
+			break;
+		}
+	}
+
+	
 	
 //	if (bAni == true)
 //	{

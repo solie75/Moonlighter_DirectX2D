@@ -38,6 +38,7 @@ private:
 	bool mbLoop;
 	std::map<std::wstring, Events*> mEvents;
 	CConstantBuffer* mAniCB;
+	bool mbChange;
 
 public:
 	CAnimator();
@@ -56,7 +57,7 @@ public:
 		, Vector2 offset = Vector2::Zero
 		, float duration = 0.1f);
 	CAnimation* FindAnimation(const std::wstring& aniName);
-	Events* FindEvents(const std::wstring& name);
+	Events* FindEvents(const std::wstring& aniName);
 	void PlayAnimation(const std::wstring& aniName, bool loop);
 	void Binds();
 
