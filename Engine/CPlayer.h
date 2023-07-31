@@ -11,6 +11,7 @@ private:
     eCreatureType mCreatureType;
     CState* mState;
     CAimSight* mAimSight;
+    bool mbAniChange;
 
 
 public:
@@ -26,5 +27,7 @@ public:
     eCreatureType GetCreatureType() { return mCreatureType; }
     CState* GetState() { return mState; }
     CAimSight* GetAimSight() { return mAimSight; }
+    bool IsAniChange() { return mbAniChange; }
+    void SetBoolAniChange(bool b) { mbAniChange = b; }
 };
 
