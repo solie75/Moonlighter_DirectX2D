@@ -60,7 +60,7 @@ public:
 	Events* FindEvents(const std::wstring& aniName);
 	void PlayAnimation(const std::wstring& aniName, bool loop);
 	void Binds();
-
+	CAnimation* GetCurAnimation() { return mActiveAnimation; }
 
 	std::function<void()>& StartEvent(const std::wstring key);
 	std::function<void()>& CompleteEvent(const std::wstring key);

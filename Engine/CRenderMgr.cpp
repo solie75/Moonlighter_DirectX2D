@@ -445,6 +445,13 @@ void CRenderMgr::Init()
 
 			CreateAtlas(L"Will_Walk_Up", 8);
 			LoadMaterial(aniShader, L"atlas_Will_Walk_Up", eRenderingMode::CutOut);
+
+			// Will Attack
+			CreateAtlas(L"Will_BigSwordCombo_Down", 40);
+			LoadMaterial(aniShader, L"atlas_Will_BigSwordCombo_Down", eRenderingMode::CutOut);
+
+			CreateAtlas(L"will_bow_secondary_animation_right", 27);
+			LoadMaterial(aniShader, L"atlas_will_bow_secondary_animation_right", eRenderingMode::CutOut);
 		}
 	}
 	// Create Scene

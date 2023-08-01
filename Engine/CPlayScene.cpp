@@ -130,6 +130,10 @@ void CPlayScene::Initialize()
 
 		std::shared_ptr<CTexture> atlas_Will_Roll_Up = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Roll_Up", L"");
 		Will_Animator->Create(L"Will_Roll_Up", atlas_Will_Roll_Up, Vector2(0.0f, 0.0f), Vector2(26.f, 41.f), 8);
+	
+		// Attack Atlas
+		std::shared_ptr<CTexture> atlas_Will_BigSwordCombo_Down = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_BigSwordCombo_Down", L"");
+		Will_Animator->Create(L"Will_BigSwordCombo_Down", atlas_Will_BigSwordCombo_Down, Vector2(0.0f, 0.0f), Vector2(34.f, 47.f), 40);
 	}
 	
 	Will_Animator->PlayAnimation(L"Will_Idle_Down", true); //맨 처음 화면에 나오는 애니메이션

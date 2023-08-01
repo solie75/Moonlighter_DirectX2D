@@ -26,7 +26,7 @@ void CPlayerMoveScript::Update()
 	CState* state = player->GetState();
 	CAimSight* aimSight = player->GetAimSight();
 
-	if (player->IsAniChange()) // 키 입력 가능 여부
+	if (state->IsStateChange()) // 키 입력 가능 여부
 	{
 		// 방향전환
 		if (CKeyMgr::GetInst()->GetKeyState(KEY::LEFT) == KEY_STATE::TAP)
@@ -90,71 +90,20 @@ void CPlayerMoveScript::Update()
 			state->SetState(eState::Idle);
 		}
 
-		// 스페이스바로 구르기 상태로 변환
+		// 구르기 상태로 변환
 		if (CKeyMgr::GetInst()->GetKeyState(KEY::SPACE) == KEY_STATE::TAP)
 		{
-			player->SetBoolAniChange(false);
+			state->SetBoolStateChange(false);
 			state->SetState(eState::Roll);
+		}
 
-			switch (aimSight->GetAimSight())
-			{
-			case eAimSight::Left:
-				pos.x -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-				tr->SetPosition(pos);
-				break;
-			case eAimSight::Right:
-				pos.x += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-				tr->SetPosition(pos);
-				break;
-			case eAimSight::Up:
-				pos.y += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-				tr->SetPosition(pos);
-				break;
-			case eAimSight::Down:
-				pos.y -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-				tr->SetPosition(pos);
-				break;
-			}
+		// 공격 상태로 변환
+		if (CKeyMgr::GetInst()->GetKeyState(KEY::G) == KEY_STATE::TAP)
+		{
+			state->SetBoolStateChange(false);
+			state->SetState(eState::Attack);
 		}
 	}
-	
-//if (CKeyMgr::GetInst()->GetKeyState(KEY::SPACE) == KEY_STATE::TAP)
-//{
-//	GetOwner()->SetBehave(CGameObject::eBehave::Roll);
-//}
-//
-//if(GetOwner()->GetBehave() == CGameObject::eBehave::Roll)
-//{
-//	if (GetOwner()->GetDirection() == CGameObject::eDirection::Down)
-//	{
-//		pos.y -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-//		tr->SetPosition(pos);
-//	}
-//	else if (GetOwner()->GetDirection() == CGameObject::eDirection::Left)
-//	{
-//		pos.x -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-//		tr->SetPosition(pos);
-//	}
-//	else if (GetOwner()->GetDirection() == CGameObject::eDirection::Right)
-//	{
-//		pos.x += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-//		tr->SetPosition(pos);
-//	}
-//	else if (GetOwner()->GetDirection() == CGameObject::eDirection::Up)
-//	{
-//		pos.y += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-//		tr->SetPosition(pos);
-//	}
-//
-//	
-//	bAniTime += CTimeMgr::GetInst()->GetDeltaTime();
-//	if (0.6f <= bAniTime)
-//	{
-//		bAniTime = 0.0f;
-//		bAni = true;
-//		GetOwner()->SetBehave(CGameObject::eBehave::Idle);
-//	}
-//}
 }
 
 void CPlayerMoveScript::LateUpdate()

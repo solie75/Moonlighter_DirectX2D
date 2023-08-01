@@ -2,6 +2,8 @@
 #include "CCameraMoveScript.h"
 #include "CPlayerMoveScript.h"
 #include "CAnimator.h"
+#include "CPlayer.h"
+#include "CCollider2D.h"
 
 CVillageScene::CVillageScene()
 {
@@ -20,12 +22,16 @@ void CVillageScene::Initialize()
 			Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_Will");
 		Will->AddComponent<CPlayerMoveScript>();*/
 
-		CGameObject* Will = new CGameObject();
+		CPlayer* Will = new CPlayer();
 		AddGameObject(eLayerType::Player, Will, L"Will", Vector3(3.0f, 0.0f, 1.0002f)
 			, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down");
+		Will->SetCreatureType(eCreatureType::Player);
+
 		CAnimator* Will_Animator = Will->AddComponent<CAnimator>();
 		CMeshRender* mr = Will->GetComponent<CMeshRender>(eComponentType::MeshRender);
 		CPlayerMoveScript* pmScript = Will->AddComponent<CPlayerMoveScript>();
+		CCollider2D* col2D = Will->AddComponent<CCollider2D>();
+		col2D->SetSize(Vector2(0.7f, 0.7f));
 		{
 			// Idle Atlas
 			std::shared_ptr<CTexture> atlas_Will_Idle_Down = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Idle_Down", L"");
@@ -65,9 +71,26 @@ void CVillageScene::Initialize()
 
 			std::shared_ptr<CTexture> atlas_Will_Roll_Up = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_Roll_Up", L"");
 			Will_Animator->Create(L"Will_Roll_Up", atlas_Will_Roll_Up, Vector2(0.0f, 0.0f), Vector2(26.f, 41.f), 8);
+		
+			// Attack Atlas
+			std::shared_ptr<CTexture> atlas_Will_BigSwordCombo_Down = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_Will_BigSwordCombo_Down", L"");
+			Will_Animator->Create(L"Will_BigSwordCombo_Down", atlas_Will_BigSwordCombo_Down, Vector2(0.0f, 0.0f), Vector2(90.f, 130.f), 40);
+		
+			std::shared_ptr<CTexture> atlas_will_bow_secondary_animation_right = CResourceMgr::GetInst()->Load<CTexture>(L"atlas_will_bow_secondary_animation_right", L"");
+			Will_Animator->Create(L"will_bow_secondary_animation_right", atlas_will_bow_secondary_animation_right, Vector2(0.0f, 0.0f), Vector2(50.f, 60.f), 27);
+
 		}
 
 		Will_Animator->PlayAnimation(L"Will_Idle_Down", true); //맨 처음 화면에 나오는 애니메이션
+
+		{ // light
+			CGameObject* light = new CGameObject();
+			light->SetName(L"light");
+			AddGameObject(eLayerType::Light, light, L"light", Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f), false, L"", L"");
+			CLight* lightComp = light->AddComponent<CLight>();
+			lightComp->SetType(eLightType::Directional);
+			lightComp->SetColor(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+		}
 	}
 	{ // Background
 		CGameObject* Village_Background = new CGameObject();

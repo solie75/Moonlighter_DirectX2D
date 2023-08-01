@@ -56,6 +56,6 @@ public:
 
 	virtual HRESULT ResourceLoad(const std::wstring name, const std::wstring& path) { return S_FALSE; }
 
-	void CreateAtlas(const std::wstring& path, const std::wstring& spriteName, int spriteNum);
+	//void CreateAtlas(const std::wstring& path, const std::wstring& spriteName, int spriteNum);
 };
 

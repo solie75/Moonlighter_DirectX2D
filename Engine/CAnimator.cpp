@@ -78,8 +78,12 @@ void CAnimator::Create(const std::wstring& aniName, std::shared_ptr<CTexture> at
 	Events* events = FindEvents(aniName);
 	if (events != nullptr)
 	{
-		mEvents.insert(std::make_pair(aniName, events));
+		return;
 	}
+
+	events = new Events();
+	mEvents.insert(std::make_pair(aniName, events));
+	
 }
 
 CAnimation* CAnimator::FindAnimation(const std::wstring& aniName)
