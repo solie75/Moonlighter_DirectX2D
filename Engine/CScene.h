@@ -22,6 +22,9 @@ public:
 	void AddGameObject(eLayerType type, CGameObject* gameObj, const std::wstring& objName
 		, Vector3 position, Vector3 scale, bool meshRenderBool, const std::wstring& meshName, const std::wstring& materialName);
 
+	void AddGameObjectTest(eLayerType type, CGameObject* gameObj, const std::wstring& objName
+		, Vector3 position, Vector3 scale, bool meshRenderBool, const std::wstring& meshName, const std::wstring& materialName, bool animationBool);
+
 	CLayer& GetLayer(eLayerType type) { return mLayers[(UINT)type]; }
 
 	/*template <typename T>

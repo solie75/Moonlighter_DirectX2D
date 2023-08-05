@@ -1,12 +1,17 @@
 #include "CPlayer.h"
 #include "CAnimator.h"
 #include "CTimeMgr.h"
+#include "CPlayerMoveScript.h"
+#include "CCollider2D.h"
 
 CPlayer::CPlayer()
 	: mCreatureType(eCreatureType::Player)
 {
 	mState = new CState();
 	mAimSight = new CAimSight();
+	this->AddComponent<CPlayerMoveScript>();
+	CCollider2D* cd = this->AddComponent<CCollider2D>();
+	cd->SetSize(Vector2(0.7f, 0.7f));
 }
 
 CPlayer::~CPlayer()

@@ -27,11 +27,11 @@ public:
 
 	void LoadAnimationData();
 	void CreateAtlas(const std::wstring& spriteName, int spriteNum);
-	void CreateAnimation(const std::wstring& objName, CAnimator* animator)
+	void CreateAnimationTest(const std::wstring& objName, CAnimator* animator)
 	{
 		for (int i = 0; i < mAnimationDatas.size(); i++)
 		{
-			if (mAnimationDatas[i].objName == objName)
+			if (mAnimationDatas[i].objName == objName) // 함수의 인자에 해당하는 mAnimationData 의 데이터에 대하여 애니메이션을 생성한다.
 			{
 				// atlas 생성
 				CreateAtlas(mAnimationDatas[i].name, mAnimationDatas[i].spriteNum);

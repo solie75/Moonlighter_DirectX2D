@@ -1,4 +1,6 @@
 #include "CAnimator.h"
+#include "CGameObject.h"
+#include "CMeshRender.h"
 
 CAnimator::CAnimator()
 	: CComponent(eComponentType::Animator)
@@ -138,6 +140,10 @@ void CAnimator::PlayAnimation(const std::wstring& aniName, bool loop)
 	{
 		events->startEvent();
 	}
+	
+	this->GetOwner()->GetComponent<CMeshRender>(eComponentType::MeshRender)
+
+
 
 	mbLoop = loop;
 	mActiveAnimation->Reset();
