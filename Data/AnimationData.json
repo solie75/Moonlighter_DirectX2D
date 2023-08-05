@@ -1,0 +1,111 @@
+{
+    "Will": 
+    [
+        {
+            "id": 1,
+            "name": "Will_Idle_Down",
+            "objectName": "Will",
+            "spriteNumber": [10],
+            "renderingMode": [1],
+            "size": [24, 41]
+            
+        },
+        {
+            "id": 2,
+            "name": "Will_Idle_Left",
+            "objectName": "Will",
+            "spriteNumber": [10],
+            "renderingMode": [1],
+            "size": [32, 42]
+        },
+        {
+            "id": 3,
+            "name": "Will_Idle_Right",
+            "objectName": "Will",
+            "spriteNumber": [10],
+            "renderingMode": [1],
+            "size": [32, 42]
+        },
+        {
+            "id": 4,
+            "name": "Will_Idle_Up",
+            "objectName": "Will",
+            "spriteNumber": [10],
+            "renderingMode": [1],
+            "size": [25, 42]
+        },
+        {
+            "id": 5,
+            "name": "Will_Walk_Down",
+            "objectName": "Will",
+            "spriteNumber": [8],
+            "renderingMode": [1],
+            "size": [24, 39]
+        },
+        {
+            "id": 6,
+            "name": "Will_Walk_Left",
+            "objectName": "Will",
+            "spriteNumber": [8],
+            "renderingMode": [1],
+            "size": [35, 40]
+        },
+        {
+            "id": 7,
+            "name": "Will_Walk_Right",
+            "objectName": "Will",
+            "spriteNumber": [8],
+            "renderingMode": [1],
+            "size": [35, 40]
+        },
+        {
+            "id": 8,
+            "name": "Will_Walk_Up",
+            "objectName": "Will",
+            "spriteNumber": [8],
+            "renderingMode": [1],
+            "size": [25, 43]
+        },
+        {
+            "id": 9,
+            "name": "Will_Roll_Down",
+            "objectName": "Will",
+            "spriteNumber": [8],
+            "renderingMode": [1],
+            "size": [29, 42]
+        },
+        {
+            "id": 10,
+            "name": "Will_Roll_Left",
+            "objectName": "Will",
+            "spriteNumber": [8],
+            "renderingMode": [1],
+            "size": [35, 40]
+        },
+        {
+            "id": 11,
+            "name": "Will_Roll_Right",
+            "objectName": "Will",
+            "spriteNumber": [8],
+            "renderingMode": [1],
+            "size": [35, 42]
+        },
+        {
+            "id": 12,
+            "name": "Will_Roll_Up",
+            "objectName": "Will",
+            "spriteNumber": [8],
+            "renderingMode": [1],
+            "size": [26, 41]
+        }
+        
+    ],
+
+    "__commnet(RenderingMode's num)" :
+    {
+        "Opaque" : "0",
+        "CutOut" : "1",
+        "Transparent" : "2",
+        "End" : "3"
+    }
+}

@@ -19,6 +19,7 @@
 #include <memory>
 #include <filesystem>
 #include <wrl.h>
+#include <fstream>
 
 #include "Struct.h"
 

@@ -1,16 +1,68 @@
 #pragma once
 #include "CSingleton.h"
+#include "Header.h"
 #include "CResource.h"
-
+#include "CPathMgr.h"
+#include "Graphic.h"
+#include "CAnimator.h"
+#include "CRenderMgr.h"
 
 class CResourceMgr : public CSingleton<CResourceMgr>
 {
+public:
+	struct AnimationData
+	{
+		std::wstring name;
+		int spriteNum;
+		eRenderingMode renderingMode;
+		Vector2 size;
+		std::wstring objName;
+	};
 private:
 	std::map<std::wstring, std::shared_ptr<CResource>> mResources;
-
+	std::vector<AnimationData> mAnimationDatas; // <ObjectName, data>
 public:
 	CResourceMgr();
 	~CResourceMgr();
+
+	void LoadAnimationData();
+	void CreateAtlas(const std::wstring& spriteName, int spriteNum);
+	void CreateAnimation(const std::wstring& objName, CAnimator* animator)
+	{
+		for (int i = 0; i < mAnimationDatas.size(); i++)
+		{
+			if (mAnimationDatas[i].objName == objName)
+			{
+				// atlas 持失
+				CreateAtlas(mAnimationDatas[i].name, mAnimationDatas[i].spriteNum);
+				std::wstring atlasTexkey = L"atlas_" + mAnimationDatas[i].name;
+
+				std::shared_ptr<CShader> shader = CResourceMgr::GetInst()->Find<CShader>(L"AnimationShader");
+				// Material 持失
+				CreateMaterial(shader, atlasTexkey, (eRenderingMode)mAnimationDatas[i].renderingMode);
+
+				// Animation 持失
+				animator->Create(mAnimationDatas[i].name,
+					CResourceMgr::GetInst()->Load<CTexture>(atlasTexkey, L""),
+					Vector2(0.0f, 0.0f),
+					Vector2(mAnimationDatas[i].size.x, mAnimationDatas[i].size.y),
+					mAnimationDatas[i].spriteNum);
+			}
+		}
+	}
+
+	void CreateMaterial(std::shared_ptr<CShader> shader, const std::wstring& textureName, eRenderingMode renderMode)
+	{
+		std::shared_ptr<CTexture> tex = CResourceMgr::GetInst()->Find<CTexture>(textureName);
+
+		std::shared_ptr<CMaterial> mt = std::make_shared<CMaterial>();
+		mt->SetName(L"mt_" + textureName);
+		mt->SetShader(shader);
+		mt->SetTexture(tex);
+		mt->SetRenderMode(renderMode);
+		CResourceMgr::GetInst()->Insert(L"mt_" + textureName, mt);
+	}
+
 
 	template <typename T>
 	static std::shared_ptr<T> Find(const std::wstring& key)
