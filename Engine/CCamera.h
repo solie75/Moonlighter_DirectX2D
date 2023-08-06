@@ -5,6 +5,7 @@
 #include "CSceneMgr.h"
 #include "CMeshRender.h"
 #include "CRenderMgr.h"
+#include "CCameraMoveScript.h"
 
 class CGameObject;
 
@@ -67,7 +68,14 @@ public:
 	void DisableLayerMasks() { mLayerMask.reset(); }
 
 	float GetSize() { return mSize; }
-	void SetCameraType(eCameraType type) { mCamType = type; }
+	void SetCameraType(eCameraType type)
+	{ 
+		mCamType = type; 
+		if (type == eCameraType::Main) 
+		{
+			this->GetOwner()->AddComponent<CCameraMoveScript>();
+		} 
+	}
 
 	static Matrix& GetStaticViewMatrix() { return staticView; }
 	static void SetStaticViewMatrix(Matrix view) { staticView = view; }

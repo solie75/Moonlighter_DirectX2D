@@ -141,9 +141,9 @@ void CAnimator::PlayAnimation(const std::wstring& aniName, bool loop)
 		events->startEvent();
 	}
 	
-	this->GetOwner()->GetComponent<CMeshRender>(eComponentType::MeshRender)
-
-
+	CMeshRender* mr = this->GetOwner()->GetComponent<CMeshRender>(eComponentType::MeshRender);
+	std::shared_ptr<CMaterial> mt = CResourceMgr::Find<CMaterial>(L"mt_atlas_" + aniName);
+	mr->SetMaterial(mt);
 
 	mbLoop = loop;
 	mActiveAnimation->Reset();

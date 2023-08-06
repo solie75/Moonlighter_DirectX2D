@@ -128,6 +128,8 @@ void CCamera::AlphaSortGameObjects()
 				
 				std::shared_ptr<CMaterial> mt = mr->GetMaterial();
 				eRenderingMode renderMode = mt->GetRenderingMode();
+				// 현재 애니메이션은 material 의 Text 가 필요 없음에도 mt 가 empty 일 때의 오류방지를 위해 playanimation() 에서 Setmaterial 을 호출하고 있다.
+				// 후에 Animation 객체의 경우 mt가 없어도 renderMode 를 적용하게 하는 코드 구현 필요
 
 				switch (renderMode)
 				{
