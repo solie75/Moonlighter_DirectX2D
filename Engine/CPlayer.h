@@ -22,7 +22,6 @@ public:
     virtual void LateUpdate();
     virtual void Render();
 
-    void SetCreatureType(eCreatureType type) { mCreatureType = type; }
     eCreatureType GetCreatureType() { return mCreatureType; }
     CState* GetState() { return mState; }
     CAimSight* GetAimSight() { return mAimSight; }

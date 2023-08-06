@@ -27,6 +27,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CCreatureObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CDebugObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBoss.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CDungeonsEntranceScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CEditor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CEntity.h" />
@@ -37,6 +39,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CMeshRender.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CMonster.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CPlayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CPlayerMoveScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CPlayScene.h" />
@@ -79,6 +82,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CCreatureObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CDebugObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBoss.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBossScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CDungeonsEntranceScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CEditor.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CEntity.cpp" />
@@ -89,6 +94,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CMaterial.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CMeshRender.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CMonster.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CPlayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CPlayerMoveScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CPlayScene.cpp" />

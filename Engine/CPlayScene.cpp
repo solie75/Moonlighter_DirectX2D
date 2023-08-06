@@ -7,6 +7,7 @@
 #include "CAnimator.h"
 #include "CCollisionMgr.h"
 #include "CPlayer.h"
+#include "CMonster.h"
 
 CPlayScene::CPlayScene()
 {
@@ -20,16 +21,16 @@ void CPlayScene::Initialize()
 {
 	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Player, eLayerType::Monster, true);
 
-	// Link
-	CGameObject* player1 = new CGameObject();
-	AddGameObject(eLayerType::Monster, player1, L"Link", Vector3(0.0f, 0.0f, 1.01f),
-		Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_Link", false);
-	CCollider2D* cd = player1->AddComponent<CCollider2D>();
+	//// Link
+	//CGameObject* player1 = new CGameObject();
+	//AddGameObject(eLayerType::Monster, player1, L"Link", Vector3(0.0f, 0.0f, 1.01f),
+	//	Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_Link", false);
+	//CCollider2D* cd = player1->AddComponent<CCollider2D>();
 
-	// Smile
-	CGameObject* smile = new CGameObject();
-	AddGameObject(eLayerType::UI, smile, L"Smile", Vector3(0.2f, 0.0f, 1.0f),
-		Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_Smile",false);
+	//// Smile
+	//CGameObject* smile = new CGameObject();
+	//AddGameObject(eLayerType::UI, smile, L"Smile", Vector3(0.2f, 0.0f, 1.0f),
+	//	Vector3(1.0f, 1.0f, 1.0f), true, L"Mesh", L"mt_Smile",false);
 
 
 	// Main Camera
@@ -51,9 +52,19 @@ void CPlayScene::Initialize()
 	uiCamComp->TurnLayerMask(eLayerType::Player, false);
 	uiCamComp->TurnLayerMask(eLayerType::Monster, false);
 
+	// player
 	CPlayer* Will = new CPlayer();
 	AddGameObject(eLayerType::Player, Will, L"Will", Vector3(3.0f, 0.0f, 1.0002f)
 		, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down", true);
+
+	// Boss Monster
+	CMonster* DesertBossHead = new CMonster();
+	AddGameObject(eLayerType::Monster, DesertBossHead, L"DesertBossHead", Vector3(0.0f, 0.0f, 1.0004f)
+		, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"mt_DesertBossHead", false);
+
+	CMonster* DesertBossCircle = new CMonster();
+	AddGameObject(eLayerType::Monster, DesertBossCircle, L"DesertBossCircle", Vector3(-1.0f, 0.0f, 1.0005f)
+		, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"mt_DesertBossCircle", false);
 
 	{ // light
 		CGameObject* light = new CGameObject();
@@ -61,7 +72,7 @@ void CPlayScene::Initialize()
 		AddGameObject(eLayerType::Light, light, L"light", Vector3(0.0f, 0.0f,  0.0f), Vector3(0.0f, 0.0f, 0.0f), false, L"", L"", false);
 		CLight* lightComp = light->AddComponent<CLight>();
 		lightComp->SetType(eLightType::Directional);
-		lightComp->SetColor(Vector4(1.0f, 0.0f, 1.0f, 1.0f));
+		lightComp->SetColor(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 	
 	CScene::Initialize();

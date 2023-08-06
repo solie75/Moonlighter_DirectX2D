@@ -145,6 +145,18 @@
     <Filter Include="GameObject\Object\AimSight">
       <UniqueIdentifier>{3c11e92c-a5f7-4edd-98cb-445549174b50}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Object\Monster">
+      <UniqueIdentifier>{c0e1d1e2-0e00-4c77-9a8a-34e36c805b4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object\Monster\Boss">
+      <UniqueIdentifier>{29a66fa8-3e7f-4c5c-b57b-8826ab554c00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object\Monster\Boss\DesertBoss">
+      <UniqueIdentifier>{c684a5ed-c337-4c24-95d8-16ac64fed7d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Script\DesertBossScript">
+      <UniqueIdentifier>{0603e85f-15ba-45c5-8997-7b2a615c4c83}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -297,6 +309,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CAimSight.h">
       <Filter>GameObject\Object\AimSight</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CMonster.h">
+      <Filter>GameObject\Object\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBoss.h">
+      <Filter>GameObject\Object\Monster\Boss\DesertBoss</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossScript.h">
+      <Filter>GameObject\Component\Script\DesertBossScript</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -433,6 +454,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CAimSight.cpp">
       <Filter>GameObject\Object\AimSight</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CMonster.cpp">
+      <Filter>GameObject\Object\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBoss.cpp">
+      <Filter>GameObject\Object\Monster\Boss\DesertBoss</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBossScript.cpp">
+      <Filter>GameObject\Component\Script\DesertBossScript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

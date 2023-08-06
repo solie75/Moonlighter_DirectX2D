@@ -17,6 +17,7 @@ public:
 private:
     eObjectState mState;
     std::vector<CComponent*> mComponent;
+    CGameObject* mParentObject;
 
 public:
     CGameObject();
@@ -26,6 +27,12 @@ public:
     virtual void Update();
     virtual void LateUpdate();
     virtual void Render();
+
+
+    void Destroy() { mState = eObjectState::Dead; }
+    eObjectState GetState() { return mState; }
+    CGameObject* GetParentObject() { return mParentObject; }
+    void SetParentObject(CGameObject* pObj) { mParentObject = pObj; }
 
     template <typename T>
     T* AddComponent()
@@ -52,8 +59,5 @@ public:
         return nullptr;
     }
 
-    void Destroy() { mState = eObjectState::Dead; }
-
-    eObjectState GetState() { return mState; }
 };
 

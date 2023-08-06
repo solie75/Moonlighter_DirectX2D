@@ -401,6 +401,22 @@ void CRenderMgr::Init()
 			LoadTexture(L"Item_Coin", L"..\\Resource\\Texture\\Item\\Item_Coin.png");
 			LoadMaterial(shader, L"Item_Coin", eRenderingMode::CutOut);
 		}
+		{
+			LoadTexture(L"DesertBossHead", L"..\\Resource\\Texture\\boss3\\Boss3_head_death_1.png");
+			LoadMaterial(shader, L"DesertBossHead", eRenderingMode::CutOut);
+
+			LoadTexture(L"DesertBossCircle", L"..\\Resource\\Texture\\boss3\\Boss3_circle_attack_1.png");
+			LoadMaterial(shader, L"DesertBossCircle", eRenderingMode::CutOut);
+
+			LoadTexture(L"DesertBossRhombus", L"..\\Resource\\Texture\\boss3\\Boss3_rhombus_attack_1.png");
+			LoadMaterial(shader, L"DesertBossRhombus", eRenderingMode::CutOut);
+
+			LoadTexture(L"DesertBossSquare", L"..\\Resource\\Texture\\boss3\\Boss3_square_attack_1.png");
+			LoadMaterial(shader, L"DesertBossSquare", eRenderingMode::CutOut);
+
+			LoadTexture(L"DesertBossTriangle", L"..\\Resource\\Texture\\boss3\\Boss3_triangle_catapult_1.png");
+			LoadMaterial(shader, L"DesertBossTriangle", eRenderingMode::CutOut);
+		}
 		{ // Atlas
 			// test
 			LoadTexture(L"linkSprites", L"..\\Resource\\Texture\\linkSprites.png");
