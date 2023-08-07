@@ -8,6 +8,7 @@
 #include "CCollisionMgr.h"
 #include "CPlayer.h"
 #include "CMonster.h"
+#include "CDesertBossScript.h"
 
 CPlayScene::CPlayScene()
 {
@@ -61,10 +62,12 @@ void CPlayScene::Initialize()
 	CMonster* DesertBossHead = new CMonster();
 	AddGameObject(eLayerType::Monster, DesertBossHead, L"DesertBossHead", Vector3(0.0f, 0.0f, 1.0004f)
 		, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"mt_DesertBossHead", false);
+	DesertBossHead->AddComponent<CDesertBossScript>();
 
 	CMonster* DesertBossCircle = new CMonster();
 	AddGameObject(eLayerType::Monster, DesertBossCircle, L"DesertBossCircle", Vector3(-1.0f, 0.0f, 1.0005f)
 		, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"mt_DesertBossCircle", false);
+	
 
 	{ // light
 		CGameObject* light = new CGameObject();
@@ -75,7 +78,7 @@ void CPlayScene::Initialize()
 		lightComp->SetColor(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 	
-	CScene::Initialize();
+	CScene::Initialize(); 
 }
 
 void CPlayScene::Update()
