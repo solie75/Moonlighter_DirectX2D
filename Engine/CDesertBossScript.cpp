@@ -2,8 +2,11 @@
 #include "CKeyMgr.h"
 #include "CTimeMgr.h"
 #include "CTransform.h"
+#include "CCollider2D.h"
+#include "CMonster.h"
 
 CDesertBossScript::CDesertBossScript()
+
 {
 }
 
@@ -13,6 +16,7 @@ CDesertBossScript::~CDesertBossScript()
 
 void CDesertBossScript::Initialize()
 {
+	CScript::Initialize();
 }
 
 void CDesertBossScript::Update()
@@ -40,12 +44,15 @@ void CDesertBossScript::Update()
 		pos.y -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 		tr->SetPosition(pos);
 	}
+	CScript::Update();
 }
 
 void CDesertBossScript::LateUpdate()
 {
+	CScript::LateUpdate();
 }
 
 void CDesertBossScript::Render()
 {
+	CScript::Render();
 }

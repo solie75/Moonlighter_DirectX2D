@@ -98,7 +98,26 @@
             "renderingMode": [1],
             "size": [26, 41]
         }
-        
+    ],
+
+    "Fire_Ball":
+    [
+        {
+            "id": 13,
+            "name": "Fire_Ball",
+            "objectName": "Fire_Ball",
+            "spriteNumber": [3],
+            "renderingMode": [1],
+            "size": [30, 22]
+        },
+        {
+            "id": 14,
+            "name": "Fire_Ball_Explosion",
+            "objectName": "Fire_Ball",
+            "spriteNumber": [3],
+            "renderingMode": [1],
+            "size": [28, 28]
+            }
     ],
 
     "__commnet(RenderingMode's num)" :

@@ -30,6 +30,7 @@ enum class eLayerType
 	Grid,
 	Player,
 	Monster,
+	Projectile,
 	Light,
 	UI,
 	Background,

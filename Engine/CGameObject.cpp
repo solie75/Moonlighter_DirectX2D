@@ -6,7 +6,7 @@ CGameObject::CGameObject()
 	//, mPrevBehave(eBehave::Idle)
 	//, mDirection(eDirection::Down)
 {
-	AddComponent<CTransform>();
+	CTransform* tr = AddComponent<CTransform>();
 }
 
 CGameObject::~CGameObject()

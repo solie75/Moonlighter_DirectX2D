@@ -17,6 +17,10 @@ private:
     Vector2 mSize;
     Vector2 mCenter;
 
+    CConstantBuffer* mColliderCB;
+    
+    bool mIsCollider;
+    int mCollideCount; // Ãæµ¹ ÁßÃ¸ È½¼ö
 public:
     CCollider2D();
     ~CCollider2D();
@@ -32,6 +36,9 @@ public:
     void SetCenter(Vector2 size) { mCenter = size; }
     UINT GetColliderID() { return mColliderID; }
     void SetColPositionOffset(Vector3 offset);
+    CConstantBuffer* GetColliderCB() { return mColliderCB; }
+    bool GetIsCollider() { return mIsCollider; }
+    void MinusColliderNum() { mCollideCount--; }
 
     void OnCollisionEnter(CCollider2D* other);
     void OnCollisionStay(CCollider2D* other);

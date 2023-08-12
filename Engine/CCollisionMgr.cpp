@@ -24,13 +24,55 @@ void CCollisionMgr::Update()
 	}
 }
 
-void CCollisionMgr::ObjectCollision(eLayerType leftLayer, eLayerType rightLayer)
+void CCollisionMgr::LateUpdate()
 {
-	const std::vector<CGameObject*>& lefts = 
-		CSceneMgr::GetInst()->GetActiveScene()->GetLayer(leftLayer).GetGameObjects();
+	for (UINT column = 0; column < (UINT)eLayerType::End; column++)
+	{
+		for (UINT row = 0; row < (UINT)eLayerType::End; row++)
+		{
+			if (mMatrix[column][row] == true)
+			{
+				DecreaseColliderCount((eLayerType)column, (eLayerType)row);
+			}
+		}
+	}
+}
+
+void CCollisionMgr::DecreaseColliderCount(eLayerType leftLayer, eLayerType rightLayer)
+{
+	const std::vector<CGameObject*>& lefts
+		= CSceneMgr::GetInst()->GetActiveScene()->GetLayer(leftLayer).GetGameObjects();
 
 	const std::vector<CGameObject*>& rights =
 		CSceneMgr::GetInst()->GetActiveScene()->GetLayer(rightLayer).GetGameObjects();
+
+	for (CGameObject* leftObj : lefts)
+	{
+		for (CGameObject* rightObj : rights)
+		{
+			CCollider2D* leftCol = leftObj->GetComponent<CCollider2D>(eComponentType::Collider2D);
+			CCollider2D* rightCol = rightObj->GetComponent<CCollider2D>(eComponentType::Collider2D);
+
+			if (leftCol != nullptr && rightCol != nullptr)
+			{
+				if (leftObj->GetState() == CGameObject::eObjectState::Dead || rightObj->GetState() == CGameObject::eObjectState::Dead)
+					// 두 객체중 하나만  Dead 여도 두 Collider2d 의 충돌 카운트를 1만큼 감산한다.
+				{
+					leftCol->MinusColliderNum();
+					rightCol->MinusColliderNum();
+				}
+			}
+		}
+	}
+}
+
+void CCollisionMgr::ObjectCollision(eLayerType leftLayer, eLayerType rightLayer)
+{
+	const std::vector<CGameObject*>& lefts
+	 = CSceneMgr::GetInst()->GetActiveScene()->GetLayer(leftLayer).GetGameObjects();
+
+	const std::vector<CGameObject*>& rights =
+	CSceneMgr::GetInst()->GetActiveScene()->GetLayer(rightLayer).GetGameObjects();
 
 	for (CGameObject* leftObj : lefts)
 	{
@@ -44,12 +86,28 @@ void CCollisionMgr::ObjectCollision(eLayerType leftLayer, eLayerType rightLayer)
 		for (CGameObject* rightObj : rights)
 		{
 			CCollider2D* rightCol = rightObj->GetComponent<CCollider2D>(eComponentType::Collider2D);
-			if (leftObj == rightObj)
+
+			/*if (leftCol == nullptr || leftObj->GetState() != CGameObject::eObjectState::Active)
+			{
+				if (leftObj->GetState() == CGameObject::eObjectState::Dead)
+				{
+					leftCol->MinusColliderNum();
+					rightCol->MinusColliderNum();
+				}
+				continue;
+			}*/
+
+			/*if (leftObj == rightObj)
 			{
 				continue;
-			}
-			if (rightCol == nullptr || rightObj->GetState() != CGameObject::eObjectState::Active);
+			}*/
+			if (rightCol == nullptr || rightObj->GetState() != CGameObject::eObjectState::Active)
 			{
+				/*if (rightObj->GetState() == CGameObject::eObjectState::Dead)
+				{
+					leftCol->MinusColliderNum();
+					rightCol->MinusColliderNum();
+				}*/
 				continue;
 			}
 
@@ -68,11 +126,13 @@ void CCollisionMgr::ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCo
 	std::map<UINT64, bool>::iterator iter = mCollisionMap.find(colID.CollisionId);
 	if (iter == mCollisionMap.end())
 	{
+		colID.CollisionId = mCollisionID;
 		mCollisionMap.insert(std::make_pair(colID.CollisionId, false));
 		iter = mCollisionMap.find(colID.CollisionId);
+		mCollisionID++;
 	}
-
-	if (Intersect(leftCol, rightCol))
+	bool b = Intersect(leftCol, rightCol);
+	if (Intersect(leftCol, rightCol)) // 현재 충돌 중이면 ture 를 충돌 중이 아니면 false 를
 	{
 		// 충돌
 		if (iter->second == false)
@@ -80,6 +140,7 @@ void CCollisionMgr::ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCo
 			// 최초 충돌
 			leftCol->OnCollisionEnter(rightCol);
 			rightCol->OnCollisionEnter(leftCol);
+			iter->second = true;
 		}
 		else
 		{
@@ -94,6 +155,7 @@ void CCollisionMgr::ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCo
 		{
 			leftCol->OnCollisionExit(rightCol);
 			rightCol->OnCollisionExit(leftCol);
+			iter->second = false;
 		}
 	}
 }
@@ -104,7 +166,7 @@ bool CCollisionMgr::Intersect(CCollider2D* leftCol, CCollider2D* rightCol)
 	// 0 --- 1
 	// |     |
 	// 3 --- 2
-	return false;
+	//return false;
 	Vector3 arrLocalPos[4] =
 	{
 		Vector3(-0.5f, 0.5f, 0.0f),
@@ -170,7 +232,7 @@ bool CCollisionMgr::Intersect(CCollider2D* leftCol, CCollider2D* rightCol)
 		}
 
 		// 위의 사영길이 더한것과 두 충돌체 사이의 거리의 사영길이를 비교한다.
-		if (projLength < fabsf(vDistBetweenCols.Dot(vAxis)))
+		if (projLength <= fabsf(vDistBetweenCols.Dot(vAxis)))
 		{
 			// 하나의 분리축의 경우라도 사영길이 더한것보다 두 충돌체의 거리의 사영길이가 더 큰경우
 			// 즉, 하나의 분리축으로 두 도형을 사영했을 때 빈 공간이 있는 경우 충돌하지 않았다.

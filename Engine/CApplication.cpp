@@ -48,12 +48,14 @@ void CApplication::AppUpdate()
 	CTimeMgr::GetInst()->Update();
 	CKeyMgr::GetInst()->Update();
 	CRenderMgr::GetInst()->Update();
-	CCollisionMgr::GetInst()->Update();
+	CCollisionMgr::GetInst()->Update(); // 충돌 감지
 }
 
 void CApplication::AppLateUpdate()
 {
-	CRenderMgr::GetInst()->LateUpdate();
+	CRenderMgr::GetInst()->LateUpdate(); // 감지된 충돌을 Collider2D::LateUpdate 에서 IsCollider 반영 -> 그 이후에 ObjectState 를 Dead 로 변경
+	CCollisionMgr::GetInst()->LateUpdate(); // 두 컴포넌트의 충돌에서 둘 중 하나라도 Owner Object 가 Dead 라면 두 Collider2D 컴포넌트에서 ColliderCount-- 처리한다.
+	// 이후에 AppDestroy 에서 객체 삭제
 }
 
 void CApplication::AppRender()

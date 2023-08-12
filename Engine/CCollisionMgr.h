@@ -11,7 +11,8 @@ private:
 	std::map<UINT64, bool> mCollisionMap;
 	// 배열 mMatrix 는 eLayerType::End 개의 요소를 가지며 각 요소는 10개의 비트를 가진 bitset이다.
 	std::bitset <(UINT)eLayerType::End> mMatrix[(UINT)eLayerType::End];
-	
+	static UINT64 mCollisionID;
+
 public:
 	struct collisionID
 	{
@@ -27,6 +28,8 @@ public:
 	~CCollisionMgr();
 
 	void Update();
+	void LateUpdate();
+	void DecreaseColliderCount(eLayerType leftLayer, eLayerType rightLayer);
 	void ObjectCollision(eLayerType leftLayer, eLayerType rightLayer);
 	void ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCol);
 	bool Intersect(CCollider2D* leftCol, CCollider2D* rightCol);
@@ -34,5 +37,4 @@ public:
 	void Clear();
 };
 
-
-
+UINT64 CCollisionMgr::mCollisionID = 1;

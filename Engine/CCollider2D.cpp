@@ -5,6 +5,8 @@ CCollider2D::CCollider2D()
     , mTransform(nullptr)
     , mSize(Vector2::One)
     , mCenter(Vector2::Zero)
+    , mIsCollider(false)
+    , mCollideCount(0)
 {
     mColliderNumber++;
     mColliderID = mColliderNumber;
@@ -17,11 +19,18 @@ CCollider2D::~CCollider2D()
 
 void CCollider2D::Initialize()
 {
-    mTransform = GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 }
 
 void CCollider2D::Update()
 {
+    if (mCollideCount == 0)
+    {
+        mIsCollider = false;
+    }
+    else if(mCollideCount > 0)
+    {
+        mIsCollider = true;
+    }
 }
 
 void CCollider2D::LateUpdate()
@@ -33,7 +42,7 @@ void CCollider2D::LateUpdate()
     scale.y *= mSize.y;
 
     Vector3 pos = tr->GetPosition();
-    pos.x += mCenter.x;
+    pos.x += mCenter.x; // offset
     pos.y += mCenter.y;
 
     mPosition = pos;
@@ -42,6 +51,7 @@ void CCollider2D::LateUpdate()
     debugMesh.scale = scale;
     debugMesh.rotation = tr->GetRotation();
     debugMesh.type = eColliderType::Rect;
+    debugMesh.IsCollider = mIsCollider;
     
     CRenderMgr::GetInst()->AddDebugMesh(debugMesh);
 }
@@ -59,7 +69,7 @@ void CCollider2D::SetColPositionOffset(Vector3 offset)
 
 void CCollider2D::OnCollisionEnter(CCollider2D* other)
 {
-    //const std::vector<
+    mCollideCount += 1;
 }
 
 void CCollider2D::OnCollisionStay(CCollider2D* other)
@@ -68,4 +78,5 @@ void CCollider2D::OnCollisionStay(CCollider2D* other)
 
 void CCollider2D::OnCollisionExit(CCollider2D* other)
 {
+    mCollideCount -= 1;
 }

@@ -20,6 +20,11 @@ cbuffer Animator : register(b3)
     uint AnimationType;
 }
 
+cbuffer DebugColor : register(b4)
+{
+    float4 DebugColor;
+}
+
 struct LightAttribute
 {
     float4 color;

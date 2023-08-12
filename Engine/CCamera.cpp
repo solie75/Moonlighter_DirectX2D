@@ -153,7 +153,7 @@ void CCamera::AlphaSortGameObjects()
 bool CompareZSort(CGameObject* a, CGameObject* b)
 {
 	if (a->GetComponent<CTransform>(eComponentType::Transform)->GetPosition().z
-		< b->GetComponent<CTransform>(eComponentType::Transform)->GetPosition().z)
+		<= b->GetComponent<CTransform>(eComponentType::Transform)->GetPosition().z)
 		return false;
 
 	return true;
@@ -167,6 +167,12 @@ void CCamera::ZSortTransparencyGameObjects()
 	std::sort(mTransparentGameObjects.begin()
 		, mTransparentGameObjects.end()
 		, CompareZSort);
+	/*std::sort(mCutOutGameObjects.begin()
+		, mCutOutGameObjects.end()
+		);
+	std::sort(mTransparentGameObjects.begin()
+		, mTransparentGameObjects.end()
+		);*/
 }
 
 void CCamera::EnableDepthStencilState()

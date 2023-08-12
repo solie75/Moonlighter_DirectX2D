@@ -72,7 +72,7 @@ void CRenderMgr::Init()
 	// Load Texture and Mateiral
 	{
 		{ // Debug Mateiral
-			LoadMaterial(debugShader, L"Debug", eRenderingMode::End);
+			LoadMaterial(debugShader, L"Debug", eRenderingMode::CutOut);
 		}
 
 		{ // Test
@@ -401,7 +401,10 @@ void CRenderMgr::Init()
 			LoadTexture(L"Item_Coin", L"..\\Resource\\Texture\\Item\\Item_Coin.png");
 			LoadMaterial(shader, L"Item_Coin", eRenderingMode::CutOut);
 		}
-		{
+		{	// Desert Boss
+			LoadTexture(L"DesertBossBackground", L"..\\Resource\\Texture\\DesertBoss_Background.png");
+			LoadMaterial(shader, L"DesertBossBackground", eRenderingMode::Opaque);
+
 			LoadTexture(L"DesertBossHead", L"..\\Resource\\Texture\\boss3\\Boss3_head_death_1.png");
 			LoadMaterial(shader, L"DesertBossHead", eRenderingMode::CutOut);
 
@@ -416,51 +419,14 @@ void CRenderMgr::Init()
 
 			LoadTexture(L"DesertBossTriangle", L"..\\Resource\\Texture\\boss3\\Boss3_triangle_catapult_1.png");
 			LoadMaterial(shader, L"DesertBossTriangle", eRenderingMode::CutOut);
+
+			LoadTexture(L"DesertBoss_Background", L"..\\Resource\\Texture\\DesertBoss_Background.png");
+			LoadMaterial(shader, L"DesertBoss_Background", eRenderingMode::Opaque);
 		}
 		{ // Atlas
 			// test
 			LoadTexture(L"linkSprites", L"..\\Resource\\Texture\\linkSprites.png");
 			LoadMaterial(aniShader, L"linkSprites", eRenderingMode::CutOut);
-
-			// Will_Idle
-			CreateAtlas(L"Will_Idle_Down", 10);
-			LoadMaterial(aniShader, L"atlas_Will_Idle_Down", eRenderingMode::CutOut);
-
-			CreateAtlas(L"Will_Idle_Left", 10);
-			LoadMaterial(aniShader, L"atlas_Will_Idle_Left", eRenderingMode::CutOut);
-
-			CreateAtlas(L"Will_Idle_Right", 10);
-			LoadMaterial(aniShader, L"atlas_Will_Idle_Right", eRenderingMode::CutOut);
-
-			CreateAtlas(L"Will_Idle_Up", 10);
-			LoadMaterial(aniShader, L"atlas_Will_Idle_Up", eRenderingMode::CutOut);
-
-			// Will Roll
-			CreateAtlas(L"Will_Roll_Down", 8);
-			LoadMaterial(aniShader, L"atlas_Will_Roll_Down", eRenderingMode::CutOut);
-
-			CreateAtlas(L"Will_Roll_Right", 8);
-			LoadMaterial(aniShader, L"atlas_Will_Roll_Right", eRenderingMode::CutOut);
-
-			CreateAtlas(L"Will_Roll_Left", 8);
-			LoadMaterial(aniShader, L"atlas_Will_Roll_Left", eRenderingMode::CutOut);
-
-			CreateAtlas(L"Will_Roll_Up", 8);
-			LoadMaterial(aniShader, L"atlas_Will_Roll_Up", eRenderingMode::CutOut);
-
-			// Will_Work
-
-			CreateAtlas(L"Will_Walk_Down", 8);
-			LoadMaterial(aniShader, L"atlas_Will_Walk_Down", eRenderingMode::CutOut);
-
-			CreateAtlas(L"Will_Walk_Left", 8);
-			LoadMaterial(aniShader, L"atlas_Will_Walk_Left", eRenderingMode::CutOut);
-
-			CreateAtlas(L"Will_Walk_Right", 8);
-			LoadMaterial(aniShader, L"atlas_Will_Walk_Right", eRenderingMode::CutOut);
-
-			CreateAtlas(L"Will_Walk_Up", 8);
-			LoadMaterial(aniShader, L"atlas_Will_Walk_Up", eRenderingMode::CutOut);
 
 			// Will Attack
 			CreateAtlas(L"Will_BigSwordCombo_Down", 40);
@@ -468,6 +434,7 @@ void CRenderMgr::Init()
 
 			CreateAtlas(L"will_bow_secondary_animation_right", 27);
 			LoadMaterial(aniShader, L"atlas_will_bow_secondary_animation_right", eRenderingMode::CutOut);
+
 		}
 	}
 	// Create Scene
@@ -607,6 +574,14 @@ void CRenderMgr::SetUpState()
 
 	CDevice::GetInst()->GetDevice()->CreateDepthStencilState(&depthStencilDesc
 		, depthStencilStates[(UINT)eDSType::Less].GetAddressOf());
+
+	depthStencilDesc.DepthEnable = true;
+	depthStencilDesc.DepthFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_LESS_EQUAL;
+	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+	depthStencilDesc.StencilEnable = false;
+
+	CDevice::GetInst()->GetDevice()->CreateDepthStencilState(&depthStencilDesc
+		, depthStencilStates[(UINT)eDSType::LessEqual].GetAddressOf());
 
 	//Greater
 	depthStencilDesc.DepthEnable = true;

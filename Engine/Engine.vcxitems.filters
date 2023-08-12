@@ -154,8 +154,20 @@
     <Filter Include="GameObject\Object\Monster\Boss\DesertBoss">
       <UniqueIdentifier>{c684a5ed-c337-4c24-95d8-16ac64fed7d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Component\Script\DesertBossScript">
+    <Filter Include="GameObject\Object\Projectile">
+      <UniqueIdentifier>{3e31464d-a730-479d-bb60-e0f277a64119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Script\DesertBoss">
+      <UniqueIdentifier>{d63d3d13-54eb-4851-9286-f4f3f895731c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Script\DesertBoss\DesertBossCircleScript">
+      <UniqueIdentifier>{c12d6aab-d7f8-402d-a988-9830d33fde05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Script\DesertBoss\DesertBossScript">
       <UniqueIdentifier>{0603e85f-15ba-45c5-8997-7b2a615c4c83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Script\DesertBoss\DesertBossRhombusScript">
+      <UniqueIdentifier>{dc49d043-9ab7-478d-a685-e48f74926139}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -316,7 +328,16 @@
       <Filter>GameObject\Object\Monster\Boss\DesertBoss</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossScript.h">
-      <Filter>GameObject\Component\Script\DesertBossScript</Filter>
+      <Filter>GameObject\Component\Script\DesertBoss\DesertBossScript</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossCircleScript.h">
+      <Filter>GameObject\Component\Script\DesertBoss\DesertBossCircleScript</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CFireBall.h">
+      <Filter>GameObject\Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossRhombusScript.h">
+      <Filter>GameObject\Component\Script\DesertBoss\DesertBossRhombusScript</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -462,7 +483,16 @@
       <Filter>GameObject\Object\Monster\Boss\DesertBoss</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBossScript.cpp">
-      <Filter>GameObject\Component\Script\DesertBossScript</Filter>
+      <Filter>GameObject\Component\Script\DesertBoss\DesertBossScript</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBossCircleScript.cpp">
+      <Filter>GameObject\Component\Script\DesertBoss\DesertBossCircleScript</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CFireBall.cpp">
+      <Filter>GameObject\Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBossRhombusScript.cpp">
+      <Filter>GameObject\Component\Script\DesertBoss\DesertBossRhombusScript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

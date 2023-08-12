@@ -1,4 +1,5 @@
 #include "CEditor.h"
+#include "CCollider2D.h"
 
 std::vector<CDebugObject*> CEditor::mDebugObjects = {};
 
@@ -65,15 +66,36 @@ void CEditor::DebugRender(const DebugMesh& mesh)
 
 	CTransform* tr = debugObj->GetComponent<CTransform>(eComponentType::Transform);
 	// 이러면 mDebugObjects[ColliderType::Rect]의 Transform이 바뀌에 되지 않나?
+	//CCollider2D* cd2D = debugObj->GetComponent<CCollider2D>(eComponentType::Collider2D);
 
 	Vector3 pos = mesh.position;
 	pos.z -= 0.0001f;// 1.0002f
+
 
 	tr->SetPosition(pos);
 	tr->SetScale(mesh.scale);
 	tr->SetRotation(mesh.rotation);
 
 	tr->LateUpdate(); // 월드 변환 완성
+
+	if (mesh.IsCollider == true)
+	{
+		DebugColorCB cb;
+		cb.DebugColor = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+		CConstantBuffer* colliderCB = new CConstantBuffer;
+		colliderCB->InitConstantBuffer(sizeof(DebugColorCB), eCBType::DebugColor, &cb);
+		CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, colliderCB);
+		CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::PS, colliderCB);
+	}
+	else
+	{
+		DebugColorCB cb;
+		cb.DebugColor = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+		CConstantBuffer* colliderCB = new CConstantBuffer;
+		colliderCB->InitConstantBuffer(sizeof(DebugColorCB), eCBType::DebugColor, &cb);
+		CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, colliderCB);
+		CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::PS, colliderCB);
+	}
 
 	// debugObj 가 렌더링 되기 전에 그에 대한 viewMatrix 와 projection matrix 의 기준은 maincamera 여야 한다.
 	CCamera* mainCamera = CCameraMgr::GetInst()->GetMainCamera();

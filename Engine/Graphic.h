@@ -14,6 +14,7 @@
 //#define CBSLOT_PARTICLE		1
 #define CBSLOT_GRID		2
 #define CBSLOT_ANIMATION2D		3
+#define CBSLOT_DEBUGCOLOR		4
 
 enum class eShaderStage
 {
@@ -32,6 +33,7 @@ enum class eCBType
 	Particle,
 	Grid,
 	Animator,
+	DebugColor,
 	End,
 };
 
@@ -54,6 +56,7 @@ enum class eRSType
 enum class eDSType
 {
 	Less, // turn on writes + 기존의 깊이값 보다 현재 정점의 깊이 값이 더 카메라와 가까이 있을 때 깊이 값을 갱신한다.
+	LessEqual, // 기존의 깊이 값보다 현재 정점의 깊이 값이 같거나 가까이 있을 때 깊이 값을 갱신
 	Greater, //  turn on writes + 기존의 깊이 값 보다 현재 정점의 깊이 값이 더 카메라와 멀리 있을 때 깊이 값을 갱신한다.
 	NoWrite, // turn off writes + 기존 보다 카메라에 가까울 떄 깊이값 갱신
 	None, // turn off writes + 기존 보다 카메라에 멀때 깊이 값 갱신
@@ -112,7 +115,11 @@ struct DebugMesh
 	float radius;
 	float duration;
 	float time;
+
+	bool IsCollider; // true: 충돌 상태, false: 충돌 상태 아님
 };
+
+
 
 CBUFFER(TransformCB, CBSLOT_TRANSFORM)
 {
@@ -140,4 +147,9 @@ CBUFFER(AnimatorCB, CBSLOT_ANIMATION2D)
 
 	//UINT printSpriteIndex;
 	UINT AnimationType;
+};
+
+CBUFFER(DebugColorCB, CBSLOT_DEBUGCOLOR)
+{
+	Vector4 DebugColor;
 };

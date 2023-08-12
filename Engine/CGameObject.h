@@ -29,8 +29,9 @@ public:
     virtual void Render();
 
 
-    void Destroy() { mState = eObjectState::Dead; }
+    //void Destroy() { mState = eObjectState::Dead; }
     eObjectState GetState() { return mState; }
+    void SetState(eObjectState state) { mState = state; }
     CGameObject* GetParentObject() { return mParentObject; }
     void SetParentObject(CGameObject* pObj) { mParentObject = pObj; }
 
