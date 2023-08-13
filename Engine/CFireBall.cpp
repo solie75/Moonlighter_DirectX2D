@@ -37,7 +37,6 @@ void CFireBall::Update()
 			// 충돌 상태여서 PlayAnimation 이 계속 호출됨 -> 애니메이션의 첫번째 프레임만 계속 보임
 		}
 	}
-	
 	CGameObject::Update();
 }
 

@@ -17,6 +17,7 @@ CDesertBossScript::~CDesertBossScript()
 void CDesertBossScript::Initialize()
 {
 	CScript::Initialize();
+	mAimAngle = 180.f;
 }
 
 void CDesertBossScript::Update()
