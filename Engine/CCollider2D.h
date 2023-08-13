@@ -39,11 +39,6 @@ public:
     CConstantBuffer* GetColliderCB() { return mColliderCB; }
     bool GetIsCollider() { return mIsCollider; }
     std::vector<UINT> GetCollisionIDs() { return vCollisionIDs; }
-    void EraseCollisionID(UINT id)
-    {
-        std::vector<UINT>::iterator EraseIter = std::remove(vCollisionIDs.begin(), vCollisionIDs.end(), id);
-        vCollisionIDs.erase(EraseIter, vCollisionIDs.end());
-    }
 
     void OnCollisionEnter(CCollider2D* other);
     void OnCollisionStay(CCollider2D* other);

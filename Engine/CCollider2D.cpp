@@ -87,5 +87,6 @@ void CCollider2D::OnCollisionStay(CCollider2D* other)
 
 void CCollider2D::OnCollisionExit(CCollider2D* other)
 {
-    //MinusColliderNum();
+    std::vector<UINT>::iterator EraseIter = std::remove(vCollisionIDs.begin(), vCollisionIDs.end(), other->GetColliderID());
+    vCollisionIDs.erase(EraseIter, vCollisionIDs.end());
 }

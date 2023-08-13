@@ -57,17 +57,18 @@ void CCollisionMgr::DecreaseDeadObject(eLayerType leftLayer, eLayerType rightLay
 			{
 				if (leftObj->GetState() == CGameObject::eObjectState::Dead)
 				{
-					rightCol->EraseCollisionID(leftCol->GetColliderID());
-
+					rightCol->OnCollisionExit(leftCol);
 				}
 				if (rightObj->GetState() == CGameObject::eObjectState::Dead)
 				{
-					leftCol->EraseCollisionID(rightCol->GetColliderID());
+					leftCol->OnCollisionExit(rightCol);
 				}
 			}
 		}
 	}
 }
+
+
 
 void CCollisionMgr::ObjectCollision(eLayerType leftLayer, eLayerType rightLayer)
 {
@@ -143,8 +144,8 @@ void CCollisionMgr::ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCo
 		}
 
 		// 충돌하지 않은 상태인데 충돌 목록에 있는 경우 서로의 목록에서 삭제한다.
-		leftCol->EraseCollisionID(rightCol->GetColliderID());
-		rightCol->EraseCollisionID(leftCol->GetColliderID());
+		leftCol->OnCollisionExit(rightCol);
+		rightCol->OnCollisionExit(leftCol);
 	}
 }
 
