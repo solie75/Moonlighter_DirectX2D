@@ -29,7 +29,7 @@ public:
 
 	void Update();
 	void LateUpdate();
-	void DecreaseColliderCount(eLayerType leftLayer, eLayerType rightLayer);
+	void DecreaseDeadObject(eLayerType leftLayer, eLayerType rightLayer);
 	void ObjectCollision(eLayerType leftLayer, eLayerType rightLayer);
 	void ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCol);
 	bool Intersect(CCollider2D* leftCol, CCollider2D* rightCol);

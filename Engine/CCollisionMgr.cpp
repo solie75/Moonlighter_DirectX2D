@@ -32,13 +32,13 @@ void CCollisionMgr::LateUpdate()
 		{
 			if (mMatrix[column][row] == true)
 			{
-				DecreaseColliderCount((eLayerType)column, (eLayerType)row);
+				DecreaseDeadObject((eLayerType)column, (eLayerType)row);
 			}
 		}
 	}
 }
 
-void CCollisionMgr::DecreaseColliderCount(eLayerType leftLayer, eLayerType rightLayer)
+void CCollisionMgr::DecreaseDeadObject(eLayerType leftLayer, eLayerType rightLayer)
 {
 	const std::vector<CGameObject*>& lefts
 		= CSceneMgr::GetInst()->GetActiveScene()->GetLayer(leftLayer).GetGameObjects();
@@ -55,11 +55,14 @@ void CCollisionMgr::DecreaseColliderCount(eLayerType leftLayer, eLayerType right
 
 			if (leftCol != nullptr && rightCol != nullptr)
 			{
-				if (leftObj->GetState() == CGameObject::eObjectState::Dead || rightObj->GetState() == CGameObject::eObjectState::Dead)
-					// 두 객체중 하나만  Dead 여도 두 Collider2d 의 충돌 카운트를 1만큼 감산한다.
+				if (leftObj->GetState() == CGameObject::eObjectState::Dead)
 				{
-					leftCol->MinusColliderNum();
-					rightCol->MinusColliderNum();
+					rightCol->EraseCollisionID(leftCol->GetColliderID());
+
+				}
+				if (rightObj->GetState() == CGameObject::eObjectState::Dead)
+				{
+					leftCol->EraseCollisionID(rightCol->GetColliderID());
 				}
 			}
 		}
@@ -103,63 +106,45 @@ void CCollisionMgr::ObjectCollision(eLayerType leftLayer, eLayerType rightLayer)
 
 void CCollisionMgr::ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCol)
 {
-	bool b = Intersect(leftCol, rightCol);
+	std::vector<UINT> rightCollisionIDs = rightCol->GetCollisionIDs();
+	std::vector<UINT> leftCollisionIDs = leftCol->GetCollisionIDs();
+
 	if (Intersect(leftCol, rightCol)) // 현재 충돌 중이면 true 를 충돌 중이 아니면 false 를
 	{
-
-		if (leftCol->GetIsCollider() == false) // 전에 충돌상태가 아니었다.
+		if (leftCollisionIDs.end() == std::find(leftCollisionIDs.begin(), leftCollisionIDs.end(), rightCol->GetColliderID()))
+			// 두 충돌체의 서로 충돌 목록에 데이터가 없는 경우
 		{
-			leftCol->OnCollisionEnter(rightCol); // 현재 tick 에서 충돌 발생
+			leftCol->OnCollisionEnter(rightCol); // 충돌 목록에 추가
 		}
-		else // 전에 충돌상태였다.
+		else // 두 충돌체의 서로 충돌 목록에 데이터가 있는 경우
 		{
 			leftCol->OnCollisionStay(rightCol); // 전에 이어 계속 충돌 상태이다.
 		}
-
-		if (rightCol->GetIsCollider() == false) // 전에 충돌상태가 아니었다.
+		if (rightCollisionIDs.end() == std::find(rightCollisionIDs.begin(), rightCollisionIDs.end(), leftCol->GetColliderID()))
+			// 두 충돌체의 서로 충돌 목록에 데이터가 없는 경우
 		{
-			rightCol->OnCollisionEnter(leftCol); // 현재 tick 에서 충돌 발생
+			rightCol->OnCollisionEnter(leftCol); // 충돌 목록에 추가
 		}
-		else // 전에 충돌상태였다.
+		else // 두 충돌체의 서로 충돌 목록에 데이터가 있는 경우
 		{
 			rightCol->OnCollisionStay(leftCol); // 전에 이어 계속 충돌 상태이다.
 		}
 	}
-	else
+	else // 현재 충돌중이 아니다.
 	{
-		auto rightCollisionIDs = rightCol->GetCollisionIDs();
-		auto leftCollisionIDs = leftCol->GetCollisionIDs();
-		if (leftCol->GetIsCollider() == true)
+		// 두 충돌체의 충돌 목록에 서로가 없는경우
+		if (leftCollisionIDs.end() == std::find(leftCollisionIDs.begin(), leftCollisionIDs.end(), rightCol->GetColliderID()))
 		{
-			if (leftCollisionIDs.end() == std::find(leftCollisionIDs.begin(), leftCollisionIDs.end(), rightCol->GetColliderID()))
-				// 현재 rightCol 이 leftCol 과 충돌 하지 않았던 경우
-			{
-				return;
-			}
-			else
-				// rightCol 이 leftCol 과 충돌 했던 경우
-			{
-				std::vector<UINT>::iterator EraseIter = std::remove(leftCollisionIDs.begin(), leftCollisionIDs.end(), rightCol->GetColliderID());
-				leftCollisionIDs.erase(EraseIter, leftCollisionIDs.end());
-				leftCol->OnCollisionExit(rightCol);
-			}
+			return;
 		}
-		if (rightCol->GetIsCollider() == true)
+		if (rightCollisionIDs.end() == std::find(rightCollisionIDs.begin(), rightCollisionIDs.end(), leftCol->GetColliderID()))
 		{
+			return;
+		}
 
-			if (rightCollisionIDs.end() == std::find(rightCollisionIDs.begin(), rightCollisionIDs.end(), leftCol->GetColliderID()))
-			// 현재 leftCol 이 rightCol 과 충돌 하지 않았던 경우
-			{
-				return;
-			}
-			else
-			// leftCol 이 rightCol 과 충돌 했던 경우
-			{
-				std::vector<UINT>::iterator EraseIter = std::remove(rightCollisionIDs.begin(), rightCollisionIDs.end(), leftCol->GetColliderID());
-				rightCollisionIDs.erase(EraseIter, rightCollisionIDs.end());
-				rightCol->OnCollisionExit(leftCol);
-			}
-		}
+		// 충돌하지 않은 상태인데 충돌 목록에 있는 경우 서로의 목록에서 삭제한다.
+		leftCol->EraseCollisionID(rightCol->GetColliderID());
+		rightCol->EraseCollisionID(leftCol->GetColliderID());
 	}
 }
 
@@ -169,7 +154,6 @@ bool CCollisionMgr::Intersect(CCollider2D* leftCol, CCollider2D* rightCol)
 	// 0 --- 1
 	// |     |
 	// 3 --- 2
-	//return false;
 	Vector3 arrLocalPos[4] =
 	{
 		Vector3(-0.5f, 0.5f, 0.0f),
@@ -271,6 +255,5 @@ void CCollisionMgr::SetCollideLayer(eLayerType leftLayer, eLayerType rightLayer,
 void CCollisionMgr::Clear()
 {
 	mMatrix->reset();
-	//mCollisionMap.clear();
 }
 

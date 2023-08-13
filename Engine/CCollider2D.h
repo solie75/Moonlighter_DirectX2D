@@ -8,7 +8,7 @@ class CCollider2D :
 {
 private:
     static UINT mColliderNumber;
-    vector<UINT> vCollisionIDs; // 충돌한 타 충돌체의 ID 모음
+    std::vector<UINT> vCollisionIDs; // 충돌한 타 충돌체의 ID 모음
     UINT mColliderID;
     eColliderType mType;
 
@@ -21,7 +21,6 @@ private:
     CConstantBuffer* mColliderCB;
     
     bool mIsCollider;
-    int mCollideCount; // 충돌 중첩 횟수
 public:
     CCollider2D();
     ~CCollider2D();
@@ -39,8 +38,12 @@ public:
     void SetColPositionOffset(Vector3 offset);
     CConstantBuffer* GetColliderCB() { return mColliderCB; }
     bool GetIsCollider() { return mIsCollider; }
-    void MinusColliderNum() { mCollideCount--; }
-    vector<UINT> GetCollisionIDs() { return vCollisionIDs; }
+    std::vector<UINT> GetCollisionIDs() { return vCollisionIDs; }
+    void EraseCollisionID(UINT id)
+    {
+        std::vector<UINT>::iterator EraseIter = std::remove(vCollisionIDs.begin(), vCollisionIDs.end(), id);
+        vCollisionIDs.erase(EraseIter, vCollisionIDs.end());
+    }
 
     void OnCollisionEnter(CCollider2D* other);
     void OnCollisionStay(CCollider2D* other);

@@ -6,7 +6,7 @@ CCollider2D::CCollider2D()
     , mSize(Vector2::One)
     , mCenter(Vector2::Zero)
     , mIsCollider(false)
-    , mCollideCount(0)
+    //, mCollideCount(0)
 {
     mColliderNumber++;
     mColliderID = mColliderNumber;
@@ -23,11 +23,19 @@ void CCollider2D::Initialize()
 
 void CCollider2D::Update()
 {
-    if (mCollideCount == 0)
+    /*if (mCollideCount == 0)
     {
         mIsCollider = false;
     }
     else if(mCollideCount > 0)
+    {
+        mIsCollider = true;
+    }*/
+    if (vCollisionIDs.size() == 0)
+    {
+        mIsCollider = false;
+    }
+    else if (vCollisionIDs.size() > 0)
     {
         mIsCollider = true;
     }
@@ -69,8 +77,8 @@ void CCollider2D::SetColPositionOffset(Vector3 offset)
 
 void CCollider2D::OnCollisionEnter(CCollider2D* other)
 {
-    mCollideCount += 1;
-    vCollisionIDs.push_back(other->GetColliderID());
+    //mCollideCount += 1;
+    vCollisionIDs.push_back(other->GetColliderID()); // 이미 존재하는 경우 추가 하지 않는다. 이게 가능한가? 이미 존재하는 데 또 OnCollisionEnter 가 될 수 있나?
 }
 
 void CCollider2D::OnCollisionStay(CCollider2D* other)
@@ -79,5 +87,5 @@ void CCollider2D::OnCollisionStay(CCollider2D* other)
 
 void CCollider2D::OnCollisionExit(CCollider2D* other)
 {
-    MinusColliderNum();
+    //MinusColliderNum();
 }
