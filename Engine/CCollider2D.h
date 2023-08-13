@@ -8,6 +8,7 @@ class CCollider2D :
 {
 private:
     static UINT mColliderNumber;
+    vector<UINT> vCollisionIDs; // 충돌한 타 충돌체의 ID 모음
     UINT mColliderID;
     eColliderType mType;
 
@@ -39,6 +40,7 @@ public:
     CConstantBuffer* GetColliderCB() { return mColliderCB; }
     bool GetIsCollider() { return mIsCollider; }
     void MinusColliderNum() { mCollideCount--; }
+    vector<UINT> GetCollisionIDs() { return vCollisionIDs; }
 
     void OnCollisionEnter(CCollider2D* other);
     void OnCollisionStay(CCollider2D* other);

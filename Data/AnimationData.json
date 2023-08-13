@@ -117,7 +117,44 @@
             "spriteNumber": [3],
             "renderingMode": [1],
             "size": [28, 28]
-            }
+        }
+    ],
+
+    "Boss3":
+    [
+        {
+            "id": 15,
+            "name": "Boss3_Head_Down",
+            "objectName": "Boss3_Head",
+            "spriteNumber": [1],
+            "renderingMode": [1],
+            "size": [256, 256]
+        },
+        {
+            "id": 16,
+            "name": "Boss3_Head_Left",
+            "objectName": "Boss3_Head",
+            "spriteNumber": [1],
+            "renderingMode": [1],
+            "size": [256, 256]
+        },
+        {
+            "id": 17,
+            "name": "Boss3_Head_Right",
+            "objectName": "Boss3_Head",
+            "spriteNumber": [1],
+            "renderingMode": [1],
+            "size": [256, 256]
+        },
+        {
+            "id": 18,
+            "name": "Boss3_Head_Up",
+            "objectName": "Boss3_Head",
+            "spriteNumber": [1],
+            "renderingMode": [1],
+            "size": [256, 256]
+        }
+
     ],
 
     "__commnet(RenderingMode's num)" :

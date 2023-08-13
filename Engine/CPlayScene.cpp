@@ -77,15 +77,15 @@ void CPlayScene::Initialize()
 	uiCamComp->TurnLayerMask(eLayerType::Background, false);
 	uiCamComp->TurnLayerMask(eLayerType::Projectile, false);
 
-	// playerdsd
+	// player
 	CPlayer* Will = new CPlayer();
 	AddGameObject(eLayerType::Player, Will, L"Will", Vector3(3.0f, 0.0f, 1.0002f)
 		, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down", true);
 
 	// Boss Monster
 	CMonster* DesertBossHead = new CMonster();
-	AddGameObject(eLayerType::Monster, DesertBossHead, L"DesertBossHead", Vector3(0.0f, 0.0f, 1.0004f)
-		, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"mt_DesertBossHead", false);
+	AddGameObject(eLayerType::Monster, DesertBossHead, L"Boss3_Head", Vector3(0.0f, 0.0f, 1.0004f)
+		, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"mt_Boss3_Head_Down", false);
 	CDesertBossScript* DesertBossScript = DesertBossHead->AddComponent<CDesertBossScript>();
 	cd = DesertBossHead->AddComponent<CCollider2D>();
 

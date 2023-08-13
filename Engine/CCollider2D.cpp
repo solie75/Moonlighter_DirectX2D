@@ -70,6 +70,7 @@ void CCollider2D::SetColPositionOffset(Vector3 offset)
 void CCollider2D::OnCollisionEnter(CCollider2D* other)
 {
     mCollideCount += 1;
+    vCollisionIDs.push_back(other->GetColliderID());
 }
 
 void CCollider2D::OnCollisionStay(CCollider2D* other)
@@ -78,5 +79,5 @@ void CCollider2D::OnCollisionStay(CCollider2D* other)
 
 void CCollider2D::OnCollisionExit(CCollider2D* other)
 {
-    mCollideCount -= 1;
+    MinusColliderNum();
 }

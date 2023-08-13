@@ -405,8 +405,18 @@ void CRenderMgr::Init()
 			LoadTexture(L"DesertBossBackground", L"..\\Resource\\Texture\\DesertBoss_Background.png");
 			LoadMaterial(shader, L"DesertBossBackground", eRenderingMode::Opaque);
 
-			LoadTexture(L"DesertBossHead", L"..\\Resource\\Texture\\boss3\\Boss3_head_death_1.png");
-			LoadMaterial(shader, L"DesertBossHead", eRenderingMode::CutOut);
+			// Boss Head
+			LoadTexture(L"Boss3_Head_Down", L"..\\Resource\\Texture\\boss3\\Boss3_Head_Down.png");
+			LoadMaterial(shader, L"Boss3_Head_Down", eRenderingMode::CutOut);
+
+			LoadTexture(L"Boss3_Head_Left", L"..\\Resource\\Texture\\boss3\\Boss3_Head_Left.png");
+			LoadMaterial(shader, L"Boss3_Head_Left", eRenderingMode::CutOut);
+
+			LoadTexture(L"Boss3_Head_Right", L"..\\Resource\\Texture\\boss3\\Boss3_Head_Right.png");
+			LoadMaterial(shader, L"Boss3_Head_Right", eRenderingMode::CutOut);
+
+			LoadTexture(L"Boss3_Head_Up", L"..\\Resource\\Texture\\boss3\\Boss3_Head_Up.png");
+			LoadMaterial(shader, L"Boss3_Head_Up", eRenderingMode::CutOut);
 
 			LoadTexture(L"DesertBossCircle", L"..\\Resource\\Texture\\boss3\\Boss3_circle_attack_1.png");
 			LoadMaterial(shader, L"DesertBossCircle", eRenderingMode::CutOut);

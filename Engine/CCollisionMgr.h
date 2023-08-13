@@ -8,13 +8,13 @@ class CCollisionMgr
 	: public CSingleton<CCollisionMgr>
 {
 private:
-	std::map<UINT64, bool> mCollisionMap;
+	//std::map<UINT64, bool> mCollisionMap;
 	// 배열 mMatrix 는 eLayerType::End 개의 요소를 가지며 각 요소는 10개의 비트를 가진 bitset이다.
 	std::bitset <(UINT)eLayerType::End> mMatrix[(UINT)eLayerType::End];
-	static UINT64 mCollisionID;
+	//UINT64 mCollisionID;
 
 public:
-	struct collisionID
+	/*struct collisionID
 	{
 		struct
 		{
@@ -22,7 +22,7 @@ public:
 			UINT Right;
 		};
 		UINT64 CollisionId;
-	};
+	};*/
 
 	CCollisionMgr();
 	~CCollisionMgr();
@@ -37,4 +37,4 @@ public:
 	void Clear();
 };
 
-UINT64 CCollisionMgr::mCollisionID = 1;
+//UINT64 CCollisionMgr::mCollisionID = 0;

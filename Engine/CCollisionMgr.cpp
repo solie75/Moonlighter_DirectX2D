@@ -87,27 +87,12 @@ void CCollisionMgr::ObjectCollision(eLayerType leftLayer, eLayerType rightLayer)
 		{
 			CCollider2D* rightCol = rightObj->GetComponent<CCollider2D>(eComponentType::Collider2D);
 
-			/*if (leftCol == nullptr || leftObj->GetState() != CGameObject::eObjectState::Active)
-			{
-				if (leftObj->GetState() == CGameObject::eObjectState::Dead)
-				{
-					leftCol->MinusColliderNum();
-					rightCol->MinusColliderNum();
-				}
-				continue;
-			}*/
-
-			/*if (leftObj == rightObj)
+			if (leftObj == rightObj)
 			{
 				continue;
-			}*/
+			}
 			if (rightCol == nullptr || rightObj->GetState() != CGameObject::eObjectState::Active)
 			{
-				/*if (rightObj->GetState() == CGameObject::eObjectState::Dead)
-				{
-					leftCol->MinusColliderNum();
-					rightCol->MinusColliderNum();
-				}*/
 				continue;
 			}
 
@@ -118,44 +103,62 @@ void CCollisionMgr::ObjectCollision(eLayerType leftLayer, eLayerType rightLayer)
 
 void CCollisionMgr::ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCol)
 {
-	collisionID colID = {};
-	colID.Left = leftCol->GetColliderID();
-	colID.Right = rightCol->GetColliderID();
-
-	// 충돌 정보
-	std::map<UINT64, bool>::iterator iter = mCollisionMap.find(colID.CollisionId);
-	if (iter == mCollisionMap.end())
-	{
-		colID.CollisionId = mCollisionID;
-		mCollisionMap.insert(std::make_pair(colID.CollisionId, false));
-		iter = mCollisionMap.find(colID.CollisionId);
-		mCollisionID++;
-	}
 	bool b = Intersect(leftCol, rightCol);
-	if (Intersect(leftCol, rightCol)) // 현재 충돌 중이면 ture 를 충돌 중이 아니면 false 를
+	if (Intersect(leftCol, rightCol)) // 현재 충돌 중이면 true 를 충돌 중이 아니면 false 를
 	{
-		// 충돌
-		if (iter->second == false)
+
+		if (leftCol->GetIsCollider() == false) // 전에 충돌상태가 아니었다.
 		{
-			// 최초 충돌
-			leftCol->OnCollisionEnter(rightCol);
-			rightCol->OnCollisionEnter(leftCol);
-			iter->second = true;
+			leftCol->OnCollisionEnter(rightCol); // 현재 tick 에서 충돌 발생
 		}
-		else
+		else // 전에 충돌상태였다.
 		{
-			// 충돌 중
-			leftCol->OnCollisionStay(rightCol);
-			rightCol->OnCollisionStay(leftCol);
+			leftCol->OnCollisionStay(rightCol); // 전에 이어 계속 충돌 상태이다.
+		}
+
+		if (rightCol->GetIsCollider() == false) // 전에 충돌상태가 아니었다.
+		{
+			rightCol->OnCollisionEnter(leftCol); // 현재 tick 에서 충돌 발생
+		}
+		else // 전에 충돌상태였다.
+		{
+			rightCol->OnCollisionStay(leftCol); // 전에 이어 계속 충돌 상태이다.
 		}
 	}
 	else
 	{
-		if (iter->second == true) // 원래 충돌 상태였다가 현재 충돌 상태가 아니게 된 경우
+		auto rightCollisionIDs = rightCol->GetCollisionIDs();
+		auto leftCollisionIDs = leftCol->GetCollisionIDs();
+		if (leftCol->GetIsCollider() == true)
 		{
-			leftCol->OnCollisionExit(rightCol);
-			rightCol->OnCollisionExit(leftCol);
-			iter->second = false;
+			if (leftCollisionIDs.end() == std::find(leftCollisionIDs.begin(), leftCollisionIDs.end(), rightCol->GetColliderID()))
+				// 현재 rightCol 이 leftCol 과 충돌 하지 않았던 경우
+			{
+				return;
+			}
+			else
+				// rightCol 이 leftCol 과 충돌 했던 경우
+			{
+				std::vector<UINT>::iterator EraseIter = std::remove(leftCollisionIDs.begin(), leftCollisionIDs.end(), rightCol->GetColliderID());
+				leftCollisionIDs.erase(EraseIter, leftCollisionIDs.end());
+				leftCol->OnCollisionExit(rightCol);
+			}
+		}
+		if (rightCol->GetIsCollider() == true)
+		{
+
+			if (rightCollisionIDs.end() == std::find(rightCollisionIDs.begin(), rightCollisionIDs.end(), leftCol->GetColliderID()))
+			// 현재 leftCol 이 rightCol 과 충돌 하지 않았던 경우
+			{
+				return;
+			}
+			else
+			// leftCol 이 rightCol 과 충돌 했던 경우
+			{
+				std::vector<UINT>::iterator EraseIter = std::remove(rightCollisionIDs.begin(), rightCollisionIDs.end(), leftCol->GetColliderID());
+				rightCollisionIDs.erase(EraseIter, rightCollisionIDs.end());
+				rightCol->OnCollisionExit(leftCol);
+			}
 		}
 	}
 }
@@ -268,6 +271,6 @@ void CCollisionMgr::SetCollideLayer(eLayerType leftLayer, eLayerType rightLayer,
 void CCollisionMgr::Clear()
 {
 	mMatrix->reset();
-	mCollisionMap.clear();
+	//mCollisionMap.clear();
 }
 
