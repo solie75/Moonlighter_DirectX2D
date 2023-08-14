@@ -12,8 +12,7 @@ class CDesertBossScript :
 private:
 	std::vector<CFireBall*> projectiles;
 	Vector2 AimDirection;
-	CState mCurState;
-	CState mPrevState;
+	CState mState;
 	CAimSight mAimSight; // AimAngle 에 따라서 상하좌우 로 나눈다.
 	Vector2 mAimNormal; // 객체가 바라보는 방향 벡터
 	float mAimAngle; // 객체가 바라보는 방향을 360 로 나눈다.

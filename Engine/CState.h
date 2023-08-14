@@ -5,6 +5,7 @@ enum class eState
     Idle,
     Attack,
     Hit,
+	Collide,
     Roll,
     Walk,
     End,

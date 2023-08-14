@@ -107,45 +107,45 @@ void CCollisionMgr::ObjectCollision(eLayerType leftLayer, eLayerType rightLayer)
 
 void CCollisionMgr::ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCol)
 {
-	std::vector<UINT> rightCollisionIDs = rightCol->GetCollisionIDs();
-	std::vector<UINT> leftCollisionIDs = leftCol->GetCollisionIDs();
+	if (Intersect(leftCol, rightCol))
+	{ // 두 충돌 체가 충돌한 경우
+		if (leftCol->FindColliderID(rightCol->GetColliderID()) == true) // 이미 leftCol 에 RightCol 의 정보가 존재한다면
+		{
+			leftCol->OnCollisionStay(rightCol);
+		}
+		else // leftCol 에 rightCol 의 정보가 없다면
+		{
+			leftCol->OnCollisionEnter(rightCol);
+		}
 
-	if (Intersect(leftCol, rightCol)) // 현재 충돌 중이면 true 를 충돌 중이 아니면 false 를
-	{
-		if (leftCollisionIDs.end() == std::find(leftCollisionIDs.begin(), leftCollisionIDs.end(), rightCol->GetColliderID()))
-			// 두 충돌체의 서로 충돌 목록에 데이터가 없는 경우
+		if (rightCol->FindColliderID(leftCol->GetColliderID()) == true) // 이미 RightCol 에 leftCol 의 정보가 존재한다면
 		{
-			leftCol->OnCollisionEnter(rightCol); // 충돌 목록에 추가
+			rightCol->OnCollisionStay(leftCol);
 		}
-		else // 두 충돌체의 서로 충돌 목록에 데이터가 있는 경우
+		else // rightCol 에 leftCol 의 정보가 없다면
 		{
-			leftCol->OnCollisionStay(rightCol); // 전에 이어 계속 충돌 상태이다.
-		}
-		if (rightCollisionIDs.end() == std::find(rightCollisionIDs.begin(), rightCollisionIDs.end(), leftCol->GetColliderID()))
-			// 두 충돌체의 서로 충돌 목록에 데이터가 없는 경우
-		{
-			rightCol->OnCollisionEnter(leftCol); // 충돌 목록에 추가
-		}
-		else // 두 충돌체의 서로 충돌 목록에 데이터가 있는 경우
-		{
-			rightCol->OnCollisionStay(leftCol); // 전에 이어 계속 충돌 상태이다.
+			rightCol->OnCollisionEnter(leftCol);
 		}
 	}
-	else // 현재 충돌중이 아니다.
-	{
-		// 두 충돌체의 충돌 목록에 서로가 없는경우
-		if (leftCollisionIDs.end() == std::find(leftCollisionIDs.begin(), leftCollisionIDs.end(), rightCol->GetColliderID()))
+	else
+	{ // 현재 충돌 중이 아닌 경우
+		if (leftCol->FindColliderID(rightCol->GetColliderID()) == true)
 		{
-			return;
+			leftCol->OnCollisionExit(rightCol);
 		}
-		if (rightCollisionIDs.end() == std::find(rightCollisionIDs.begin(), rightCollisionIDs.end(), leftCol->GetColliderID()))
+		else
 		{
 			return;
 		}
 
-		// 충돌하지 않은 상태인데 충돌 목록에 있는 경우 서로의 목록에서 삭제한다.
-		leftCol->OnCollisionExit(rightCol);
-		rightCol->OnCollisionExit(leftCol);
+		if (rightCol->FindColliderID(leftCol->GetColliderID()) == true)
+		{
+			rightCol->OnCollisionExit(leftCol);
+		}
+		else
+		{
+			return;
+		}
 	}
 }
 

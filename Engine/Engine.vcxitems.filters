@@ -151,9 +151,6 @@
     <Filter Include="GameObject\Object\Monster\Boss">
       <UniqueIdentifier>{29a66fa8-3e7f-4c5c-b57b-8826ab554c00}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Object\Monster\Boss\DesertBoss">
-      <UniqueIdentifier>{c684a5ed-c337-4c24-95d8-16ac64fed7d4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Object\Projectile">
       <UniqueIdentifier>{3e31464d-a730-479d-bb60-e0f277a64119}</UniqueIdentifier>
     </Filter>
@@ -168,6 +165,9 @@
     </Filter>
     <Filter Include="GameObject\Component\Script\DesertBoss\DesertBossRhombusScript">
       <UniqueIdentifier>{dc49d043-9ab7-478d-a685-e48f74926139}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object\State\DesertBoss">
+      <UniqueIdentifier>{c684a5ed-c337-4c24-95d8-16ac64fed7d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -325,7 +325,7 @@
       <Filter>GameObject\Object\Monster</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBoss.h">
-      <Filter>GameObject\Object\Monster\Boss\DesertBoss</Filter>
+      <Filter>GameObject\Object\State\DesertBoss</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossScript.h">
       <Filter>GameObject\Component\Script\DesertBoss\DesertBossScript</Filter>
@@ -480,7 +480,7 @@
       <Filter>GameObject\Object\Monster</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBoss.cpp">
-      <Filter>GameObject\Object\Monster\Boss\DesertBoss</Filter>
+      <Filter>GameObject\Object\State\DesertBoss</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBossScript.cpp">
       <Filter>GameObject\Component\Script\DesertBoss\DesertBossScript</Filter>

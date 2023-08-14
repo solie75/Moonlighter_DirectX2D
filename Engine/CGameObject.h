@@ -18,6 +18,7 @@ private:
     eObjectState mState;
     std::vector<CComponent*> mComponent;
     CGameObject* mParentObject;
+    eLayerType mLayerType;
 
 public:
     CGameObject();
@@ -34,6 +35,8 @@ public:
     void SetState(eObjectState state) { mState = state; }
     CGameObject* GetParentObject() { return mParentObject; }
     void SetParentObject(CGameObject* pObj) { mParentObject = pObj; }
+    eLayerType GetLayerType() { return mLayerType; }
+    void SetLayerType(eLayerType type) { mLayerType = type; }
 
     template <typename T>
     T* AddComponent()

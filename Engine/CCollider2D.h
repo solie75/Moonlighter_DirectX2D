@@ -6,9 +6,17 @@
 class CCollider2D :
     public CComponent
 {
+public:
+    struct ColliderData
+    {
+        UINT id;
+        eLayerType type;
+        Vector2 pos;
+    };
+
 private:
     static UINT mColliderNumber;
-    std::vector<UINT> vCollisionIDs; // 충돌한 타 충돌체의 ID 모음
+    std::map<UINT, ColliderData> mColliderDataList; // UINT 에는 id 를 ColliderData 에는 충돌한 충돌체의 정보를 저장한다.
     UINT mColliderID;
     eColliderType mType;
 
@@ -31,6 +39,8 @@ public:
     virtual void Render() override;
 
     void SetType(eColliderType type) { mType = type; }
+    eColliderType GetColliderType() { return mType; }
+    Vector2 GetColliderPosition() { return Vector2(mPosition.x, mPosition.y); }
     Vector2 GetSize() { return mSize; }
     void SetSize(Vector2 size) { mSize = size; }
     void SetCenter(Vector2 size) { mCenter = size; }
@@ -38,7 +48,18 @@ public:
     void SetColPositionOffset(Vector3 offset);
     CConstantBuffer* GetColliderCB() { return mColliderCB; }
     bool GetIsCollider() { return mIsCollider; }
-    std::vector<UINT> GetCollisionIDs() { return vCollisionIDs; }
+    bool FindColliderID(UINT id)
+    {
+        std::map<UINT, ColliderData>::iterator iter = mColliderDataList.find(id);
+        if (iter == mColliderDataList.end())
+        {
+           return false;
+        }
+        else
+        {
+           return true;
+        }
+    }
 
     void OnCollisionEnter(CCollider2D* other);
     void OnCollisionStay(CCollider2D* other);
