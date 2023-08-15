@@ -1,14 +1,27 @@
 #pragma once
 #include "CScript.h"
+
 class CDesertBossRhombusScript :
     public CScript
 {
+public:
+    enum class eRhombusAttackState
+    {
+        Enter,
+        Stay,
+        Exit,
+        End,
+    };
+
 private:
     static float angleNum; // 매 발사 마다 각도가 조금씩 달라지는 기준
     float diff;
     CScene* ownScene;
     float fireballInterval;
     int fireCount;
+
+    eRhombusAttackState mRhombusAttackState;
+    eRhombusAttackState mPrevRhombusAttackState;
 
 public:
     CDesertBossRhombusScript();
@@ -20,6 +33,12 @@ public:
     virtual void Render();
 
     void SetScene(CScene* scene) { ownScene = scene; }
+
+    void ChangeRhombusAttackState(eRhombusAttackState state)
+    {
+        mPrevRhombusAttackState = mRhombusAttackState;
+        mRhombusAttackState = state;
+    }
 };
 
 float CDesertBossRhombusScript::angleNum = 0.f;

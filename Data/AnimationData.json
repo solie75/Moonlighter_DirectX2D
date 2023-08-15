@@ -157,6 +157,62 @@
 
     ],
 
+    "DesertBossRhombus":
+    [
+        {
+            "id": 19,
+            "name": "Boss3_Rhombus_Attack_Enter",
+            "objectName": "DesertBossRhombus",
+            "spriteNumber": [28],
+            "renderingMode": [1],
+            "size": [128, 128]
+        },
+        {
+            "id": 20,
+            "name": "Boss3_Rhombus_Attack_Stay",
+            "objectName": "DesertBossRhombus",
+            "spriteNumber": [15],
+            "renderingMode": [1],
+            "size": [128, 128]
+        },
+        {
+            "id": 21,
+            "name": "Boss3_Rhombus_Attack_Exit",
+            "objectName": "DesertBossRhombus",
+            "spriteNumber": [21],
+            "renderingMode": [1],
+            "size": [128, 128]
+        }
+    ],
+
+    "DesertBossCircle":
+    [
+        {
+            "id": 22,
+            "name": "Boss3_Circle_Attack_Enter",
+            "objectName": "DesertBossCircle",
+            "spriteNumber": [28],
+            "renderingMode": [1],
+            "size": [128, 128]
+        },
+        {
+            "id": 23,
+            "name": "Boss3_Circle_Attack_Stay",
+            "objectName": "DesertBossCircle",
+            "spriteNumber": [15],
+            "renderingMode": [1],
+            "size": [128, 128]
+        },
+        {
+            "id": 24,
+            "name": "Boss3_Circle_Attack_Exit",
+            "objectName": "DesertBossCircle",
+            "spriteNumber": [20],
+            "renderingMode": [1],
+            "size": [128, 128]
+        }
+    ],
+
     "__commnet(RenderingMode's num)" :
     {
         "Opaque" : "0",

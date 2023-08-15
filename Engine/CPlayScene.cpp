@@ -93,7 +93,7 @@ void CPlayScene::Initialize()
 
 	CMonster* DesertBossCircle = new CMonster();
 	AddGameObject(eLayerType::Monster, DesertBossCircle, L"DesertBossCircle", Vector3(-0.7f, 0.0f, 1.0005f)
-		, Vector3(1.6f, 1.6f, 0.0f), true, L"Mesh", L"mt_DesertBossCircle", false);
+		, Vector3(1.6f, 1.6f, 0.0f), true, L"Mesh", L"mt_DesertBossCircle", true);
 	DesertBossCircle->SetParentObject(DesertBossHead);
 	CDesertBossCircleScript* DesertBossCircleScript = DesertBossCircle->AddComponent<CDesertBossCircleScript>();
 	DesertBossCircleScript->SetScene(this);
@@ -102,7 +102,7 @@ void CPlayScene::Initialize()
 
 	CMonster* DesertBossRhombus = new CMonster();
 	AddGameObject(eLayerType::Monster, DesertBossRhombus, L"DesertBossRhombus", Vector3(-1.4f, 0.0f, 1.0006f)
-		, Vector3(1.6f, 1.6f, 0.0f), true, L"Mesh", L"mt_DesertBossRhombus", false);
+		, Vector3(1.6f, 1.6f, 0.0f), true, L"Mesh", L"mt_DesertBossRhombus", true);
 	DesertBossRhombus->SetParentObject(DesertBossCircle);
 	CDesertBossRhombusScript* DesertBossRhombusScript = DesertBossRhombus -> AddComponent<CDesertBossRhombusScript>();
 	DesertBossRhombusScript->SetScene(this);

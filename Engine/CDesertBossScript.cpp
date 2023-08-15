@@ -46,23 +46,15 @@ void CDesertBossScript::Update()
 
 	//double pi = 3.14159265358979323846;
 	time += CTimeMgr::GetInst()->GetDeltaTime();
-	if (time > 5.f * CircleAttackNum)
+	if (time > 7.f * CircleAttackNum)
 	{
-		if (time < 5.f * (CircleAttackNum + 1))
-		{
-			mAttackState = eAttackState::Circle;
-			//time = 0.0f;
-			CircleAttackNum++;
-		}
+		mAttackState = eAttackState::Circle;
+		CircleAttackNum++;
 	}
-	if (time > 7.f * RhombusAttackNum)
+	if (time > 9.f * RhombusAttackNum)
 	{
-		if (time < 7.f * (RhombusAttackNum + 1))
-		{
-			mAttackState = eAttackState::RhomBus;
-			//time = 0.0f;
-			RhombusAttackNum++;
-		}
+		mAttackState = eAttackState::Rhombus;
+		RhombusAttackNum++;
 	}
 	
 
@@ -72,25 +64,6 @@ void CDesertBossScript::Update()
 		pos.x += (float)(mAimNormal.x * 1.5 * CTimeMgr::GetInst()->GetDeltaTime());
 		pos.y += (float)(mAimNormal.y * 1.5 * CTimeMgr::GetInst()->GetDeltaTime());
 		tr->SetPosition(pos);
-
-		double pi = 3.14159265358979323846;
-
-		// 내적 계산
-		//float dotProduct = DirectX::XMVectorGetX(DirectX::XMVector2Dot(Vector2(mAimNormal.x, mAimNormal.y), Vector2(1.0f, 0.0f)));
-
-		//// 벡터의 크기 
-		//float magnitudeA = DirectX::XMVectorGetX(DirectX::XMVector2Length(mAimNormal));
-		//float magnitudeB = DirectX::XMVectorGetX(DirectX::XMVector2Length(Vector2(1.0f, 0.0f)));
-
-		//// 사잇각 계산 (라디안)
-		//float cosTheta = dotProduct / (magnitudeA * magnitudeB);
-		//float angleRadians = std::acos(cosTheta);
-
-		//// 라디안 각을 도로 변환
-		//float angleDegrees = angleRadians * ((180.0f / pi));
-
-		//float angleCopy = acos(angleDegrees);
-		//tr->SetRotation(Vector3(0.0f, 0.0f, angleCopy));
 
 		float angle = -acos(mAimNormal.x);
 		if (mAimNormal.x == 0 && mAimNormal.y > 0)
@@ -119,11 +92,11 @@ void CDesertBossScript::LateUpdate()
 			mAimNormal.y = 0.0f;
 			if (otherPos.y > 0) // backgroundup
 			{
-				tr->SetPosition(Vector3(pos.x, pos.y - 0.04f, pos.z));
+				tr->SetPosition(Vector3(pos.x, pos.y - 0.06f, pos.z));
 			}
 			if (otherPos.y < 0)
 			{
-				tr->SetPosition(Vector3(pos.x, pos.y + 0.04f, pos.z));
+				tr->SetPosition(Vector3(pos.x, pos.y + 0.06f, pos.z));
 			}
 		}
 		if (otherPos.x != 0)
@@ -132,11 +105,11 @@ void CDesertBossScript::LateUpdate()
 			mAimNormal.y = otherPos.y - pos.y;
 			if (otherPos.x > 0) // background right
 			{
-				tr->SetPosition(Vector3(pos.x - 0.04f, pos.y , pos.z));
+				tr->SetPosition(Vector3(pos.x - 0.06f, pos.y , pos.z));
 			}
 			if (otherPos.x < 0)
 			{
-				tr->SetPosition(Vector3(pos.x + 0.04f, pos.y , pos.z));
+				tr->SetPosition(Vector3(pos.x + 0.06f, pos.y , pos.z));
 			}
 		}
 		// 여기에 충돌하면 각도를 조금씩 변화시키는 코드 추가할 것

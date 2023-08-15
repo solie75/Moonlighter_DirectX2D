@@ -17,7 +17,9 @@ CDesertBossCircleScript::~CDesertBossCircleScript()
 void CDesertBossCircleScript::Initialize()
 {
 	CScript::Initialize();
-	fired = false;
+	firedNum = 0;
+	mCircleAttackState = eCircleAttackState::End;
+	mtime = 0.0f;
 }
 
 void CDesertBossCircleScript::Update()
@@ -27,12 +29,14 @@ void CDesertBossCircleScript::Update()
 	Vector3 parentPos = parentTr->GetPosition();
 	CTransform* thisTr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	Vector3 thisPos = thisTr->GetPosition();
+	CAnimator* at = this->GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
 
 	// Direction from this to parent Object
 	Vector3 direct = Vector3(parentPos.x - thisPos.x, parentPos.y - thisPos.y, 0.0f);
 	direct.Normalize();
 
 	// moving distance in 1fps
+	mtime += CTimeMgr::GetInst()->GetDeltaTime();
 	float moveDist = (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 	float dist = Vector3::Distance(parentPos, thisPos);
 	if (dist > 0.9f)
@@ -42,8 +46,28 @@ void CDesertBossCircleScript::Update()
 	}
 
 	CDesertBossScript* HeadScript = parentObj->GetComponent<CDesertBossScript>(eComponentType::Script);
-	//int CollideCount = HeadScript->GetCollideCount();
+
 	if (HeadScript->GetAttackState() == CDesertBossScript::eAttackState::Circle)
+	{
+		ChangeCirCleAttackState(eCircleAttackState::Enter);
+		at->PlayAnimation(L"Boss3_Circle_Attack_Enter", false);
+		HeadScript->ResetAttackState();
+	}
+
+	if (mCircleAttackState == eCircleAttackState::Enter && at->GetCurAnimation()->IsComplete())
+	{
+		at->PlayAnimation(L"Boss3_Circle_Attack_Stay", true);
+		ChangeCirCleAttackState(eCircleAttackState::Stay);
+	}
+
+	if (firedNum == 2)
+	{
+		ChangeCirCleAttackState(eCircleAttackState::Exit);
+		at->PlayAnimation(L"Boss3_Circle_Attack_Exit", false);
+		firedNum = 0;
+	}
+
+	if (mCircleAttackState == eCircleAttackState::Stay && mtime > 0.7f) // 처음에 한번
 	{
 		for (int i = 0; i < 50; i++)
 		{
@@ -66,34 +90,9 @@ void CDesertBossCircleScript::Update()
 			FireBallDirection.Normalize();
 			fb->SetDirection(FireBallDirection);
 		}
-		HeadScript->ResetAttackState();
+		firedNum++;
+		mtime = 0.0f;// 한번 쏘고 0으로 초기화 한 뒤 또 솔 수 있다.
 	}
-
-
-	//if (CKeyMgr::GetInst()->GetKeyState(KEY::Z) == KEY_STATE::TAP)
-	//{
-	//	for (int i = 0; i < 50; i++)
-	//	{
-	//		Vector3 FireBallPos = thisPos;
-	//		double pi = 3.14159265358979323846;
-	//		double angle = 7.2f * i;
-	//		FireBallPos.x += diff * std::cos(angle * pi / 180.0);
-	//		FireBallPos.y += diff * sin(angle * pi / 180.0);
-	//		FireBallPos.z = 0.00001 * (i + 1);
-	//		CFireBall* fb = new CFireBall; //(i, BossHeadPos) 여기에서 회전행렬 소스 전달 monster 면 화면에 나온다.
-	//		ownScene->AddGameObject(eLayerType::Projectile, fb, L"Fire_Ball", FireBallPos, Vector3(0.2f, 0.2f, 0.0f),
-	//			true, L"Mesh", L"mt_atlas_Fire_Ball", true);
-	//		CCollider2D* cd = fb->AddComponent<CCollider2D>();
-	//		cd->SetSize(Vector2(0.5f, 0.5f));
-	//		CAnimator* fireball = fb->GetComponent<CAnimator>(eComponentType::Animator);
-	//		fireball->PlayAnimation(L"Fire_Ball", true);
-	//		CTransform* fireballTr = fb->GetComponent<CTransform>(eComponentType::Transform);
-	//		fireballTr->SetRotation(Vector3(0.0f, 0.0f, 0.125f * i));
-	//		Vector3 FireBallDirection = FireBallPos - thisPos;
-	//		FireBallDirection.Normalize();
-	//		fb->SetDirection(FireBallDirection);
-	//	}
-	//}
 
 	CScript::Update();
 }

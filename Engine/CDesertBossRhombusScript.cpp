@@ -20,6 +20,8 @@ void CDesertBossRhombusScript::Initialize()
 	CScript::Initialize();
 	fireballInterval = 0.0f;
 	fireCount = 0;
+	CAnimator* at = this->GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
+	mRhombusAttackState = eRhombusAttackState::End;
 }
 
 void CDesertBossRhombusScript::Update()
@@ -31,6 +33,7 @@ void CDesertBossRhombusScript::Update()
 	Vector3 parentPos = parentTr->GetPosition();
 	CTransform* thisTr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	Vector3 thisPos = thisTr->GetPosition();
+	CAnimator* at = this->GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
 
 	// Direction from this to parent Object
 	Vector3 direct = Vector3(parentPos.x - thisPos.x, parentPos.y - thisPos.y, 0.0f);
@@ -48,9 +51,22 @@ void CDesertBossRhombusScript::Update()
 	
 	CDesertBossScript* HeadScript = parentObj->GetParentObject()->GetComponent<CDesertBossScript>(eComponentType::Script); // 부모의 부모 오브젝트 == Head
 
-	if (HeadScript->GetAttackState() == CDesertBossScript::eAttackState::RhomBus) // AttactState 가 RhomBus 일 때,
+	if (HeadScript->GetAttackState() == CDesertBossScript::eAttackState::Rhombus)
 	{
-		if(fireCount < 40 && fireballInterval > 0.1f)
+		ChangeRhombusAttackState(eRhombusAttackState::Enter);
+		at->PlayAnimation(L"Boss3_Rhombus_Attack_Enter", false);
+		HeadScript->ResetAttackState();
+	}
+
+	if (mRhombusAttackState == eRhombusAttackState::Enter && at->GetCurAnimation()->IsComplete())
+	{
+		at->PlayAnimation(L"Boss3_Rhombus_Attack_Stay", true);
+		ChangeRhombusAttackState(eRhombusAttackState::Stay);
+	}
+
+	if (mRhombusAttackState == eRhombusAttackState::Stay)
+	{
+		if (fireCount < 40 && fireballInterval > 0.1f)
 		{
 			for (int i = 0; i < 3; i++) // 이 사이클이 한번 발사이다. 이것을 50번 해야한다.
 			{
@@ -80,9 +96,15 @@ void CDesertBossRhombusScript::Update()
 		}
 		if (fireCount == 29)
 		{
-			HeadScript->ResetAttackState();
+			ChangeRhombusAttackState(eRhombusAttackState::Exit);
 			fireCount = 0;
 		}
+	}
+
+	if (mRhombusAttackState == eRhombusAttackState::Exit)
+	{
+		at->PlayAnimation(L"Boss3_Rhombus_Attack_Exit", false);
+		ChangeRhombusAttackState(eRhombusAttackState::End);
 	}
 
 	CScript::Update();
