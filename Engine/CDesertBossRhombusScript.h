@@ -7,6 +7,9 @@ private:
     static float angleNum; // 매 발사 마다 각도가 조금씩 달라지는 기준
     float diff;
     CScene* ownScene;
+    float fireballInterval;
+    int fireCount;
+
 public:
     CDesertBossRhombusScript();
     ~CDesertBossRhombusScript();

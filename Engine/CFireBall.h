@@ -28,5 +28,6 @@ public:
     virtual void Render();
 
     void SetDirection(Vector3 direct) { direction = direct; }
+    void SetSpeed(float f) { speed = f; }
 };
 

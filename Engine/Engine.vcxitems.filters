@@ -225,9 +225,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CGameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CComponent.h">
-      <Filter>GameObject\Component</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CMeshRender.h">
       <Filter>GameObject\Component\MeshRender</Filter>
     </ClInclude>
@@ -338,6 +335,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossRhombusScript.h">
       <Filter>GameObject\Component\Script\DesertBoss\DesertBossRhombusScript</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CComponent.h">
+      <Filter>GameObject\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

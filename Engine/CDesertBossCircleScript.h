@@ -8,6 +8,7 @@ class CDesertBossCircleScript :
 private:
     float diff;
     CScene* ownScene;
+    bool fired;
 public:
     CDesertBossCircleScript();
     ~CDesertBossCircleScript();          
