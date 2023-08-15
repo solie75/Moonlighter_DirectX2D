@@ -5,7 +5,7 @@
 #include "CCollider2D.h"
 
 CDesertBossCircleScript::CDesertBossCircleScript()
-	: diff(0.5f)
+	: diff(0.3f)
 {
 }
 

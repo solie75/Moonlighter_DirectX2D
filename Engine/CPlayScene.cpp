@@ -26,6 +26,7 @@ void CPlayScene::Initialize()
 	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Background, eLayerType::Projectile, true);
 	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Player, eLayerType::Projectile, true);
 	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Player, eLayerType::Background, true);
+	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Monster, eLayerType::Background, true);
 
 	CGameObject* DesertBossBackground = new CGameObject();
 	AddGameObject(eLayerType::Background, DesertBossBackground, L"DesertBossBackground",
@@ -85,9 +86,10 @@ void CPlayScene::Initialize()
 	// Boss Monster
 	CMonster* DesertBossHead = new CMonster();
 	AddGameObject(eLayerType::Monster, DesertBossHead, L"Boss3_Head", Vector3(0.0f, 0.0f, 1.0004f)
-		, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"mt_Boss3_Head_Down", false);
+		, Vector3(2.5f, 2.5f, 0.0f), true, L"Mesh", L"mt_Boss3_Head_Down", false);
 	CDesertBossScript* DesertBossScript = DesertBossHead->AddComponent<CDesertBossScript>();
 	cd = DesertBossHead->AddComponent<CCollider2D>();
+	cd->SetSize(Vector2(0.8f, 0.8f));
 
 	CMonster* DesertBossCircle = new CMonster();
 	AddGameObject(eLayerType::Monster, DesertBossCircle, L"DesertBossCircle", Vector3(-0.7f, 0.0f, 1.0005f)

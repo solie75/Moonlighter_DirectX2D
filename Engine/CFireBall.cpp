@@ -3,7 +3,7 @@
 #include "CCollider2D.h"
 
 CFireBall::CFireBall()
-	: speed(3.0f)
+	: speed(7.0f)
 {
 }
 

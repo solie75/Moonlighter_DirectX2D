@@ -78,7 +78,9 @@ void CCollider2D::OnCollisionEnter(CCollider2D* other)
     data.type = other->GetOwner()->GetLayerType();
     data.pos = other->GetColliderPosition();
 
+    //mColliderDataList.insert(std::make_pair(data.id, &data));
     mColliderDataList.insert(std::make_pair(data.id, data));
+    this;
 }
 
 void CCollider2D::OnCollisionStay(CCollider2D* other)

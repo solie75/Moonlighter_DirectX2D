@@ -48,6 +48,10 @@ public:
     void SetColPositionOffset(Vector3 offset);
     CConstantBuffer* GetColliderCB() { return mColliderCB; }
     bool GetIsCollider() { return mIsCollider; }
+    size_t GetColliderDataListSize()
+    {
+        return mColliderDataList.size();
+    }
     bool FindColliderID(UINT id)
     {
         std::map<UINT, ColliderData>::iterator iter = mColliderDataList.find(id);
@@ -58,6 +62,35 @@ public:
         else
         {
            return true;
+        }
+    }
+
+    ColliderData GetColliderData(UINT id)
+    {
+        std::map<UINT, ColliderData>::iterator iter = mColliderDataList.find(id);
+        if (iter == mColliderDataList.end())
+        {
+            return iter->second;
+        }
+        else
+        {
+            ColliderData data;
+            data.id = -1;
+            data.type = eLayerType::End;
+            data.pos = Vector2(0.0f, 0.0f);
+
+            return data;
+        }
+    }
+
+    ColliderData GetColliderData(eLayerType type)
+    {
+        for (const auto& col : mColliderDataList)
+        {
+            if (col.second.type == type)
+            {
+                return col.second;
+            }
         }
     }
 

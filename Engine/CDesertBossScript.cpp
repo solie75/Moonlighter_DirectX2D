@@ -18,44 +18,78 @@ void CDesertBossScript::Initialize()
 {
 	CScript::Initialize();
 	mAimAngle = 180.f;
+	Vector2 vec = Vector2(cos(mAimAngle), sin(mAimAngle));
+	vec.Normalize();
+	mAimNormal = vec;
 }
 
 void CDesertBossScript::Update()
 {
-	// Head 가 바라보는 뱡향
-	Vector2 direction = Vector2(cos(mAimAngle), sin(mAimAngle));
-	direction.Normalize();
-
 	CTransform* tr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	Vector3 pos = tr->GetPosition();
 
 	CCollider2D* cd = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
-	//std::vector<UINT>CollisionIDList = cd->GetCollisionIDs();
-
-
-	// boss3 의 상태가 Idle 및 Attack 일 때 움직인다.
-	/*if (mState.GetCurState() == eState::Idle)
+	if (cd->GetIsCollider())
 	{
-		pos.x += (float)(direction.x * 2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-		pos.y += (float)(direction.y * 2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-		tr->SetPosition(pos);
-	}*/
-
-	if (mState.GetCurState() == eState::Collide)
+		mState.SetState(eState::Collide);
+	}
+	else
 	{
-
+		mState.SetState(eState::Idle);
 	}
 
-	/*if (mState.GetCurState() == eState::Idle && mState.GetPrevState() != eState::Idle)
-	{
+	Vector2 otherPos;
 
-	}*/
+	// boss3 의 상태가 Idle 및 Attack 일 때 움직인다.
+	if (mState.GetCurState() == eState::Idle || mState.GetCurState() == eState::Collide)
+	{
+		pos.x += (float)(mAimNormal.x * 1.5 * CTimeMgr::GetInst()->GetDeltaTime());
+		pos.y += (float)(mAimNormal.y * 1.5 * CTimeMgr::GetInst()->GetDeltaTime());
+		tr->SetPosition(pos);
+	}
 
 	CScript::Update();
 }
 
 void CDesertBossScript::LateUpdate()
 {
+	CTransform* tr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
+	Vector3 pos = tr->GetPosition();
+	CCollider2D* cd = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
+	Vector2 otherPos;
+	if (mState.GetPrevState() != eState::Collide && mState.GetCurState() == eState::Collide)
+	{
+		otherPos = cd->GetColliderData(eLayerType::Background).pos;
+		if (otherPos.y != 0) // backgroundup
+		{
+			mAimNormal.y = 0.0f;
+			mAimNormal.x = otherPos.x - pos.x;
+			if (otherPos.y > 0)
+			{
+				tr->SetPosition(Vector3(pos.x, pos.y - 0.04f, pos.z));
+				
+			}
+			if (otherPos.y < 0)
+			{
+				tr->SetPosition(Vector3(pos.x, pos.y + 0.04f, pos.z));
+			}
+		}
+		if (otherPos.x != 0)
+		{
+			mAimNormal.x = 0.0f;
+			mAimNormal.y = otherPos.y - pos.y;
+			if (otherPos.x > 0)
+			{
+				tr->SetPosition(Vector3(pos.x - 0.04f, pos.y , pos.z));
+			}
+			if (otherPos.x < 0)
+			{
+				tr->SetPosition(Vector3(pos.x + 0.04f, pos.y , pos.z));
+			}
+		}
+		mAimNormal.Normalize();
+	}
+
 	CScript::LateUpdate();
 }
 
