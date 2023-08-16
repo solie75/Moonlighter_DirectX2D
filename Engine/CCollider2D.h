@@ -24,7 +24,7 @@ private:
 
     Vector3 mPosition;
     Vector2 mSize;
-    Vector2 mCenter;
+    Vector2 mOffset;
 
     CConstantBuffer* mColliderCB;
     
@@ -43,9 +43,9 @@ public:
     Vector2 GetColliderPosition() { return Vector2(mPosition.x, mPosition.y); }
     Vector2 GetSize() { return mSize; }
     void SetSize(Vector2 size) { mSize = size; }
-    void SetCenter(Vector2 size) { mCenter = size; }
+    void SetOffset(Vector2 offset) { mOffset = offset; }
     UINT GetColliderID() { return mColliderID; }
-    void SetColPositionOffset(Vector3 offset);
+    //void SetColPositionOffset(Vector3 offset);
     CConstantBuffer* GetColliderCB() { return mColliderCB; }
     bool GetIsCollider() { return mIsCollider; }
     size_t GetColliderDataListSize()
@@ -91,7 +91,17 @@ public:
             {
                 return col.second;
             }
+            else
+            {
+                ColliderData data;
+                data.id = -1;
+                data.type = eLayerType::End;
+                data.pos = Vector2(0.0f, 0.0f);
+
+                return data;
+            }
         }
+
     }
 
     void OnCollisionEnter(CCollider2D* other);

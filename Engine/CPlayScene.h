@@ -3,6 +3,8 @@
 class CPlayScene :
     public CScene
 {
+private:
+	CAnimator* BossBornAt;
 public:
 	CPlayScene();
 	virtual ~CPlayScene();

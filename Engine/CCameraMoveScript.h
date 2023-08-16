@@ -6,6 +6,7 @@
 class CCameraMoveScript :
     public CScript
 {
+public:
     virtual void Update() override;
 };
 

@@ -82,8 +82,8 @@ void CDesertBossRhombusScript::Update()
 					true, L"Mesh", L"mt_atlas_Fire_Ball", true);
 				CCollider2D* cd = fb->AddComponent<CCollider2D>();
 				cd->SetSize(Vector2(0.5f, 0.5f));
-				CAnimator* fireball = fb->GetComponent<CAnimator>(eComponentType::Animator);
-				fireball->PlayAnimation(L"Fire_Ball", true);
+				CAnimator* fireballAT = fb->GetComponent<CAnimator>(eComponentType::Animator);
+				fireballAT->PlayAnimation(L"Fire_Ball", true);
 				CTransform* fireballTr = fb->GetComponent<CTransform>(eComponentType::Transform);
 				fireballTr->SetRotation(Vector3(0.0f, 0.0f, (2.0f * i) + (0.0175 * angleNum)));
 				Vector3 FireBallDirection = FireBallPos - thisPos;

@@ -53,6 +53,7 @@ public:
 	void Reset();
 
 	bool IsComplete() { return mbComplete; }
+	int GetAnimationIndex() { return mIndex; }
 
 	virtual HRESULT ResourceLoad(const std::wstring name, const std::wstring& path) { return S_FALSE; }
 

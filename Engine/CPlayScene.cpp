@@ -11,6 +11,8 @@
 #include "CDesertBossScript.h"
 #include "CDesertBossCircleScript.h"
 #include "CDesertBossRhombusScript.h"
+#include "CDesertBossSquareScript.h"
+#include "CDesertBossTriangleSCript.h"
 
 CPlayScene::CPlayScene()
 {
@@ -56,6 +58,11 @@ void CPlayScene::Initialize()
 	cd = BackgroundRight->AddComponent<CCollider2D>();
 	cd->SetSize(Vector2(0.3f, 10.f));
 
+	// player
+	CPlayer* Will = new CPlayer();
+	AddGameObject(eLayerType::Player, Will, L"Will", Vector3(3.0f, 0.0f, 1.0002f)
+		, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down", true);
+
 
 	// Main Camera
 	CGameObject* mainCamera = new CGameObject();
@@ -78,21 +85,26 @@ void CPlayScene::Initialize()
 	uiCamComp->TurnLayerMask(eLayerType::Background, false);
 	uiCamComp->TurnLayerMask(eLayerType::Projectile, false);
 
-	// player
-	CPlayer* Will = new CPlayer();
-	AddGameObject(eLayerType::Player, Will, L"Will", Vector3(3.0f, 0.0f, 1.0002f)
-		, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down", true);
+
 
 	// Boss Monster
+	CMonster* Boss3_Born = new CMonster();
+	AddGameObject(eLayerType::Monster, Boss3_Born, L"Boss3_Born", Vector3(-0.1f, 1.5f, 1.0003f)
+		, Vector3(6.f, 6.f, 0.0f), true, L"Mesh", L"mt_atlas_Boss3_Born_1", true);
+	BossBornAt = Boss3_Born->GetComponent<CAnimator>(eComponentType::Animator);
+	BossBornAt->PlayAnimation(L"Boss3_Born_1", false);
+	
+
 	CMonster* DesertBossHead = new CMonster();
-	AddGameObject(eLayerType::Monster, DesertBossHead, L"Boss3_Head", Vector3(0.0f, 0.0f, 1.0004f)
+	AddGameObject(eLayerType::Monster, DesertBossHead, L"Boss3_Head", Vector3(0.3f, -0.6f, 1.0004f)
 		, Vector3(2.5f, 2.5f, 0.0f), true, L"Mesh", L"mt_Boss3_Head_Down", false);
 	CDesertBossScript* DesertBossScript = DesertBossHead->AddComponent<CDesertBossScript>();
 	cd = DesertBossHead->AddComponent<CCollider2D>();
-	cd->SetSize(Vector2(0.8f, 0.8f));
+	cd->SetSize(Vector2(0.7f, 0.7f));
+	DesertBossHead->SetParentObject(Boss3_Born);
 
 	CMonster* DesertBossCircle = new CMonster();
-	AddGameObject(eLayerType::Monster, DesertBossCircle, L"DesertBossCircle", Vector3(-0.7f, 0.0f, 1.0005f)
+	AddGameObject(eLayerType::Monster, DesertBossCircle, L"DesertBossCircle", Vector3(0.4f, 0.2f, 1.0005f)
 		, Vector3(1.6f, 1.6f, 0.0f), true, L"Mesh", L"mt_DesertBossCircle", true);
 	DesertBossCircle->SetParentObject(DesertBossHead);
 	CDesertBossCircleScript* DesertBossCircleScript = DesertBossCircle->AddComponent<CDesertBossCircleScript>();
@@ -101,7 +113,7 @@ void CPlayScene::Initialize()
 	cd->SetSize(Vector2(0.5f, 0.5f));
 
 	CMonster* DesertBossRhombus = new CMonster();
-	AddGameObject(eLayerType::Monster, DesertBossRhombus, L"DesertBossRhombus", Vector3(-1.4f, 0.0f, 1.0006f)
+	AddGameObject(eLayerType::Monster, DesertBossRhombus, L"DesertBossRhombus", Vector3(0.0f, 0.25f, 1.0006f)
 		, Vector3(1.6f, 1.6f, 0.0f), true, L"Mesh", L"mt_DesertBossRhombus", true);
 	DesertBossRhombus->SetParentObject(DesertBossCircle);
 	CDesertBossRhombusScript* DesertBossRhombusScript = DesertBossRhombus -> AddComponent<CDesertBossRhombusScript>();
@@ -110,19 +122,23 @@ void CPlayScene::Initialize()
 	cd->SetSize(Vector2(0.5f, 0.5f));
 
 	CMonster* DesertBossSquare = new CMonster();
-	AddGameObject(eLayerType::Monster, DesertBossSquare, L"DesertBossSquare", Vector3(-2.1f, 0.0f, 1.0007f)
+	AddGameObject(eLayerType::Monster, DesertBossSquare, L"DesertBossSquare", Vector3(-0.5f, 0.0f, 1.0007f)
 		, Vector3(1.6f, 1.6f, 0.0f), true, L"Mesh", L"mt_DesertBossSquare", false);
 	DesertBossSquare->SetParentObject(DesertBossRhombus);
+	CDesertBossSquareScript* DesertBossSquareScript = DesertBossSquare->AddComponent<CDesertBossSquareScript>();
 	cd = DesertBossSquare->AddComponent<CCollider2D>();
 	cd->SetSize(Vector2(0.5f, 0.5f));
 
 	CMonster* DesertBossTriangle = new CMonster();
-	AddGameObject(eLayerType::Monster, DesertBossTriangle, L"DesertBossTriangle", Vector3(-2.8f, 0.0f, 1.0008f)
-		, Vector3(1.6f, 1.6f, 0.0f), true, L"Mesh", L"mt_DesertBossTriangle", false);
+	AddGameObject(eLayerType::Monster, DesertBossTriangle, L"DesertBossTriangle", Vector3(-0.8f, -0.6f, 1.0008f)
+		, Vector3(1.6f, 1.6f, 0.0f), true, L"Mesh", L"mt_DesertBossTriangle", true);
 	DesertBossTriangle->SetParentObject(DesertBossSquare);
+	CDesertBossTriangleScript* DesertBossTriangleScript = DesertBossTriangle->AddComponent<CDesertBossTriangleScript>();
+	DesertBossTriangleScript->SetScene(this);
+	DesertBossTriangleScript->SetOtherPos(Will->GetComponent<CTransform>(eComponentType::Transform));
 	cd = DesertBossTriangle->AddComponent<CCollider2D>();
 	cd->SetSize(Vector2(0.5f, 0.5f));
-	
+	                                               
 	{ // light
 		CGameObject* light = new CGameObject();
 		light->SetName(L"light");
@@ -137,6 +153,14 @@ void CPlayScene::Initialize()
 
 void CPlayScene::Update()
 {
+	if (BossBornAt->GetCurAnimation()->GetKey() == L"Boss3_Born_1" && BossBornAt->GetCurAnimation()->IsComplete())
+	{
+		BossBornAt->PlayAnimation(L"Boss3_Born_2", false);
+	}
+	if (BossBornAt->GetCurAnimation()->GetKey() == L"Boss3_Born_2" && BossBornAt->GetCurAnimation()->IsComplete())
+	{
+		BossBornAt->GetOwner()->SetState(CGameObject::eObjectState::Paused);
+	}
 	CScene::Update();
 }
 

@@ -169,6 +169,18 @@
     <Filter Include="GameObject\Object\State\DesertBoss">
       <UniqueIdentifier>{c684a5ed-c337-4c24-95d8-16ac64fed7d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Component\Script\DesertBoss\DesertBossTriangleScript">
+      <UniqueIdentifier>{6f3c9067-49e4-4c67-8080-6317d7e57d42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Script\DesertBoss\DesertBossSquareScript">
+      <UniqueIdentifier>{1779af9d-ec84-461e-affb-b7954d0ee39a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object\Projectile\FireBall">
+      <UniqueIdentifier>{ec12bf5a-c43a-4f79-a268-a23e82b08131}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object\Projectile\LavaBall">
+      <UniqueIdentifier>{4af33d1f-1bb2-44c3-a912-1af072e36e2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -330,14 +342,23 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossCircleScript.h">
       <Filter>GameObject\Component\Script\DesertBoss\DesertBossCircleScript</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CFireBall.h">
-      <Filter>GameObject\Object\Projectile</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossRhombusScript.h">
       <Filter>GameObject\Component\Script\DesertBoss\DesertBossRhombusScript</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CComponent.h">
       <Filter>GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossTriangleScript.h">
+      <Filter>GameObject\Component\Script\DesertBoss\DesertBossTriangleScript</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossSquareScript.h">
+      <Filter>GameObject\Component\Script\DesertBoss\DesertBossSquareScript</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CFireBall.h">
+      <Filter>GameObject\Object\Projectile\FireBall</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CLavaBall.h">
+      <Filter>GameObject\Object\Projectile\LavaBall</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -488,11 +509,20 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBossCircleScript.cpp">
       <Filter>GameObject\Component\Script\DesertBoss\DesertBossCircleScript</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CFireBall.cpp">
-      <Filter>GameObject\Object\Projectile</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBossRhombusScript.cpp">
       <Filter>GameObject\Component\Script\DesertBoss\DesertBossRhombusScript</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBossTriangleScript.cpp">
+      <Filter>GameObject\Component\Script\DesertBoss\DesertBossTriangleScript</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBossSquareScript.cpp">
+      <Filter>GameObject\Component\Script\DesertBoss\DesertBossSquareScript</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CFireBall.cpp">
+      <Filter>GameObject\Object\Projectile\FireBall</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CLavaBall.cpp">
+      <Filter>GameObject\Object\Projectile\LavaBall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

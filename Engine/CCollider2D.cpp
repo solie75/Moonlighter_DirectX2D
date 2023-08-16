@@ -4,7 +4,7 @@ CCollider2D::CCollider2D()
 	: CComponent(eComponentType::Collider2D)
     , mTransform(nullptr)
     , mSize(Vector2::One)
-    , mCenter(Vector2::Zero)
+    , mOffset(Vector2::Zero)
     , mIsCollider(false)
 {
     mColliderNumber++;
@@ -46,8 +46,8 @@ void CCollider2D::LateUpdate()
     scale.y *= mSize.y;
 
     Vector3 pos = tr->GetPosition();
-    pos.x += mCenter.x; // offset
-    pos.y += mCenter.y;
+    pos.x += mOffset.x; // offset
+    pos.y += mOffset.y;
 
     mPosition = pos;
     DebugMesh debugMesh = {};
@@ -64,12 +64,12 @@ void CCollider2D::Render()
 {
 }
 
-void CCollider2D::SetColPositionOffset(Vector3 offset)
-{
-    mPosition.x += offset.x;
-    mPosition.y += offset.y;
-    mPosition.z += offset.z;
-}
+//void CCollider2D::SetColPositionOffset(Vector3 offset)
+//{
+//    mPosition.x += offset.x;
+//    mPosition.y += offset.y;
+//    mPosition.z += offset.z;
+//}
 
 void CCollider2D::OnCollisionEnter(CCollider2D* other)
 {

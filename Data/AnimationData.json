@@ -213,6 +213,78 @@
         }
     ],
 
+    "DesertBossTriangle":
+    [
+        {
+            "id": 25,
+            "name": "Boss3_Triangle_Attack",
+            "objectName": "DesertBossTriangle",
+            "spriteNumber": [46],
+            "renderingMode": [1],
+            "size": [128, 128]
+        }
+    ],
+    
+    "Lava_Ball":
+    [
+        {
+            "id": 26,
+            "name": "Lava_Ball",
+            "objectName": "Lava_Ball",
+            "spriteNumber": [4],
+            "renderingMode": [1],
+            "size": [28, 26]
+        },
+        {
+            "id": 27,
+            "name": "Lava_Ball_Splash_Enter",
+            "objectName": "Lava_Ball",
+            "spriteNumber": [9],
+            "renderingMode": [1],
+            "size": [64, 45]
+        },
+        {
+            "id": 28,
+            "name": "Lava_Ball_Splash_Stay",
+            "objectName": "Lava_Ball",
+            "spriteNumber": [7],
+            "renderingMode": [1],
+            "size": [64, 45]  
+        }
+    ],
+
+    "Boss3_Born":
+    [
+        {
+            "id": 29,
+            "name": "Boss3_Born_1",
+            "objectName": "Boss3_Born",
+            "spriteNumber": [30],
+            "renderingMode": [1],
+            "size": [512, 512]  
+        },
+        {
+            "id": 30,
+            "name": "Boss3_Born_2",
+            "objectName": "Boss3_Born",
+            "spriteNumber": [25],
+            "renderingMode": [1],
+            "size": [512, 512]  
+        }
+    ],
+
+    "Will2":
+    [
+        {
+            "id": 31,
+            "name": "Will_BigSwordCombo_Down",
+            "objectName": "Will",
+            "spriteNumber": [40],
+            "renderingMode": [1],
+            "size": [90, 130] 
+        }
+    ],
+
     "__commnet(RenderingMode's num)" :
     {
         "Opaque" : "0",

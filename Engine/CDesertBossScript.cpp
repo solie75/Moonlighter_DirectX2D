@@ -23,6 +23,7 @@ void CDesertBossScript::Initialize()
 	mAimNormal = vec;
 	CircleAttackNum = 1;
 	RhombusAttackNum = 1;
+	TriangleAttackNum = 1;
 	CollideCount = 0;
 	mAttackState = eAttackState::End;
 	time = 0.0f;
@@ -30,10 +31,18 @@ void CDesertBossScript::Initialize()
 
 void CDesertBossScript::Update()
 {
+	CGameObject* parentObj = this->GetOwner()->GetParentObject();
+	if (parentObj->GetState() != CGameObject::eObjectState::Paused)
+	{
+		return;
+	}
+
 	CTransform* tr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	Vector3 pos = tr->GetPosition();
 
 	CCollider2D* cd = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
+	//cd->SetOffset(Vector2(pos.x + mAimNormal.x, pos.y + mAimNormal.y));
+
 	if (cd->GetIsCollider())
 	{
 		mState.SetState(eState::Collide);
@@ -55,6 +64,11 @@ void CDesertBossScript::Update()
 	{
 		mAttackState = eAttackState::Rhombus;
 		RhombusAttackNum++;
+	}
+	if (time > 11.f * TriangleAttackNum)
+	{
+		mAttackState = eAttackState::Triangle;
+		TriangleAttackNum++;
 	}
 	
 
@@ -109,7 +123,7 @@ void CDesertBossScript::LateUpdate()
 			}
 			if (otherPos.x < 0)
 			{
-				tr->SetPosition(Vector3(pos.x + 0.06f, pos.y , pos.z));
+				tr->SetPosition(Vector3(pos.x + 0.2f, pos.y , pos.z));
 			}
 		}
 		// 여기에 충돌하면 각도를 조금씩 변화시키는 코드 추가할 것

@@ -14,6 +14,8 @@ public:
 	{
 		Circle,
 		Rhombus,
+		Square,
+		Triangle,
 		End
 	};
 
@@ -27,11 +29,13 @@ private:
 
 	int CircleAttackNum;
 	int RhombusAttackNum;
-	//int CircleAttackNum;
-	//int CircleAttackNum;
+	int TriangleAttackNum;
 	double time;
 
 	eAttackState mAttackState;
+
+	//CAnimator* BornAt;
+	//eState BornAnimationState;
 
 	int CollideCount;
 public:
@@ -48,5 +52,7 @@ public:
 
 	int GetCollideCount() { return CollideCount; }
 	void ResetCollideCount() { CollideCount = 0; }
+
+	//void SetBornAnimator(CAnimator* at) { BornAt = at; }
 };
 

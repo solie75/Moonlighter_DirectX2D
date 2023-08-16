@@ -19,7 +19,6 @@ private:
 
 public:
     CFireBall();
-    //CFireBall(int num, Vector3 pos) : DirectNum(num) {};
     ~CFireBall();
 
     virtual void Initialize();
