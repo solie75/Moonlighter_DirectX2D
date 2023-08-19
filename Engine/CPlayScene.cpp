@@ -100,7 +100,8 @@ void CPlayScene::Initialize()
 		, Vector3(2.5f, 2.5f, 0.0f), true, L"Mesh", L"mt_Boss3_Head_Down", false);
 	CDesertBossScript* DesertBossScript = DesertBossHead->AddComponent<CDesertBossScript>();
 	cd = DesertBossHead->AddComponent<CCollider2D>();
-	cd->SetSize(Vector2(0.7f, 0.7f));
+	cd->SetSize(Vector2(0.2f, 0.2f));
+	cd->SetOffset(Vector2(1.0f, 1.0f));
 	DesertBossHead->SetParentObject(Boss3_Born);
 
 	CMonster* DesertBossCircle = new CMonster();
