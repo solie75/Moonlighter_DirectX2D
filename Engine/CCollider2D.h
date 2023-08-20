@@ -85,6 +85,16 @@ public:
 
     ColliderData GetColliderData(eLayerType type)
     {
+        ColliderData data;
+        data.id = -1;
+        data.type = eLayerType::End;
+        data.pos = Vector2(0.0f, 0.0f);
+
+        if (mColliderDataList.size() == 0)
+        {
+            return data;
+        }
+
         for (const auto& col : mColliderDataList)
         {
             if (col.second.type == type)
@@ -93,11 +103,6 @@ public:
             }
             else
             {
-                ColliderData data;
-                data.id = -1;
-                data.type = eLayerType::End;
-                data.pos = Vector2(0.0f, 0.0f);
-
                 return data;
             }
         }
