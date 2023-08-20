@@ -48,6 +48,7 @@ void CCollider2D::LateUpdate()
     Vector3 pos = tr->GetPosition();
     pos.x += mOffset.x; // offset
     pos.y += mOffset.y;
+    //tr->SetPosition(pos);
 
     mPosition = pos;
     DebugMesh debugMesh = {};
@@ -64,13 +65,6 @@ void CCollider2D::Render()
 {
 }
 
-//void CCollider2D::SetColPositionOffset(Vector3 offset)
-//{
-//    mPosition.x += offset.x;
-//    mPosition.y += offset.y;
-//    mPosition.z += offset.z;
-//}
-
 void CCollider2D::OnCollisionEnter(CCollider2D* other)
 {
     ColliderData data = {};
@@ -78,7 +72,6 @@ void CCollider2D::OnCollisionEnter(CCollider2D* other)
     data.type = other->GetOwner()->GetLayerType();
     data.pos = other->GetColliderPosition();
 
-    //mColliderDataList.insert(std::make_pair(data.id, &data));
     mColliderDataList.insert(std::make_pair(data.id, data));
     this;
 }

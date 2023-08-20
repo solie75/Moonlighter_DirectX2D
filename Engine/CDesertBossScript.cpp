@@ -41,9 +41,9 @@ void CDesertBossScript::Update()
 	Vector3 pos = tr->GetPosition();
 
 	CCollider2D* cd = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
-	//cd->SetOffset(Vector2(pos.x + mAimNormal.x, pos.y + mAimNormal.y));
+	cd->SetOffset(Vector2(mAimNormal.x * (1.5f), mAimNormal.y * (1.5f))); // 충돌체를 aim 기준 앞에다 둔다. 이때 상수는 거리
 
-	if (cd->GetIsCollider())
+	if (cd->GetIsCollider() && mState.GetCurState() != eState::Turn)
 	{
 		mState.SetState(eState::Collide);
 		CollideCount++;
@@ -53,7 +53,6 @@ void CDesertBossScript::Update()
 		mState.SetState(eState::Idle);
 	}
 
-	//double pi = 3.14159265358979323846;
 	time += CTimeMgr::GetInst()->GetDeltaTime();
 	if (time > 7.f * CircleAttackNum)
 	{
@@ -70,10 +69,10 @@ void CDesertBossScript::Update()
 		mAttackState = eAttackState::Triangle;
 		TriangleAttackNum++;
 	}
-	
 
 	// boss3 의 상태가 Idle 및 Attack 일 때 움직인다.
-	if (mState.GetCurState() == eState::Idle || mState.GetCurState() == eState::Collide)
+	//if (mState.GetCurState() == eState::Idle || mState.GetCurState() == eState::Collide)
+	if (mState.GetCurState() == eState::Idle)
 	{
 		pos.x += (float)(mAimNormal.x * 1.5 * CTimeMgr::GetInst()->GetDeltaTime());
 		pos.y += (float)(mAimNormal.y * 1.5 * CTimeMgr::GetInst()->GetDeltaTime());
@@ -99,11 +98,39 @@ void CDesertBossScript::LateUpdate()
 	
 	if (mState.GetPrevState() != eState::Collide && mState.GetCurState() == eState::Collide)
 	{
+		//otherPos = cd->GetColliderData(eLayerType::Background).pos;
+		//if (otherPos.y != 0) 
+		//{
+		//	mAimNormal.x = otherPos.x - pos.x;
+		//	mAimNormal.y = 0.0f;
+		//	if (otherPos.y > 0) // backgroundup
+		//	{
+		//		tr->SetPosition(Vector3(pos.x, pos.y - 0.06f, pos.z));
+		//	}
+		//	if (otherPos.y < 0)
+		//	{
+		//		tr->SetPosition(Vector3(pos.x, pos.y + 0.06f, pos.z));
+		//	}
+		//}
+		//if (otherPos.x != 0)
+		//{
+		//	mAimNormal.x = 0.0f;
+		//	mAimNormal.y = otherPos.y - pos.y;
+		//	if (otherPos.x > 0) // background right
+		//	{
+		//		tr->SetPosition(Vector3(pos.x - 0.06f, pos.y , pos.z));
+		//	}
+		//	if (otherPos.x < 0)
+		//	{
+		//		tr->SetPosition(Vector3(pos.x + 0.2f, pos.y , pos.z));
+		//	}
+		//}
+		 
 		otherPos = cd->GetColliderData(eLayerType::Background).pos;
-		if (otherPos.y != 0) 
+		if (otherPos.y != 0)
 		{
-			mAimNormal.x = otherPos.x - pos.x;
-			mAimNormal.y = 0.0f;
+			mExpectedAimNormal.x = otherPos.x - pos.x;
+			mExpectedAimNormal.y = 0.0f;
 			if (otherPos.y > 0) // backgroundup
 			{
 				tr->SetPosition(Vector3(pos.x, pos.y - 0.06f, pos.z));
@@ -115,21 +142,39 @@ void CDesertBossScript::LateUpdate()
 		}
 		if (otherPos.x != 0)
 		{
-			mAimNormal.x = 0.0f;
-			mAimNormal.y = otherPos.y - pos.y;
+			mExpectedAimNormal.x = 0.0f;
+			mExpectedAimNormal.y = otherPos.y - pos.y;
 			if (otherPos.x > 0) // background right
 			{
-				tr->SetPosition(Vector3(pos.x - 0.06f, pos.y , pos.z));
+				tr->SetPosition(Vector3(pos.x - 0.06f, pos.y, pos.z));
 			}
 			if (otherPos.x < 0)
 			{
-				tr->SetPosition(Vector3(pos.x + 0.2f, pos.y , pos.z));
+				tr->SetPosition(Vector3(pos.x + 0.2f, pos.y, pos.z));
 			}
 		}
-		// 여기에 충돌하면 각도를 조금씩 변화시키는 코드 추가할 것
+		mExpectedAimNormal.Normalize();
 
-		mAimNormal.Normalize();
+		mDiffAimNormal = mExpectedAimNormal - mAimNormal;
+		mChangeAimTime = 0;
+		mState.SetState(eState::Turn);
 	}
+
+	mChangeAimTime += CTimeMgr::GetInst()->GetDeltaTime();
+	if (mState.GetCurState() == eState::Turn)
+	{
+		if (mChangeAimTime > 0.1f && fabs(mExpectedAimNormal.x - mExpectedAimNormal.x) > 0.01f)
+		{
+			mAimNormal.x += mDiffAimNormal.x / 10;
+			mAimNormal.y += mDiffAimNormal.y / 10;
+		}
+		else
+		{
+			mState.SetState(eState::Idle);
+		}
+	}
+
+
 
 	CScript::LateUpdate();
 }

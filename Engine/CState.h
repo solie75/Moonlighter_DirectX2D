@@ -8,6 +8,7 @@ enum class eState
 	Collide,
     Roll,
     Walk,
+	Turn,
     End,
 };
 

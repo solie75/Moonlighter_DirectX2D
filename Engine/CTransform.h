@@ -11,6 +11,7 @@ class CTransform :
 {
 private:
 	Vector3 mPosition;
+	Vector3 mColliderPosition;
 	Vector3 mRotation;
 	Vector3 mScale;
 
@@ -19,6 +20,7 @@ private:
 	Vector3 mRight;
 
 	Matrix mWorld;
+	Matrix mCollisionWorldMatrix;
 
 	CConstantBuffer* mTransformCB;
 
@@ -42,6 +44,7 @@ public:
 	void SetScale(float x, float y, float z) { mScale = Vector3(x, y, z); }
 
 	Vector3 GetPosition() { return mPosition; }
+	Vector3 GetColliderPosition() { return mColliderPosition; }
 	Vector3 GetRotation() { return mRotation; }
 	Vector3 GetScale() { return mScale; }
 
@@ -52,5 +55,6 @@ public:
 	CConstantBuffer* GetTransformCB() { return mTransformCB; }
 
 	Matrix& GetWorldMatrix() { return mWorld; }
+	Matrix& GetCollisionWorldMatrix() {	return mCollisionWorldMatrix;}
 };
 

@@ -25,12 +25,17 @@ private:
 	CState mState;
 	CAimSight mAimSight; // AimAngle 에 따라서 상하좌우 로 나눈다.
 	Vector2 mAimNormal; // 객체가 바라보는 방향 벡터
+	Vector2 mExpectedAimNormal; // 벽에 충돌했을 때 설정되는 목표 방향 벡터.
+	Vector2 mDiffAimNormal; // 목표 방향 벡터와 현재 방향 벡터의 차
+	double mChangeAimTime;
+	
 	float mAimAngle; // 객체가 바라보는 방향을 360 로 나눈다.
 
 	int CircleAttackNum;
 	int RhombusAttackNum;
 	int TriangleAttackNum;
 	double time;
+	
 
 	eAttackState mAttackState;
 

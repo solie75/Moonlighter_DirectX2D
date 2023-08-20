@@ -176,7 +176,7 @@ bool CCollisionMgr::Intersect(CCollider2D* leftCol, CCollider2D* rightCol)
 	Vector3 rightScale = Vector3(rightCol->GetSize().x, rightCol->GetSize().y, 1.0f);
 	Matrix rightScaleMatrix = Matrix::CreateScale(rightScale);
 	rightMatrix *= rightScaleMatrix;
-
+	
 	// 분리축 배열
 	Vector3 Axis[4] = {};
 
@@ -201,7 +201,7 @@ bool CCollisionMgr::Intersect(CCollider2D* leftCol, CCollider2D* rightCol)
 	}
 	
 	// 두 충돌체의 중심 사이의 거리
-	Vector3 vDist = leftTr->GetPosition() - rightTr->GetPosition();
+	Vector3 vDist = leftTr->GetColliderPosition() - rightTr->GetColliderPosition();
 	vDist.z = 0.0f;
 
 	Vector3 vDistBetweenCols = vDist;
@@ -227,6 +227,12 @@ bool CCollisionMgr::Intersect(CCollider2D* leftCol, CCollider2D* rightCol)
 			return false;
 		}
 	}
+
+	if (leftCol->GetOwner()->GetName() == L"Boss3_Head" || rightCol->GetOwner()->GetName() == L"Boss3_Head")
+	{
+		int a = 0;
+	}
+
 	return true;
 }
 

@@ -44,8 +44,8 @@ public:
     Vector2 GetSize() { return mSize; }
     void SetSize(Vector2 size) { mSize = size; }
     void SetOffset(Vector2 offset) { mOffset = offset; }
+    Vector2 GetOffset() { return mOffset; }
     UINT GetColliderID() { return mColliderID; }
-    //void SetColPositionOffset(Vector3 offset);
     CConstantBuffer* GetColliderCB() { return mColliderCB; }
     bool GetIsCollider() { return mIsCollider; }
     size_t GetColliderDataListSize()
@@ -101,7 +101,6 @@ public:
                 return data;
             }
         }
-
     }
 
     void OnCollisionEnter(CCollider2D* other);
