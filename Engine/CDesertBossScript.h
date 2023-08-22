@@ -21,7 +21,6 @@ public:
 
 private:
 	std::vector<CFireBall*> projectiles;
-	//Vector2 AimDirection;
 	CState mState;
 	CAimSight mAimSight; // AimAngle 에 따라서 상하좌우 로 나눈다.
 	Vector2 mAimNormal; // 객체가 바라보는 방향 벡터
@@ -36,11 +35,7 @@ private:
 	int TriangleAttackNum;
 	double time;
 	
-
 	eAttackState mAttackState;
-
-	//CAnimator* BornAt;
-	//eState BornAnimationState;
 
 	int CollideCount;
 public:
@@ -57,7 +52,5 @@ public:
 
 	int GetCollideCount() { return CollideCount; }
 	void ResetCollideCount() { CollideCount = 0; }
-
-	//void SetBornAnimator(CAnimator* at) { BornAt = at; }
 };
 

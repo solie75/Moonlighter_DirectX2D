@@ -18,7 +18,7 @@ void CDesertBossScript::Initialize()
 {
 	CScript::Initialize();
 	double pi = 3.14159265358979323846;
-	Vector2 vec = Vector2(-cos((pi/180.f)*45), -sin((pi / 180.f) * 45));
+	Vector2 vec = Vector2(0.0f, -1.0f);
 	vec.Normalize();
 	mAimNormal = vec;
 	CircleAttackNum = 1;
@@ -27,6 +27,7 @@ void CDesertBossScript::Initialize()
 	CollideCount = 0;
 	mAttackState = eAttackState::End;
 	time = 0.0f;
+	mDiffAimNormal = mAimNormal;
 }
 
 void CDesertBossScript::Update()
@@ -57,17 +58,6 @@ void CDesertBossScript::Update()
 		}
 	}
 
-
-	//if (cd->GetIsCollider() && mState.GetCurState() != eState::Turn)
-	//{
-	//	mState.SetState(eState::Collide);
-	//	CollideCount++;
-	//}
-	//else
-	//{
-	//	mState.SetState(eState::Idle);
-	//}
-
 	time += CTimeMgr::GetInst()->GetDeltaTime();
 	if (time > 7.f * CircleAttackNum)
 	{
@@ -86,19 +76,11 @@ void CDesertBossScript::Update()
 	}
 
 	// boss3 의 상태가 Idle 및 Attack 일 때 움직인다.
-	//if (mState.GetCurState() == eState::Idle || mState.GetCurState() == eState::Collide)
 	if (mState.GetCurState() == eState::Idle || mState.GetCurState() == eState::Turn)
 	{
 		pos.x += (float)(mAimNormal.x * 1.5 * CTimeMgr::GetInst()->GetDeltaTime());
 		pos.y += (float)(mAimNormal.y * 1.5 * CTimeMgr::GetInst()->GetDeltaTime());
 		tr->SetPosition(pos);
-
-		float angle = -acos(mAimNormal.x);
-		if (mAimNormal.x == 0 && mAimNormal.y > 0)
-		{
-			angle *= -1.0f;
-		}
-		tr->SetRotation(Vector3(0.0f, 0.0f, angle));
 	}
 
 	CScript::Update();
@@ -113,81 +95,53 @@ void CDesertBossScript::LateUpdate()
 	
 	if (mState.GetPrevState() != eState::Turn && mState.GetCurState() == eState::Turn)
 	{
-		//otherPos = cd->GetColliderData(eLayerType::Background).pos;
-		//if (otherPos.y != 0) 
-		//{
-		//	mAimNormal.x = otherPos.x - pos.x;
-		//	mAimNormal.y = 0.0f;
-		//	if (otherPos.y > 0) // backgroundup
-		//	{
-		//		tr->SetPosition(Vector3(pos.x, pos.y - 0.06f, pos.z));
-		//	}
-		//	if (otherPos.y < 0)
-		//	{
-		//		tr->SetPosition(Vector3(pos.x, pos.y + 0.06f, pos.z));
-		//	}
-		//}
-		//if (otherPos.x != 0)
-		//{
-		//	mAimNormal.x = 0.0f;
-		//	mAimNormal.y = otherPos.y - pos.y;
-		//	if (otherPos.x > 0) // background right
-		//	{
-		//		tr->SetPosition(Vector3(pos.x - 0.06f, pos.y , pos.z));
-		//	}
-		//	if (otherPos.x < 0)
-		//	{
-		//		tr->SetPosition(Vector3(pos.x + 0.2f, pos.y , pos.z));
-		//	}
-		//}
 		 
 		otherPos = cd->GetColliderData(eLayerType::Background).pos;
 		 if (otherPos.y != 0)
 		{
 			mExpectedAimNormal.x = otherPos.x - pos.x;
 			mExpectedAimNormal.y = 0.0f;
-			//if (otherPos.y > 0) // backgroundup
-			//{
-			//	tr->SetPosition(Vector3(pos.x, pos.y - 0.06f, pos.z));
-			//}
-			//if (otherPos.y < 0)
-			//{
-			//	tr->SetPosition(Vector3(pos.x, pos.y + 0.06f, pos.z));
-			//}
 		}
 		if (otherPos.x != 0)
 		{
 			mExpectedAimNormal.x = 0.0f;
 			mExpectedAimNormal.y = otherPos.y - pos.y;
-			//if (otherPos.x > 0) // background right
-			//{
-			//	tr->SetPosition(Vector3(pos.x - 0.06f, pos.y, pos.z));
-			//}
-			//if (otherPos.x < 0)
-			//{
-			//	tr->SetPosition(Vector3(pos.x + 0.2f, pos.y, pos.z));
-			//}
 		}
 		mExpectedAimNormal.Normalize();
 
-		mDiffAimNormal = mExpectedAimNormal - mAimNormal;
-		//mChangeAimTime = 0;
+		mDiffAimNormal.x = mExpectedAimNormal.x - mAimNormal.x;
+		mDiffAimNormal.y = mExpectedAimNormal.y - mAimNormal.y;
 		mState.SetState(eState::Turn);
 	}
 
-	//mChangeAimTime += CTimeMgr::GetInst()->GetDeltaTime();
 	if (mState.GetCurState() == eState::Turn)
 	{
 		if (fabs(mExpectedAimNormal.x - mAimNormal.x) > 0.01f)
 		{
-			mAimNormal.x += mDiffAimNormal.x / 10;
-			mAimNormal.y += mDiffAimNormal.y / 10;
+			mAimNormal.x += mDiffAimNormal.x / 30;
+			mAimNormal.y += mDiffAimNormal.y / 30;
 		}
 		else
 		{
 			mState.SetState(eState::Idle);
 		}
 	}
+	double pi = 3.14159265358979323846;
+	float a, b;
+	a = mAimNormal.x;
+	b = mAimNormal.y;
+	if (mAimNormal.y < 0)
+	{
+		b *= -1;
+	}
+
+	float c = sqrt(pow(a, 2) + pow(b, 2));
+	float angle = acosf(a / c);
+	if (mAimNormal.y < 0)
+	{
+		angle = 2 * pi - angle;
+	}
+	tr->SetRotation(Vector3(0.0f, 0.0f, angle));
 	CScript::LateUpdate();
 }
 
