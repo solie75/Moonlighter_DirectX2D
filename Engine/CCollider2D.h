@@ -75,7 +75,7 @@ public:
         else
         {
             ColliderData data;
-            data.id = -1;
+            data.id = 0;
             data.type = eLayerType::End;
             data.pos = Vector2(0.0f, 0.0f);
 
@@ -86,7 +86,7 @@ public:
     ColliderData GetColliderData(eLayerType type)
     {
         ColliderData data;
-        data.id = -1;
+        data.id = 0;
         data.type = eLayerType::End;
         data.pos = Vector2(0.0f, 0.0f);
 

@@ -10,6 +10,7 @@ public:
         Enter,
         Stay,
         Exit,
+        Parts,
         End,
     };
 
@@ -19,6 +20,10 @@ private:
     CScene* ownScene;
     float fireballInterval;
     int fireCount;
+    Vector2 mAimNormal;
+    float mtime;
+    float mPartsAttackSpeed;
+    UINT CollideId;
 
     eRhombusAttackState mRhombusAttackState;
     eRhombusAttackState mPrevRhombusAttackState;

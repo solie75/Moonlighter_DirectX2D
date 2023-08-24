@@ -3,9 +3,25 @@
 class CDesertBossSquareScript :
     public CScript
 {
+public:
+    enum class eSquareAttackState
+    {
+        FireEnter,
+        FireStay,
+        FireExit,
+        Parts,
+        End,
+    };
 private:
     CScene* ownScene;
     float mtime;
+    eSquareAttackState mSquareAttackState;
+    eSquareAttackState mPrevSquareAttackState;
+    Vector2 mAimNormal;
+    //float mtime;
+    float mPartsAttackSpeed;
+    UINT CollideId;
+
 public:
     CDesertBossSquareScript();
     ~CDesertBossSquareScript();

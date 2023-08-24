@@ -9,6 +9,7 @@ enum class eState
     Roll,
     Walk,
 	Turn,
+	Pause,
     End,
 };
 

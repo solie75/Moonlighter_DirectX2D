@@ -153,6 +153,46 @@
             "spriteNumber": [1],
             "renderingMode": [1],
             "size": [256, 256]
+        },
+        {
+            "id": 19,
+            "name": "Boss3_Head_PartsAttack_Down",
+            "objectName": "Boss3_Head",
+            "spriteNumber": [34],
+            "renderingMode": [1],
+            "size": [256, 256]
+        },
+        {
+            "id": 20,
+            "name": "Boss3_Head_PartsAttack_Up",
+            "objectName": "Boss3_Head",
+            "spriteNumber": [34],
+            "renderingMode": [1],
+            "size": [256, 256]
+        },
+        {
+            "id": 21,
+            "name": "Boss3_Head_PartsAttack_Right",
+            "objectName": "Boss3_Head",
+            "spriteNumber": [34],
+            "renderingMode": [1],
+            "size": [256, 256]
+        },
+        {
+            "id": 22,
+            "name": "Boss3_Head_PartsAttack_Left",
+            "objectName": "Boss3_Head",
+            "spriteNumber": [34],
+            "renderingMode": [1],
+            "size": [256, 256]
+        },
+        {
+            "id": 23,
+            "name": "Boss3_Head_Death",
+            "objectName": "Boss3_Head",
+            "spriteNumber": [1],
+            "renderingMode": [1],
+            "size": [122, 121]
         }
 
     ],
@@ -160,7 +200,7 @@
     "DesertBossRhombus":
     [
         {
-            "id": 19,
+            "id": 24,
             "name": "Boss3_Rhombus_Attack_Enter",
             "objectName": "DesertBossRhombus",
             "spriteNumber": [28],
@@ -168,7 +208,7 @@
             "size": [128, 128]
         },
         {
-            "id": 20,
+            "id": 25,
             "name": "Boss3_Rhombus_Attack_Stay",
             "objectName": "DesertBossRhombus",
             "spriteNumber": [15],
@@ -176,10 +216,26 @@
             "size": [128, 128]
         },
         {
-            "id": 21,
+            "id": 26,
             "name": "Boss3_Rhombus_Attack_Exit",
             "objectName": "DesertBossRhombus",
             "spriteNumber": [21],
+            "renderingMode": [1],
+            "size": [128, 128]
+        },
+        {
+            "id": 27,
+            "name": "Boss3_Rhombus_Light_On",
+            "objectName": "DesertBossRhombus",
+            "spriteNumber": [32],
+            "renderingMode": [1],
+            "size": [128, 128]
+        },
+        {
+            "id": 28,
+            "name": "Boss3_Rhombus_Light_Off",
+            "objectName": "DesertBossRhombus",
+            "spriteNumber": [6],
             "renderingMode": [1],
             "size": [128, 128]
         }
@@ -188,7 +244,7 @@
     "DesertBossCircle":
     [
         {
-            "id": 22,
+            "id": 29,
             "name": "Boss3_Circle_Attack_Enter",
             "objectName": "DesertBossCircle",
             "spriteNumber": [28],
@@ -196,7 +252,7 @@
             "size": [128, 128]
         },
         {
-            "id": 23,
+            "id": 30,
             "name": "Boss3_Circle_Attack_Stay",
             "objectName": "DesertBossCircle",
             "spriteNumber": [15],
@@ -204,10 +260,26 @@
             "size": [128, 128]
         },
         {
-            "id": 24,
+            "id": 31,
             "name": "Boss3_Circle_Attack_Exit",
             "objectName": "DesertBossCircle",
             "spriteNumber": [20],
+            "renderingMode": [1],
+            "size": [128, 128]
+        },
+        {
+            "id": 32,
+            "name": "Boss3_Circle_Light_On",
+            "objectName": "DesertBossCircle",
+            "spriteNumber": [32],
+            "renderingMode": [1],
+            "size": [128, 128]
+        },
+        {
+            "id": 33,
+            "name": "Boss3_Circle_Light_Off",
+            "objectName": "DesertBossCircle",
+            "spriteNumber": [6],
             "renderingMode": [1],
             "size": [128, 128]
         }
@@ -216,10 +288,54 @@
     "DesertBossTriangle":
     [
         {
-            "id": 25,
+            "id": 34,
             "name": "Boss3_Triangle_Attack",
             "objectName": "DesertBossTriangle",
             "spriteNumber": [46],
+            "renderingMode": [1],
+            "size": [128, 128]
+        },
+        {
+            "id": 35,
+            "name": "Boss3_Triangle_Light_On",
+            "objectName": "DesertBossTriangle",
+            "spriteNumber": [32],
+            "renderingMode": [1],
+            "size": [128, 128]
+        },
+        {
+            "id": 36,
+            "name": "Boss3_Triangle_Light_Off",
+            "objectName": "DesertBossTriangle",
+            "spriteNumber": [6],
+            "renderingMode": [1],
+            "size": [128, 128]
+        }
+    ],
+
+    "DesertBossSquare":
+    [
+        {
+            "id": 37,
+            "name": "Boss3_Square_Attack",
+            "objectName": "DesertBossSquare",
+            "spriteNumber": [57],
+            "renderingMode": [1],
+            "size": [128, 128]
+        },
+        {
+            "id": 38,
+            "name": "Boss3_Square_Light_On",
+            "objectName": "DesertBossSquare",
+            "spriteNumber": [32],
+            "renderingMode": [1],
+            "size": [128, 128]
+        },
+        {
+            "id": 39,
+            "name": "Boss3_Square_Light_Off",
+            "objectName": "DesertBossSquare",
+            "spriteNumber": [6],
             "renderingMode": [1],
             "size": [128, 128]
         }
@@ -228,7 +344,7 @@
     "Lava_Ball":
     [
         {
-            "id": 26,
+            "id": 40,
             "name": "Lava_Ball",
             "objectName": "Lava_Ball",
             "spriteNumber": [4],
@@ -236,7 +352,7 @@
             "size": [28, 26]
         },
         {
-            "id": 27,
+            "id": 41,
             "name": "Lava_Ball_Splash_Enter",
             "objectName": "Lava_Ball",
             "spriteNumber": [9],
@@ -244,7 +360,7 @@
             "size": [64, 45]
         },
         {
-            "id": 28,
+            "id": 42,
             "name": "Lava_Ball_Splash_Stay",
             "objectName": "Lava_Ball",
             "spriteNumber": [7],
@@ -256,7 +372,7 @@
     "Boss3_Born":
     [
         {
-            "id": 29,
+            "id": 43,
             "name": "Boss3_Born_1",
             "objectName": "Boss3_Born",
             "spriteNumber": [30],
@@ -264,7 +380,7 @@
             "size": [512, 512]  
         },
         {
-            "id": 30,
+            "id": 44,
             "name": "Boss3_Born_2",
             "objectName": "Boss3_Born",
             "spriteNumber": [25],
@@ -276,7 +392,7 @@
     "Will2":
     [
         {
-            "id": 31,
+            "id": 45,
             "name": "Will_BigSwordCombo_Down",
             "objectName": "Will",
             "spriteNumber": [40],

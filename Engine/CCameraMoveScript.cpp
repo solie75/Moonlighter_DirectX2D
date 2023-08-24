@@ -55,9 +55,13 @@ void CCameraMoveScript::Update()
 	}
 	else // 플레이어에 고정
 	{
-		pos.x = playerPos.x;
-		pos.y = playerPos.y;
-		tr->SetPosition(pos);
+		if (nullptr != PlayerTr)
+		{
+			Vector3 PlayerPos = PlayerTr->GetPosition();
+			pos.x = PlayerPos.x;
+			pos.y = PlayerPos.y;
+			tr->SetPosition(pos);
+		}
 	}
 	CScript::Update();
 }

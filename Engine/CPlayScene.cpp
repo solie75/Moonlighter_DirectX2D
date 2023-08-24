@@ -62,6 +62,7 @@ void CPlayScene::Initialize()
 	CPlayer* Will = new CPlayer();
 	AddGameObject(eLayerType::Player, Will, L"Will", Vector3(3.0f, 0.0f, 1.0002f)
 		, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down", true);
+	CTransform* PlayerTr = Will->GetComponent<CTransform>(eComponentType::Transform);
 
 
 	// Main Camera
@@ -71,8 +72,8 @@ void CPlayScene::Initialize()
 	CCamera* mainCamComp = mainCamera->AddComponent<CCamera>();
 	mainCamComp->SetCameraType(eCameraType::Main);
 	mainCamComp->TurnLayerMask(eLayerType::UI, false);
-	//mainCamComp->TurnLayerMask(eLayerType::Grid, false);
-	mainCamera->AddComponent<CCameraMoveScript>();
+	CCameraMoveScript* CameraMoveScript = mainCamera->AddComponent<CCameraMoveScript>();
+	CameraMoveScript->SetPlayerTr(PlayerTr);
 
 	// UI Camera
 	CGameObject* uiCamera = new CGameObject();
@@ -96,11 +97,10 @@ void CPlayScene::Initialize()
 	
 	CMonster* DesertBossHead = new CMonster();
 	AddGameObject(eLayerType::Monster, DesertBossHead, L"Boss3_Head", Vector3(0.3f, -0.6f, 1.0004f)
-		, Vector3(2.5f, 2.5f, 0.0f), true, L"Mesh", L"mt_Boss3_Head_Down", false);
+		, Vector3(2.5f, 2.5f, 0.0f), true, L"Mesh", L"mt_atlas_Boss3_Head_Down", true);
 	CDesertBossScript* DesertBossScript = DesertBossHead->AddComponent<CDesertBossScript>();
 	cd = DesertBossHead->AddComponent<CCollider2D>();
 	cd->SetSize(Vector2(0.1f, 0.1f));
-	//cd->SetOffset(Vector2(1.0f, -3.0f));
 	DesertBossHead->SetParentObject(Boss3_Born);
 
 	CMonster* DesertBossCircle = new CMonster();
@@ -123,7 +123,7 @@ void CPlayScene::Initialize()
 
 	CMonster* DesertBossSquare = new CMonster();
 	AddGameObject(eLayerType::Monster, DesertBossSquare, L"DesertBossSquare", Vector3(-0.5f, 0.0f, 1.0007f)
-		, Vector3(1.6f, 1.6f, 0.0f), true, L"Mesh", L"mt_DesertBossSquare", false);
+		, Vector3(1.6f, 1.6f, 0.0f), true, L"Mesh", L"mt_DesertBossSquare", true);
 	DesertBossSquare->SetParentObject(DesertBossRhombus);
 	CDesertBossSquareScript* DesertBossSquareScript = DesertBossSquare->AddComponent<CDesertBossSquareScript>();
 	cd = DesertBossSquare->AddComponent<CCollider2D>();
@@ -153,6 +153,11 @@ void CPlayScene::Initialize()
 
 void CPlayScene::Update()
 {
+	if (BossBornAt->GetOwner()->GetState() == CGameObject::eObjectState::Paused)
+	{
+		BossBornAt->GetOwner()->SetState(CGameObject::eObjectState::Dead);
+		//delete BossBornAt;
+	}
 	if (BossBornAt->GetCurAnimation()->GetKey() == L"Boss3_Born_1" && BossBornAt->GetCurAnimation()->IsComplete())
 	{
 		BossBornAt->PlayAnimation(L"Boss3_Born_2", false);
@@ -161,6 +166,7 @@ void CPlayScene::Update()
 	{
 		BossBornAt->GetOwner()->SetState(CGameObject::eObjectState::Paused);
 	}
+	
 	CScene::Update();
 }
 

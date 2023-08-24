@@ -54,31 +54,6 @@ HRESULT CTexture::ResourceLoad(const std::wstring name, const std::wstring& path
 void CTexture::BindShaderResource(eShaderStage stage, UINT startSlot)
 {
 	CDevice::GetInst()->BindShaderResource(stage, startSlot, mSRV.GetAddressOf());
-	/*switch (stage)
-	{
-	case eShaderStage::VS:
-		mGraphicContext->VSSetShaderResources(startSlot, 1, mSRV.GetAddressOf());
-		break;
-	case eShaderStage::HS:
-		mGraphicContext->HSSetShaderResources(startSlot, 1, mSRV.GetAddressOf());
-		break;
-	case eShaderStage::DS:
-		mGraphicContext->DSSetShaderResources(startSlot, 1, mSRV.GetAddressOf());
-		break;
-	case eShaderStage::GS:
-		mGraphicContext->GSSetShaderResources(startSlot, 1, mSRV.GetAddressOf());
-		break;
-	case eShaderStage::PS:
-		mGraphicContext->PSSetShaderResources(startSlot, 1, mSRV.GetAddressOf());
-		break;
-	case eShaderStage::CS:
-		mGraphicContext->CSSetShaderResources(startSlot, 1, mSRV.GetAddressOf());
-		break;
-	case eShaderStage::End:
-		break;
-	default:
-		break;
-	}*/
 }
 
 void CTexture::Clear()

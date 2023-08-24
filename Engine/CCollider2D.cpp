@@ -68,7 +68,7 @@ void CCollider2D::Render()
 void CCollider2D::OnCollisionEnter(CCollider2D* other)
 {
     ColliderData data = {};
-    data.id = other->GetColliderID();
+    data.id = other->GetColliderID(); // 0부터 시작하는데 0을 없는 데이터의 기준으로 사용하므로
     data.type = other->GetOwner()->GetLayerType();
     data.pos = other->GetColliderPosition();
 

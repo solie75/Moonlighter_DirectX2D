@@ -1,6 +1,7 @@
 #pragma once
 #include "CScript.h"
 #include "CFireBall.h"
+#include "CState.h"
 
 class CDesertBossCircleScript :
     public CScript
@@ -11,6 +12,7 @@ public:
         Enter,
         Stay,
         Exit,
+        Parts,
         End,
     };
 
@@ -21,6 +23,10 @@ private:
     eCircleAttackState mCircleAttackState;
     eCircleAttackState mPrevCircleAttackState;
     float mtime;
+    Vector2 mAimNormal;
+    float mPartsAttackSpeed;
+    CState mState;
+    UINT CollideId;
 
 public:
     CDesertBossCircleScript();
