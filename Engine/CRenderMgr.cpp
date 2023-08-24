@@ -1,6 +1,6 @@
 #include "CRenderMgr.h"
 #include "CTexture.h"
-#include "CPlayScene.h"
+#include "CDesertBossScene.h"
 #include "CEditor.h"
 
 CRenderMgr::CRenderMgr()

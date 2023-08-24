@@ -48,7 +48,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CMonster.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CPlayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CPlayerMoveScript.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)CPlayScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CResourceMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CScene.h" />
@@ -65,6 +65,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CStartMenuScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CState.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CStructedBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CTestScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CTimeMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CTransform.h" />
@@ -109,7 +110,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CMonster.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CPlayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CPlayerMoveScript.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)CPlayScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBossScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CResourceMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CScene.cpp" />
@@ -125,6 +126,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CStartMenuScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CState.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CStructedBuffer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CTestScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CTimeMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CTransform.cpp" />

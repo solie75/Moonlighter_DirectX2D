@@ -2,8 +2,9 @@
 #include "CVillageScene.h"
 #include "CStartMenuScene.h"
 #include "CShopScene.h"
-#include "CPlayScene.h"
+#include "CDesertBossScene.h"
 #include "CDungeonsEntranceScene.h"
+#include "CTestScene.h"
 
 CSceneMgr::CSceneMgr()
 	: mActiveScene(nullptr)
@@ -20,7 +21,8 @@ void CSceneMgr::Initialize()
 	//AddScene<CShopScene>(L"CShopScene");
 	//AddScene<CDungeonsEntranceScene>(L"CDungeonsEntranceScene");
 	//AddScene<CVillageScene>(L"VillageScene");
-	AddScene<CPlayScene>(L"TestScene");
+	//AddScene<CDesertBossScene>(L"CDesertBossScene");
+	AddScene<CTestScene>(L"CTestScene");
 }
 
 void CSceneMgr::Update()

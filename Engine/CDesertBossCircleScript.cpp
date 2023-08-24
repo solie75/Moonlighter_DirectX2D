@@ -38,6 +38,7 @@ void CDesertBossCircleScript::Update()
 	
 	CDesertBossScript* HeadScript = parentObj->GetComponent<CDesertBossScript>(eComponentType::Script);
 
+	// Parts Attack Enter
 	if (HeadScript->GetAttackState() == CDesertBossScript::eAttackState::Parts && mCircleAttackState != eCircleAttackState::Parts)
 	{
 		at->PlayAnimation(L"Boss3_Circle_Light_On", false);
@@ -60,27 +61,61 @@ void CDesertBossCircleScript::Update()
 		mAimNormal.Normalize();
 	}
 
+	if (HeadScript->GetAttackState() == CDesertBossScript::eAttackState::End && mCircleAttackState == eCircleAttackState::Parts)
+	{
+		mCircleAttackState = eCircleAttackState::End;
+	}
+
+	// Parts Attack Stay
 	if (mCircleAttackState == eCircleAttackState::Parts)
 	{
 		// 벽과 충돌했을 때 mAimNormal 변경
 		Vector2 otherPos = cd->GetColliderData(eLayerType::Background).pos;
-		UINT id = cd->GetColliderData(eLayerType::Background).id;
+		CCollider2D::ColliderData CD;
+		CD.id = 0;
+		CD.type = eLayerType::End;
+		CD.pos = Vector2(0.0f, 0.0f);
 
-		if (id != CollideId && id != 0)
+		if (cd->GetColliderData(eLayerType::Monster).id != 0)
 		{
+			CD = cd->GetColliderData(eLayerType::Monster);
+		}
+		if (cd->GetColliderData(eLayerType::Background).id != 0)
+		{
+			CD = cd->GetColliderData(eLayerType::Background);
+		}
+		
+		if (CD.type == eLayerType::Monster) // 충돌체가 배경 
+		{
+			if (CD.id != CollideId)
+			{
+				mAimNormal.x = thisPos.x - CD.pos.x;
+				mAimNormal.y = thisPos.y - CD.pos.y;
+				CollideId = CD.id;
 
-			if (otherPos.x == 0) // 충돌한 벽 충돌체가 Up 과 Down 일 때
-			{
-				mAimNormal.y *= -1;
-				CollideId = id;
-			}
-			else
-			{
-				mAimNormal.x *= -1;
-				CollideId = id;
+				mAimNormal.Normalize();
 			}
 			
 		}
+		if (CD.type == eLayerType::Background) // 충돌체가 배경 벽일 때
+		{
+			if (CD.id != CollideId)
+			{
+				if (otherPos.x == 0) // 충돌한 벽 충돌체가 Up 과 Down 일 때
+				{
+					mAimNormal.y *= -1;
+					CollideId = CD.id;
+					mAimNormal.Normalize();
+				}
+				if (otherPos.y == 0)
+				{
+					mAimNormal.x *= -1;
+					CollideId = CD.id;
+					mAimNormal.Normalize();
+				}
+			}
+		}
+		
 
 		mtime += CTimeMgr::GetInst()->GetDeltaTime();
 		if (mtime > 0.01f)
@@ -89,7 +124,7 @@ void CDesertBossCircleScript::Update()
 			mtime = 0.0f;
 		}
 	}
-	else
+	else // eCircleAttackState != Part
 	{
 		// Direction from this to parent Object
 		Vector3 direct = Vector3(parentPos.x - thisPos.x, parentPos.y - thisPos.y, 0.0f);
@@ -98,7 +133,7 @@ void CDesertBossCircleScript::Update()
 		// moving distance in 1fps
 		mtime += CTimeMgr::GetInst()->GetDeltaTime();
 		float moveDist = (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-		float dist = Vector3::Distance(parentPos, thisPos);
+		float dist = Vector3::Distance(Vector3(parentPos.x, parentPos.y, 0.0f), Vector3(thisPos.x, thisPos.y, 0.0f)); // Parts 전에는 정상적으로 작동하다가 Parts 후에 이상하게 작동한다.
 		if (dist > 0.9f)
 		{
 			Vector3 diff = Vector3(direct.x * moveDist, direct.y * moveDist, 0.0f);

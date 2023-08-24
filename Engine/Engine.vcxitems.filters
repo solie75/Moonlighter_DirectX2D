@@ -85,9 +85,6 @@
     <Filter Include="GameObject\Component\Script\PlayerMove">
       <UniqueIdentifier>{d742bc4c-1e0c-4e55-b6e4-b05c1a96ddf7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\TestScene">
-      <UniqueIdentifier>{e8a3f225-1c85-4432-bb3e-f77d9581e52d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene\02.VillageScene">
       <UniqueIdentifier>{80607246-b92d-4e22-a6a3-83c45f3442a0}</UniqueIdentifier>
     </Filter>
@@ -181,6 +178,12 @@
     <Filter Include="GameObject\Object\Projectile\LavaBall">
       <UniqueIdentifier>{4af33d1f-1bb2-44c3-a912-1af072e36e2a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\05.DesertBossScene">
+      <UniqueIdentifier>{e8a3f225-1c85-4432-bb3e-f77d9581e52d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\TestScene">
+      <UniqueIdentifier>{f11c98ea-1664-4e56-aff8-25d52cea7cf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -252,8 +255,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CSceneMgr.h">
       <Filter>Manager\SceneMgr</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CPlayScene.h">
-      <Filter>Scene\TestScene</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossScene.h">
+      <Filter>Scene\05.DesertBossScene</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CTransform.h">
       <Filter>GameObject\Component\Transform</Filter>
@@ -360,6 +363,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CLavaBall.h">
       <Filter>GameObject\Object\Projectile\LavaBall</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CTestScene.h">
+      <Filter>Scene\TestScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -419,8 +425,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CSceneMgr.cpp">
       <Filter>Manager\SceneMgr</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CPlayScene.cpp">
-      <Filter>Scene\TestScene</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBossScene.cpp">
+      <Filter>Scene\05.DesertBossScene</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CTransform.cpp">
       <Filter>GameObject\Component\Transform</Filter>
@@ -523,6 +529,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CLavaBall.cpp">
       <Filter>GameObject\Object\Projectile\LavaBall</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CTestScene.cpp">
+      <Filter>Scene\TestScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

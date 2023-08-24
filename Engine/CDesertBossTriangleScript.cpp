@@ -59,25 +59,52 @@ void CDesertBossTriangleScript::Update()
 		mAimNormal.Normalize();
 	}
 
+	if (HeadScript->GetAttackState() == CDesertBossScript::eAttackState::End && mTriangleAttackState == eTriangleAttackState::Parts)
+	{
+		mTriangleAttackState = eTriangleAttackState::End;
+	}
+
 	if (mTriangleAttackState == eTriangleAttackState::Parts)
 	{
 		Vector2 otherPos = cd->GetColliderData(eLayerType::Background).pos;
-		UINT id = cd->GetColliderData(eLayerType::Background).id;
-
-		if (id != CollideId && id != 0)
+		CCollider2D::ColliderData CD;
+		CD.id = 0;
+		CD.type = eLayerType::End;
+		CD.pos = Vector2(0.0f, 0.0f);
+		if (cd->GetColliderData(eLayerType::Monster).id != 0)
 		{
+			CD = cd->GetColliderData(eLayerType::Monster);
+		}
+		if (cd->GetColliderData(eLayerType::Background).id != 0)
+		{
+			CD = cd->GetColliderData(eLayerType::Background);
+		}
 
-			if (otherPos.x == 0) // 충돌한 벽 충돌체가 Up 과 Down 일 때
-			{
-				mAimNormal.y *= -1;
-				CollideId = id;
-			}
-			else
-			{
-				mAimNormal.x *= -1;
-				CollideId = id;
-			}
 
+		if (CD.id != CollideId && CD.id != 0)
+		{
+			if (CD.type == eLayerType::Monster) // 충돌체가 배경 
+			{
+				mAimNormal.x = thisPos.x - CD.pos.x;
+				mAimNormal.y = thisPos.y - CD.pos.y;
+				CollideId = CD.id;
+				mAimNormal.Normalize();
+			}
+			if (CD.type == eLayerType::Background) // 충돌체가 배경 벽일 때
+			{
+				if (otherPos.x == 0) // 충돌한 벽 충돌체가 Up 과 Down 일 때
+				{
+					mAimNormal.y *= -1;
+					CollideId = CD.id;
+					mAimNormal.Normalize();
+				}
+				if (otherPos.y == 0)
+				{
+					mAimNormal.x *= -1;
+					CollideId = CD.id;
+					mAimNormal.Normalize();
+				}
+			}
 		}
 
 
@@ -97,7 +124,7 @@ void CDesertBossTriangleScript::Update()
 		// moving distance in 1fps
 		mtime += CTimeMgr::GetInst()->GetDeltaTime();
 		float moveDist = (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-		float dist = Vector3::Distance(parentPos, thisPos);
+		float dist = Vector3::Distance(Vector3(parentPos.x, parentPos.y, 0.0f), Vector3(thisPos.x, thisPos.y, 0.0f));
 		if (dist > 0.9f)
 		{
 			Vector3 diff = Vector3(direct.x * moveDist, direct.y * moveDist, 0.0f);
