@@ -184,6 +184,12 @@
     <Filter Include="Scene\TestScene">
       <UniqueIdentifier>{f11c98ea-1664-4e56-aff8-25d52cea7cf1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphic\GraphicShader\Shader">
+      <UniqueIdentifier>{4e2bbcb7-9c12-4cef-90db-373f58a7387e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic\GraphicShader\ComputeShader">
+      <UniqueIdentifier>{afff90ad-70d8-4ec1-8b80-0de49ebd4551}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -215,9 +221,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CEntity.h">
       <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CShader.h">
-      <Filter>Graphic\GraphicShader</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CMesh.h">
       <Filter>Resource\Mesh</Filter>
@@ -366,6 +369,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CTestScene.h">
       <Filter>Scene\TestScene</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CShader.h">
+      <Filter>Graphic\GraphicShader\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CComputeShader.h">
+      <Filter>Graphic\GraphicShader\ComputeShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -388,9 +397,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CEntity.cpp">
       <Filter>Common</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CShader.cpp">
-      <Filter>Graphic\GraphicShader</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CMesh.cpp">
       <Filter>Resource\Mesh</Filter>
@@ -532,6 +538,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CTestScene.cpp">
       <Filter>Scene\TestScene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CShader.cpp">
+      <Filter>Graphic\GraphicShader\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CComputeShader.cpp">
+      <Filter>Graphic\GraphicShader\ComputeShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

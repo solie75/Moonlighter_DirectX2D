@@ -7,6 +7,7 @@ enum class eResourceType
 	Material,
 	Mesh,
 	Animation,
+	ComputeShader,
 	End,
 };
 

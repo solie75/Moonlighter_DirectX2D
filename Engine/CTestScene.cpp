@@ -1,6 +1,7 @@
 #include "CTestScene.h"
 #include "CPlayer.h"
 #include "CMonster.h"
+#include "CComputeShader.h"
 
 CTestScene::CTestScene()
 {
@@ -12,6 +13,9 @@ CTestScene::~CTestScene()
 
 void CTestScene::Initialize()
 {
+	CComputeShader* cs = new CComputeShader();
+	cs->Create(L"PaintCS.hlsl", "main");
+
 	// Will
 	CPlayer* Will = new CPlayer();
 	AddGameObject(eLayerType::Player, Will, L"Will", Vector3(3.0f, 0.0f, 1.0002f)
@@ -21,8 +25,6 @@ void CTestScene::Initialize()
 	CMonster* Smile = new CMonster();
 	AddGameObject(eLayerType::Monster, Smile, L"Smile", Vector3(0.0f, 0.0f, 1.0003f)
 		, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"mt_Smile", false);
-
-
 
 	// Camera
 	CGameObject* mainCamera = new CGameObject();

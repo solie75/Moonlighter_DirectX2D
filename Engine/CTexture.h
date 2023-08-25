@@ -19,8 +19,13 @@ private:
 	ComPtr<ID3D11Texture2D> mTexture;
 	ComPtr<ID3D11ShaderResourceView> mSRV;
 	D3D11_TEXTURE2D_DESC mDesc;
-
 	ID3D11DeviceContext* mGraphicContext;
+
+	// Compute Shader 위한 텍스쳐 구조 변경
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> mRTV;
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> mDSV;
+	Microsoft::WRL::ComPtr<ID3D11UnorderedAccessView> mUAV;
+
 
 public:
 	CTexture();
@@ -35,9 +40,10 @@ public:
 	const Image* GetScratchImage() { return mImage.GetImages(); }
 	void InitScratImage(size_t width, size_t hight) {	mImage.Initialize2D(DXGI_FORMAT_R8G8B8A8_UNORM, width, hight, 1, 1); }
 
-	ComPtr<ID3D11ShaderResourceView> GetSRV() { return mSRV; }
+	//ComPtr<ID3D11ShaderResourceView> GetSRV() { return mSRV; }
 
-	void CreateSRV() {
+	void CreateSRV() // CreateAtlas 의 atlasTex->CreateSRV() 로 사용되고 있음
+	{ 
 		CreateShaderResourceView
 		(
 			CDevice::GetInst()->GetDevice()
@@ -50,5 +56,20 @@ public:
 	}
 
 	void Clear();
+
+	// Compute Shader 위한 텍스쳐 구조 변경
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> GetRTV() { return mRTV; }
+	void SetRTV(Microsoft::WRL::ComPtr<ID3D11RenderTargetView> rtv) { mRTV = rtv; }
+
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> GetDSV() { return  mDSV; }
+	void SetDSV(Microsoft::WRL::ComPtr<ID3D11DepthStencilView> dsv) { mDSV = dsv; }
+
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> GetSRV() { return  mSRV; }
+	Microsoft::WRL::ComPtr<ID3D11UnorderedAccessView> GetUAV() { return  mUAV; }
+
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> GetTexture() { return mTexture; }
+	void SetTexture(Microsoft::WRL::ComPtr<ID3D11Texture2D> texture) { mTexture = texture; }
+
+	bool Create(UINT width, UINT height, DXGI_FORMAT format, UINT bindFlag);
 };
 
