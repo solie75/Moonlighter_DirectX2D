@@ -55,17 +55,13 @@ void CAnimation::CreateAnimation(std::wstring aniName, std::shared_ptr<CTexture>
 	SetKey(aniName);
 	mAtlas = atlas;
 
-	float width = (float)atlas->GetWidth();
-	float height = (float)atlas->GetHeight();
+	float width = (float)atlas->GetMetadataWidth();
+	float height = (float)atlas->GetMetadataHeight();
 
 	for (int i = 0 ; i < spriteNum; i++)
 	{
 		Sprite sprite = {};
-		//sprite.leftTop.x = LeftTop.x + (i * size.x) / width; // 이해 가지 않는다. width/atlasNum * i 여야 하는것 아닌가
-		//sprite.leftTop.x = LeftTop.x + i * (width / 10.f);
 		sprite.leftTop.x = i * (spriteSize.x);
-		//sprite.leftTop.y = LeftTop.y / height; // 가로의 sprite 개수를 10 개로 한정하고 다음 가로줄로 넘어가는 거면 안되나
-		//sprite.leftTop.y = LeftTop.y + ((int)i / 10) * spriteSize.y;
 		sprite.leftTop.y = 0.0f;
 		sprite.spriteSize = spriteSize;
 		sprite.Offset = Vector2(i*(spriteSize.x / width), 0.0f);
@@ -81,9 +77,7 @@ void CAnimation::Binds(CConstantBuffer* aniCB)
 	// texture bind'
 	mAtlas->BindShaderResource(eShaderStage::PS, 12);
 
-	//Vector2 scale = Vector2(mSprites[mIndex].spriteSize.x / mSprites[mIndex].atlasSize.x, mSprites[mIndex].spriteSize.y / mSprites[mIndex].atlasSize.y);
 	Vector2 scale = Vector2(mSprites[mIndex].spriteSize.x / mSprites[mIndex].atlasSize.x, 1.0f);
-	//Vector2 offset = Vector2(mIndex * scale.x, (mIndex / 10) * scale.y);
 	Vector2 offset = mSprites[mIndex].Offset;
 
 	AnimatorCB cb;

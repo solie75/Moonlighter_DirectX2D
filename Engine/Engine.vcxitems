@@ -47,6 +47,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CMeshRender.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CMonster.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CPaintShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CPlayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CPlayerMoveScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossScene.h" />
@@ -110,6 +111,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CMeshRender.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CMonster.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CPaintShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CPlayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CPlayerMoveScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBossScene.cpp" />

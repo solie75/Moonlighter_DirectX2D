@@ -190,6 +190,9 @@
     <Filter Include="Graphic\GraphicShader\ComputeShader">
       <UniqueIdentifier>{afff90ad-70d8-4ec1-8b80-0de49ebd4551}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphic\GraphicShader\PaintShader">
+      <UniqueIdentifier>{ae406556-9ea9-44a9-b5b8-a0da54a22bd2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -375,6 +378,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CComputeShader.h">
       <Filter>Graphic\GraphicShader\ComputeShader</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CPaintShader.h">
+      <Filter>Graphic\GraphicShader\PaintShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -544,6 +550,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CComputeShader.cpp">
       <Filter>Graphic\GraphicShader\ComputeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CPaintShader.cpp">
+      <Filter>Graphic\GraphicShader\PaintShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

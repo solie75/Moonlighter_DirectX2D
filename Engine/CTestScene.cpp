@@ -2,6 +2,8 @@
 #include "CPlayer.h"
 #include "CMonster.h"
 #include "CComputeShader.h"
+#include "CPaintShader.h"
+//#include "CMaterial.h"
 
 CTestScene::CTestScene()
 {
@@ -13,8 +15,10 @@ CTestScene::~CTestScene()
 
 void CTestScene::Initialize()
 {
-	CComputeShader* cs = new CComputeShader();
-	cs->Create(L"PaintCS.hlsl", "main");
+	std::shared_ptr<CPaintShader> paintShader = CResourceMgr::GetInst()->Find<CPaintShader>(L"PaintShader"); // paintShader ∞° empty ¿Ã¥Ÿ.
+	std::shared_ptr<CTexture> paintTexture = CResourceMgr::GetInst()->Find<CTexture>(L"PaintTexture");
+	paintShader->SetTarget(paintTexture);
+	paintShader->OnExcute();
 
 	// Will
 	CPlayer* Will = new CPlayer();
@@ -25,6 +29,11 @@ void CTestScene::Initialize()
 	CMonster* Smile = new CMonster();
 	AddGameObject(eLayerType::Monster, Smile, L"Smile", Vector3(0.0f, 0.0f, 1.0003f)
 		, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"mt_Smile", false);
+	CMeshRender* mr = Smile->GetComponent<CMeshRender>(eComponentType::MeshRender);
+	std::shared_ptr<CMaterial> mt = mr->GetMaterial();
+	mt->SetTexture(paintTexture);
+	int a = 0;
+
 
 	// Camera
 	CGameObject* mainCamera = new CGameObject();

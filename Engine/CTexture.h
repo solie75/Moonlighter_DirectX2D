@@ -26,6 +26,8 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> mDSV;
 	Microsoft::WRL::ComPtr<ID3D11UnorderedAccessView> mUAV;
 
+	UINT mWidth;
+	UINT mHeight;
 
 public:
 	CTexture();
@@ -34,8 +36,17 @@ public:
 	virtual HRESULT ResourceLoad(const std::wstring name, const std::wstring& path) override;
 	void BindShaderResource(eShaderStage stage, UINT startSlot);
 
-	size_t GetWidth() { return mImage.GetMetadata().width; }
-	size_t GetHeight() { return mImage.GetMetadata().height; }
+	//Compute Shader 이후
+	void BindUnorderedAccessViews(UINT slot);
+	void ClearUnorderedAccessViews(UINT slot);
+
+	// 일반적인 이미지의 크기를 가져오는 것과 Create() 때에 크기를 직접 정해주는 경우가 따로 필요하다.
+	size_t GetWidth() { return mWidth; }
+	size_t GetHeight() { return mHeight; }
+
+	size_t GetMetadataWidth() { return mImage.GetMetadata().width; }
+	size_t GetMetadataHeight() { return mImage.GetMetadata().height; }
+	
 
 	const Image* GetScratchImage() { return mImage.GetImages(); }
 	void InitScratImage(size_t width, size_t hight) {	mImage.Initialize2D(DXGI_FORMAT_R8G8B8A8_UNORM, width, hight, 1, 1); }
@@ -70,6 +81,6 @@ public:
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> GetTexture() { return mTexture; }
 	void SetTexture(Microsoft::WRL::ComPtr<ID3D11Texture2D> texture) { mTexture = texture; }
 
-	bool Create(UINT width, UINT height, DXGI_FORMAT format, UINT bindFlag);
+	bool CreateTexture(UINT width, UINT height, DXGI_FORMAT format, UINT bindFlag);
 };
 

@@ -10,9 +10,10 @@ RWTexture2D<float4> tex : register(u0);
 
 void main(uint3 DTid : SV_DispatchThreadID)
 {
-    if(1024 <= DTid.x || 1024 <= DTid.y)
+    if (DTid.x >= 1024 || DTid.y >= 1024)
     {
         return;
     }
-    tex[DTid.xy] = float4(1.f, 0.f, 0.f, 1.f);
+
+    tex[DTid.xy] = float4(0.f, 0.f, 1.f, 1.f);
 }

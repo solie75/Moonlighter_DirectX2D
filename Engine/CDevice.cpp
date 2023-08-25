@@ -284,6 +284,21 @@ void CDevice::BindShaderResource(eShaderStage stage, UINT startSlot, ID3D11Shade
 	}
 }
 
+void CDevice::BindUnorderedAccess(UINT slot, ID3D11UnorderedAccessView** ppUnorrderedAccessViews, const UINT* pUAVInitialCounts)
+{
+	mContext->CSSetUnorderedAccessViews(slot, 1, ppUnorrderedAccessViews, pUAVInitialCounts);
+}
+
+void CDevice::BindComputeShader(ID3D11ComputeShader* pComputeShader)
+{
+	mContext->CSSetShader(pComputeShader, 0, 0);
+}
+
+void CDevice::Dispatch(UINT ThreadGroupCountX, UINT ThreadGroupCountY, UINT ThreadGroupCountZ)
+{
+	mContext->Dispatch(ThreadGroupCountX, ThreadGroupCountY, ThreadGroupCountZ);
+}
+
 void CDevice::UpdateViewPort()
 {
 	RECT winRect = {};

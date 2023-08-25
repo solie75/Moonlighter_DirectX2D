@@ -45,6 +45,7 @@ public:
 	void BindConstantBuffer(eShaderStage stage, CConstantBuffer* tCB);
 	void SetUpState();
 	void BindSampler(eShaderStage stage, UINT StartSlot, ID3D11SamplerState** ppSamplerState);
+	void LoadUAVTexture();
 	void LoadTexture(const std::wstring& textureName, const std::wstring& path);
 	void LoadMaterial(std::shared_ptr<CShader> shader, const std::wstring& textureName, eRenderingMode renderMode);
 	void CreateAtlas(const std::wstring& spriteName, int spriteNum);

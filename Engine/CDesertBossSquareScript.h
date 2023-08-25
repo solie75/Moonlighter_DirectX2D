@@ -1,5 +1,6 @@
 #pragma once
 #include "CScript.h"
+
 class CDesertBossSquareScript :
     public CScript
 {

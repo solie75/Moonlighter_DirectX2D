@@ -48,12 +48,28 @@ HRESULT CTexture::ResourceLoad(const std::wstring name, const std::wstring& path
 	);
 	mSRV->GetResource((ID3D11Resource**)mTexture.GetAddressOf());
 
+	mWidth = mImage.GetMetadata().width;
+	mHeight = mImage.GetMetadata().height;
+
 	return S_OK;
 }
 
 void CTexture::BindShaderResource(eShaderStage stage, UINT startSlot)
 {
 	CDevice::GetInst()->BindShaderResource(stage, startSlot, mSRV.GetAddressOf());
+}
+
+void CTexture::BindUnorderedAccessViews(UINT slot)
+{
+	UINT i = -1;
+	CDevice::GetInst()->BindUnorderedAccess(slot, mUAV.GetAddressOf(), &i);
+}
+
+void CTexture::ClearUnorderedAccessViews(UINT slot)
+{
+	ID3D11UnorderedAccessView* p = nullptr;
+	UINT i = -1;
+	CDevice::GetInst()->BindUnorderedAccess(slot, &p, &i);
 }
 
 void CTexture::Clear()
@@ -68,7 +84,7 @@ void CTexture::Clear()
 	mGraphicContext->CSSetShaderResources((UINT)eShaderStage::CS, 1, &srv);
 }
 
-bool CTexture::Create(UINT width, UINT height, DXGI_FORMAT format, UINT bindFlag)
+bool CTexture::CreateTexture(UINT width, UINT height, DXGI_FORMAT format, UINT bindFlag)
 {
 	if (mTexture == nullptr)
 	{
@@ -86,7 +102,11 @@ bool CTexture::Create(UINT width, UINT height, DXGI_FORMAT format, UINT bindFlag
 		mDesc.MipLevels = 0;
 		mDesc.MiscFlags = 0;
 
-		if (!CDevice::GetInst()->GetDevice()->CreateTexture2D(&mDesc, nullptr, mTexture.GetAddressOf()))
+		// mImage 의 크기 설정
+		mWidth = width;
+		mHeight = height;
+
+		if (FAILED(CDevice::GetInst()->GetDevice()->CreateTexture2D(&mDesc, nullptr, mTexture.GetAddressOf())))
 		{
 			return false;
 		}

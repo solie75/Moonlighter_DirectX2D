@@ -2,6 +2,7 @@
 #include "CTexture.h"
 #include "CDesertBossScene.h"
 #include "CEditor.h"
+#include "CPaintShader.h"
 
 CRenderMgr::CRenderMgr()
 	: mCB{}
@@ -61,6 +62,10 @@ void CRenderMgr::Init()
 	aniShader->CreateInputLayout();
 	CResourceMgr::GetInst()->Insert(L"AnimationShader", aniShader);
 
+	std::shared_ptr<CPaintShader> paintShader = std::make_shared<CPaintShader>();
+	paintShader->Create(L"PaintCS.hlsl", "main");
+	CResourceMgr::GetInst()->Insert(L"PaintShader", paintShader);
+
 	// Create Grid Material
 	//std::shared_ptr<CMaterial> mt_Grid = std::make_shared<CMaterial>();
 	//mt_Grid->SetShader(gridShader);
@@ -81,6 +86,9 @@ void CRenderMgr::Init()
 
 			LoadTexture(L"Smile", L"..\\Resource\\Texture\\Smile.png");
 			LoadMaterial(shader, L"Smile", eRenderingMode::CutOut);
+
+			LoadUAVTexture(); // 여기에서 PaintTexture 로 Insert
+			LoadMaterial(shader, L"PaintTexture", eRenderingMode::Transparent);
 		}
 		{ // will
 			LoadTexture(L"Will", L"..\\Resource\\Texture\\Will.png");
@@ -452,6 +460,7 @@ void CRenderMgr::Init()
 }
 
 
+
 void CRenderMgr::LoadTexture(const std::wstring& textureName, const std::wstring& path)
 {
 	std::shared_ptr<CTexture> tex = std::make_shared<CTexture>();
@@ -683,6 +692,14 @@ void CRenderMgr::BindSampler(eShaderStage stage, UINT StartSlot, ID3D11SamplerSt
 	default:
 		break;
 	}
+}
+
+void CRenderMgr::LoadUAVTexture()
+{
+	// paint texture
+	std::shared_ptr<CTexture> uavTexture = std::make_shared<CTexture>();
+	uavTexture->CreateTexture(1024, 1024, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS);
+	CResourceMgr::GetInst()->Insert(L"PaintTexture", uavTexture);
 }
 
 //void CRenderMgr::CreateAtlas(const std::wstring& path, const std::wstring& spriteName, int spriteNum)
