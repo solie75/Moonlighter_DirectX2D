@@ -33,7 +33,7 @@ bool CComputeShader::Create(const std::wstring& name, const std::string& methodN
     CDevice::GetInst()->CompileFromfile(fullPath, methodName, "cs_5_0", mCSBlob.GetAddressOf());
     CDevice::GetInst()->CrateComputeShader(mCSBlob->GetBufferPointer(), mCSBlob->GetBufferSize(), mCS.GetAddressOf());
 
-    return false;
+    return true;
 }
 
 void CComputeShader::OnExcute()

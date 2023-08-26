@@ -19,7 +19,7 @@ float4 main(VSOut In) : SV_TARGET
     float4 color = (float) 0.0f;
     color = albedoTexture.Sample(anisotropicSampler, In.UV);
     
-    float4 lightColor = float4(0.2f, 0.2f, 0.2f, 1.0f);
+    float4 lightColor = float4(0.2f, 0.2f, 0.2f, 0.2f);
     
     for (int i = 0; i < 2; i++)
     {

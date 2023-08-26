@@ -21,7 +21,7 @@ CRenderMgr::~CRenderMgr()
 void CRenderMgr::Init()
 {
 	lightsBuffer = new CStructedBuffer();
-	lightsBuffer->CreateStructedBuffer(sizeof(LightAttribute), 2, eViewType::None, nullptr);
+	lightsBuffer->CreateStructedBuffer(sizeof(LightAttribute), 2, eViewType::SRV, nullptr);
 
 	// Set Sampler
 	SetUpState();
@@ -87,7 +87,7 @@ void CRenderMgr::Init()
 	particleShader->SetDSType(eDSType::NoWrite);
 	particleShader->SetBSType(eBSType::AlphaBlend);
 	particleShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_POINTLIST);
-	particleShader->CreateInputLayout();
+	//particleShader->CreateInputLayout();
 	CResourceMgr::GetInst()->Insert(L"ParticleShader", particleShader);
 
 	// Create Grid Material
@@ -526,8 +526,6 @@ void CRenderMgr::Render()
 	{
 		CEditor::GetInst()->DebugRender(debugMesh);
 	}
-
-
 
 	CCameraMgr::GetInst()->ClearCamera();
 	debugMeshs.clear();

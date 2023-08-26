@@ -5,8 +5,8 @@ CTimeMgr::CTimeMgr()
 	, mCurCount{}
 	, mFrequency{}
 	, mFPS(0)
-	, mDeltaTime(0.f)
-	, mTime(0.f)
+	//, mDeltaTime(0.f)
+	//, mTime(0.f)
 {
 	QueryPerformanceFrequency(&mFrequency);
 	QueryPerformanceCounter(&mCurCount);

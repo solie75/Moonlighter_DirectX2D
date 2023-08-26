@@ -66,7 +66,7 @@ void CTestScene::Initialize()
 		AddGameObject(eLayerType::Light, light, L"light", Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f), false, L"", L"", false);
 		CLight* lightComp = light->AddComponent<CLight>();
 		lightComp->SetType(eLightType::Point);
-		lightComp->SetColor(Vector4(0.0f, 0.0f, 0.0f, 1.0f));
+		lightComp->SetColor(Vector4(0.0f, 0.0f, 1.0f, 1.0f));
 		lightComp->SetRadius(3.0f);
 	}
 

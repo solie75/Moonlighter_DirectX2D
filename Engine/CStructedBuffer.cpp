@@ -35,7 +35,8 @@ bool CStructedBuffer::CreateStructedBuffer(UINT size, UINT stride, eViewType typ
     if (mType == eViewType::UAV)
     {
         mDesc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
-        mDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_FLAG::D3D11_BIND_UNORDERED_ACCESS; // Texture Register Binding
+        mDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_SHADER_RESOURCE
+            | D3D11_BIND_FLAG::D3D11_BIND_UNORDERED_ACCESS; // Texture Register Binding
         mDesc.CPUAccessFlags = 0;
     }
 
@@ -44,14 +45,14 @@ bool CStructedBuffer::CreateStructedBuffer(UINT size, UINT stride, eViewType typ
         D3D11_SUBRESOURCE_DATA tSub = {};
         tSub.pSysMem = data;
 
-        if (!(CDevice::GetInst()->GetDevice()->CreateBuffer(&mDesc, &tSub, mBuffer.GetAddressOf())))
+        if (FAILED(CDevice::GetInst()->GetDevice()->CreateBuffer(&mDesc, &tSub, mBuffer.GetAddressOf())))
         {
             return false;
         }
     }
     else
     {
-        if (!(CDevice::GetInst()->GetDevice()->CreateBuffer(&mDesc, nullptr, mBuffer.GetAddressOf())))
+        if (FAILED(CDevice::GetInst()->GetDevice()->CreateBuffer(&mDesc, nullptr, mBuffer.GetAddressOf())))
         {
             return false;
         }
@@ -63,7 +64,7 @@ bool CStructedBuffer::CreateStructedBuffer(UINT size, UINT stride, eViewType typ
     srvDesc.ViewDimension = D3D_SRV_DIMENSION::D3D_SRV_DIMENSION_BUFFEREX;
 
     //HRESULT hr = CDevice::GetInst()->GetDevice()->CreateShaderResourceView(mBuffer.Get(), &srvDesc, mSRV.GetAddressOf());
-    if (!(CDevice::GetInst()->GetDevice()->CreateShaderResourceView(mBuffer.Get(), &srvDesc, mSRV.GetAddressOf())))
+    if (FAILED(CDevice::GetInst()->GetDevice()->CreateShaderResourceView(mBuffer.Get(), &srvDesc, mSRV.GetAddressOf())))
     {
         return false;
     }

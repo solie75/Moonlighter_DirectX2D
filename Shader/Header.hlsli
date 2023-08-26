@@ -27,7 +27,7 @@ cbuffer DebugColor : register(b4)
 
 cbuffer ParticleSystem : register(b5)
 {
-    uint elementCout;
+    uint elementCount;
     float elapsedTime;
     int padd;
     int padd2;
@@ -76,8 +76,8 @@ void CalculateLight2D(in out float4 lightColor, float3 position, int idx)
     else if (1 == lightsAttribute[idx].type)
     {
         float length = distance(position.xy, lightsAttribute[idx].position.xy);
-        
-        if(length < lightsAttribute[idx].radius)
+
+        if (length < lightsAttribute[idx].radius)
         {
             float ratio = 1.0f - (length / lightsAttribute[idx].radius);
             lightColor += lightsAttribute[idx].color * ratio;
@@ -85,7 +85,6 @@ void CalculateLight2D(in out float4 lightColor, float3 position, int idx)
     }
     else
     {
-        
-    }
 
+    }
 }

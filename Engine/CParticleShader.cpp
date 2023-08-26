@@ -7,6 +7,7 @@ CParticleShader::CParticleShader()
 	: CComputeShader(128, 1, 1)
 	, mParticleBuffer(nullptr)
 {
+	mParticleCB = new CConstantBuffer();
 }
 
 CParticleShader::~CParticleShader()
@@ -38,6 +39,6 @@ void CParticleShader::SetParticleBuffer(CStructedBuffer* particleBuffer)
 	cbData.elementCount = mParticleBuffer->GetStride();
 	cbData.elpasedTime = CTimeMgr::GetInst()->GetDeltaTime(); // 
 
-	mParticleCB->InitConstantBuffer(sizeof(mParticleCB), eCBType::Particle, &cbData);
+	mParticleCB->InitConstantBuffer(sizeof(ParticleCB), eCBType::Particle, &cbData);
 	CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::CS, mParticleCB);
 }

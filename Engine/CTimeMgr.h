@@ -11,8 +11,8 @@ private:
 	LARGE_INTEGER	mFrequency;
 
 	UINT			mFPS;
-	double			mDeltaTime;
-	double			mTime;
+	static double	mDeltaTime;
+	static double	mTime;
 
 public:
 	CTimeMgr();
@@ -21,6 +21,8 @@ public:
 	void Update();
 	void Render(HWND _hWnd);
 
-	double GetDeltaTime() { return mDeltaTime; }
+	__forceinline static double GetDeltaTime() { return mDeltaTime; }
 };
 
+double CTimeMgr::mDeltaTime = 0.0l;
+double CTimeMgr::mTime = 0.0f;
