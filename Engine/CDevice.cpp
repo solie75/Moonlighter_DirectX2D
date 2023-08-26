@@ -313,6 +313,11 @@ void CDevice::UpdateViewPort()
 	mContext->RSSetViewports(1, &mViewPort);
 }
 
+void CDevice::DrawIndexedInstanced(UINT IndexCountPerInstance, UINT InstanceCount, UINT StartIndexLocation, INT BaseVertexLocation, UINT StartInstanceLocation)
+{
+	mContext->DrawIndexedInstanced(IndexCountPerInstance, InstanceCount, StartIndexLocation, BaseVertexLocation, StartInstanceLocation);
+}
+
 
 
 

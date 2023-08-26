@@ -21,6 +21,8 @@ bool CConstantBuffer::InitConstantBuffer(size_t size, eCBType type, void* data)
 
 	CDevice::GetInst()->GetDevice()->CreateBuffer(&mDesc, nullptr, mBuffer.GetAddressOf());
 
+
+	// SetData -> SetConstantBuffer ºÎºÐ
 	D3D11_MAPPED_SUBRESOURCE subRes = {};
 	CDevice::GetInst()->GetContext()->Map(mBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &subRes);
 	memcpy(subRes.pData, data, mDesc.ByteWidth);

@@ -16,6 +16,8 @@ private:
     D3D11_BUFFER_DESC mVBDesc;
     D3D11_BUFFER_DESC mIBDesc;
 
+    UINT mIndexCount;
+
 public:
     CMesh();
     ~CMesh();
@@ -24,6 +26,7 @@ public:
 
     void CreateBuffer();
     void BindBuffer();
+    void RenderInstanced(UINT startIndexLocation);
 
     virtual HRESULT ResourceLoad(const std::wstring name, const std::wstring& path) { return S_OK; }
 };

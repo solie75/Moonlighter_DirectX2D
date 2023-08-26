@@ -59,10 +59,12 @@ public:
 	void BindShaderResource(eShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV);
 	void BindUnorderedAccess(UINT slot, ID3D11UnorderedAccessView** ppUnorrderedAccessViews, const UINT* pUAVInitialCounts);
 	void BindComputeShader(ID3D11ComputeShader* pComputeShader);
-
 	void Dispatch(UINT ThreadGroupCountX, UINT ThreadGroupCountY, UINT ThreadGroupCountZ);
 
 	void UpdateViewPort();
+
+	void DrawIndexedInstanced(UINT IndexCountPerInstance, UINT InstanceCount
+		, UINT StartIndexLocation, INT BaseVertexLocation, UINT StartInstanceLocation);
 };
 
 

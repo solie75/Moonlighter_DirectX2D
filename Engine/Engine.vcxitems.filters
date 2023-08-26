@@ -193,6 +193,9 @@
     <Filter Include="Graphic\GraphicShader\PaintShader">
       <UniqueIdentifier>{ae406556-9ea9-44a9-b5b8-a0da54a22bd2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Component\ParticleSystem">
+      <UniqueIdentifier>{8aaacd86-fe9c-40e6-92dc-d463a217e144}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -381,6 +384,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CPaintShader.h">
       <Filter>Graphic\GraphicShader\PaintShader</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CParticleSystem.h">
+      <Filter>GameObject\Component\ParticleSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -553,6 +559,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CPaintShader.cpp">
       <Filter>Graphic\GraphicShader\PaintShader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CParticleSystem.cpp">
+      <Filter>GameObject\Component\ParticleSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

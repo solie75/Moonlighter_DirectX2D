@@ -119,6 +119,17 @@ struct DebugMesh
 	bool IsCollider; // true: 충돌 상태, false: 충돌 상태 아님
 };
 
+struct Particle
+{
+	Vector4 position;
+	Vector4 direction;
+
+	float endTime;
+	float time;
+	float speed;
+	UINT active;
+};
+
 
 
 CBUFFER(TransformCB, CBSLOT_TRANSFORM)

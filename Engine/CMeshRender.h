@@ -23,5 +23,6 @@ public:
     void SetMaterial(std::shared_ptr<CMaterial> material) { mMaterial = material; }
 
     std::shared_ptr<CMaterial> GetMaterial(){ return mMaterial; }
+    std::shared_ptr<CMesh> GetMesh() { return mMesh; }
 };
 

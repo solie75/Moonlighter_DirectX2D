@@ -3,7 +3,7 @@
 #include "CMonster.h"
 #include "CComputeShader.h"
 #include "CPaintShader.h"
-//#include "CMaterial.h"
+#include "CParticleSystem.h"
 
 CTestScene::CTestScene()
 {
@@ -26,6 +26,7 @@ void CTestScene::Initialize()
 		, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down", true);
 	CTransform* PlayerTr = Will->GetComponent<CTransform>(eComponentType::Transform);
 
+	// Smile
 	CMonster* Smile = new CMonster();
 	AddGameObject(eLayerType::Monster, Smile, L"Smile", Vector3(0.0f, 0.0f, 1.0003f)
 		, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"mt_Smile", false);
@@ -33,6 +34,12 @@ void CTestScene::Initialize()
 	std::shared_ptr<CMaterial> mt = mr->GetMaterial();
 	mt->SetTexture(paintTexture);
 	int a = 0;
+
+	// Particle
+	CGameObject* particle = new CGameObject();
+	particle->SetName(L"Particle");
+	AddGameObject(eLayerType::Monster, particle, L"Particle", Vector3(0.0f, 0.0f, 1.0f), Vector3(0.2f, 0.2f, 0.2f), false, L"", L"", false);
+	CParticleSystem* pts = particle->AddComponent<CParticleSystem>();
 
 
 	// Camera

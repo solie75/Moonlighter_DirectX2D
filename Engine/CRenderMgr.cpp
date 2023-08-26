@@ -66,6 +66,15 @@ void CRenderMgr::Init()
 	paintShader->Create(L"PaintCS.hlsl", "main");
 	CResourceMgr::GetInst()->Insert(L"PaintShader", paintShader);
 
+	std::shared_ptr<CShader> particleShader = std::make_shared<CShader>();
+	particleShader->CreateShader(eShaderStage::VS, L"ParticleVS.hlsl", "main");
+	particleShader->CreateShader(eShaderStage::PS, L"ParticlePS.hlsl", "main");
+	particleShader->SetRSType(eRSType::SolidNone);
+	particleShader->SetDSType(eDSType::NoWrite);
+	particleShader->SetBSType(eBSType::AlphaBlend);
+	particleShader->CreateInputLayout();
+	CResourceMgr::GetInst()->Insert(L"ParticleShader", particleShader);
+
 	// Create Grid Material
 	//std::shared_ptr<CMaterial> mt_Grid = std::make_shared<CMaterial>();
 	//mt_Grid->SetShader(gridShader);
@@ -89,6 +98,8 @@ void CRenderMgr::Init()
 
 			LoadUAVTexture(); // 여기에서 PaintTexture 로 Insert
 			LoadMaterial(shader, L"PaintTexture", eRenderingMode::Transparent);
+
+			LoadMaterial(particleShader, L"Particle", eRenderingMode::Transparent);
 		}
 		{ // will
 			LoadTexture(L"Will", L"..\\Resource\\Texture\\Will.png");

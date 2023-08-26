@@ -6,6 +6,7 @@ CMesh::CMesh()
 	, mIBDesc{}
 {
 	CreateBuffer();
+	mIndexCount = 0;
 }
 
 CMesh::~CMesh()
@@ -80,5 +81,11 @@ void CMesh::BindBuffer()
 
 	CDevice::GetInst()->GetContext()->IASetVertexBuffers(0, 1, mVB.GetAddressOf(), &stride, &offset);
 	CDevice::GetInst()->GetContext()->IASetIndexBuffer(mIB.Get(), DXGI_FORMAT_R32_UINT, 0);
+}
+
+void CMesh::RenderInstanced(UINT startIndexLocation)
+{
+	// 6 => mIndexCount
+	CDevice::GetInst()->DrawIndexedInstanced(6, startIndexLocation, 0, 0, 0);
 }
 
