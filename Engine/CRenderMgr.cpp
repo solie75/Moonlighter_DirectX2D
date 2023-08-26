@@ -3,6 +3,7 @@
 #include "CDesertBossScene.h"
 #include "CEditor.h"
 #include "CPaintShader.h"
+#include "CParticleShader.h"
 
 CRenderMgr::CRenderMgr()
 	: mCB{}
@@ -20,7 +21,7 @@ CRenderMgr::~CRenderMgr()
 void CRenderMgr::Init()
 {
 	lightsBuffer = new CStructedBuffer();
-	lightsBuffer->CreateStructedBuffer(sizeof(LightAttribute), 2, eSRVType::None);
+	lightsBuffer->CreateStructedBuffer(sizeof(LightAttribute), 2, eViewType::None, nullptr);
 
 	// Set Sampler
 	SetUpState();
@@ -73,6 +74,10 @@ void CRenderMgr::Init()
 	std::shared_ptr<CPaintShader> paintShader = std::make_shared<CPaintShader>();
 	paintShader->Create(L"PaintCS.hlsl", "main");
 	CResourceMgr::GetInst()->Insert(L"PaintShader", paintShader);
+
+	std::shared_ptr<CParticleShader> psSystemShader = std::make_shared<CParticleShader>();
+	psSystemShader->Create(L"ParticleCS.hlsl", "main");
+	CResourceMgr::GetInst()->Insert(L"ParticleSystemShader", psSystemShader);
 
 	std::shared_ptr<CShader> particleShader = std::make_shared<CShader>();
 	particleShader->CreateShader(eShaderStage::VS, L"ParticleVS.hlsl", "main");
@@ -805,6 +810,6 @@ void CRenderMgr::BindLights()
 	}
 
 	lightsBuffer->SetData(lightsAttributes.data(), lightsAttributes.size());
-	lightsBuffer->Bind(eShaderStage::VS, 13);
-	lightsBuffer->Bind(eShaderStage::PS, 13);
+	lightsBuffer->BindSRV(eShaderStage::VS, 13);
+	lightsBuffer->BindSRV(eShaderStage::PS, 13);
 }

@@ -48,6 +48,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CMeshRender.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CMonster.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CPaintShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CParticleShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CParticleSystem.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CPlayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CPlayerMoveScript.h" />
@@ -113,6 +114,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CMeshRender.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CMonster.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CPaintShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CParticleShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CParticleSystem.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CPlayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CPlayerMoveScript.cpp" />

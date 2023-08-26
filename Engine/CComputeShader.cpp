@@ -9,6 +9,14 @@ CComputeShader::CComputeShader()
     mThreadGroupCountZ = 1;
 }
 
+CComputeShader::CComputeShader(int x, int y, int z)
+    : CResource(eResourceType::ComputeShader)
+{
+    mThreadGroupCountX = x;
+    mThreadGroupCountY = y;
+    mThreadGroupCountZ = z;
+}
+
 CComputeShader::~CComputeShader()
 {
 }

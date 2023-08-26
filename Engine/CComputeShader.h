@@ -18,6 +18,7 @@ protected:
 
 public:
     CComputeShader();
+    CComputeShader(int x, int y, int z);
     virtual ~CComputeShader();
 
     bool Create(const std::wstring& name, const std::string& methodName);

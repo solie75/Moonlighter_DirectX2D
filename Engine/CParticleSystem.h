@@ -1,12 +1,13 @@
 #pragma once
 #include "CMeshRender.h"
-
+#include "CParticleShader.h"
 
 class CParticleSystem :
     public CMeshRender
 {
 private:
     CStructedBuffer* mBuffer;
+    std::shared_ptr<CParticleShader> mCS;
 
     UINT mCount;
     Vector4 mStartSize;
@@ -14,6 +15,7 @@ private:
     Vector4 mStartColor;
     Vector4 mEndColor;
     float mLifeTime;
+    float mFrequency;
 
 public:
     CParticleSystem();

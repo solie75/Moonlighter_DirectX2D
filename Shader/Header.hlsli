@@ -25,6 +25,14 @@ cbuffer DebugColor : register(b4)
     float4 DebugColor;
 }
 
+cbuffer ParticleSystem : register(b5)
+{
+    uint elementCout;
+    float elapsedTime;
+    int padd;
+    int padd2;
+}
+
 struct LightAttribute
 {
     float4 color;
@@ -47,6 +55,7 @@ struct Particle
     float speed;
     uint active;
 };
+
 
 
 //Texture2D smileTexture : register(t0);

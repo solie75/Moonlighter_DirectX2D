@@ -15,6 +15,7 @@
 #define CBSLOT_GRID		2
 #define CBSLOT_ANIMATION2D		3
 #define CBSLOT_DEBUGCOLOR		4
+#define CBSLOT_PARTICLE		5
 
 enum class eShaderStage
 {
@@ -80,9 +81,17 @@ enum class eRenderingMode
 	End,
 };
 
-enum class eSRVType
+//enum class eSRVType
+//{
+//	None,
+//	End,
+//};
+
+enum class eViewType
 {
 	None,
+	SRV,
+	UAV,
 	End,
 };
 
@@ -163,4 +172,12 @@ CBUFFER(AnimatorCB, CBSLOT_ANIMATION2D)
 CBUFFER(DebugColorCB, CBSLOT_DEBUGCOLOR)
 {
 	Vector4 DebugColor;
+};
+
+CBUFFER(ParticleCB, CBSLOT_PARTICLE)
+{
+	UINT elementCount;
+	float elpasedTime;
+	int padd;
+	int padd2;
 };
