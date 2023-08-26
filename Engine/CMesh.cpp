@@ -5,7 +5,7 @@ CMesh::CMesh()
 	, mVBDesc{}
 	, mIBDesc{}
 {
-	CreateBuffer();
+	//CreateBuffer();
 	mIndexCount = 0;
 }
 
@@ -18,7 +18,7 @@ void CMesh::Render()
 	CDevice::GetInst()->GetContext()->DrawIndexed(6, 0, 0);
 }
 
-void CMesh::CreateBuffer()
+void CMesh::CreateSquareBuffer()
 {
 	// Rectangle Vertex array
 	vertexes[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
@@ -71,6 +71,35 @@ void CMesh::CreateBuffer()
 
 	// Create IndexBuffer
 	CDevice::GetInst()->GetDevice()->CreateBuffer(&mIBDesc, &subData, mIB.GetAddressOf());
+}
+
+void CMesh::CreatePointBuffer()
+{
+	vertexes[0].pos = Vector3(0.0f, 0.0f, 0.0f);
+	vertexes[0].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	mVBDesc.ByteWidth = sizeof(tVertex) * 1;
+	mVBDesc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
+	mVBDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
+	mVBDesc.CPUAccessFlags = 0;
+
+	D3D11_SUBRESOURCE_DATA subData = {};
+	subData.pSysMem = vertexes;
+
+	CDevice::GetInst()->GetDevice()->CreateBuffer(&mVBDesc, &subData, mVB.GetAddressOf());
+
+	std::vector<UINT> indexes = {};
+	indexes.push_back(0);
+
+	mIBDesc.ByteWidth = sizeof(UINT) * 1;
+	mIBDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_INDEX_BUFFER;
+	mIBDesc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
+	mIBDesc.CPUAccessFlags = 0;
+
+	subData.pSysMem = indexes.data();
+	
+	CDevice::GetInst()->GetDevice()->CreateBuffer(&mIBDesc, &subData, mIB.GetAddressOf());
+
 }
 
 void CMesh::BindBuffer()

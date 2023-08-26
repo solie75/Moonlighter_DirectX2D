@@ -24,7 +24,8 @@ public:
 
     void Render();
 
-    void CreateBuffer();
+    void CreateSquareBuffer();
+    void CreatePointBuffer();
     void BindBuffer();
     void RenderInstanced(UINT startIndexLocation);
 

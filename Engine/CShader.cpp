@@ -8,6 +8,7 @@ CShader::CShader()
 {
 	//CreateInputLayout();
 	//BindInputLayout();
+	mTopology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 }
 
 CShader::~CShader()
@@ -34,6 +35,24 @@ bool CShader::CreateShader(eShaderStage shaderStage, const std::wstring& shaderN
 		}
 		CDevice::GetInst()->GetDevice()->CreateVertexShader(mVSBlob->GetBufferPointer()
 			, mVSBlob->GetBufferSize(), nullptr, mVS.GetAddressOf());
+	}
+	else if (shaderStage == eShaderStage::GS)
+	{
+		std::filesystem::path psPath = shaderPath;
+		psPath += shaderName;
+
+		HRESULT hr = D3DCompileFromFile(psPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
+			entrypointName.c_str(), "gs_5_0", 0, 0
+			, mGSBlob.GetAddressOf(), mErrorBlob.GetAddressOf());
+
+		if (mErrorBlob)
+		{
+			OutputDebugStringA((char*)mErrorBlob->GetBufferPointer());
+			mErrorBlob->Release();
+		}
+
+		CDevice::GetInst()->GetDevice()->CreateGeometryShader(mGSBlob->GetBufferPointer()
+			, mGSBlob->GetBufferSize(), nullptr, mGS.GetAddressOf());
 	}
 	else if (shaderStage == eShaderStage::PS)
 	{
@@ -143,10 +162,12 @@ void CShader::BindsShader()
 	BindInputLayout();
 	CDevice::GetInst()->GetContext()->VSSetShader(mVS.Get(), 0, 0);
 	CDevice::GetInst()->GetContext()->PSSetShader(mPS.Get(), 0, 0);
+	CDevice::GetInst()->GetContext()->GSSetShader(mGS.Get(), 0, 0);
 }
 
 void CShader::BindInputLayout()
 {
 	CDevice::GetInst()->GetContext()->IASetInputLayout(mInputLayout.Get());
-	CDevice::GetInst()->GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	//CDevice::GetInst()->GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	CDevice::GetInst()->GetContext()->IASetPrimitiveTopology(mTopology);
 }

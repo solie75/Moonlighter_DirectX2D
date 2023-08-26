@@ -22,6 +22,7 @@ private:
 	ComPtr<ID3D11PixelShader> mPS;
 
 	ComPtr<ID3D11InputLayout> mInputLayout = nullptr;
+	D3D11_PRIMITIVE_TOPOLOGY mTopology;
 
 	eRSType mRSType;
 	eDSType mDSType;
@@ -43,6 +44,8 @@ public:
 	void SetRSType(eRSType type) { mRSType = type; }
 	void SetDSType(eDSType type) { mDSType = type; }
 	void SetBSType(eBSType type) { mBSType = type; }
+
+	void SetTopology(D3D11_PRIMITIVE_TOPOLOGY topology) { mTopology = topology; }
 	
 	eRSType GetRSType() { return mRSType; }
 	eDSType GetDSType() { return mDSType; }

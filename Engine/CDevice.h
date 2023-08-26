@@ -45,7 +45,9 @@ public:
 	bool CreateRenderTargetView(ID3D11Resource* pResource, const D3D11_RENDER_TARGET_VIEW_DESC* pDesc, ID3D11RenderTargetView** ppRTView);
 	bool CreateUnorderedAccessView(ID3D11Resource* pResource, const D3D11_UNORDERED_ACCESS_VIEW_DESC* pDesc, ID3D11UnorderedAccessView** ppUAView);
 	bool CrateComputeShader(const void* pShaderBytecode, SIZE_T BytecodeLength, ID3D11ComputeShader** ppComputeShader);
+	bool CreateGeometryShader(const void* pShaderBytecode, SIZE_T BytecodeLength, ID3D11GeometryShader** ppGeometryShader);
 	bool CompileFromfile(const std::wstring& fileName, const std::string& funcName, const std::string& version, ID3DBlob** ppCode);
+	
 
 	void ClearRenderTarget();
 
@@ -59,6 +61,10 @@ public:
 	void BindShaderResource(eShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV);
 	void BindUnorderedAccess(UINT slot, ID3D11UnorderedAccessView** ppUnorrderedAccessViews, const UINT* pUAVInitialCounts);
 	void BindComputeShader(ID3D11ComputeShader* pComputeShader);
+	void BindHullShader(ID3D11HullShader* pHullShader);
+	void BindDomainShader(ID3D11DomainShader* pDomainShader);
+	void BindGeometryShader(ID3D11GeometryShader* pGeometryShader);
+	
 	void Dispatch(UINT ThreadGroupCountX, UINT ThreadGroupCountY, UINT ThreadGroupCountZ);
 
 	void UpdateViewPort();

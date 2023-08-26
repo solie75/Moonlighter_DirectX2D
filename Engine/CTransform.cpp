@@ -62,4 +62,9 @@ void CTransform::CreateConstantBuffer()
 	trCB.mProjection = CCamera::GetStaticProjectionMatrix();
 
 	mTransformCB->InitConstantBuffer(sizeof(TransformCB), eCBType::Transform, &trCB);
+	CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, mTransformCB);
+	CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::HS, mTransformCB);
+	CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::DS, mTransformCB);
+	CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::GS, mTransformCB);
+	CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::PS, mTransformCB);
 }

@@ -27,12 +27,20 @@ void CRenderMgr::Init()
 
 	// Create Mesh
 	std::shared_ptr<CMesh> mesh = std::make_shared<CMesh>();
-	//mesh->BindBuffer();
+	mesh->CreateSquareBuffer();
 	CResourceMgr::GetInst()->Insert(L"Mesh", mesh);
 
 	std::shared_ptr<CMesh> debugMesh = std::make_shared<CMesh>();
-	//debugMesh->BindBuffer();
+	mesh->CreateSquareBuffer();
 	CResourceMgr::GetInst()->Insert(L"DebugMesh", debugMesh);
+
+	tVertex v = {};
+	v.pos = Vector3(0.0f, 0.0f, 0.0f);
+	std::shared_ptr<CMesh> pointMesh = std::make_shared<CMesh>();
+	pointMesh->CreatePointBuffer();
+	CResourceMgr::GetInst()->Insert(L"PointMesh", pointMesh);
+
+
 
 
 	// Create Shader
@@ -69,9 +77,11 @@ void CRenderMgr::Init()
 	std::shared_ptr<CShader> particleShader = std::make_shared<CShader>();
 	particleShader->CreateShader(eShaderStage::VS, L"ParticleVS.hlsl", "main");
 	particleShader->CreateShader(eShaderStage::PS, L"ParticlePS.hlsl", "main");
+	particleShader->CreateShader(eShaderStage::GS, L"ParticleGS.hlsl", "main");
 	particleShader->SetRSType(eRSType::SolidNone);
 	particleShader->SetDSType(eDSType::NoWrite);
 	particleShader->SetBSType(eBSType::AlphaBlend);
+	particleShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_POINTLIST);
 	particleShader->CreateInputLayout();
 	CResourceMgr::GetInst()->Insert(L"ParticleShader", particleShader);
 

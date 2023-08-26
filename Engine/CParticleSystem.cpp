@@ -8,7 +8,7 @@ CParticleSystem::CParticleSystem()
 	, mEndColor(Vector4::Zero)
 	, mLifeTime(0.0f)
 {
-	std::shared_ptr<CMesh> mesh = CResourceMgr::GetInst()->Find<CMesh>(L"Mesh");
+	std::shared_ptr<CMesh> mesh = CResourceMgr::GetInst()->Find<CMesh>(L"PointMesh");
 	SetMesh(mesh);
 
 	std::shared_ptr<CMaterial> material = CResourceMgr::GetInst()->Find<CMaterial>(L"mt_Particle");
@@ -34,6 +34,7 @@ CParticleSystem::CParticleSystem()
 		}
 
 		particles[i].position = pos; 
+		particles[i].active = 1;
 	}
 
 	mBuffer = new CStructedBuffer();
@@ -64,6 +65,7 @@ void CParticleSystem::Render()
 	CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, tr->GetTransformCB());
 
 	mBuffer->Bind(eShaderStage::VS, 14);
+	mBuffer->Bind(eShaderStage::GS, 14);
 	mBuffer->Bind(eShaderStage::PS, 14);
 
 	GetMaterial()->Bind();

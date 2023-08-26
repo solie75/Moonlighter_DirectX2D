@@ -224,6 +224,16 @@ bool CDevice::CrateComputeShader(const void* pShaderBytecode, SIZE_T BytecodeLen
 	return true;
 }
 
+bool CDevice::CreateGeometryShader(const void* pShaderBytecode, SIZE_T BytecodeLength, ID3D11GeometryShader** ppGeometryShader)
+{
+	if (FAILED(mDevice->CreateGeometryShader(pShaderBytecode, BytecodeLength, nullptr, ppGeometryShader)))
+	{
+		return false;
+	}
+
+	return true;
+}
+
 bool CDevice::CompileFromfile(const std::wstring& fileName, const std::string& funcName, const std::string& version, ID3DBlob** ppCode)
 {
 	ID3DBlob* errorBlob = nullptr;
@@ -292,6 +302,21 @@ void CDevice::BindUnorderedAccess(UINT slot, ID3D11UnorderedAccessView** ppUnorr
 void CDevice::BindComputeShader(ID3D11ComputeShader* pComputeShader)
 {
 	mContext->CSSetShader(pComputeShader, 0, 0);
+}
+
+void CDevice::BindHullShader(ID3D11HullShader* pHullShader)
+{
+	mContext->HSSetShader(pHullShader, 0, 0);
+}
+
+void CDevice::BindDomainShader(ID3D11DomainShader* pDomainShader)
+{
+	mContext->DSSetShader(pDomainShader, 0, 0);
+}
+
+void CDevice::BindGeometryShader(ID3D11GeometryShader* pGeometryShader)
+{
+	mContext->GSSetShader(pGeometryShader, 0, 0);
 }
 
 void CDevice::Dispatch(UINT ThreadGroupCountX, UINT ThreadGroupCountY, UINT ThreadGroupCountZ)
