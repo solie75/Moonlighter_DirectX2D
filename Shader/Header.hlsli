@@ -49,13 +49,16 @@ struct Particle
 {
     float4 position;
     float4 direction;
+    float4 startSize;
+    float4 endSize;
+    float4 startColor;
+    float4 endColor;
     
     float endTime;
     float time;
     float speed;
-    uint active;
+    uint state;
 };
-
 
 
 //Texture2D smileTexture : register(t0);

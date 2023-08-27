@@ -17,6 +17,8 @@ private:
     float mLifeTime;
     float mFrequency;
 
+    Particle particles[100] = {};
+
 public:
     CParticleSystem();
     ~CParticleSystem();

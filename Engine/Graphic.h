@@ -96,6 +96,14 @@ enum class eViewType
 	End,
 };
 
+enum class eParticleState
+{
+	None,
+	Active,
+	Dead,
+	End,
+};;
+
 struct tVertex
 {
 	Vector3 pos;
@@ -133,11 +141,15 @@ struct Particle
 {
 	Vector4 position;
 	Vector4 direction;
-
+	Vector4 startSize;
+	Vector4 endSize;
+	Vector4 startColor;
+	Vector4 endColor;
 	float endTime;
 	float time;
 	float speed;
-	UINT active;
+
+	UINT state;
 };
 
 

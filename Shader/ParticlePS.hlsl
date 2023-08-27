@@ -1,16 +1,5 @@
 #include "Header.hlsli"
 
-//struct VSIn
-//{
-//    float3 pos : POSITIONT;
-//    uint Instance : SV_InstanceID;
-//};
-
-//struct VSOut
-//{
-//    float4 pos : SV_POSITION;
-//};
-
 struct GSOut
 {
     float4 Pos : SV_Position;
@@ -21,9 +10,8 @@ struct GSOut
 float4 main(GSOut In) : SV_TARGET
 {
     float4 Out = (float4) 0.0f;
-    
-    Out = float4(1.0f, 0.0f, 1.0f, 1.0f);
-    
-    return Out;
+    Out = float4(0.0f, 0.0f, 1.0f, 1.0f);
+    Out = float4(particles[0].startColor.x, particles[0].startColor.y, particles[0].startColor.z, 1.0f);
 
+    return Out;
 }
