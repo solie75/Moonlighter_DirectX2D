@@ -47,7 +47,7 @@ CParticleSystem::CParticleSystem()
 
 	mBuffer = new CStructedBuffer();
 	mBuffer->CreateStructedBuffer(sizeof(Particle), 1000, eViewType::UAV, particles);
-	//mBuffer->SetData(particles, 100);
+	//mBuffer 는 제대로 생성된것 같은데...
 }
 
 CParticleSystem::~CParticleSystem()
@@ -72,7 +72,6 @@ void CParticleSystem::Render()
 {
 	CTransform* tr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	tr->CreateConstantBuffer();
-	CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, tr->GetTransformCB());
 
 	mBuffer->BindSRV(eShaderStage::VS, 14);
 	mBuffer->BindSRV(eShaderStage::GS, 14);

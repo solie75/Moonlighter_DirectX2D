@@ -115,6 +115,6 @@ void CMesh::BindBuffer()
 void CMesh::RenderInstanced(UINT startIndexLocation)
 {
 	// 6 => mIndexCount
-	CDevice::GetInst()->DrawIndexedInstanced(6, startIndexLocation, 0, 0, 0);
+	CDevice::GetInst()->DrawIndexedInstanced(1, startIndexLocation, 0, 0, 0);
 }
 

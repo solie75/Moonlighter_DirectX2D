@@ -31,10 +31,11 @@ enum class eShaderStage
 enum class eCBType
 {
 	Transform,
-	Particle,
+	Material,
 	Grid,
 	Animator,
 	DebugColor,
+	Particle,
 	End,
 };
 

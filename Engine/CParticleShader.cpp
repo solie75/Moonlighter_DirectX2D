@@ -32,8 +32,8 @@ void CParticleShader::SetParticleBuffer(CStructedBuffer* particleBuffer)
 {
 	mParticleBuffer = particleBuffer;
 
-	static float elapsedTime = 0.0f; // 이 변수가 하는 역할이 뭐길래  static 이지? (elapsed : 경과)
-	elapsedTime += CTimeMgr::GetInst()->GetDeltaTime();
+	//static float elapsedTime = 0.0f; // 이 변수가 하는 역할이 뭐길래  static 이지? (elapsed : 경과)
+	//elapsedTime += CTimeMgr::GetInst()->GetDeltaTime();
 
 	ParticleCB cbData = {};
 	cbData.elementCount = mParticleBuffer->GetStride();

@@ -5,7 +5,7 @@ CStructedBuffer::CStructedBuffer()
     : mBuffer(nullptr)
     , mDesc{}
     , mSRV(nullptr)
-    , mType(eViewType::None)
+    , mType(eViewType::SRV)
     , mSize(0)
     , mStride(0)
     , mSRVSlot(0)
@@ -88,7 +88,8 @@ void CStructedBuffer::SetData(void* data, UINT stride)
 {
     if (mStride < stride)
     {
-        CreateStructedBuffer(mSize, stride, eViewType::None, nullptr);
+        CreateStructedBuffer(mSize, stride, mType, data);
+        //CreateStructedBuffer(mSize, stride, eViewType::None, nullptr);
     }
     else
     {
