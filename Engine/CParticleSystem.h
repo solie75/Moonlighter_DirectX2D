@@ -9,7 +9,7 @@ private:
     CStructedBuffer* mBuffer;
     std::shared_ptr<CParticleShader> mCS;
 
-    UINT mCount;
+    UINT mParticleNum;
     Vector4 mStartSize;
     Vector4 mEndSize;
     Vector4 mStartColor;
@@ -17,7 +17,7 @@ private:
     float mLifeTime;
     float mFrequency;
 
-    Particle particles[100] = {};
+    Particle mParticles[100] = {};
 
 public:
     CParticleSystem();

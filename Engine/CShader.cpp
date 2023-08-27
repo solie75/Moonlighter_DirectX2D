@@ -38,10 +38,10 @@ bool CShader::CreateShader(eShaderStage shaderStage, const std::wstring& shaderN
 	}
 	else if (shaderStage == eShaderStage::GS)
 	{
-		std::filesystem::path psPath = shaderPath;
-		psPath += shaderName;
+		std::filesystem::path gsPath = shaderPath;
+		gsPath += shaderName;
 
-		HRESULT hr = D3DCompileFromFile(psPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
+		HRESULT hr = D3DCompileFromFile(gsPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
 			entrypointName.c_str(), "gs_5_0", 0, 0
 			, mGSBlob.GetAddressOf(), mErrorBlob.GetAddressOf());
 

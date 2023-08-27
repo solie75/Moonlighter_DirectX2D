@@ -55,7 +55,7 @@ struct Particle
     float4 endColor;
     
     float endTime;
-    float time;
+    float curTime;
     float speed;
     uint state;
 };

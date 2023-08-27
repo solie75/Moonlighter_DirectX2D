@@ -146,7 +146,7 @@ struct Particle
 	Vector4 startColor;
 	Vector4 endColor;
 	float endTime;
-	float time;
+	float curTime;
 	float speed;
 
 	UINT state;

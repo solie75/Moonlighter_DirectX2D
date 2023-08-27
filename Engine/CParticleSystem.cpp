@@ -1,8 +1,9 @@
 #include "CParticleSystem.h"
+#include "CTimeMgr.h"
 #include <random>
 
 CParticleSystem::CParticleSystem()
-	: mCount(0)
+	: mParticleNum(100)
 	, mStartSize(Vector4::One)
 	, mEndSize(Vector4::One)
 	, mStartColor(Vector4::Zero)
@@ -17,8 +18,8 @@ CParticleSystem::CParticleSystem()
 
 	mCS = CResourceMgr::Find<CParticleShader>(L"ParticleSystemShader");
 
-	Particle particles[1000] = {};
-	for (size_t i = 0; i < 1000; i++)
+	//Particle particles[100] = {};
+	for (size_t i = 0; i < mParticleNum; i++)
 	{
 		Vector4 pos = Vector4::Zero;
 		pos.x += 3 + rand() % 20;
@@ -36,54 +37,39 @@ CParticleSystem::CParticleSystem()
 			pos.y *= -1.0f;
 		}
 
-		// 전방위
-		/*float directionX = cosf((float)i * (XM_2PI / (float)1000));
-		float directionY = sinf((float)i * (XM_2PI / 100.f));*/
-
 		// 우측에서 왼쪽으로
 		std::random_device rd; // 하드웨어 기반 난수 생성기를 초기화
 		std::mt19937 genX(rd()); // 난수 생성기 초기화
 		std::mt19937 genY(rd());
 		std::mt19937 genSpeed(rd());
+		std::mt19937 genTime(rd());
 
 		std::uniform_real_distribution<float> realDistributionX(90, 270);
 		std::uniform_real_distribution<float> realDistributionY(90, 270);
 		std::uniform_real_distribution<float> realDistributionSpeed(2.0f, 3.0f);
+		std::uniform_real_distribution<float> realDistributionTime(2.0f, 3.0f);
 
 		float directionX = cosf(realDistributionX(genX) * (XM_2PI / (float)360));
 		float directionY = sinf(realDistributionY(genY) * (XM_2PI / (float)360));
 
-		/*if (i > 75)
-		{
-			directionX = cosf((float)(i - 25) * (XM_2PI / (float)360));
-			directionY = sinf((float)(i - 25) * (XM_2PI / 100.f));
-		}
-		else if (i < 25)
-		{
-			directionX = cosf((float)(i + 25) * (XM_2PI / (float)360));
-			directionY = sinf((float)(i + 25) * (XM_2PI / 100.f));
-		}
-		else
-		{
-			directionX = cosf((float)i * (XM_2PI / (float)100));
-			directionY = sinf((float)i * (XM_2PI / 100.f));
-		}*/
 
-		particles[i].direction =
+		mParticles[i].direction =
 			Vector4(directionX, directionY, 0.0f, 1.0f);
 
-		particles[i].position = pos; 
-		particles[i].speed = realDistributionSpeed(genSpeed);
-		particles[i].state = (UINT)eParticleState::Active;
-		particles[i].startSize = Vector4(0.1f, 0.1f, 0.1f, 0.0f);
-		particles[i].endSize = Vector4::One;
-		particles[i].startColor = Vector4(0.8f, 0.447f, 0.239f, 0.0f);
-		particles[i].endColor = Vector4::One;
+		mParticles[i].position = pos;
+		mParticles[i].speed = realDistributionSpeed(genSpeed);
+		mParticles[i].state = (UINT)eParticleState::Active;
+		mParticles[i].startSize = Vector4(0.1f, 0.1f, 0.1f, 0.0f);
+		mParticles[i].endSize = Vector4::One;
+		mParticles[i].startColor = Vector4(0.8f, 0.447f, 0.239f, 0.0f);
+		mParticles[i].endColor = Vector4::One;
+		mParticles[i].endTime = realDistributionTime(genTime);
+		mParticles[i].curTime = 0.0f;
+		
 	}
 
 	mBuffer = new CStructedBuffer();
-	mBuffer->CreateStructedBuffer(sizeof(Particle), 1000, eViewType::UAV, particles);
-	//mBuffer 는 제대로 생성된것 같은데...
+	mBuffer->CreateStructedBuffer(sizeof(Particle), mParticleNum, eViewType::UAV, mParticles);
 }
 
 CParticleSystem::~CParticleSystem()
@@ -96,6 +82,15 @@ void CParticleSystem::Initialize()
 
 void CParticleSystem::Update()
 {
+	for (int i = 0; i < 100; i++)
+	{
+		mParticles[i].curTime += CTimeMgr::GetInst()->GetDeltaTime();
+		if (mParticles[i].curTime >= mParticles[i].endTime)
+		{
+			mParticles[i].state = (UINT)eParticleState::Dead;
+		}
+	}
+	mBuffer->CreateStructedBuffer(sizeof(Particle), mParticleNum, eViewType::UAV, mParticles);
 }
 
 void CParticleSystem::LateUpdate()
@@ -114,7 +109,7 @@ void CParticleSystem::Render()
 	mBuffer->BindSRV(eShaderStage::PS, 14);
 
 	GetMaterial()->Bind();
-	GetMesh()->RenderInstanced(1000);
+	GetMesh()->RenderInstanced(mParticleNum);
 
 	mBuffer->Clear();
 }
