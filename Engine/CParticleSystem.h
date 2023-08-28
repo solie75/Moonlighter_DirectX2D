@@ -17,15 +17,18 @@ private:
     float mLifeTime;
     float mFrequency;
 
-    Particle mParticles[100] = {};
+    Particle mParticles[75] = {};
 
 public:
     CParticleSystem();
     ~CParticleSystem();
 
-    virtual void Initialize() override;
-    virtual void Update() override;
-    virtual void LateUpdate() override;
-    virtual void Render() override;
+    Vector4 SetRendomPos();
+    float SetRendomFloat(float leftValje, float rightValue);
+
+    virtual void Initialize();
+    virtual void Update();
+    virtual void LateUpdate();
+    virtual void Render();
 };
 

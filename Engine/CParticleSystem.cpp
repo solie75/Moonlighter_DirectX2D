@@ -3,7 +3,7 @@
 #include <random>
 
 CParticleSystem::CParticleSystem()
-	: mParticleNum(100)
+	: mParticleNum(75)
 	, mStartSize(Vector4::One)
 	, mEndSize(Vector4::One)
 	, mStartColor(Vector4::Zero)
@@ -18,52 +18,31 @@ CParticleSystem::CParticleSystem()
 
 	mCS = CResourceMgr::Find<CParticleShader>(L"ParticleSystemShader");
 
-	//Particle particles[100] = {};
 	for (size_t i = 0; i < mParticleNum; i++)
 	{
-		Vector4 pos = Vector4::Zero;
-		pos.x += 3 + rand() % 20;
-		pos.y += rand() % 10;
+		Vector4 pos = SetRendomPos();
 
-		// 50퍼센트의 확률로 x 와 y 값을 음수 일지 양수 일지 정한다.
-		int sign = rand() % 2; // 50% 확률로 0 또는 1이다.
-		if (sign == 0)
-		{
-			pos.x *= -1.0f;
-		}
-		sign = rand() % 2;
-		if (sign == 0)
-		{
-			pos.y *= -1.0f;
-		}
+		float valueX = SetRendomFloat(90.f, 270.f);
+		float valueY = SetRendomFloat(90.f, 270.f);
+		float valueSpeed = SetRendomFloat(0.01f, 0.02f);
+		float valueTime = SetRendomFloat(1.0f, 2.5f); 
 
-		// 우측에서 왼쪽으로
-		std::random_device rd; // 하드웨어 기반 난수 생성기를 초기화
-		std::mt19937 genX(rd()); // 난수 생성기 초기화
-		std::mt19937 genY(rd());
-		std::mt19937 genSpeed(rd());
-		std::mt19937 genTime(rd());
 
-		std::uniform_real_distribution<float> realDistributionX(90, 270);
-		std::uniform_real_distribution<float> realDistributionY(90, 270);
-		std::uniform_real_distribution<float> realDistributionSpeed(2.0f, 3.0f);
-		std::uniform_real_distribution<float> realDistributionTime(2.0f, 3.0f);
-
-		float directionX = cosf(realDistributionX(genX) * (XM_2PI / (float)360));
-		float directionY = sinf(realDistributionY(genY) * (XM_2PI / (float)360));
+		float directionX = cosf(valueX * (XM_2PI / (float)360));
+		float directionY = sinf(valueY * (XM_2PI / (float)360));
 
 
 		mParticles[i].direction =
 			Vector4(directionX, directionY, 0.0f, 1.0f);
 
 		mParticles[i].position = pos;
-		mParticles[i].speed = realDistributionSpeed(genSpeed);
+		mParticles[i].speed = valueSpeed;
 		mParticles[i].state = (UINT)eParticleState::Active;
 		mParticles[i].startSize = Vector4(0.1f, 0.1f, 0.1f, 0.0f);
 		mParticles[i].endSize = Vector4::One;
 		mParticles[i].startColor = Vector4(0.8f, 0.447f, 0.239f, 0.0f);
 		mParticles[i].endColor = Vector4::One;
-		mParticles[i].endTime = realDistributionTime(genTime);
+		mParticles[i].endTime = valueTime;
 		mParticles[i].curTime = 0.0f;
 		
 	}
@@ -82,15 +61,38 @@ void CParticleSystem::Initialize()
 
 void CParticleSystem::Update()
 {
-	for (int i = 0; i < 100; i++)
+	/*for (int i = 0; i < mParticleNum; i++)
 	{
 		mParticles[i].curTime += CTimeMgr::GetInst()->GetDeltaTime();
 		if (mParticles[i].curTime >= mParticles[i].endTime)
 		{
 			mParticles[i].state = (UINT)eParticleState::Dead;
+			mParticles[i].curTime = 0;
+			
+		}
+		else
+		{
+			if (mParticles[i].state == (UINT)eParticleState::Dead)
+			{
+				Vector4 pos = SetRendomPos();
+				mParticles[i].position = pos;
+				mParticles[i].state = (UINT)eParticleState::Active;
+			}
 		}
 	}
-	mBuffer->CreateStructedBuffer(sizeof(Particle), mParticleNum, eViewType::UAV, mParticles);
+	mBuffer->CreateStructedBuffer(sizeof(Particle), mParticleNum, eViewType::UAV, mParticles);*/
+
+	//for (int i = 0; i < mParticleNum; i++)
+	//{
+	//	Vector4 pos = SetRendomPos();
+	//	mParticles[i].position = pos;
+	//}
+	//mBuffer->CreateStructedBuffer(sizeof(Particle), mParticleNum, eViewType::UAV, mParticles);
+	//struct RandomPos
+	//{
+	//	Vector4 randomPos = SetRendomPos();
+	//};
+
 }
 
 void CParticleSystem::LateUpdate()
@@ -112,4 +114,36 @@ void CParticleSystem::Render()
 	GetMesh()->RenderInstanced(mParticleNum);
 
 	mBuffer->Clear();
+
+}
+
+Vector4 CParticleSystem::SetRendomPos()
+{
+	Vector4 pos = Vector4::Zero;
+	pos.x += 3 + rand() % 20;
+	pos.y += rand() % 10;
+
+	// 50퍼센트의 확률로 x 와 y 값을 음수 일지 양수 일지 정한다.
+	int sign = rand() % 2; // 50% 확률로 0 또는 1이다.
+	if (sign == 0)
+	{
+		pos.x *= -1.0f;
+	}
+	sign = rand() % 2;
+	if (sign == 0)
+	{
+		pos.y *= -1.0f;
+	}
+
+	return pos;
+}
+
+float CParticleSystem::SetRendomFloat(float leftValue, float rightValue)
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+
+	std::uniform_real_distribution<float> realDistribution(leftValue, rightValue);
+
+	return realDistribution(gen);
 }
