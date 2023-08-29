@@ -48,7 +48,16 @@ void CScene::AddGameObject(eLayerType type, CGameObject* gameObj, const std::wst
 	{
 		CMeshRender* mr = gameObj->AddComponent<CMeshRender>();
 		mr->SetMesh(CResourceMgr::Find<CMesh>(meshName));
-		mr->SetMaterial(CResourceMgr::Find<CMaterial>(materialName));
+		if (materialName == L"")
+		{
+			std::shared_ptr<CMaterial> mt = std::make_shared<CMaterial>();
+			mt->SetShader(CResourceMgr::Find<CShader>(L"shader"));
+			mr->SetMaterial(mt);
+		}
+		else
+		{
+			mr->SetMaterial(CResourceMgr::Find<CMaterial>(materialName));
+		}
 	}
 	if (animationBool == true)
 	{

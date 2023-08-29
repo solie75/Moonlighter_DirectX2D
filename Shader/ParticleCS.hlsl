@@ -17,7 +17,7 @@ void main(uint3 DTid : SV_DispatchThreadID)
         return;
  
     ParticleBuffer[DTid.x].position +=
-    ParticleBuffer[DTid.x].direction * ParticleBuffer[DTid.x].speed * 0.1f;
+    ParticleBuffer[DTid.x].direction * ParticleBuffer[DTid.x].speed;
     
     // particleBuffer 에서 현재 쓰레드의 ID('DTid.x') 에 해당하는 파티클을 선택하고,
     // 파티클의 위치, 방향, 속도, 경과시간 를 이용하여 파티클의 새로운 위치를 계산하고 업데이트한다.
@@ -35,8 +35,8 @@ void main(uint3 DTid : SV_DispatchThreadID)
         float ranfomValueX = GenerateRandom(ParticleBuffer[DTid.x].position.xy);
         float ranfomValueY = GenerateRandom(ParticleBuffer[DTid.x].position.xy);
         
-        ParticleBuffer[DTid.x].position.x = ranfomValueX * 8.0f - 3;
-        ParticleBuffer[DTid.x].position.y = ranfomValueY * 4.0f - 2;
+        ParticleBuffer[DTid.x].position.x = ranfomValueX * 10.0f - 3;
+        ParticleBuffer[DTid.x].position.y = ranfomValueY * 6.0f - 2;
         ParticleBuffer[DTid.x].curTime = 0;
         ParticleBuffer[DTid.x].state = 1;
     }

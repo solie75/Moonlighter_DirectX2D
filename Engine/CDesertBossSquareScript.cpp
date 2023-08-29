@@ -37,6 +37,9 @@ void CDesertBossSquareScript::Update()
 
 	if (HeadScript->GetAttackState() == CDesertBossScript::eAttackState::Parts && mSquareAttackState != eSquareAttackState::Parts)
 	{
+		CTransform* tr = GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
+		Vector3 v3 = tr->GetPosition();
+
 		at->PlayAnimation(L"Boss3_Square_Light_On", false);
 		mSquareAttackState = eSquareAttackState::Parts;
 
@@ -60,6 +63,7 @@ void CDesertBossSquareScript::Update()
 	if (HeadScript->GetAttackState() == CDesertBossScript::eAttackState::End && mSquareAttackState == eSquareAttackState::Parts)
 	{
 		mSquareAttackState = eSquareAttackState::End;
+		at->PlayAnimation(L"Boss3_Square_Light_Off", false);
 	}
 
 	if (mSquareAttackState == eSquareAttackState::Parts)
@@ -108,7 +112,7 @@ void CDesertBossSquareScript::Update()
 		mtime += CTimeMgr::GetInst()->GetDeltaTime();
 		if (mtime > 0.01f)
 		{
-			thisTr->SetPosition(Vector3(thisPos.x + (mAimNormal.x * 0.05f), thisPos.y + (mAimNormal.y * 0.05f), 0.0f));
+			thisTr->SetPosition(Vector3(thisPos.x + (mAimNormal.x * 0.05f), thisPos.y + (mAimNormal.y * 0.05f), thisPos.z));
 			mtime = 0.0f;
 		}
 	}

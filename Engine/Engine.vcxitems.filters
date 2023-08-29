@@ -199,6 +199,9 @@
     <Filter Include="Graphic\GraphicShader\ParticleShader">
       <UniqueIdentifier>{43cb764c-564a-4a17-b54a-6af8acbe6ca9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Component\Script\HPScript">
+      <UniqueIdentifier>{5bbde103-b68a-486a-931d-e09db615aa7f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -393,6 +396,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CParticleShader.h">
       <Filter>Graphic\GraphicShader\ParticleShader</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CHPScript.h">
+      <Filter>GameObject\Component\Script\HPScript</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -571,6 +577,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CParticleShader.cpp">
       <Filter>Graphic\GraphicShader\ParticleShader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CHPScript.cpp">
+      <Filter>GameObject\Component\Script\HPScript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

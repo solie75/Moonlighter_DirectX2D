@@ -61,38 +61,6 @@ void CParticleSystem::Initialize()
 
 void CParticleSystem::Update()
 {
-	/*for (int i = 0; i < mParticleNum; i++)
-	{
-		mParticles[i].curTime += CTimeMgr::GetInst()->GetDeltaTime();
-		if (mParticles[i].curTime >= mParticles[i].endTime)
-		{
-			mParticles[i].state = (UINT)eParticleState::Dead;
-			mParticles[i].curTime = 0;
-			
-		}
-		else
-		{
-			if (mParticles[i].state == (UINT)eParticleState::Dead)
-			{
-				Vector4 pos = SetRendomPos();
-				mParticles[i].position = pos;
-				mParticles[i].state = (UINT)eParticleState::Active;
-			}
-		}
-	}
-	mBuffer->CreateStructedBuffer(sizeof(Particle), mParticleNum, eViewType::UAV, mParticles);*/
-
-	//for (int i = 0; i < mParticleNum; i++)
-	//{
-	//	Vector4 pos = SetRendomPos();
-	//	mParticles[i].position = pos;
-	//}
-	//mBuffer->CreateStructedBuffer(sizeof(Particle), mParticleNum, eViewType::UAV, mParticles);
-	//struct RandomPos
-	//{
-	//	Vector4 randomPos = SetRendomPos();
-	//};
-
 }
 
 void CParticleSystem::LateUpdate()

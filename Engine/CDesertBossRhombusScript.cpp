@@ -66,10 +66,14 @@ void CDesertBossRhombusScript::Update()
 	if (HeadScript->GetAttackState() == CDesertBossScript::eAttackState::End && mRhombusAttackState == eRhombusAttackState::Parts)
 	{
 		mRhombusAttackState = eRhombusAttackState::End;
+		at->PlayAnimation(L"Boss3_Rhombus_Light_Off", false);
 	}
 
 	if (mRhombusAttackState == eRhombusAttackState::Parts)
 	{
+		CTransform* tr = GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
+		Vector3 v3 = tr->GetPosition();
+
 		// 벽과 충돌했을 때 mAimNormal 변경
 		Vector2 otherPos = cd->GetColliderData(eLayerType::Background).pos;
 		CCollider2D::ColliderData CD;
@@ -116,7 +120,7 @@ void CDesertBossRhombusScript::Update()
 
 		if (mtime > 0.01f)
 		{
-			thisTr->SetPosition(Vector3(thisPos.x + (mAimNormal.x * 0.05f), thisPos.y + (mAimNormal.y * 0.05f), 0.0f));
+			thisTr->SetPosition(Vector3(thisPos.x + (mAimNormal.x * 0.05f), thisPos.y + (mAimNormal.y * 0.05f), thisPos.z));
 			mtime = 0.0f;
 		}
 	}
@@ -164,7 +168,7 @@ void CDesertBossRhombusScript::Update()
 					FireBallPos.y += diff * sin(angle * pi / 180.0);
 					FireBallPos.z = 0.000010001 * (i + 1);
 					CFireBall* fb = new CFireBall; //(i, BossHeadPos) 여기에서 회전행렬 소스 전달 monster 면 화면에 나온다.
-					fb->SetSpeed(10.0f);
+					fb->SetSpeed(1.0f);
 					ownScene->AddGameObject(eLayerType::Projectile, fb, L"Fire_Ball", FireBallPos, Vector3(0.2f, 0.2f, 0.0f),
 						true, L"Mesh", L"mt_atlas_Fire_Ball", true);
 					CCollider2D* cd = fb->AddComponent<CCollider2D>();

@@ -33,6 +33,11 @@ cbuffer ParticleSystem : register(b5)
     int padd2;
 }
 
+cbuffer HPbar : register(b6)
+{
+    uint hp;
+}
+
 struct LightAttribute
 {
     float4 color;

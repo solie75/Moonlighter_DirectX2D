@@ -19,6 +19,7 @@ private:
     std::vector<CComponent*> mComponent;
     CGameObject* mParentObject;
     eLayerType mLayerType;
+    UINT mHP;
 
 public:
     CGameObject();
@@ -37,6 +38,8 @@ public:
     void SetParentObject(CGameObject* pObj) { mParentObject = pObj; }
     eLayerType GetLayerType() { return mLayerType; }
     void SetLayerType(eLayerType type) { mLayerType = type; }
+    UINT GetHP() { return mHP; }
+    UINT SetHP(UINT hp) { mHP = hp; }
 
     template <typename T>
     T* AddComponent()

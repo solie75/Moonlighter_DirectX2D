@@ -23,7 +23,7 @@ float4 main(VSOut In) : SV_TARGET
     
     for (int i = 0; i < 2; i++)
     {
-        CalculateLight2D(lightColor, In.WorldPos, i);
+       CalculateLight2D(lightColor, In.WorldPos, i);
     }
     
     color *= lightColor;

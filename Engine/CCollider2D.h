@@ -12,6 +12,7 @@ public:
         UINT id;
         eLayerType type;
         Vector2 pos;
+        UINT damage;
     };
 
 private:
@@ -28,6 +29,8 @@ private:
 
     CConstantBuffer* mColliderCB;
     
+    UINT mDamege;
+
     bool mIsCollider;
 public:
     CCollider2D();
@@ -48,6 +51,7 @@ public:
     UINT GetColliderID() { return mColliderID; }
     CConstantBuffer* GetColliderCB() { return mColliderCB; }
     bool GetIsCollider() { return mIsCollider; }
+    UINT GetColliderDamege() { return mDamege; }
     size_t GetColliderDataListSize()
     {
         return mColliderDataList.size();
@@ -78,6 +82,7 @@ public:
             data.id = 0;
             data.type = eLayerType::End;
             data.pos = Vector2(0.0f, 0.0f);
+            data.damage = 0;
 
             return data;
         }
@@ -89,6 +94,7 @@ public:
         data.id = 0;
         data.type = eLayerType::End;
         data.pos = Vector2(0.0f, 0.0f);
+        data.damage = 0;
 
         if (mColliderDataList.size() == 0)
         {

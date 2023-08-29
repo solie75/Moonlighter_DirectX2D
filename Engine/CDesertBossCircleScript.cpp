@@ -64,6 +64,7 @@ void CDesertBossCircleScript::Update()
 	if (HeadScript->GetAttackState() == CDesertBossScript::eAttackState::End && mCircleAttackState == eCircleAttackState::Parts)
 	{
 		mCircleAttackState = eCircleAttackState::End;
+		at->PlayAnimation(L"Boss3_Circle_Light_Off", false);
 	}
 
 	// Parts Attack Stay
@@ -120,7 +121,7 @@ void CDesertBossCircleScript::Update()
 		mtime += CTimeMgr::GetInst()->GetDeltaTime();
 		if (mtime > 0.01f)
 		{
-			thisTr->SetPosition(Vector3(thisPos.x + (mAimNormal.x * 0.05f), thisPos.y + (mAimNormal.y * 0.05f), 0.0f));
+			thisTr->SetPosition(Vector3(thisPos.x + (mAimNormal.x * 0.05f), thisPos.y + (mAimNormal.y * 0.05f), thisPos.z));
 			mtime = 0.0f;
 		}
 	}

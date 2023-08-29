@@ -29,6 +29,7 @@ private:
 	Vector2 mDiffAimNormal; // 목표 방향 벡터와 현재 방향 벡터의 차
 	double mChangeAimTime;
 	float speed;
+	float mHP;
 	
 	float mAimAngle; // 객체가 바라보는 방향을 360 로 나눈다.
 
@@ -56,5 +57,8 @@ public:
 
 	int GetCollideCount() { return CollideCount; }
 	void ResetCollideCount() { CollideCount = 0; }
+
+	void DecreaseHP(UINT damage);
+	UINT GetHP() { return mHP; }
 };
 

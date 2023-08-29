@@ -40,6 +40,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CDevice.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CFireBall.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CGridScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CHPScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CLavaBall.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CLight.h" />
@@ -106,6 +107,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CDevice.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CFireBall.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CGridScript.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CHPScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CLavaBall.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CLight.cpp" />

@@ -18,6 +18,8 @@ void CFireBall::Initialize()
 
 void CFireBall::Update()
 {
+	time += CTimeMgr::GetInst()->GetDeltaTime();
+
 	if (this->GetState() != CGameObject::eObjectState::Paused)
 	{
 		CTransform* tr = this->GetComponent<CTransform>(eComponentType::Transform);
@@ -25,10 +27,15 @@ void CFireBall::Update()
 		CAnimator* at = this->GetComponent<CAnimator>(eComponentType::Animator);
 		if (cd->GetIsCollider() == false)
 		{
-			Vector3 pos = tr->GetPosition();
-			pos.x += ((float)(speed * CTimeMgr::GetInst()->GetDeltaTime())) * direction.x;
-			pos.y += ((float)(speed * CTimeMgr::GetInst()->GetDeltaTime())) * direction.y;
-			tr->SetPosition(pos);
+			if (time > 0.005f)
+			{
+				Vector3 pos = tr->GetPosition();
+				pos.x += direction.x * 0.1;
+				pos.y += direction.y * 0.1;
+				tr->SetPosition(pos);
+				time = 0;
+			}
+
 		}
 		else
 		{
@@ -37,6 +44,7 @@ void CFireBall::Update()
 			// 충돌 상태여서 PlayAnimation 이 계속 호출됨 -> 애니메이션의 첫번째 프레임만 계속 보임
 		}
 	}
+
 	CGameObject::Update();
 }
 

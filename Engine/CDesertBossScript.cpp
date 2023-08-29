@@ -29,6 +29,7 @@ void CDesertBossScript::Initialize()
 	PartsAttackTime = 0.0f;
 	mDiffAimNormal = mAimNormal;
 	speed = 1.5f;
+	mHP = 1000;
 }
 
 void CDesertBossScript::Update()
@@ -38,6 +39,10 @@ void CDesertBossScript::Update()
 	CCollider2D* cd = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
 	Vector3 pos = tr->GetPosition();
 
+	if (mHP <= 0)
+	{
+		this->GetOwner()->SetState(CGameObject::eObjectState::Dead);
+	}
 
 	if (parentObj->GetState() != CGameObject::eObjectState::Paused)
 	{
@@ -117,6 +122,12 @@ void CDesertBossScript::LateUpdate()
 	Vector3 pos = tr->GetPosition();
 	CCollider2D* cd = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
 	Vector2 otherPos;
+
+	if (0 != cd->GetColliderData(eLayerType::Player).id)
+	{
+		DecreaseHP(1);
+		//DecreaseHP(cd->GetColliderData(eLayerType::Player).damage);
+	}
 
 	// Turn 상태가 되어 예상 방향 벡터를 설정한다.
 	if (mState.GetPrevState() != eState::Turn && mState.GetCurState() == eState::Turn)
@@ -252,4 +263,9 @@ void CDesertBossScript::LateUpdate()
 void CDesertBossScript::Render()
 {
 	CScript::Render();
+}
+
+void CDesertBossScript::DecreaseHP(UINT value)
+{
+	mHP -= value;
 }

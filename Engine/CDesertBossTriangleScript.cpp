@@ -39,7 +39,7 @@ void CDesertBossTriangleScript::Update()
 
 	if (HeadScript->GetAttackState() == CDesertBossScript::eAttackState::Parts && mTriangleAttackState != eTriangleAttackState::Parts)
 	{
-		at->PlayAnimation(L"Boss3_Circle_Light_On", false);
+		at->PlayAnimation(L"Boss3_Triangle_Light_On", false);
 		mTriangleAttackState = eTriangleAttackState::Parts;
 
 		std::random_device rd; // 하드웨어 기반 난수 생성기를 초기화
@@ -62,6 +62,7 @@ void CDesertBossTriangleScript::Update()
 	if (HeadScript->GetAttackState() == CDesertBossScript::eAttackState::End && mTriangleAttackState == eTriangleAttackState::Parts)
 	{
 		mTriangleAttackState = eTriangleAttackState::End;
+		at->PlayAnimation(L"Boss3_Triangle_Light_Off", false);
 	}
 
 	if (mTriangleAttackState == eTriangleAttackState::Parts)
@@ -111,7 +112,7 @@ void CDesertBossTriangleScript::Update()
 		mtime += CTimeMgr::GetInst()->GetDeltaTime();
 		if (mtime > 0.01f)
 		{
-			thisTr->SetPosition(Vector3(thisPos.x + (mAimNormal.x * 0.05f), thisPos.y + (mAimNormal.y * 0.05f), 0.0f));
+			thisTr->SetPosition(Vector3(thisPos.x + (mAimNormal.x * 0.05f), thisPos.y + (mAimNormal.y * 0.05f), thisPos.z));
 			mtime = 0.0f;
 		}
 	}

@@ -16,6 +16,7 @@
 #define CBSLOT_ANIMATION2D		3
 #define CBSLOT_DEBUGCOLOR		4
 #define CBSLOT_PARTICLE		5
+#define CBSLOT_HP 6
 
 enum class eShaderStage
 {
@@ -193,4 +194,9 @@ CBUFFER(ParticleCB, CBSLOT_PARTICLE)
 	float elpasedTime;
 	int padd;
 	int padd2;
+};
+
+CBUFFER(HPCB, CBSLOT_HP)
+{
+	UINT hp;
 };

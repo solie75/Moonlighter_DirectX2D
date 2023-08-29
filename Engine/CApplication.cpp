@@ -49,6 +49,7 @@ void CApplication::AppUpdate()
 	CKeyMgr::GetInst()->Update();
 	CRenderMgr::GetInst()->Update();
 	CCollisionMgr::GetInst()->Update(); // 충돌 감지
+	//CEditor::GetInst()->Update();
 }
 
 void CApplication::AppLateUpdate()
@@ -69,7 +70,7 @@ void CApplication::AppRender()
 
 	// DrawIndexed, Present
 	CRenderMgr::GetInst()->Render();
-
+	
 	CDevice::GetInst()->GetSwapChain()->Present(0, 0);
 }
 

@@ -6,6 +6,7 @@ CCollider2D::CCollider2D()
     , mSize(Vector2::One)
     , mOffset(Vector2::Zero)
     , mIsCollider(false)
+    , mDamege(0)
 {
     mColliderNumber++;
     mColliderID = mColliderNumber;
@@ -29,11 +30,6 @@ void CCollider2D::Update()
     else if(mColliderDataList.size() > 0)
     {
         mIsCollider = true;
-    }
-
-    if (this->GetOwner()->GetName() == L"Will")
-    {
-        int a = 0;
     }
 }
 
@@ -71,6 +67,7 @@ void CCollider2D::OnCollisionEnter(CCollider2D* other)
     data.id = other->GetColliderID(); // 0부터 시작하는데 0을 없는 데이터의 기준으로 사용하므로
     data.type = other->GetOwner()->GetLayerType();
     data.pos = other->GetColliderPosition();
+    data.damage = other->GetColliderDamege();
 
     mColliderDataList.insert(std::make_pair(data.id, data));
     this;

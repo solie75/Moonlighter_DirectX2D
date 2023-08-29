@@ -32,7 +32,7 @@ void CRenderMgr::Init()
 	CResourceMgr::GetInst()->Insert(L"Mesh", mesh);
 
 	std::shared_ptr<CMesh> debugMesh = std::make_shared<CMesh>();
-	mesh->CreateSquareBuffer();
+	debugMesh->CreateSquareBuffer();
 	CResourceMgr::GetInst()->Insert(L"DebugMesh", debugMesh);
 
 	tVertex v = {};
@@ -440,17 +440,6 @@ void CRenderMgr::Init()
 			LoadMaterial(shader, L"DesertBossBackground", eRenderingMode::Opaque);
 
 			// Boss Head
-			/*LoadTexture(L"Boss3_Head_Down", L"..\\Resource\\Texture\\boss3\\Boss3_Head_Down.png");
-			LoadMaterial(shader, L"Boss3_Head_Down", eRenderingMode::CutOut);
-
-			LoadTexture(L"Boss3_Head_Left", L"..\\Resource\\Texture\\boss3\\Boss3_Head_Left.png");
-			LoadMaterial(shader, L"Boss3_Head_Left", eRenderingMode::CutOut);
-
-			LoadTexture(L"Boss3_Head_Right", L"..\\Resource\\Texture\\boss3\\Boss3_Head_Right.png");
-			LoadMaterial(shader, L"Boss3_Head_Right", eRenderingMode::CutOut);
-
-			LoadTexture(L"Boss3_Head_Up", L"..\\Resource\\Texture\\boss3\\Boss3_Head_Up.png");
-			LoadMaterial(shader, L"Boss3_Head_Up", eRenderingMode::CutOut);*/
 
 			LoadTexture(L"DesertBossCircle", L"..\\Resource\\Texture\\boss3\\Boss3_circle_attack_1.png");
 			LoadMaterial(shader, L"DesertBossCircle", eRenderingMode::CutOut);
@@ -466,6 +455,9 @@ void CRenderMgr::Init()
 
 			LoadTexture(L"DesertBoss_Background", L"..\\Resource\\Texture\\DesertBoss_Background.png");
 			LoadMaterial(shader, L"DesertBoss_Background", eRenderingMode::Opaque);
+
+			LoadTexture(L"DesertBoss_HealthBar", L"..\\Resource\\Texture\\boss3\\HUD_Boss_HealthBar.png");
+			LoadMaterial(shader, L"DesertBoss_HealthBar", eRenderingMode::Opaque);
 		}
 		{ // Atlas
 			// test

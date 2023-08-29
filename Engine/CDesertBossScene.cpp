@@ -13,6 +13,9 @@
 #include "CDesertBossRhombusScript.h"
 #include "CDesertBossSquareScript.h"
 #include "CDesertBossTriangleSCript.h"
+#include "CParticleSystem.h"
+#include "CPaintShader.h"
+#include "CHPScript.h"
 
 CDesertBossScene::CDesertBossScene()
 {
@@ -99,6 +102,7 @@ void CDesertBossScene::Initialize()
 	CMonster* DesertBossHead = new CMonster();
 	AddGameObject(eLayerType::Monster, DesertBossHead, L"Boss3_Head", Vector3(0.3f, -0.6f, 1.0004f)
 		, Vector3(2.5f, 2.5f, 0.0f), true, L"Mesh", L"mt_atlas_Boss3_Head_Down", true);
+	DesertBossHead->SetHP(1000);
 	CDesertBossScript* DesertBossScript = DesertBossHead->AddComponent<CDesertBossScript>();
 	cd = DesertBossHead->AddComponent<CCollider2D>();
 	cd->SetSize(Vector2(0.1f, 0.1f));
@@ -139,7 +143,18 @@ void CDesertBossScene::Initialize()
 	DesertBossTriangleScript->SetOtherPos(Will->GetComponent<CTransform>(eComponentType::Transform));
 	cd = DesertBossTriangle->AddComponent<CCollider2D>();
 	cd->SetSize(Vector2(0.5f, 0.5f));
-	                                               
+	 
+	{ // boss HP
+		CGameObject* DesertBossHP = new CGameObject();
+		DesertBossHP->SetHP(DesertBossHead->GetHP());
+		CHPScript* hpScript = DesertBossHP->AddComponent<CHPScript>();
+		DesertBossHP->SetParentObject(DesertBossHead);
+		AddGameObject(eLayerType::UI, DesertBossHP, L"DesertBossHP", Vector3(0.0f, -2.0f, -0.1f),
+			Vector3(3.f, 0.2f, 0.0f), true, L"Mesh", L"mt_DesertBoss_HealthBar", false);
+		CMeshRender* mr = DesertBossHP->GetComponent<CMeshRender>(eComponentType::MeshRender);
+	}
+
+
 	{ // light
 		CGameObject* light = new CGameObject();
 		light->SetName(L"light");
@@ -147,6 +162,15 @@ void CDesertBossScene::Initialize()
 		CLight* lightComp = light->AddComponent<CLight>();
 		lightComp->SetType(eLightType::Directional);
 		lightComp->SetColor(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+	}
+
+	// background particle
+	{
+		CGameObject* particle = new CGameObject();
+
+		particle->SetName(L"Particle");
+		AddGameObject(eLayerType::Monster, particle, L"Particle", Vector3(0.0f, 0.0f, 1.0f), Vector3(0.2f, 0.2f, 0.2f), false, L"", L"", false);
+		CParticleSystem* pts = particle->AddComponent<CParticleSystem>();
 	}
 	
 	CScene::Initialize(); 
