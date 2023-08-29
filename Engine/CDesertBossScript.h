@@ -33,13 +33,15 @@ private:
 	
 	float mAimAngle; // 객체가 바라보는 방향을 360 로 나눈다.
 
+	UINT AttackCount; // 공격 패턴 누적 수
 	int CircleAttackNum;
 	int RhombusAttackNum;
 	int TriangleAttackNum;
 	double FireAttackTime;
 	double PartsAttackTime;
 	
-	eAttackState mAttackState;
+	eAttackState mCurAttackState;
+	eAttackState mPrevAttackState;
 
 	int CollideCount;
 	int TurnCount;
@@ -52,8 +54,8 @@ public:
 	virtual void LateUpdate();
 	virtual void Render();
 
-	eAttackState GetAttackState() { return mAttackState; }
-	void ResetAttackState() { mAttackState = eAttackState::End; }
+	eAttackState GetAttackState() { return mCurAttackState; }
+	void ResetAttackState() { mCurAttackState = eAttackState::End; }
 
 	int GetCollideCount() { return CollideCount; }
 	void ResetCollideCount() { CollideCount = 0; }

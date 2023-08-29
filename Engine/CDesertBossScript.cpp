@@ -20,11 +20,13 @@ void CDesertBossScript::Initialize()
 	Vector2 vec = Vector2(0.0f, -1.0f);
 	vec.Normalize();
 	mAimNormal = vec;
-	CircleAttackNum = 1;
-	RhombusAttackNum = 1;
-	TriangleAttackNum = 1;
+	//CircleAttackNum = 1;
+	//RhombusAttackNum = 1;
+	//TriangleAttackNum = 1;
+	AttackCount = 1;
 	CollideCount = 0;
-	mAttackState = eAttackState::End;
+	mCurAttackState = eAttackState::End;
+	mPrevAttackState = eAttackState::End;
 	FireAttackTime = 0.0f;
 	PartsAttackTime = 0.0f;
 	mDiffAimNormal = mAimNormal;
@@ -50,7 +52,7 @@ void CDesertBossScript::Update()
 	}
 
 	// 현재 Parts Attack 상태 일 때
-	if(mAttackState == eAttackState::Parts)
+	if(mCurAttackState == eAttackState::Parts)
 	{
 		PartsAttackTime += CTimeMgr::GetInst()->GetDeltaTime();
 
@@ -58,11 +60,12 @@ void CDesertBossScript::Update()
 		if (PartsAttackTime > 10.f)
 		{
 			PartsAttackTime = 0.0f;
-			mAttackState = eAttackState::End;
+			mCurAttackState = eAttackState::End;
 			mState.SetState(eState::Idle);
-			CircleAttackNum = 0;
-			RhombusAttackNum = 0;
-			TriangleAttackNum = 0;
+			//CircleAttackNum = 0;
+			//RhombusAttackNum = 0;
+			//TriangleAttackNum = 0;
+			AttackCount = 0;
 			speed = 1.5f;
 			FireAttackTime = 0.0f;
 		}
@@ -97,21 +100,54 @@ void CDesertBossScript::Update()
 	}
 	
 	// 공격 패턴
-	if (FireAttackTime > 5.f * CircleAttackNum)
+	//if (FireAttackTime > 5.f * CircleAttackNum)
+	//{
+	//	mAttackState = eAttackState::Circle;
+	//	CircleAttackNum++;
+	//}
+	//if (FireAttackTime > 8.f * RhombusAttackNum)
+	//{
+	//	mAttackState = eAttackState::Rhombus;
+	//	RhombusAttackNum++;
+	//}
+	//if (FireAttackTime > 12.f * TriangleAttackNum)
+	//{
+	//	mAttackState = eAttackState::Triangle;
+	//	TriangleAttackNum++;
+	//}
+
+	if (FireAttackTime > 5.f * AttackCount)
 	{
-		mAttackState = eAttackState::Circle;
-		CircleAttackNum++;
+		/*switch (mPrevAttackState)
+			case eAttackState::End : 
+				mCurAttackState = eAttackState::Circle;
+				AttackCount++;
+				
+			case eAttackState::Circle;
+				mCurAttackState = eAttackState::Rhombus;
+				AttackCount++;*/
+		if (mPrevAttackState == eAttackState::End)
+		{
+			mCurAttackState = eAttackState::Circle;
+			AttackCount++;
+		}
+		if (mPrevAttackState == eAttackState::Circle)
+		{
+			mCurAttackState = eAttackState::Rhombus;
+			AttackCount++;
+		}
+		if (mPrevAttackState == eAttackState::Rhombus)
+		{
+			mCurAttackState = eAttackState::Triangle;
+			AttackCount++;
+		}
+		if (mPrevAttackState == eAttackState::Triangle)
+		{
+			mCurAttackState = eAttackState::Square;
+			AttackCount++;
+		}
 	}
-	if (FireAttackTime > 8.f * RhombusAttackNum)
-	{
-		mAttackState = eAttackState::Rhombus;
-		RhombusAttackNum++;
-	}
-	if (FireAttackTime > 12.f * TriangleAttackNum)
-	{
-		mAttackState = eAttackState::Triangle;
-		TriangleAttackNum++;
-	}
+
 
 	CScript::Update();
 }
@@ -226,7 +262,7 @@ void CDesertBossScript::LateUpdate()
 		// Parts Animation 이 터지는 부분인 29 번째 프레임에서 AttackState 를 Parts 로 변경한다.
 		if (at->GetCurAnimation()->GetAnimationIndex() == 29)
 		{
-			mAttackState = eAttackState::Parts;
+			mCurAttackState = eAttackState::Parts;
 		}
 	}
 	else

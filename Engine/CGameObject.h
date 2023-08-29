@@ -39,7 +39,7 @@ public:
     eLayerType GetLayerType() { return mLayerType; }
     void SetLayerType(eLayerType type) { mLayerType = type; }
     UINT GetHP() { return mHP; }
-    UINT SetHP(UINT hp) { mHP = hp; }
+    void SetHP(UINT hp) { mHP = hp; }
 
     template <typename T>
     T* AddComponent()
