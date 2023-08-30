@@ -11,6 +11,7 @@ CParticleSystem::CParticleSystem()
 	, mLifeTime(0.0f)
 {
 	std::shared_ptr<CMesh> mesh = CResourceMgr::GetInst()->Find<CMesh>(L"PointMesh");
+	mesh->SetKey(L"PointMesh");
 	SetMesh(mesh);
 
 	std::shared_ptr<CMaterial> material = CResourceMgr::GetInst()->Find<CMaterial>(L"mt_Particle");

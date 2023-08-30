@@ -146,7 +146,7 @@ void CDesertBossRhombusScript::Update()
 		{
 			ChangeRhombusAttackState(eRhombusAttackState::Enter);
 			at->PlayAnimation(L"Boss3_Rhombus_Attack_Enter", false);
-			HeadScript->ResetAttackState();
+			//HeadScript->ResetAttackState();
 		}
 
 		if (mRhombusAttackState == eRhombusAttackState::Enter && at->GetCurAnimation()->IsComplete())

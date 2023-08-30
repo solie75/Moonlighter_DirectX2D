@@ -20,9 +20,6 @@ void CDesertBossScript::Initialize()
 	Vector2 vec = Vector2(0.0f, -1.0f);
 	vec.Normalize();
 	mAimNormal = vec;
-	//CircleAttackNum = 1;
-	//RhombusAttackNum = 1;
-	//TriangleAttackNum = 1;
 	AttackCount = 1;
 	CollideCount = 0;
 	mCurAttackState = eAttackState::End;
@@ -31,17 +28,22 @@ void CDesertBossScript::Initialize()
 	PartsAttackTime = 0.0f;
 	mDiffAimNormal = mAimNormal;
 	speed = 1.5f;
-	mHP = 1000;
 }
 
 void CDesertBossScript::Update()
 {
+	if (CKeyMgr::GetInst()->GetKeyState(KEY::Z) == KEY_STATE::TAP)
+	{
+		GetOwner()->SetHP(GetOwner()->GetHP() - 100);
+	}
+
+
 	CGameObject* parentObj = this->GetOwner()->GetParentObject();
 	CTransform* tr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	CCollider2D* cd = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
 	Vector3 pos = tr->GetPosition();
 
-	if (mHP <= 0)
+	if (GetOwner()->GetHP() <= 0)
 	{
 		this->GetOwner()->SetState(CGameObject::eObjectState::Dead);
 	}
@@ -60,11 +62,8 @@ void CDesertBossScript::Update()
 		if (PartsAttackTime > 10.f)
 		{
 			PartsAttackTime = 0.0f;
-			mCurAttackState = eAttackState::End;
+			ChangeCurAttackState(eAttackState::End);
 			mState.SetState(eState::Idle);
-			//CircleAttackNum = 0;
-			//RhombusAttackNum = 0;
-			//TriangleAttackNum = 0;
 			AttackCount = 0;
 			speed = 1.5f;
 			FireAttackTime = 0.0f;
@@ -98,53 +97,27 @@ void CDesertBossScript::Update()
 
 		FireAttackTime += CTimeMgr::GetInst()->GetDeltaTime();
 	}
-	
-	// 공격 패턴
-	//if (FireAttackTime > 5.f * CircleAttackNum)
-	//{
-	//	mAttackState = eAttackState::Circle;
-	//	CircleAttackNum++;
-	//}
-	//if (FireAttackTime > 8.f * RhombusAttackNum)
-	//{
-	//	mAttackState = eAttackState::Rhombus;
-	//	RhombusAttackNum++;
-	//}
-	//if (FireAttackTime > 12.f * TriangleAttackNum)
-	//{
-	//	mAttackState = eAttackState::Triangle;
-	//	TriangleAttackNum++;
-	//}
 
 	if (FireAttackTime > 5.f * AttackCount)
 	{
-		/*switch (mPrevAttackState)
-			case eAttackState::End : 
-				mCurAttackState = eAttackState::Circle;
-				AttackCount++;
-				
-			case eAttackState::Circle;
-				mCurAttackState = eAttackState::Rhombus;
-				AttackCount++;*/
-		if (mPrevAttackState == eAttackState::End)
+		switch (mCurAttackState)
 		{
-			mCurAttackState = eAttackState::Circle;
+		case eAttackState::End :
+			ChangeCurAttackState(eAttackState::Circle);
 			AttackCount++;
-		}
-		if (mPrevAttackState == eAttackState::Circle)
-		{
-			mCurAttackState = eAttackState::Rhombus;
+			break;
+		case eAttackState::Circle:
+			ChangeCurAttackState(eAttackState::Rhombus);
 			AttackCount++;
-		}
-		if (mPrevAttackState == eAttackState::Rhombus)
-		{
-			mCurAttackState = eAttackState::Triangle;
+			break;
+		case eAttackState::Rhombus:
+			ChangeCurAttackState(eAttackState::Triangle);
 			AttackCount++;
-		}
-		if (mPrevAttackState == eAttackState::Triangle)
-		{
-			mCurAttackState = eAttackState::Square;
+			break;
+		case eAttackState::Triangle:
+			ChangeCurAttackState(eAttackState::End);
 			AttackCount++;
+			break;
 		}
 	}
 
@@ -161,7 +134,7 @@ void CDesertBossScript::LateUpdate()
 
 	if (0 != cd->GetColliderData(eLayerType::Player).id)
 	{
-		DecreaseHP(1);
+		//DecreaseHP(1);
 		//DecreaseHP(cd->GetColliderData(eLayerType::Player).damage);
 	}
 
@@ -301,7 +274,7 @@ void CDesertBossScript::Render()
 	CScript::Render();
 }
 
-void CDesertBossScript::DecreaseHP(UINT value)
-{
-	mHP -= value;
-}
+//void CDesertBossScript::DecreaseHP(UINT value)
+//{
+//	mHP -= value;
+//}

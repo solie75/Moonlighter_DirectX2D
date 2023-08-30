@@ -30,5 +30,7 @@ public:
     void RenderInstanced(UINT startIndexLocation);
 
     virtual HRESULT ResourceLoad(const std::wstring name, const std::wstring& path) { return S_OK; }
+
+    tVertex GetVertex(UINT i) { return vertexes[i]; }
 };
 

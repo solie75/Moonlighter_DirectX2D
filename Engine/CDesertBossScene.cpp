@@ -146,11 +146,11 @@ void CDesertBossScene::Initialize()
 	 
 	{ // boss HP
 		CGameObject* DesertBossHP = new CGameObject();
-		DesertBossHP->SetHP(DesertBossHead->GetHP());
+		//DesertBossHP->SetHP(DesertBossHead->GetHP());
 		CHPScript* hpScript = DesertBossHP->AddComponent<CHPScript>();
 		DesertBossHP->SetParentObject(DesertBossHead);
 		AddGameObject(eLayerType::UI, DesertBossHP, L"DesertBossHP", Vector3(0.0f, -2.0f, -0.1f),
-			Vector3(3.f, 0.2f, 0.0f), true, L"Mesh", L"mt_DesertBoss_HealthBar", false);
+			Vector3(3.f, 0.1f, 0.0f), true, L"Mesh", L"mt_DesertBoss_HealthBar", false);
 		CMeshRender* mr = DesertBossHP->GetComponent<CMeshRender>(eComponentType::MeshRender);
 	}
 

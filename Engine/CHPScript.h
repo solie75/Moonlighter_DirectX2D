@@ -3,6 +3,12 @@
 class CHPScript :
     public CScript
 {
+private:
+	UINT mFullHP;
+	UINT mCurHP;
+	float mFullWidth;
+	float mLeftXPos;
+
 public:
 	CHPScript();
 	~CHPScript();

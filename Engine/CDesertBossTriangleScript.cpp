@@ -137,7 +137,7 @@ void CDesertBossTriangleScript::Update()
 		{
 			at->PlayAnimation(L"Boss3_Triangle_Attack", false);
 			isFired = false;
-			HeadScript->ResetAttackState();
+			//HeadScript->ResetAttackState();
 		}
 
 		if (at->GetCurAnimation() != nullptr && at->GetCurAnimation()->GetAnimationIndex() == 32)

@@ -16,6 +16,7 @@ void CEditor::Initialize()
 	mDebugObjects.resize((UINT)eColliderType::End);
 
 	std::shared_ptr<CMesh> mesh = CResourceMgr::Find<CMesh>(L"DebugMesh");
+	mesh->SetKey(L"DebugMesh");
 	std::shared_ptr<CMaterial> material = CResourceMgr::Find<CMaterial>(L"mt_Debug");
 
 	mDebugObjects[(UINT)eColliderType::Rect] = new CDebugObject();

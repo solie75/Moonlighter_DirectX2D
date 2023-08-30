@@ -6,8 +6,6 @@ CShader::CShader()
 	, mDSType(eDSType::Less)
 	, mBSType(eBSType::AlphaBlend)
 {
-	//CreateInputLayout();
-	//BindInputLayout();
 	mTopology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 }
 

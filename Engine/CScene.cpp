@@ -47,6 +47,7 @@ void CScene::AddGameObject(eLayerType type, CGameObject* gameObj, const std::wst
 	if (meshRenderBool == true)
 	{
 		CMeshRender* mr = gameObj->AddComponent<CMeshRender>();
+		mr->SetName(L"mr_" + objName);
 		mr->SetMesh(CResourceMgr::Find<CMesh>(meshName));
 		if (materialName == L"")
 		{

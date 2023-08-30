@@ -145,7 +145,7 @@ void CDesertBossCircleScript::Update()
 		{
 			ChangeCirCleAttackState(eCircleAttackState::Enter);
 			at->PlayAnimation(L"Boss3_Circle_Attack_Enter", false);
-			HeadScript->ResetAttackState();
+			//HeadScript->ResetAttackState();
 		}
 
 		if (mCircleAttackState == eCircleAttackState::Enter && at->GetCurAnimation()->IsComplete())

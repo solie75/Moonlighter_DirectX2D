@@ -43,7 +43,9 @@ public:
 	void SetRotation(float x, float y, float z) { mRotation = Vector3(x, y, z); }
 	void SetScale(float x, float y, float z) { mScale = Vector3(x, y, z); }
 
-	Vector3 GetPosition() { return mPosition; }
+	Vector3 GetPosition() {
+		return mPosition;
+	}
 	Vector3 GetColliderPosition() { return mColliderPosition; }
 	Vector3 GetRotation() { return mRotation; }
 	Vector3 GetScale() { return mScale; }
