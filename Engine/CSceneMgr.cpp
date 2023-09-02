@@ -21,8 +21,8 @@ void CSceneMgr::Initialize()
 	//AddScene<CShopScene>(L"CShopScene");
 	//AddScene<CDungeonsEntranceScene>(L"CDungeonsEntranceScene");
 	//AddScene<CVillageScene>(L"VillageScene");
-	AddScene<CDesertBossScene>(L"CDesertBossScene");
-	//AddScene<CTestScene>(L"CTestScene");
+	//AddScene<CDesertBossScene>(L"CDesertBossScene");
+	AddScene<CTestScene>(L"CTestScene");
 }
 
 void CSceneMgr::Update()

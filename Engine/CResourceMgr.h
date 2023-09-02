@@ -17,6 +17,7 @@ public:
 		eRenderingMode renderingMode;
 		Vector2 size;
 		std::wstring objName;
+		float duration;
 	};
 private:
 	std::map<std::wstring, std::shared_ptr<CResource>> mResources;
@@ -46,7 +47,8 @@ public:
 					CResourceMgr::GetInst()->Load<CTexture>(atlasTexkey, L""),
 					Vector2(0.0f, 0.0f),
 					Vector2(mAnimationDatas[i].size.x, mAnimationDatas[i].size.y),
-					mAnimationDatas[i].spriteNum);
+					mAnimationDatas[i].spriteNum,
+					mAnimationDatas[i].duration * 0.001f);
 			}
 		}
 	}

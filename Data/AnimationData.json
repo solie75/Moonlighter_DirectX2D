@@ -7,8 +7,8 @@
             "objectName": "Will",
             "spriteNumber": [10],
             "renderingMode": [1],
-            "size": [24, 41]
-            
+            "size": [24, 41],
+            "duration": [100]
         },
         {
             "id": 2,
@@ -16,7 +16,8 @@
             "objectName": "Will",
             "spriteNumber": [10],
             "renderingMode": [1],
-            "size": [32, 42]
+            "size": [32, 42],
+            "duration": [100]
         },
         {
             "id": 3,
@@ -24,7 +25,8 @@
             "objectName": "Will",
             "spriteNumber": [10],
             "renderingMode": [1],
-            "size": [32, 42]
+            "size": [32, 42],
+            "duration": [100]
         },
         {
             "id": 4,
@@ -32,7 +34,8 @@
             "objectName": "Will",
             "spriteNumber": [10],
             "renderingMode": [1],
-            "size": [25, 42]
+            "size": [25, 42],
+            "duration": [100]
         },
         {
             "id": 5,
@@ -40,7 +43,8 @@
             "objectName": "Will",
             "spriteNumber": [8],
             "renderingMode": [1],
-            "size": [24, 39]
+            "size": [24, 39],
+            "duration": [100]
         },
         {
             "id": 6,
@@ -48,7 +52,8 @@
             "objectName": "Will",
             "spriteNumber": [8],
             "renderingMode": [1],
-            "size": [35, 40]
+            "size": [35, 40],
+            "duration": [100]
         },
         {
             "id": 7,
@@ -56,7 +61,8 @@
             "objectName": "Will",
             "spriteNumber": [8],
             "renderingMode": [1],
-            "size": [35, 40]
+            "size": [35, 40],
+            "duration": [100]
         },
         {
             "id": 8,
@@ -64,7 +70,8 @@
             "objectName": "Will",
             "spriteNumber": [8],
             "renderingMode": [1],
-            "size": [25, 43]
+            "size": [25, 43],
+            "duration": [100]
         },
         {
             "id": 9,
@@ -72,7 +79,8 @@
             "objectName": "Will",
             "spriteNumber": [8],
             "renderingMode": [1],
-            "size": [29, 42]
+            "size": [29, 42],
+            "duration": [50]
         },
         {
             "id": 10,
@@ -80,7 +88,8 @@
             "objectName": "Will",
             "spriteNumber": [8],
             "renderingMode": [1],
-            "size": [35, 40]
+            "size": [35, 40],
+            "duration": [50]
         },
         {
             "id": 11,
@@ -88,7 +97,8 @@
             "objectName": "Will",
             "spriteNumber": [8],
             "renderingMode": [1],
-            "size": [35, 42]
+            "size": [35, 42],
+            "duration": [50]
         },
         {
             "id": 12,
@@ -96,7 +106,8 @@
             "objectName": "Will",
             "spriteNumber": [8],
             "renderingMode": [1],
-            "size": [26, 41]
+            "size": [26, 41],
+            "duration": [50]
         }
     ],
 
@@ -108,7 +119,8 @@
             "objectName": "Fire_Ball",
             "spriteNumber": [3],
             "renderingMode": [1],
-            "size": [30, 22]
+            "size": [30, 22],
+            "duration": [100]
         },
         {
             "id": 14,
@@ -116,7 +128,8 @@
             "objectName": "Fire_Ball",
             "spriteNumber": [3],
             "renderingMode": [1],
-            "size": [28, 28]
+            "size": [28, 28],
+            "duration": [100]
         }
     ],
 
@@ -128,7 +141,8 @@
             "objectName": "Boss3_Head",
             "spriteNumber": [1],
             "renderingMode": [1],
-            "size": [256, 256]
+            "size": [256, 256],
+            "duration": [100]
         },
         {
             "id": 16,
@@ -136,7 +150,8 @@
             "objectName": "Boss3_Head",
             "spriteNumber": [1],
             "renderingMode": [1],
-            "size": [256, 256]
+            "size": [256, 256],
+            "duration": [100]
         },
         {
             "id": 17,
@@ -144,7 +159,8 @@
             "objectName": "Boss3_Head",
             "spriteNumber": [1],
             "renderingMode": [1],
-            "size": [256, 256]
+            "size": [256, 256],
+            "duration": [100]
         },
         {
             "id": 18,
@@ -152,7 +168,8 @@
             "objectName": "Boss3_Head",
             "spriteNumber": [1],
             "renderingMode": [1],
-            "size": [256, 256]
+            "size": [256, 256],
+            "duration": [100]
         },
         {
             "id": 19,
@@ -160,7 +177,8 @@
             "objectName": "Boss3_Head",
             "spriteNumber": [34],
             "renderingMode": [1],
-            "size": [256, 256]
+            "size": [256, 256],
+            "duration": [100]
         },
         {
             "id": 20,
@@ -168,7 +186,8 @@
             "objectName": "Boss3_Head",
             "spriteNumber": [34],
             "renderingMode": [1],
-            "size": [256, 256]
+            "size": [256, 256],
+            "duration": [100]
         },
         {
             "id": 21,
@@ -176,7 +195,8 @@
             "objectName": "Boss3_Head",
             "spriteNumber": [34],
             "renderingMode": [1],
-            "size": [256, 256]
+            "size": [256, 256],
+            "duration": [100]
         },
         {
             "id": 22,
@@ -184,7 +204,8 @@
             "objectName": "Boss3_Head",
             "spriteNumber": [34],
             "renderingMode": [1],
-            "size": [256, 256]
+            "size": [256, 256],
+            "duration": [100]
         },
         {
             "id": 23,
@@ -192,7 +213,8 @@
             "objectName": "Boss3_Head",
             "spriteNumber": [1],
             "renderingMode": [1],
-            "size": [122, 121]
+            "size": [122, 121],
+            "duration": [100]
         }
 
     ],
@@ -205,7 +227,8 @@
             "objectName": "DesertBossRhombus",
             "spriteNumber": [28],
             "renderingMode": [1],
-            "size": [128, 128]
+            "size": [128, 128],
+            "duration": [100]
         },
         {
             "id": 25,
@@ -213,7 +236,8 @@
             "objectName": "DesertBossRhombus",
             "spriteNumber": [15],
             "renderingMode": [1],
-            "size": [128, 128]
+            "size": [128, 128],
+            "duration": [100]
         },
         {
             "id": 26,
@@ -221,7 +245,8 @@
             "objectName": "DesertBossRhombus",
             "spriteNumber": [21],
             "renderingMode": [1],
-            "size": [128, 128]
+            "size": [128, 128],
+            "duration": [100]
         },
         {
             "id": 27,
@@ -229,7 +254,8 @@
             "objectName": "DesertBossRhombus",
             "spriteNumber": [32],
             "renderingMode": [1],
-            "size": [128, 128]
+            "size": [128, 128],
+            "duration": [100]
         },
         {
             "id": 28,
@@ -237,7 +263,8 @@
             "objectName": "DesertBossRhombus",
             "spriteNumber": [6],
             "renderingMode": [1],
-            "size": [128, 128]
+            "size": [128, 128],
+            "duration": [100]
         }
     ],
 
@@ -249,7 +276,8 @@
             "objectName": "DesertBossCircle",
             "spriteNumber": [28],
             "renderingMode": [1],
-            "size": [128, 128]
+            "size": [128, 128],
+            "duration": [100]
         },
         {
             "id": 30,
@@ -257,7 +285,8 @@
             "objectName": "DesertBossCircle",
             "spriteNumber": [15],
             "renderingMode": [1],
-            "size": [128, 128]
+            "size": [128, 128],
+            "duration": [100]
         },
         {
             "id": 31,
@@ -265,7 +294,8 @@
             "objectName": "DesertBossCircle",
             "spriteNumber": [20],
             "renderingMode": [1],
-            "size": [128, 128]
+            "size": [128, 128],
+            "duration": [100]
         },
         {
             "id": 32,
@@ -273,7 +303,8 @@
             "objectName": "DesertBossCircle",
             "spriteNumber": [32],
             "renderingMode": [1],
-            "size": [128, 128]
+            "size": [128, 128],
+            "duration": [100]
         },
         {
             "id": 33,
@@ -281,7 +312,8 @@
             "objectName": "DesertBossCircle",
             "spriteNumber": [6],
             "renderingMode": [1],
-            "size": [128, 128]
+            "size": [128, 128],
+            "duration": [100]
         }
     ],
 
@@ -293,7 +325,8 @@
             "objectName": "DesertBossTriangle",
             "spriteNumber": [46],
             "renderingMode": [1],
-            "size": [128, 128]
+            "size": [128, 128],
+            "duration": [100]
         },
         {
             "id": 35,
@@ -301,7 +334,8 @@
             "objectName": "DesertBossTriangle",
             "spriteNumber": [32],
             "renderingMode": [1],
-            "size": [128, 128]
+            "size": [128, 128],
+            "duration": [100]
         },
         {
             "id": 36,
@@ -309,7 +343,8 @@
             "objectName": "DesertBossTriangle",
             "spriteNumber": [6],
             "renderingMode": [1],
-            "size": [128, 128]
+            "size": [128, 128],
+            "duration": [100]
         }
     ],
 
@@ -321,7 +356,8 @@
             "objectName": "DesertBossSquare",
             "spriteNumber": [57],
             "renderingMode": [1],
-            "size": [128, 128]
+            "size": [128, 128],
+            "duration": [100]
         },
         {
             "id": 38,
@@ -329,7 +365,8 @@
             "objectName": "DesertBossSquare",
             "spriteNumber": [32],
             "renderingMode": [1],
-            "size": [128, 128]
+            "size": [128, 128],
+            "duration": [100]
         },
         {
             "id": 39,
@@ -337,7 +374,8 @@
             "objectName": "DesertBossSquare",
             "spriteNumber": [6],
             "renderingMode": [1],
-            "size": [128, 128]
+            "size": [128, 128],
+            "duration": [100]
         }
     ],
     
@@ -349,7 +387,8 @@
             "objectName": "Lava_Ball",
             "spriteNumber": [4],
             "renderingMode": [1],
-            "size": [28, 26]
+            "size": [28, 26],
+            "duration": [100]
         },
         {
             "id": 41,
@@ -357,7 +396,8 @@
             "objectName": "Lava_Ball",
             "spriteNumber": [9],
             "renderingMode": [1],
-            "size": [64, 45]
+            "size": [64, 45],
+            "duration": [100]
         },
         {
             "id": 42,
@@ -365,7 +405,8 @@
             "objectName": "Lava_Ball",
             "spriteNumber": [7],
             "renderingMode": [1],
-            "size": [64, 45]  
+            "size": [64, 45]  ,
+            "duration": [100]
         }
     ],
 
@@ -377,7 +418,8 @@
             "objectName": "Boss3_Born",
             "spriteNumber": [30],
             "renderingMode": [1],
-            "size": [512, 512]  
+            "size": [512, 512],
+            "duration": [100]
         },
         {
             "id": 44,
@@ -385,11 +427,12 @@
             "objectName": "Boss3_Born",
             "spriteNumber": [25],
             "renderingMode": [1],
-            "size": [512, 512]  
+            "size": [512, 512],
+            "duration": [100]
         }
     ],
 
-    "Will2":
+    "Will":
     [
         {
             "id": 45,
@@ -397,7 +440,8 @@
             "objectName": "Will",
             "spriteNumber": [40],
             "renderingMode": [1],
-            "size": [90, 130] 
+            "size": [34, 47],
+            "duration": [70] 
         }
     ],
 

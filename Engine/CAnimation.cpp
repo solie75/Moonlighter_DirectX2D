@@ -50,7 +50,7 @@ void CAnimation::Render()
 {
 }
 
-void CAnimation::CreateAnimation(std::wstring aniName, std::shared_ptr<CTexture> atlas, Vector2 LeftTop, Vector2 spriteSize, UINT spriteNum, Vector2 offset, float duration)
+void CAnimation::CreateAnimation(std::wstring aniName, std::shared_ptr<CTexture> atlas, Vector2 LeftTop, Vector2 spriteSize, UINT spriteNum, float duration, Vector2 offset)
 {
 	SetKey(aniName);
 	mAtlas = atlas;

@@ -9,10 +9,10 @@ D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossCircleScript.cpp(172,27)
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossCircleScript.cpp(173,29): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossRhombusScript.cpp(32,55): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossRhombusScript.cpp(119,45): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossRhombusScript.cpp(167,28): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossRhombusScript.cpp(168,28): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossRhombusScript.cpp(169,34): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossRhombusScript.cpp(179,61): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossRhombusScript.cpp(170,28): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossRhombusScript.cpp(171,28): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossRhombusScript.cpp(172,34): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossRhombusScript.cpp(186,61): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossScript.cpp(204,10): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossScript.cpp(266,18): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossSquareScript.cpp(112,45): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -26,6 +26,7 @@ D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CPaintShader.cpp(7,56): warning C42
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CPaintShader.cpp(8,57): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CParticleShader.cpp(40,56): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CPlayer.cpp(75,45): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CResourceMgr.cpp(96,25): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CResourceMgr.cpp(54,63): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CRenderMgr.cpp(802,72): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CTexture.cpp(51,37): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.

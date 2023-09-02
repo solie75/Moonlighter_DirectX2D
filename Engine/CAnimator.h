@@ -54,8 +54,9 @@ public:
 		, Vector2 leftTop
 		, Vector2 spriteSize
 		, UINT spriteNum
+		, float duration // = 0.1f
 		, Vector2 offset = Vector2::Zero
-		, float duration = 0.1f);
+		);
 	CAnimation* FindAnimation(const std::wstring& aniName);
 	Events* FindEvents(const std::wstring& aniName);
 	void PlayAnimation(const std::wstring& aniName, bool loop);

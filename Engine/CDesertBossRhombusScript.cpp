@@ -157,17 +157,22 @@ void CDesertBossRhombusScript::Update()
 
 		if (mRhombusAttackState == eRhombusAttackState::Stay)
 		{
-			if (fireCount < 40 && fireballInterval > 0.1f)
+			if (fireCount < 40 && fireballInterval > 0.1f) // fireballInterval 은 발사 간격
 			{
-				for (int i = 0; i < 3; i++) // 이 사이클이 한번 발사이다. 이것을 50번 해야한다.
+				for (int i = 0; i < 3; i++)
 				{
+					// 한번 발사 때에 발사체 3개를 발사하는 코드입니다.
+
+					// 발사체의 발사 시작 위치를 정합니다.
 					Vector3 FireBallPos = thisPos;
 					double pi = 3.14159265358979323846;
-					double angle = (120.f) * i + angleNum;
-					FireBallPos.x += diff * std::cos(angle * pi / 180.0);
-					FireBallPos.y += diff * sin(angle * pi / 180.0);
+					double angle = (120.f) * i + angleNum; // 세 개의 발사 지점의 각도 입니다. angleNum 은 발사 때마다 달라지는 각도 입니다.
+					FireBallPos.x += diff * std::cos(angle * pi / 180.0); // diff 는 발사원과 발사체의 간격을 위한 값입니다.
+					FireBallPos.y += diff * std::sin(angle * pi / 180.0);
 					FireBallPos.z = 0.000010001 * (i + 1);
-					CFireBall* fb = new CFireBall; //(i, BossHeadPos) 여기에서 회전행렬 소스 전달 monster 면 화면에 나온다.
+
+					// 투사체 설정
+					CFireBall* fb = new CFireBall;
 					fb->SetSpeed(1.0f);
 					ownScene->AddGameObject(eLayerType::Projectile, fb, L"Fire_Ball", FireBallPos, Vector3(0.2f, 0.2f, 0.0f),
 						true, L"Mesh", L"mt_atlas_Fire_Ball", true);
@@ -176,7 +181,11 @@ void CDesertBossRhombusScript::Update()
 					CAnimator* fireballAT = fb->GetComponent<CAnimator>(eComponentType::Animator);
 					fireballAT->PlayAnimation(L"Fire_Ball", true);
 					CTransform* fireballTr = fb->GetComponent<CTransform>(eComponentType::Transform);
+
+					// 투사체의 시작 지점에 따른 이미지 회전 변화
 					fireballTr->SetRotation(Vector3(0.0f, 0.0f, (2.0f * i) + (0.0175 * angleNum)));
+
+					// 투사체가 나아가야할 방향
 					Vector3 FireBallDirection = FireBallPos - thisPos;
 					FireBallDirection.Normalize();
 					fb->SetDirection(FireBallDirection);

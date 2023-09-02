@@ -135,19 +135,21 @@ void CPlayer::Update()
 
 			switch (mAimSight->GetAimSight())
 			{
-			/*case eAimSight::Left:
-				at->PlayAnimation(L"Will_Walk_Left", true);
-				break;*/
-			case eAimSight::Right:
-				at->PlayAnimation(L"will_bow_secondary_animation_right", false);
-				tr->SetScale(Vector3(0.45f, 0.65f, 0.0f));
-				break;
-			/*case eAimSight::Up:
-				at->PlayAnimation(L"Will_Walk_Up", true);
-				break;*/
+			//case eAimSight::Left:
+			//	at->PlayAnimation(L"Will_BigSwordCombo_Left", true);
+			//	tr->SetScale(Vector3(0.45f, 0.65f, 0.0f));
+			//	break;
+			//case eAimSight::Right:
+			//	at->PlayAnimation(L"Will_BigSwordCombo_Right", false);
+			//	tr->SetScale(Vector3(0.45f, 0.65f, 0.0f));
+			//	break;
+			//case eAimSight::Up:
+			//	at->PlayAnimation(L"Will_BigSwordCombo_Up", true);
+			//	tr->SetScale(Vector3(0.35f, 0.5f, 0.0f));
+			//	break;
 			case eAimSight::Down:
 				at->PlayAnimation(L"Will_BigSwordCombo_Down", false);
-				tr->SetScale(Vector3(1.0f, 1.4f, 0.0f));
+				tr->SetScale(Vector3(0.35f, 0.5f, 0.0f));
 				break;
 			}
 			

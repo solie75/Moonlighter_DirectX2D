@@ -17,5 +17,7 @@ public:
 	virtual void Update();
 	virtual void LateUpdate();
 	virtual void Render();
+
+	//void SetLeftXPos(float xPos) { mLeftXPos = xPos; }
 };
 

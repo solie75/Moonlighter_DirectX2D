@@ -84,9 +84,19 @@ void CResourceMgr::LoadAnimationData()
 
 					aniDesc.size = Vector2((float)(sizeX * 1.0f), (float)(sizeY * 1.0f));
 				}
+				std::getline(DataFile, line);
+				if (line.find(L"\"duration\": ") != std::string::npos)
+				{
+					size_t startPos = line.find(L"[") + 1;
+					size_t endPos = line.find(L"]");
+					std::wstring numStr = line.substr(startPos, endPos - startPos);
+
+					int duration;
+					swscanf_s(numStr.c_str(), L"%d", &duration);
+					aniDesc.duration = duration;
+				}
 
 				mAnimationDatas.push_back(aniDesc);
-				int a = 0;
 			}
 		}
 	}

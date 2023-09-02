@@ -46,8 +46,9 @@ public:
 		, Vector2 LeftTop
 		, Vector2 spriteSize
 		, UINT spriteNum
-		, Vector2 offset = Vector2::Zero
-		, float duration = 0.0f);
+		, float duration
+		, Vector2 offset
+		);
 
 	void Binds(CConstantBuffer* aniCB);
 	void Reset();
