@@ -3,6 +3,7 @@
 #include "CGameObject.h"
 #include "CState.h"
 #include "CAimSight.h"
+#include "CWeapon.h"
 
 class CPlayer :
     public CGameObject
@@ -11,7 +12,6 @@ private:
     eCreatureType mCreatureType;
     CState* mState;
     CAimSight* mAimSight;
-
 
 public:
     CPlayer();
@@ -25,6 +25,5 @@ public:
     eCreatureType GetCreatureType() { return mCreatureType; }
     CState* GetState() { return mState; }
     CAimSight* GetAimSight() { return mAimSight; }
-
 };
 

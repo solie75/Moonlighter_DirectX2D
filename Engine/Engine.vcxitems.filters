@@ -202,6 +202,9 @@
     <Filter Include="GameObject\Component\Script\HPScript">
       <UniqueIdentifier>{5bbde103-b68a-486a-931d-e09db615aa7f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Object\Player\Weapon">
+      <UniqueIdentifier>{6a206750-1676-49b4-bf29-457a1f269ab1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -399,6 +402,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CHPScript.h">
       <Filter>GameObject\Component\Script\HPScript</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CWeapon.h">
+      <Filter>GameObject\Object\Player\Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -580,6 +586,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CHPScript.cpp">
       <Filter>GameObject\Component\Script\HPScript</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CWeapon.cpp">
+      <Filter>GameObject\Object\Player\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

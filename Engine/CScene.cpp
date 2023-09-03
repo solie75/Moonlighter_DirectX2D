@@ -51,6 +51,7 @@ void CScene::AddGameObject(eLayerType type, CGameObject* gameObj, const std::wst
 		mr->SetMesh(CResourceMgr::Find<CMesh>(meshName));
 		if (materialName == L"")
 		{
+			// MaterialName 이 없는 경우 -> 애니메이션으로 이루어지는 객체이지만 초기에 애니메이션 출력 조건이 아니어서 출력이 없는 경우
 			std::shared_ptr<CMaterial> mt = std::make_shared<CMaterial>();
 			mt->SetShader(CResourceMgr::Find<CShader>(L"shader"));
 			mr->SetMaterial(mt);

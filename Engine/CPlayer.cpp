@@ -26,22 +26,23 @@ void CPlayer::Update()
 {
 
 	CAnimator* at = this->GetComponent<CAnimator>(eComponentType::Animator);
+	CTransform* tr = this->GetComponent<CTransform>(eComponentType::Transform);
 
 		// Idle 상태일 때
 		if (mState->GetCurState() == eState::Idle && mState->GetPrevState() != eState::Idle)
 		{
-			switch (mAimSight->GetAimSight())
+			switch (mAimSight->GetSight())
 			{
-			case eAimSight::Left:
+			case eSight::Left:
 				at->PlayAnimation(L"Will_Idle_Left", true);
 				break;
-			case eAimSight::Right:
+			case eSight::Right:
 				at->PlayAnimation(L"Will_Idle_Right", true);
 				break;
-			case eAimSight::Up:
+			case eSight::Up:
 				at->PlayAnimation(L"Will_Idle_Up", true);
 				break;
-			case eAimSight::Down:
+			case eSight::Down:
 				at->PlayAnimation(L"Will_Idle_Down", true);
 				break;
 			}
@@ -51,18 +52,18 @@ void CPlayer::Update()
 		// Roll
 		if (mState->GetCurState() == eState::Roll && mState->GetPrevState() != eState::Roll)
 		{
-			switch (mAimSight->GetAimSight())
+			switch (mAimSight->GetSight())
 			{
-			case eAimSight::Left:
+			case eSight::Left:
 				at->PlayAnimation(L"Will_Roll_Left", false);
 				break;
-			case eAimSight::Right:
+			case eSight::Right:
 				at->PlayAnimation(L"Will_Roll_Right", false);
 				break;
-			case eAimSight::Up:
+			case eSight::Up:
 				at->PlayAnimation(L"Will_Roll_Up", false);
 				break;
-			case eAimSight::Down:
+			case eSight::Down:
 				at->PlayAnimation(L"Will_Roll_Down", false);
 				break;
 			}
@@ -78,21 +79,21 @@ void CPlayer::Update()
 			CTransform* tr = this->GetComponent<CTransform>(eComponentType::Transform);
 			Vector3 pos = tr->GetPosition();
 
-			switch (mAimSight->GetAimSight())
+			switch (mAimSight->GetSight())
 			{
-			case eAimSight::Left: // 특정 시간 동안, 특정 거리 만큼, 이동한다.
+			case eSight::Left: // 특정 시간 동안, 특정 거리 만큼, 이동한다.
 				pos.x -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 				tr->SetPosition(pos);
 				break;
-			case eAimSight::Right:
+			case eSight::Right:
 				pos.x += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 				tr->SetPosition(pos);
 				break;
-			case eAimSight::Up:
+			case eSight::Up:
 				pos.y += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 				tr->SetPosition(pos);
 				break;
-			case eAimSight::Down:
+			case eSight::Down:
 				pos.y -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 				tr->SetPosition(pos);
 				break;
@@ -110,30 +111,29 @@ void CPlayer::Update()
 		// Walk
 		if (mState->GetCurState() == eState::Walk && mState->GetPrevState() != eState::Walk)
 		{
-			switch (mAimSight->GetAimSight())
+			switch (mAimSight->GetSight())
 			{
-			case eAimSight::Left:
+			case eSight::Left:
 				at->PlayAnimation(L"Will_Walk_Left", true);
 				break;
-			case eAimSight::Right:
+			case eSight::Right:
 				at->PlayAnimation(L"Will_Walk_Right", true);
 				break;
-			case eAimSight::Up:
+			case eSight::Up:
 				at->PlayAnimation(L"Will_Walk_Up", true);
 				break;
-			case eAimSight::Down:
+			case eSight::Down:
 				at->PlayAnimation(L"Will_Walk_Down", true);
 				break;
 			}
 
 		}
 
-		// Attack
 		if (mState->GetCurState() == eState::Attack && mState->GetPrevState() != eState::Attack)
 		{
-			CTransform* tr = this->GetComponent<CTransform>(eComponentType::Transform);
+			
 
-			switch (mAimSight->GetAimSight())
+			switch (mAimSight->GetSight())
 			{
 			//case eAimSight::Left:
 			//	at->PlayAnimation(L"Will_BigSwordCombo_Left", true);
@@ -147,7 +147,7 @@ void CPlayer::Update()
 			//	at->PlayAnimation(L"Will_BigSwordCombo_Up", true);
 			//	tr->SetScale(Vector3(0.35f, 0.5f, 0.0f));
 			//	break;
-			case eAimSight::Down:
+			case eSight::Down:
 				at->PlayAnimation(L"Will_BigSwordCombo_Down", false);
 				tr->SetScale(Vector3(0.35f, 0.5f, 0.0f));
 				break;
@@ -160,7 +160,6 @@ void CPlayer::Update()
 		{
 			if (at->GetCurAnimation()->IsComplete() == true)
 			{
-				CTransform* tr = this->GetComponent<CTransform>(eComponentType::Transform);
 				tr->SetScale(Vector3(0.25f, 0.47f, 0.0f));
 				mState->SetBoolStateChange(true);
 				mState->SetState(eState::Idle);

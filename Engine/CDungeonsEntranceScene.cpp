@@ -1,5 +1,6 @@
 #include "CDungeonsEntranceScene.h"
 #include "CPlayer.h"
+#include "CWeapon.h"
 
 CDungeonsEntranceScene::CDungeonsEntranceScene()
 {
@@ -15,6 +16,12 @@ void CDungeonsEntranceScene::Initialize()
 		CPlayer* Will = new CPlayer();
 		AddGameObject(eLayerType::Player, Will, L"Will", Vector3(3.0f, 0.0f, 1.0002f)
 			, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down", true);
+		
+		// Will's Weapon
+		CWeapon* Weapon = new CWeapon();
+		AddGameObject(eLayerType::Weapon, Weapon, L"Weapon", Vector3(0.0f, 0.0f, 1.00019f)
+			, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"", true);
+		Weapon->SetParentObject(Will);
 	}
 	{ // camera
 		// Main Camera

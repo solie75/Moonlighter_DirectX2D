@@ -5,12 +5,14 @@
 
 
 CPlayerMoveScript::CPlayerMoveScript()
-	: mLeftKey(KEY_STATE::NONE)
-	, mRightKey(KEY_STATE::NONE)
-	, mUpKey(KEY_STATE::NONE)
-	, mDownKey(KEY_STATE::NONE)
-	, bAni(true) // true 일때 애니메이션 작동 // false 일때 애니메이션 비작동
-	, bAniTime(0.0f)
+	: 
+	mComboAttackNum(0)
+	//, mLeftKey(KEY_STATE::NONE)
+	//, mRightKey(KEY_STATE::NONE)
+	//, mUpKey(KEY_STATE::NONE)
+	//, mDownKey(KEY_STATE::NONE)
+	//, bAni(true) // true 일때 애니메이션 작동 // false 일때 애니메이션 비작동
+	//, mAniTime(0.0f)
 {
 }
 
@@ -54,28 +56,28 @@ void CPlayerMoveScript::Update()
 		// 캐릭터 위치 변화
 		if (CKeyMgr::GetInst()->GetKeyState(KEY::LEFT) == KEY_STATE::PRESSED)
 		{
-			aimSight->SetAimSight(eAimSight::Left);
+			aimSight->SetSight(eSight::Left);
 			pos.x -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 			tr->SetPosition(pos);
 			state->SetState(eState::Walk);
 		}
 		if (CKeyMgr::GetInst()->GetKeyState(KEY::RIGHT) == KEY_STATE::PRESSED)
 		{
-			aimSight->SetAimSight(eAimSight::Right);
+			aimSight->SetSight(eSight::Right);
 			pos.x += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 			tr->SetPosition(pos);
 			state->SetState(eState::Walk);
 		}
 		if (CKeyMgr::GetInst()->GetKeyState(KEY::UP) == KEY_STATE::PRESSED)
 		{
-			aimSight->SetAimSight(eAimSight::Up);
+			aimSight->SetSight(eSight::Up);
 			pos.y += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 			tr->SetPosition(pos);
 			state->SetState(eState::Walk);
 		}
 		if (CKeyMgr::GetInst()->GetKeyState(KEY::DOWN) == KEY_STATE::PRESSED)
 		{
-			aimSight->SetAimSight(eAimSight::Down);
+			aimSight->SetSight(eSight::Down);
 			pos.y -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 			tr->SetPosition(pos);
 			state->SetState(eState::Walk);
@@ -109,6 +111,10 @@ void CPlayerMoveScript::Update()
 		// 공격 상태로 변환
 		if (CKeyMgr::GetInst()->GetKeyState(KEY::G) == KEY_STATE::TAP)
 		{
+			if (player->GetMainWeaponType() == CPlayer::eWeapon::BigSword)
+			{
+				mComboAttackNum++;
+			}
 			state->SetBoolStateChange(false);
 			state->SetState(eState::Attack);
 		}

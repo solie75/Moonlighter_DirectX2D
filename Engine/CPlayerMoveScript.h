@@ -9,13 +9,14 @@ class CPlayerMoveScript :
 {
 private:
     //KEY mKey;
-    KEY_STATE mLeftKey;
-    KEY_STATE mRightKey;
-    KEY_STATE mUpKey;
-    KEY_STATE mDownKey;
-    bool bAni;
-    float bAniTime;
-    bool bRoll;
+    //KEY_STATE mLeftKey;
+    //KEY_STATE mRightKey;
+    //KEY_STATE mUpKey;
+    //KEY_STATE mDownKey;
+    //bool bAni;
+    //float mAniTime;
+    //bool bRoll;
+    UINT mComboAttackNum;
 
 public:
     CPlayerMoveScript();

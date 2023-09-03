@@ -1,24 +1,27 @@
 #pragma once
 
-enum class eAimSight
-{
-    Left,
-    Right,
-    Up,
-    Down,
-    End,
-};
+
 
 class CAimSight
 {
+public:
+    enum class eSight
+    {
+        Left,
+        Right,
+        Up,
+        Down,
+        End,
+    };
+
 private:
-    eAimSight mAimSight;
+    eSight mAimSight;
 
 public:
     CAimSight();
     ~CAimSight();
 
-    void SetAimSight(eAimSight sight) { mAimSight = sight; }
-    eAimSight GetAimSight() { return mAimSight; }
+    void SetSight(eSight sight) { mAimSight = sight; }
+    eSight GetSight() { return mAimSight; }
 };
 

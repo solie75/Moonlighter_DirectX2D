@@ -36,6 +36,7 @@ enum class eLayerType
 	UI,
 	Background,
 	Camera,
+	Weapon,
 	End,
 };
 

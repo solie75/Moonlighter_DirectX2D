@@ -75,6 +75,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CTimeMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CTransform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CVillageScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CWeapon.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Enum.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Graphic.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h" />
@@ -141,6 +142,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CTimeMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CTransform.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CVillageScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CWeapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)CMath.inl" />
