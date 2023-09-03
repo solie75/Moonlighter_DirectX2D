@@ -12,6 +12,7 @@ private:
     eCreatureType mCreatureType;
     CState* mState;
     CAimSight* mAimSight;
+    UINT AttackComboNum;
 
 public:
     CPlayer();

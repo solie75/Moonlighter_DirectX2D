@@ -56,28 +56,28 @@ void CPlayerMoveScript::Update()
 		// 캐릭터 위치 변화
 		if (CKeyMgr::GetInst()->GetKeyState(KEY::LEFT) == KEY_STATE::PRESSED)
 		{
-			aimSight->SetSight(eSight::Left);
+			aimSight->SetSight(CAimSight::eSight::Left);
 			pos.x -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 			tr->SetPosition(pos);
 			state->SetState(eState::Walk);
 		}
 		if (CKeyMgr::GetInst()->GetKeyState(KEY::RIGHT) == KEY_STATE::PRESSED)
 		{
-			aimSight->SetSight(eSight::Right);
+			aimSight->SetSight(CAimSight::eSight::Right);
 			pos.x += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 			tr->SetPosition(pos);
 			state->SetState(eState::Walk);
 		}
 		if (CKeyMgr::GetInst()->GetKeyState(KEY::UP) == KEY_STATE::PRESSED)
 		{
-			aimSight->SetSight(eSight::Up);
+			aimSight->SetSight(CAimSight::eSight::Up);
 			pos.y += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 			tr->SetPosition(pos);
 			state->SetState(eState::Walk);
 		}
 		if (CKeyMgr::GetInst()->GetKeyState(KEY::DOWN) == KEY_STATE::PRESSED)
 		{
-			aimSight->SetSight(eSight::Down);
+			aimSight->SetSight(CAimSight::eSight::Down);
 			pos.y -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 			tr->SetPosition(pos);
 			state->SetState(eState::Walk);
@@ -111,10 +111,21 @@ void CPlayerMoveScript::Update()
 		// 공격 상태로 변환
 		if (CKeyMgr::GetInst()->GetKeyState(KEY::G) == KEY_STATE::TAP)
 		{
-			if (player->GetMainWeaponType() == CPlayer::eWeapon::BigSword)
+			// 공격 별로 유지 시간 또는 발동 조건 콤보 유무 등이 다르기 때문에 현재 들고 있는 main Weapon 에 따라 다른 코드를 호출한다.
+			switch (CWeapon::GetInst()->GetWeaponType())
+			{
+			case CWeapon::eWeaponType::BigSword :
+				break;
+			case CWeapon::eWeaponType::Bow :
+				break;
+			case CWeapon::eWeaponType::Spear :
+				break;
+			}
+
+			/*if (player->GetMainWeaponType() == CPlayer::eWeapon::BigSword)
 			{
 				mComboAttackNum++;
-			}
+			}*/
 			state->SetBoolStateChange(false);
 			state->SetState(eState::Attack);
 		}

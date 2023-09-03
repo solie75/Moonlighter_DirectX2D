@@ -3,6 +3,7 @@
 #include "CTimeMgr.h"
 #include "CPlayerMoveScript.h"
 #include "CCollider2D.h"
+#include "CWeapon.h"
 
 CPlayer::CPlayer()
 	: mCreatureType(eCreatureType::Player)
@@ -33,16 +34,16 @@ void CPlayer::Update()
 		{
 			switch (mAimSight->GetSight())
 			{
-			case eSight::Left:
+			case CAimSight::eSight::Left:
 				at->PlayAnimation(L"Will_Idle_Left", true);
 				break;
-			case eSight::Right:
+			case CAimSight::eSight::Right:
 				at->PlayAnimation(L"Will_Idle_Right", true);
 				break;
-			case eSight::Up:
+			case CAimSight::eSight::Up:
 				at->PlayAnimation(L"Will_Idle_Up", true);
 				break;
-			case eSight::Down:
+			case CAimSight::eSight::Down:
 				at->PlayAnimation(L"Will_Idle_Down", true);
 				break;
 			}
@@ -54,16 +55,16 @@ void CPlayer::Update()
 		{
 			switch (mAimSight->GetSight())
 			{
-			case eSight::Left:
+			case CAimSight::eSight::Left:
 				at->PlayAnimation(L"Will_Roll_Left", false);
 				break;
-			case eSight::Right:
+			case CAimSight::eSight::Right:
 				at->PlayAnimation(L"Will_Roll_Right", false);
 				break;
-			case eSight::Up:
+			case CAimSight::eSight::Up:
 				at->PlayAnimation(L"Will_Roll_Up", false);
 				break;
-			case eSight::Down:
+			case CAimSight::eSight::Down:
 				at->PlayAnimation(L"Will_Roll_Down", false);
 				break;
 			}
@@ -81,19 +82,19 @@ void CPlayer::Update()
 
 			switch (mAimSight->GetSight())
 			{
-			case eSight::Left: // 특정 시간 동안, 특정 거리 만큼, 이동한다.
+			case CAimSight::eSight::Left: // 특정 시간 동안, 특정 거리 만큼, 이동한다.
 				pos.x -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 				tr->SetPosition(pos);
 				break;
-			case eSight::Right:
+			case CAimSight::eSight::Right:
 				pos.x += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 				tr->SetPosition(pos);
 				break;
-			case eSight::Up:
+			case CAimSight::eSight::Up:
 				pos.y += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 				tr->SetPosition(pos);
 				break;
-			case eSight::Down:
+			case CAimSight::eSight::Down:
 				pos.y -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
 				tr->SetPosition(pos);
 				break;
@@ -113,16 +114,16 @@ void CPlayer::Update()
 		{
 			switch (mAimSight->GetSight())
 			{
-			case eSight::Left:
+			case CAimSight::eSight::Left:
 				at->PlayAnimation(L"Will_Walk_Left", true);
 				break;
-			case eSight::Right:
+			case CAimSight::eSight::Right:
 				at->PlayAnimation(L"Will_Walk_Right", true);
 				break;
-			case eSight::Up:
+			case CAimSight::eSight::Up:
 				at->PlayAnimation(L"Will_Walk_Up", true);
 				break;
-			case eSight::Down:
+			case CAimSight::eSight::Down:
 				at->PlayAnimation(L"Will_Walk_Down", true);
 				break;
 			}
@@ -131,8 +132,6 @@ void CPlayer::Update()
 
 		if (mState->GetCurState() == eState::Attack && mState->GetPrevState() != eState::Attack)
 		{
-			
-
 			switch (mAimSight->GetSight())
 			{
 			//case eAimSight::Left:
@@ -147,7 +146,7 @@ void CPlayer::Update()
 			//	at->PlayAnimation(L"Will_BigSwordCombo_Up", true);
 			//	tr->SetScale(Vector3(0.35f, 0.5f, 0.0f));
 			//	break;
-			case eSight::Down:
+			case CAimSight::eSight::Down:
 				at->PlayAnimation(L"Will_BigSwordCombo_Down", false);
 				tr->SetScale(Vector3(0.35f, 0.5f, 0.0f));
 				break;

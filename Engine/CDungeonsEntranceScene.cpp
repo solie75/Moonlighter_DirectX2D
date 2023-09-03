@@ -19,9 +19,9 @@ void CDungeonsEntranceScene::Initialize()
 		
 		// Will's Weapon
 		CWeapon* Weapon = new CWeapon();
-		AddGameObject(eLayerType::Weapon, Weapon, L"Weapon", Vector3(0.0f, 0.0f, 1.00019f)
-			, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"", true);
-		Weapon->SetParentObject(Will);
+		AddGameObject(eLayerType::Weapon, (CGameObject*)Weapon, L"Weapon", Vector3(0.0f, 0.0f, 1.00019f)
+			, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"", true); // CWeapon -> CGameObject 로 형변환 할때 단순히 소괄호만으로 되는가?
+		Weapon->SetOwner(Will);
 	}
 	{ // camera
 		// Main Camera

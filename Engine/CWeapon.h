@@ -48,6 +48,8 @@ private:
     eBigSwordType mBigSwordType; 
     eBowType mBowType;
     eSpearType mSpearType;
+    CPlayer* mOwner;
+    std::wstring mAniName;
 
 public:
     CWeapon();
@@ -59,6 +61,16 @@ public:
     virtual void Render();
 
     eWeaponType GetWeaponType() { return mMainWeaponType; }
-    std::wstring AddWeaponName();
+
+    // 각 무기를 업그레이드 할 때마다 해당 함수로 현재 무기의 type 을 변경한다. 
+    void SetBigSwordType();
+    void SetBowType();
+    void SetSpearType();
+    
+    void ResetWeaponAniName() { mAniName = L"Weapon"; };
+
+    // 해당 Weapon 을 기본으로 초기화 한다.
+    void ResetUpgrade(eWeaponType type);
+    void SetOwner(CPlayer* player) { mOwner = player; }
 };
 
