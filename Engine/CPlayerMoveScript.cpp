@@ -29,29 +29,7 @@ void CPlayerMoveScript::Update()
 	CState* state = player->GetState();
 	CAimSight* aimSight = player->GetAimSight();
 
-	// 방향전환
-	//if (CKeyMgr::GetInst()->GetKeyState(KEY::LEFT) == KEY_STATE::TAP)
-	//{
-	//	aimSight->SetAimSight(eAimSight::Left);
-	//	//mLeftKey = KEY_STATE::TAP;
-	//}
-	//if (CKeyMgr::GetInst()->GetKeyState(KEY::RIGHT) == KEY_STATE::TAP)
-	//{
-	//	aimSight->SetAimSight(eAimSight::Right);
-	//	//mRightKey = KEY_STATE::TAP;
-	//}
-	//if (CKeyMgr::GetInst()->GetKeyState(KEY::UP) == KEY_STATE::TAP)
-	//{
-	//	aimSight->SetAimSight(eAimSight::Up);
-	//	//mUpKey = KEY_STATE::TAP;
-	//}
-	//if (CKeyMgr::GetInst()->GetKeyState(KEY::DOWN) == KEY_STATE::TAP)
-	//{
-	//	aimSight->SetAimSight(eAimSight::Down);
-	//	//mDownKey = KEY_STATE::TAP;
-	//}
-
-	if (state->IsStateChange()) // 키 입력 가능 여부
+	if (state->IsStateChange())
 	{
 		// 캐릭터 위치 변화
 		if (CKeyMgr::GetInst()->GetKeyState(KEY::LEFT) == KEY_STATE::PRESSED)
@@ -107,29 +85,39 @@ void CPlayerMoveScript::Update()
 			state->SetBoolStateChange(false);
 			state->SetState(eState::Roll);
 		}
+	}
 
-		// 공격 상태로 변환
-		if (CKeyMgr::GetInst()->GetKeyState(KEY::G) == KEY_STATE::TAP)
+	// Trans to Attack State
+	
+	// Main Attack
+	if (CKeyMgr::GetInst()->GetKeyState(KEY::J) == KEY_STATE::TAP)
+	{
+		state->SetBoolStateChange(false);
+		state->SetState(eState::Attack);
+
+		if (mComboAttackNum == 0)
 		{
-			// 공격 별로 유지 시간 또는 발동 조건 콤보 유무 등이 다르기 때문에 현재 들고 있는 main Weapon 에 따라 다른 코드를 호출한다.
-			switch (CWeapon::GetInst()->GetWeaponType())
-			{
-			case CWeapon::eWeaponType::BigSword :
-				break;
-			case CWeapon::eWeaponType::Bow :
-				break;
-			case CWeapon::eWeaponType::Spear :
-				break;
-			}
+			mComboAttackNum += 1;
+		}
 
-			/*if (player->GetMainWeaponType() == CPlayer::eWeapon::BigSword)
-			{
-				mComboAttackNum++;
-			}*/
-			state->SetBoolStateChange(false);
-			state->SetState(eState::Attack);
+		// 첫번재 콤보의 애니메이션 11개중 8번째 이상부터
+		if (mComboAttackNum == 1 && at->GetCurAnimation()->GetAnimationIndex() >= 8)
+		{
+			mComboAttackNum += 1;
+		}
+
+		if (mComboAttackNum == 2 && at->GetCurAnimation()->GetAnimationIndex() >= 8)
+		{
+			mComboAttackNum += 1;
 		}
 	}
+
+	// Sub Attack
+	//if (CKeyMgr::GetInst()->GetKeyState(KEY::K) == KEY_STATE::TAP)
+	//{
+	//	state->SetBoolStateChange(false);
+	//	state->SetState(eState::Attack);
+	//}
 }
 
 void CPlayerMoveScript::LateUpdate()

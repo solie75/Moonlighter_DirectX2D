@@ -26,6 +26,9 @@ public:
     virtual void Update();
     virtual void LateUpdate();
 
+    UINT GetComboAttackNum() { return mComboAttackNum; }
+    void ResetComboAttackNum() { mComboAttackNum = 0; }
+
     //KEY GetKey() { return mKey; }
     //void SetKey(KEY key) { mKey = key; }
     //KEY_STATE GetKeyState() { return CurState; }
