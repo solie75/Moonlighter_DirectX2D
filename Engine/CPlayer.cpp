@@ -138,28 +138,30 @@ void CPlayer::Update()
 		{
 			if (at->GetCurAnimation()->IsComplete() == true)
 			{
-				tr->SetScale(Vector3(0.25f, 0.47f, 0.0f));
-				mState->SetBoolStateChange(true);
-				mState->SetState(eState::Idle);
-
 				if (CWeapon::GetInst()->GetWeaponType() == CWeapon::eWeaponType::BigSword)
 				{
-					// mComboNum 을 0으로 한다.
-					playerScript->ResetComboAttackNum();
+					if (playerScript->GetBoolNextCombo())
+					{
+						mState->SetState(eState::End);
+						mState->SetState(eState::Attack);
+					}
+					else
+					{
+						playerScript->ResetComboAttackNum();
+						tr->SetScale(Vector3(0.25f, 0.47f, 0.0f));
+						mState->SetBoolStateChange(true);
+						mState->SetState(eState::Idle);
+					}
 				}
-			}
-			// BigSword 상태에서 현재 애니메이션이 끝나지 않은 상태라면
-			else if (CWeapon::GetInst()->GetWeaponType() == CWeapon::eWeaponType::BigSword)
-			{
-				// curState : Attack ,  PrevState : End 가 되게 한다.
-				if (at->GetCurAnimation()->GetAnimationIndex() >= 8 && playerScript->GetComboAttackNum() != 3)
-					// 이게 맞나...
+				else
 				{
-					mState->SetState(eState::End);
-					mState->SetState(eState::Attack);
+					tr->SetScale(Vector3(0.25f, 0.47f, 0.0f));
+					mState->SetBoolStateChange(true);
+					mState->SetState(eState::Idle);
 				}
 			}
 		}
+
 		else
 		{
 			// BigSword
@@ -185,7 +187,6 @@ void CPlayer::Update()
 				}
 
 				// Combo
-				CPlayerMoveScript* playerScript = this->GetComponent<CPlayerMoveScript>(eComponentType::Script);
 				switch (playerScript->GetComboAttackNum())
 				{
 				case 1:
@@ -200,7 +201,9 @@ void CPlayer::Update()
 				}
 
 				at->PlayAnimation(aniString, false);
+				playerScript->SetBoolNextCombo(false);
 				tr->SetScale(Vector3(0.35f, 0.5f, 0.0f));
+				mState->SetState(eState::Attack);
 			}
 
 			// Bow
@@ -226,6 +229,7 @@ void CPlayer::Update()
 				}
 
 				at->PlayAnimation(aniString, false);
+				mState->SetState(eState::Attack);
 			}
 
 			// Spear
@@ -251,9 +255,8 @@ void CPlayer::Update()
 				}
 
 				at->PlayAnimation(aniString, false);
+				mState->SetState(eState::Attack);
 			}
-
-			mState->SetState(eState::Attack);
 		}
 	}
 

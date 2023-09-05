@@ -460,102 +460,10 @@
             "renderingMode": [1],
             "size": [34, 47],
             "duration": [70] 
-        },
-        {
-            "id": 45,
-            "name": "Will_BigSword_Left_First",
-            "objectName": "Will",
-            "spriteNumber": [11],
-            "renderingMode": [1],
-            "size": [34, 47],
-            "duration": [70] 
-        },
-        {
-            "id": 46,
-            "name": "Will_BigSword_Left_Second",
-            "objectName": "Will",
-            "spriteNumber": [11],
-            "renderingMode": [1],
-            "size": [34, 47],
-            "duration": [70] 
-        },
-        {
-            "id": 47,
-            "name": "Will_BigSword_Left_Third",
-            "objectName": "Will",
-            "spriteNumber": [18],
-            "renderingMode": [1],
-            "size": [34, 47],
-            "duration": [70] 
-        },
-        {
-            "id": 45,
-            "name": "Will_BigSword_Right_First",
-            "objectName": "Will",
-            "spriteNumber": [11],
-            "renderingMode": [1],
-            "size": [34, 47],
-            "duration": [70] 
-        },
-        {
-            "id": 46,
-            "name": "Will_BigSword_Right_Second",
-            "objectName": "Will",
-            "spriteNumber": [11],
-            "renderingMode": [1],
-            "size": [34, 47],
-            "duration": [70] 
-        },
-        {
-            "id": 47,
-            "name": "Will_BigSword_Right_Third",
-            "objectName": "Will",
-            "spriteNumber": [18],
-            "renderingMode": [1],
-            "size": [34, 47],
-            "duration": [70] 
-        },
-        {
-            "id": 45,
-            "name": "Will_BigSword_Up_First",
-            "objectName": "Will",
-            "spriteNumber": [11],
-            "renderingMode": [1],
-            "size": [34, 47],
-            "duration": [70] 
-        },
-        {
-            "id": 46,
-            "name": "Will_BigSword_Up_Second",
-            "objectName": "Will",
-            "spriteNumber": [11],
-            "renderingMode": [1],
-            "size": [34, 47],
-            "duration": [70] 
-        },
-        {
-            "id": 47,
-            "name": "Will_BigSword_Up_Third",
-            "objectName": "Will",
-            "spriteNumber": [18],
-            "renderingMode": [1],
-            "size": [34, 47],
-            "duration": [70] 
         }
     ],
 
-    "Weapon":
-    [
-        {
-            "id": 45,
-            "name": "Vulkan_BigSword_Down_Combo_1",
-            "objectName": "Will",
-            "spriteNumber": [40],
-            "renderingMode": [1],
-            "size": [34, 47],
-            "duration": [70] 
-        }
-    ],
+    
 
     "__commnet(RenderingMode's num)" :
     {

@@ -9,7 +9,7 @@ class CMonster :
 private:
     eCreatureType mCreatureType;
     eState mState;
-    eAimSight mAimSight;
+    CAimSight::eSight mAimSight;
     int HP;
 
 public:

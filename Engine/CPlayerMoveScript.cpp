@@ -2,17 +2,12 @@
 #include "CTimeMgr.h"
 #include "CAnimator.h"
 #include "CPlayer.h"
+#include "CWeapon.h"
 
 
 CPlayerMoveScript::CPlayerMoveScript()
-	: 
-	mComboAttackNum(0)
-	//, mLeftKey(KEY_STATE::NONE)
-	//, mRightKey(KEY_STATE::NONE)
-	//, mUpKey(KEY_STATE::NONE)
-	//, mDownKey(KEY_STATE::NONE)
-	//, bAni(true) // true 일때 애니메이션 작동 // false 일때 애니메이션 비작동
-	//, mAniTime(0.0f)
+	: mComboAttackNum(0)
+	, mbNextCombo(false)
 {
 }
 
@@ -95,20 +90,32 @@ void CPlayerMoveScript::Update()
 		state->SetBoolStateChange(false);
 		state->SetState(eState::Attack);
 
-		if (mComboAttackNum == 0)
+		// BigSword 인 경우
+		if (CWeapon::GetInst()->GetWeaponType() == CWeapon::eWeaponType::BigSword)
 		{
-			mComboAttackNum += 1;
-		}
+			if (mComboAttackNum == 0)
+			{
+				mComboAttackNum += 1;
+			}
 
-		// 첫번재 콤보의 애니메이션 11개중 8번째 이상부터
-		if (mComboAttackNum == 1 && at->GetCurAnimation()->GetAnimationIndex() >= 8)
-		{
-			mComboAttackNum += 1;
-		}
+			// 첫번재 콤보의 애니메이션 11개중 8번째 이상부터
+			if (mComboAttackNum == 1 && at->GetCurAnimation()->GetAnimationIndex() >= 8)
+			{
+				if (mbNextCombo == false)
+				{
+					mComboAttackNum += 1;
+					mbNextCombo = true;
+				}
+			}
 
-		if (mComboAttackNum == 2 && at->GetCurAnimation()->GetAnimationIndex() >= 8)
-		{
-			mComboAttackNum += 1;
+			if (mComboAttackNum == 2 && at->GetCurAnimation()->GetAnimationIndex() >= 8)
+			{
+				if (mbNextCombo == false)
+				{
+					mComboAttackNum += 1;
+					mbNextCombo = true;
+				}
+			}
 		}
 	}
 

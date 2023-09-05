@@ -3,7 +3,9 @@
 #include "CGameObject.h"
 #include "CState.h"
 #include "CAimSight.h"
-#include "CWeapon.h"
+//#include "CWeapon.h"
+
+class CWeapon;
 
 class CPlayer :
     public CGameObject

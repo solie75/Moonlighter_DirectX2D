@@ -1,5 +1,8 @@
 #pragma once
 #include "CSingleton.h"
+#include "Header.h"
+#include "CPlayer.h"
+
 
 class CWeapon :
     public CSingleton<CWeapon>

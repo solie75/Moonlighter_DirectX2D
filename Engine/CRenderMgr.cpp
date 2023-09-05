@@ -465,11 +465,11 @@ void CRenderMgr::Init()
 			LoadMaterial(aniShader, L"linkSprites", eRenderingMode::CutOut);
 
 			// Will Attack
-			CreateAtlas(L"Will_BigSwordCombo_Down", 40);
-			LoadMaterial(aniShader, L"atlas_Will_BigSwordCombo_Down", eRenderingMode::CutOut);
+			//CreateAtlas(L"Will_BigSwordCombo_Down", 40);
+			//LoadMaterial(aniShader, L"atlas_Will_BigSwordCombo_Down", eRenderingMode::CutOut);
 
-			CreateAtlas(L"will_bow_secondary_animation_right", 27);
-			LoadMaterial(aniShader, L"atlas_will_bow_secondary_animation_right", eRenderingMode::CutOut);
+			//CreateAtlas(L"will_bow_secondary_animation_right", 27);
+			//LoadMaterial(aniShader, L"atlas_will_bow_secondary_animation_right", eRenderingMode::CutOut);
 
 		}
 	}

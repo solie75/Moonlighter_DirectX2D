@@ -1,8 +1,8 @@
 #include "CWeapon.h"
-#include "CPlayer.h"
+
 
 CWeapon::CWeapon()
-	:  mMainWeaponType(eWeaponType::End)
+	:  mMainWeaponType(eWeaponType::BigSword)
 	, mBigSwordType(eBigSwordType::End)
 	, mBowType(eBowType::End)
 	, mSpearType(eSpearType::End)
@@ -99,24 +99,18 @@ void CWeapon::Update()
 
 
 		// 무기 종류가 BigSword 라면 콤보 단계를 추가한다.
-		if (mMainWeaponType == eWeaponType::BigSword)
-		{
-			player->
-		}
+		//if (mMainWeaponType == eWeaponType::BigSword)
+		//{
+		//	player->
+		//}
 
 
 
-
-
-
-
-
-
-		switch (playerSight->GetSight())
-		{
-		case CAimSight::eSight::Down :
-			aniString += L""
-		}
+		//switch (playerSight->GetSight())
+		//{
+		//case CAimSight::eSight::Down :
+		//	aniString += L""
+		//}
 	}
 
 }
