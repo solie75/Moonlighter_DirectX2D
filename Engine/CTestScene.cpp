@@ -4,6 +4,7 @@
 #include "CComputeShader.h"
 #include "CPaintShader.h"
 #include "CParticleSystem.h"
+#include "CWeapon.h"
 
 CTestScene::CTestScene()
 {
@@ -25,6 +26,13 @@ void CTestScene::Initialize()
 	AddGameObject(eLayerType::Player, Will, L"Will", Vector3(3.0f, 0.0f, 1.0002f)
 		, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down", true);
 	CTransform* PlayerTr = Will->GetComponent<CTransform>(eComponentType::Transform);
+
+	CWeapon* Weapon = new CWeapon();
+	AddGameObject(eLayerType::Player, Weapon, L"Weapon", Vector3(0.0f, 0.0f, 0.0f),
+		Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"", true);
+	Weapon->SetPlayerToWeapon(Will);
+
+	Will->SetWeapon(Weapon);
 
 	// Smile
 	CMonster* Smile = new CMonster();

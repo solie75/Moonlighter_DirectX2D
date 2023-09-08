@@ -18,10 +18,10 @@ void CDungeonsEntranceScene::Initialize()
 			, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down", true);
 		
 		// Will's Weapon
-		CWeapon* Weapon = new CWeapon();
-		AddGameObject(eLayerType::Weapon, (CGameObject*)Weapon, L"Weapon", Vector3(0.0f, 0.0f, 1.00019f)
-			, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"", true); // CWeapon -> CGameObject 로 형변환 할때 단순히 소괄호만으로 되는가?
-		Weapon->SetOwner(Will);
+		//CWeapon* Weapon = new CWeapon();
+		//AddGameObject(eLayerType::Weapon, (CGameObject*)Weapon, L"Weapon", Vector3(0.0f, 0.0f, 1.00019f)
+		//	, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"", true); // CWeapon -> CGameObject 로 형변환 할때 단순히 소괄호만으로 되는가?
+		//Weapon->SetOwner(Will);
 	}
 	{ // camera
 		// Main Camera

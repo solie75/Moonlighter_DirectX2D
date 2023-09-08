@@ -8,6 +8,7 @@
 CPlayerMoveScript::CPlayerMoveScript()
 	: mComboAttackNum(0)
 	, mbNextCombo(false)
+	, mSubAttackState(eSubAttackState::End)
 {
 }
 
@@ -91,7 +92,7 @@ void CPlayerMoveScript::Update()
 		state->SetState(eState::Attack);
 
 		// BigSword ÀÎ °æ¿ì
-		if (CWeapon::GetInst()->GetWeaponType() == CWeapon::eWeaponType::BigSword)
+		if (player->GetWeapon()->GetWeaponType() == CWeapon::eWeaponType::BigSword)
 		{
 			if (mComboAttackNum == 0)
 			{
@@ -120,11 +121,20 @@ void CPlayerMoveScript::Update()
 	}
 
 	// Sub Attack
-	//if (CKeyMgr::GetInst()->GetKeyState(KEY::K) == KEY_STATE::TAP)
-	//{
-	//	state->SetBoolStateChange(false);
-	//	state->SetState(eState::Attack);
-	//}
+	if (CKeyMgr::GetInst()->GetKeyState(KEY::K) == KEY_STATE::TAP)
+	{
+		state->SetBoolStateChange(false);
+		state->SetState(eState::Attack);
+		mSubAttackState = eSubAttackState::Enter;
+	}
+	else if (CKeyMgr::GetInst()->GetKeyState(KEY::K) == KEY_STATE::PRESSED)
+	{
+		mSubAttackState = eSubAttackState::Stay;
+	}
+	else if (CKeyMgr::GetInst()->GetKeyState(KEY::K) == KEY_STATE::RELEASE)
+	{
+		mSubAttackState = eSubAttackState::Exit;
+	}
 }
 
 void CPlayerMoveScript::LateUpdate()

@@ -441,7 +441,7 @@
             "spriteNumber": [11],
             "renderingMode": [1],
             "size": [34, 47],
-            "duration": [70] 
+            "duration": [77] 
         },
         {
             "id": 46,
@@ -450,7 +450,7 @@
             "spriteNumber": [11],
             "renderingMode": [1],
             "size": [34, 47],
-            "duration": [70] 
+            "duration": [77] 
         },
         {
             "id": 47,
@@ -459,11 +459,220 @@
             "spriteNumber": [18],
             "renderingMode": [1],
             "size": [34, 47],
-            "duration": [70] 
+            "duration": [77] 
+        },
+        {
+            "id": 48,
+            "name": "Will_BigSword_Left_First",
+            "objectName": "Will",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [37, 44],
+            "duration": [77] 
+        },
+        {
+            "id": 49,
+            "name": "Will_BigSword_Left_Second",
+            "objectName": "Will",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [37, 44],
+            "duration": [77] 
+        },
+        {
+            "id": 50,
+            "name": "Will_BigSword_Left_Third",
+            "objectName": "Will",
+            "spriteNumber": [14],
+            "renderingMode": [1],
+            "size": [37, 44],
+            "duration": [77] 
+        },
+        {
+            "id": 51,
+            "name": "Will_BigSword_Right_First",
+            "objectName": "Will",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [37, 44],
+            "duration": [77] 
+        },
+        {
+            "id": 52,
+            "name": "Will_BigSword_Right_Second",
+            "objectName": "Will",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [37, 44],
+            "duration": [77] 
+        },
+        {
+            "id": 53,
+            "name": "Will_BigSword_Right_Third",
+            "objectName": "Will",
+            "spriteNumber": [14],
+            "renderingMode": [1],
+            "size": [37, 44],
+            "duration": [77] 
+        },
+        {
+            "id": 54,
+            "name": "Will_BigSword_Up_First",
+            "objectName": "Will",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [34, 42],
+            "duration": [77] 
+        },
+        {
+            "id": 55,
+            "name": "Will_BigSword_Up_Second",
+            "objectName": "Will",
+            "spriteNumber": [10],
+            "renderingMode": [1],
+            "size": [34, 42],
+            "duration": [77] 
+        },
+        {
+            "id": 56,
+            "name": "Will_BigSword_Up_Third",
+            "objectName": "Will",
+            "spriteNumber": [17],
+            "renderingMode": [1],
+            "size": [34, 42],
+            "duration": [77] 
+        },
+        {
+            "id": 57,
+            "name": "Will_BigSword_SubAttack",
+            "objectName": "Will",
+            "spriteNumber": [34],
+            "renderingMode": [1],
+            "size": [40, 40],
+            "duration": [77] 
         }
     ],
 
-    
+    "Weapon":
+    [
+        {
+            "id": 58,
+            "name": "Weapon_BigSword_Vulcan_Down_First",
+            "objectName": "Weapon",
+            "spriteNumber": [11],
+            "renderingMode": [1],
+            "size": [90, 130],
+            "duration": [100] 
+        },
+        {
+            "id": 59,
+            "name": "Weapon_BigSword_Vulcan_Down_Second",
+            "objectName": "Weapon",
+            "spriteNumber": [11],
+            "renderingMode": [1],
+            "size": [90, 130],
+            "duration": [100] 
+        },
+        {
+            "id": 60,
+            "name": "Weapon_BigSword_Vulcan_Down_Third",
+            "objectName": "Weapon",
+            "spriteNumber": [16],
+            "renderingMode": [1],
+            "size": [90, 130],
+            "duration": [100] 
+        },
+        {
+            "id": 61,
+            "name": "Weapon_BigSword_Vulcan_Left_First",
+            "objectName": "Weapon",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [120, 100],
+            "duration": [100] 
+        },
+        {
+            "id": 62,
+            "name": "Weapon_BigSword_Vulcan_Left_Second",
+            "objectName": "Weapon",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [120, 100],
+            "duration": [100] 
+        },
+        {
+            "id": 63,
+            "name": "Weapon_BigSword_Vulcan_Left_Third",
+            "objectName": "Weapon",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [120, 100],
+            "duration": [100] 
+        },
+        {
+            "id": 64,
+            "name": "Weapon_BigSword_Vulcan_Right_First",
+            "objectName": "Weapon",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [120, 100],
+            "duration": [100] 
+        },
+        {
+            "id": 65,
+            "name": "Weapon_BigSword_Vulcan_Right_Second",
+            "objectName": "Weapon",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [120, 100],
+            "duration": [100] 
+        },
+        {
+            "id": 66,
+            "name": "Weapon_BigSword_Vulcan_Right_Third",
+            "objectName": "Weapon",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [120, 100],
+            "duration": [100] 
+        },
+        {
+            "id": 67,
+            "name": "Weapon_BigSword_Vulcan_Up_First",
+            "objectName": "Weapon",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [100, 100],
+            "duration": [100] 
+        },
+        {
+            "id": 68,
+            "name": "Weapon_BigSword_Vulcan_Up_Second",
+            "objectName": "Weapon",
+            "spriteNumber": [10],
+            "renderingMode": [1],
+            "size": [100, 100],
+            "duration": [100] 
+        },
+        {
+            "id": 69,
+            "name": "Weapon_BigSword_Vulcan_Up_Third",
+            "objectName": "Weapon",
+            "spriteNumber": [15],
+            "renderingMode": [1],
+            "size": [100, 100],
+            "duration": [100] 
+        },
+        {
+            "id": 70,
+            "name": "Weapon_BigSword_Vulcan_SubAttack",
+            "objectName": "Weapon",
+            "spriteNumber": [33],
+            "renderingMode": [1],
+            "size": [120, 100],
+            "duration": [80] 
+        }
+    ],
 
     "__commnet(RenderingMode's num)" :
     {

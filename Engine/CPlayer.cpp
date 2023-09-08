@@ -138,7 +138,7 @@ void CPlayer::Update()
 		{
 			if (at->GetCurAnimation()->IsComplete() == true)
 			{
-				if (CWeapon::GetInst()->GetWeaponType() == CWeapon::eWeaponType::BigSword)
+				if (mWeapon->GetWeaponType() == CWeapon::eWeaponType::BigSword)
 				{
 					if (playerScript->GetBoolNextCombo())
 					{
@@ -165,9 +165,30 @@ void CPlayer::Update()
 		else
 		{
 			// BigSword
-			if (CWeapon::GetInst()->GetWeaponType() == CWeapon::eWeaponType::BigSword)
+			if (mWeapon->GetWeaponType() == CWeapon::eWeaponType::BigSword)
 			{
 				std::wstring aniString = L"Will_BigSword";
+
+				if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::Enter)
+				{
+					aniString += L"_SubAttack";
+					at->PlayAnimation(aniString, false);
+					tr->SetScale(Vector3(0.4f, 0.5f, 0.0f));
+					CGameObject::Update();
+					return;
+				}
+				else if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::Stay)
+				{
+					CGameObject::Update();
+					return;
+				}
+				else if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::Exit)
+				{
+					mState->SetBoolStateChange(true);
+					mState->SetState(eState::Idle);
+					tr->SetScale(Vector3(0.25f, 0.47f, 0.0f));
+					return;
+				}
 
 				// Direction
 				switch (mAimSight->GetSight())
@@ -191,12 +212,15 @@ void CPlayer::Update()
 				{
 				case 1:
 					aniString += L"_First";
+					mWeapon->SetComboNum(1);
 					break;
 				case 2:
 					aniString += L"_Second";
+					mWeapon->SetComboNum(2);
 					break;
 				case 3:
 					aniString += L"_Third";
+					mWeapon->SetComboNum(3);
 					break;
 				}
 
@@ -204,10 +228,11 @@ void CPlayer::Update()
 				playerScript->SetBoolNextCombo(false);
 				tr->SetScale(Vector3(0.35f, 0.5f, 0.0f));
 				mState->SetState(eState::Attack);
+				
 			}
 
 			// Bow
-			else if (CWeapon::GetInst()->GetWeaponType() == CWeapon::eWeaponType::Bow)
+			else if (mWeapon->GetWeaponType() == CWeapon::eWeaponType::Bow)
 			{
 				std::wstring aniString = L"Will_Bow";
 
@@ -233,7 +258,7 @@ void CPlayer::Update()
 			}
 
 			// Spear
-			else if (CWeapon::GetInst()->GetWeaponType() == CWeapon::eWeaponType::Spear)
+			else if (mWeapon->GetWeaponType() == CWeapon::eWeaponType::Spear)
 			{
 				std::wstring aniString = L"Will_Spear";
 

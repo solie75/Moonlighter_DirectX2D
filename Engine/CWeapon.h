@@ -1,11 +1,11 @@
 #pragma once
-#include "CSingleton.h"
+#include "CGameObject.h"
 #include "Header.h"
 #include "CPlayer.h"
 
 
 class CWeapon :
-    public CSingleton<CWeapon>
+    public CGameObject
 {
 public:
     enum class eWeaponType
@@ -51,8 +51,16 @@ private:
     eBigSwordType mBigSwordType; 
     eBowType mBowType;
     eSpearType mSpearType;
-    CPlayer* mOwner;
     std::wstring mAniName;
+    UINT mComboNum;
+
+    // Component
+    //CAnimator* mWeaponAt;
+    //CTransform* mWeaponTr;
+    //CMeshRender* mWeaponMr;
+    //CCollider2D* 
+
+    CPlayer* mPlayer;
 
 public:
     CWeapon();
@@ -74,6 +82,8 @@ public:
 
     // 해당 Weapon 을 기본으로 초기화 한다.
     void ResetUpgrade(eWeaponType type);
-    void SetOwner(CPlayer* player) { mOwner = player; }
+
+    void SetComboNum(UINT num) { mComboNum = num; }
+    void SetPlayerToWeapon(CPlayer* player) { mPlayer = player; }
 };
 

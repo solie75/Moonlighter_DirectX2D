@@ -16,6 +16,8 @@ private:
     CAimSight* mAimSight;
     UINT AttackComboNum;
 
+    CWeapon* mWeapon; // 여기에 나중에는 다른 방어구와 아이템 물약을 포함한 모든 것들을 가진 싱글톤 인벤토리가 들어가게 된다.
+
 public:
     CPlayer();
     ~CPlayer();
@@ -28,5 +30,7 @@ public:
     eCreatureType GetCreatureType() { return mCreatureType; }
     CState* GetState() { return mState; }
     CAimSight* GetAimSight() { return mAimSight; }
+    void SetWeapon(CWeapon* weapon) { mWeapon = weapon; }
+    CWeapon* GetWeapon() { return mWeapon; }
 };
 

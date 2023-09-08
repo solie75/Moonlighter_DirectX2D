@@ -7,9 +7,20 @@
 class CPlayerMoveScript :
     public CScript
 {
+public:
+    enum class eSubAttackState
+    {
+        Enter,
+        Stay,
+        Exit,
+        End,
+    };
+
 private:
     UINT mComboAttackNum;
     bool mbNextCombo;
+    //bool mbSubAttack;
+    eSubAttackState mSubAttackState;
 
 public:
     CPlayerMoveScript();
@@ -25,5 +36,6 @@ public:
     bool GetBoolNextCombo() { return mbNextCombo; }
     void SetBoolNextCombo(bool b) { mbNextCombo = b; }
 
+    eSubAttackState GetSubAttackState() { return mSubAttackState; }
 };
 
