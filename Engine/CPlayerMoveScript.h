@@ -37,5 +37,6 @@ public:
     void SetBoolNextCombo(bool b) { mbNextCombo = b; }
 
     eSubAttackState GetSubAttackState() { return mSubAttackState; }
+    void SetSubAttackState(eSubAttackState state) { mSubAttackState = state; }
 };
 

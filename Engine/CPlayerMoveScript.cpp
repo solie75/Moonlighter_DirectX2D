@@ -130,6 +130,11 @@ void CPlayerMoveScript::Update()
 	else if (CKeyMgr::GetInst()->GetKeyState(KEY::K) == KEY_STATE::PRESSED)
 	{
 		mSubAttackState = eSubAttackState::Stay;
+		// 키를 계속 누르고 있지만 이미 동작은 끝난 경우
+		if (at->GetCurAnimation()->IsComplete() == true)
+		{
+			mSubAttackState = eSubAttackState::Exit;
+		}
 	}
 	else if (CKeyMgr::GetInst()->GetKeyState(KEY::K) == KEY_STATE::RELEASE)
 	{

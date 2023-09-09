@@ -110,6 +110,11 @@ void CWeapon::Update()
 				At->PlayAnimation(mAniName, false);
 				return;
 			}
+			else if(playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::Exit)
+			{
+				At->PlayAnimation(L"", false);
+				return;
+			}
 
 			// 방향
 			switch (playerSight->GetSight())
@@ -151,8 +156,10 @@ void CWeapon::Update()
 					break;
 				}
 			}
-
-			
+		}
+		else // 공격상태가 아닐 때
+		{
+			At->PlayAnimation(L"", false);
 		}
 	}
 	CGameObject::Update();

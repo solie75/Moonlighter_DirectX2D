@@ -33,6 +33,8 @@ void CPlayer::Update()
 	// Idle 상태일 때
 	if (mState->GetCurState() == eState::Idle && mState->GetPrevState() != eState::Idle)
 	{
+		playerScript->ResetComboAttackNum();
+
 		switch (mAimSight->GetSight())
 		{
 		case CAimSight::eSight::Left:
@@ -187,6 +189,8 @@ void CPlayer::Update()
 					mState->SetBoolStateChange(true);
 					mState->SetState(eState::Idle);
 					tr->SetScale(Vector3(0.25f, 0.47f, 0.0f));
+					playerScript->SetSubAttackState(CPlayerMoveScript::eSubAttackState::End);
+					CGameObject::Update();
 					return;
 				}
 

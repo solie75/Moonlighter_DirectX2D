@@ -25,7 +25,7 @@ D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CFireBall.cpp(34,26): warning C4244
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CPaintShader.cpp(7,56): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CPaintShader.cpp(8,57): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CParticleShader.cpp(40,56): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CPlayer.cpp(79,44): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CPlayer.cpp(81,44): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CResourceMgr.cpp(96,25): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CResourceMgr.cpp(54,63): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CRenderMgr.cpp(802,72): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.

@@ -114,6 +114,16 @@ CAnimator::Events* CAnimator::FindEvents(const std::wstring& name)
 
 void CAnimator::PlayAnimation(const std::wstring& aniName, bool loop)
 {
+	CMeshRender* mr = this->GetOwner()->GetComponent<CMeshRender>(eComponentType::MeshRender);
+
+	if (aniName == L"")
+	{
+		std::shared_ptr<CMaterial> mt = std::make_shared<CMaterial>();
+		mt->SetShader(CResourceMgr::Find<CShader>(L"shader"));
+		mr->SetMaterial(mt);
+		return;
+	}
+
 	CAnimation* prevAnimation = mActiveAnimation;
 
 	Events* events;
@@ -141,7 +151,7 @@ void CAnimator::PlayAnimation(const std::wstring& aniName, bool loop)
 		events->startEvent();
 	}
 	
-	CMeshRender* mr = this->GetOwner()->GetComponent<CMeshRender>(eComponentType::MeshRender);
+	
 	std::shared_ptr<CMaterial> mt = CResourceMgr::Find<CMaterial>(L"mt_atlas_" + aniName);
 	mr->SetMaterial(mt);
 
