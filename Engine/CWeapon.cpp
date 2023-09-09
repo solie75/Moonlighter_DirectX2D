@@ -3,7 +3,7 @@
 
 
 CWeapon::CWeapon()
-	:  mMainWeaponType(eWeaponType::BigSword)
+	:  mMainWeaponType(eWeaponType::Bow)
 	, mBigSwordType(eBigSwordType::Vulcan)
 	, mBowType(eBowType::End)
 	, mSpearType(eSpearType::End)
