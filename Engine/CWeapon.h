@@ -2,6 +2,7 @@
 #include "CGameObject.h"
 #include "Header.h"
 #include "CPlayer.h"
+#include "CArrow.h"
 
 
 class CWeapon :
@@ -53,15 +54,10 @@ private:
     eSpearType mSpearType;
     std::wstring mAniName;
     UINT mComboNum;
+    bool mbArrow;
 
-    // Component
-    //CAnimator* mWeaponAt;
-    //CTransform* mWeaponTr;
-    //CMeshRender* mWeaponMr;
-    //CCollider2D* 
-
-    CPlayer* mPlayer;
-
+    //CPlayer* mPlayer;
+    CScene* ownScene;
 public:
     CWeapon();
     ~CWeapon();
@@ -72,6 +68,7 @@ public:
     virtual void Render();
 
     eWeaponType GetWeaponType() { return mMainWeaponType; }
+    eBowType GetBowType() { return mBowType; }
 
     // 각 무기를 업그레이드 할 때마다 해당 함수로 현재 무기의 type 을 변경한다. 
     void SetBigSwordType();
@@ -82,8 +79,8 @@ public:
 
     // 해당 Weapon 을 기본으로 초기화 한다.
     void ResetUpgrade(eWeaponType type);
-
+    void SetScene(CScene* scene) { ownScene = scene; }
     void SetComboNum(UINT num) { mComboNum = num; }
-    void SetPlayerToWeapon(CPlayer* player) { mPlayer = player; }
+    //void SetPlayerToWeapon(CPlayer* player) { mPlayer = player; }
 };
 

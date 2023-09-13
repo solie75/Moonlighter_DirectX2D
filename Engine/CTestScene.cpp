@@ -5,6 +5,7 @@
 #include "CPaintShader.h"
 #include "CParticleSystem.h"
 #include "CWeapon.h"
+#include "CCollisionMgr.h"
 
 CTestScene::CTestScene()
 {
@@ -16,6 +17,9 @@ CTestScene::~CTestScene()
 
 void CTestScene::Initialize()
 {
+	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::PlayerProjectile, eLayerType::Monster, true);
+	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::PlayerProjectile, eLayerType::Background, true);
+
 	std::shared_ptr<CPaintShader> paintShader = CResourceMgr::GetInst()->Find<CPaintShader>(L"PaintShader"); // paintShader ∞° empty ¿Ã¥Ÿ.
 	std::shared_ptr<CTexture> paintTexture = CResourceMgr::GetInst()->Find<CTexture>(L"PaintTexture");
 	paintShader->SetTarget(paintTexture);
@@ -31,18 +35,20 @@ void CTestScene::Initialize()
 	CWeapon* Weapon = new CWeapon();
 	AddGameObject(eLayerType::Player, Weapon, L"Weapon", Vector3(0.0f, 0.0f, 0.0f),
 		Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"", true);
-	Weapon->SetPlayerToWeapon(Will);
+	//Weapon->SetPlayerToWeapon(Will);
+	Weapon->SetParentObject(Will);
+	Weapon->SetScene(this);
 
 	Will->SetWeapon(Weapon);
 
 	// Smile
 	CMonster* Smile = new CMonster();
-	AddGameObject(eLayerType::Monster, Smile, L"Smile", Vector3(0.0f, 0.0f, 1.0003f)
+	AddGameObject(eLayerType::Monster, Smile, L"Smile", Vector3(-2.0f, 0.0f, 1.0003f)
 		, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"mt_Smile", false);
 	CMeshRender* mr = Smile->GetComponent<CMeshRender>(eComponentType::MeshRender);
 	std::shared_ptr<CMaterial> mt = mr->GetMaterial();
-	mt->SetTexture(paintTexture);
-	int a = 0;
+	Smile->AddComponent<CCollider2D>();
+	//mt->SetTexture(paintTexture);
 
 	// Particle
 	CGameObject* particle = new CGameObject();

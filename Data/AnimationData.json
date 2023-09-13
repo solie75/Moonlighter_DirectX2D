@@ -550,13 +550,85 @@
             "renderingMode": [1],
             "size": [40, 40],
             "duration": [77] 
+        },
+        {
+            "id": 58,
+            "name": "Will_Bow_Down",
+            "objectName": "Will",
+            "spriteNumber": [7],
+            "renderingMode": [1],
+            "size": [32, 42],
+            "duration": [77] 
+        },
+        {
+            "id": 59,
+            "name": "Will_Bow_Left",
+            "objectName": "Will",
+            "spriteNumber": [7],
+            "renderingMode": [1],
+            "size": [34, 40],
+            "duration": [77] 
+        },
+        {
+            "id": 60,
+            "name": "Will_Bow_Right",
+            "objectName": "Will",
+            "spriteNumber": [7],
+            "renderingMode": [1],
+            "size": [32, 40],
+            "duration": [77] 
+        },
+        {
+            "id": 61,
+            "name": "Will_Bow_Up",
+            "objectName": "Will",
+            "spriteNumber": [7],
+            "renderingMode": [1],
+            "size": [34, 42],
+            "duration": [77] 
+        },
+        {
+            "id": 62,
+            "name": "Will_Bow_SubAttack_Down",
+            "objectName": "Will",
+            "spriteNumber": [27],
+            "renderingMode": [1],
+            "size": [38, 46],
+            "duration": [80] 
+        },
+        {
+            "id": 63,
+            "name": "Will_Bow_SubAttack_Left",
+            "objectName": "Will",
+            "spriteNumber": [27],
+            "renderingMode": [1],
+            "size": [44, 40],
+            "duration": [80] 
+        },
+        {
+            "id": 64,
+            "name": "Will_Bow_SubAttack_Right",
+            "objectName": "Will",
+            "spriteNumber": [27],
+            "renderingMode": [1],
+            "size": [44, 40],
+            "duration": [80] 
+        },
+        {
+            "id": 65,
+            "name": "Will_Bow_SubAttack_Up",
+            "objectName": "Will",
+            "spriteNumber": [27],
+            "renderingMode": [1],
+            "size": [36, 46],
+            "duration": [80] 
         }
     ],
 
     "Weapon":
     [
         {
-            "id": 58,
+            "id": 66,
             "name": "Weapon_BigSword_Vulcan_Down_First",
             "objectName": "Weapon",
             "spriteNumber": [11],
@@ -565,7 +637,7 @@
             "duration": [100] 
         },
         {
-            "id": 59,
+            "id": 67,
             "name": "Weapon_BigSword_Vulcan_Down_Second",
             "objectName": "Weapon",
             "spriteNumber": [11],
@@ -574,7 +646,7 @@
             "duration": [100] 
         },
         {
-            "id": 60,
+            "id": 68,
             "name": "Weapon_BigSword_Vulcan_Down_Third",
             "objectName": "Weapon",
             "spriteNumber": [16],
@@ -583,7 +655,7 @@
             "duration": [100] 
         },
         {
-            "id": 61,
+            "id": 69,
             "name": "Weapon_BigSword_Vulcan_Left_First",
             "objectName": "Weapon",
             "spriteNumber": [13],
@@ -592,7 +664,7 @@
             "duration": [100] 
         },
         {
-            "id": 62,
+            "id": 70,
             "name": "Weapon_BigSword_Vulcan_Left_Second",
             "objectName": "Weapon",
             "spriteNumber": [13],
@@ -601,7 +673,7 @@
             "duration": [100] 
         },
         {
-            "id": 63,
+            "id": 71,
             "name": "Weapon_BigSword_Vulcan_Left_Third",
             "objectName": "Weapon",
             "spriteNumber": [13],
@@ -610,7 +682,7 @@
             "duration": [100] 
         },
         {
-            "id": 64,
+            "id": 72,
             "name": "Weapon_BigSword_Vulcan_Right_First",
             "objectName": "Weapon",
             "spriteNumber": [13],
@@ -619,7 +691,7 @@
             "duration": [100] 
         },
         {
-            "id": 65,
+            "id": 73,
             "name": "Weapon_BigSword_Vulcan_Right_Second",
             "objectName": "Weapon",
             "spriteNumber": [13],
@@ -628,7 +700,7 @@
             "duration": [100] 
         },
         {
-            "id": 66,
+            "id": 74,
             "name": "Weapon_BigSword_Vulcan_Right_Third",
             "objectName": "Weapon",
             "spriteNumber": [13],
@@ -637,7 +709,7 @@
             "duration": [100] 
         },
         {
-            "id": 67,
+            "id": 75,
             "name": "Weapon_BigSword_Vulcan_Up_First",
             "objectName": "Weapon",
             "spriteNumber": [13],
@@ -646,7 +718,7 @@
             "duration": [100] 
         },
         {
-            "id": 68,
+            "id": 76,
             "name": "Weapon_BigSword_Vulcan_Up_Second",
             "objectName": "Weapon",
             "spriteNumber": [10],
@@ -655,7 +727,7 @@
             "duration": [100] 
         },
         {
-            "id": 69,
+            "id": 77,
             "name": "Weapon_BigSword_Vulcan_Up_Third",
             "objectName": "Weapon",
             "spriteNumber": [15],
@@ -664,13 +736,107 @@
             "duration": [100] 
         },
         {
-            "id": 70,
+            "id": 78,
             "name": "Weapon_BigSword_Vulcan_SubAttack",
             "objectName": "Weapon",
             "spriteNumber": [33],
             "renderingMode": [1],
             "size": [120, 100],
             "duration": [80] 
+        },
+        {
+            "id": 79,
+            "name": "Weapon_Bow_Hunter_Down",
+            "objectName": "Weapon",
+            "spriteNumber": [6],
+            "renderingMode": [1],
+            "size": [46, 48],
+            "duration": [80] 
+        },
+        {
+            "id": 80,
+            "name": "Weapon_Bow_Hunter_Left",
+            "objectName": "Weapon",
+            "spriteNumber": [6],
+            "renderingMode": [1],
+            "size": [42, 40],
+            "duration": [80] 
+        },
+        {
+            "id": 81,
+            "name": "Weapon_Bow_Hunter_Right",
+            "objectName": "Weapon",
+            "spriteNumber": [6],
+            "renderingMode": [1],
+            "size": [42, 40],
+            "duration": [80] 
+        },
+        {
+            "id": 82,
+            "name": "Weapon_Bow_Hunter_Up",
+            "objectName": "Weapon",
+            "spriteNumber": [6],
+            "renderingMode": [1],
+            "size": [40, 50],
+            "duration": [80] 
+        },
+        {
+            "id": 83,
+            "name": "Weapon_Bow_Hunter_SubAttack_Right",
+            "objectName": "Weapon",
+            "spriteNumber": [26],
+            "renderingMode": [1],
+            "size": [80, 40],
+            "duration": [80] 
+        },
+        {
+            "id": 84,
+            "name": "Weapon_Bow_Hunter_SubAttack_Down",
+            "objectName": "Weapon",
+            "spriteNumber": [26],
+            "renderingMode": [1],
+            "size": [46, 86],
+            "duration": [80] 
+        },
+        {
+            "id": 85,
+            "name": "Weapon_Bow_Hunter_SubAttack_Left",
+            "objectName": "Weapon",
+            "spriteNumber": [26],
+            "renderingMode": [1],
+            "size": [80, 40],
+            "duration": [80] 
+        },
+        {
+            "id": 86,
+            "name": "Weapon_Bow_Hunter_SubAttack_Up",
+            "objectName": "Weapon",
+            "spriteNumber": [26],
+            "renderingMode": [1],
+            "size": [44, 90],
+            "duration": [80] 
+        }
+    ],
+
+    "Arrow" :
+    [
+        {
+            "id": 87,
+            "name": "Weapon_Arrow_Hunter_Idle",
+            "objectName": "Arrow",
+            "spriteNumber": [1],
+            "renderingMode": [1],
+            "size": [9, 29],
+            "duration": [100] 
+        },
+        {
+            "id": 88,
+            "name": "Weapon_Arrow_Hunter_Collide",
+            "objectName": "Arrow",
+            "spriteNumber": [6],
+            "renderingMode": [1],
+            "size": [18, 29],
+            "duration": [50] 
         }
     ],
 

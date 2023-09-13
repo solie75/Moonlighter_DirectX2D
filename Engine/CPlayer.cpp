@@ -7,6 +7,8 @@
 
 CPlayer::CPlayer()
 	: mCreatureType(eCreatureType::Player)
+	, mWeaponTypeStr(L"")
+	, mSightStr(L"")
 {
 	mState = new CState();
 	mAimSight = new CAimSight();
@@ -30,47 +32,46 @@ void CPlayer::Update()
 	CTransform* tr = this->GetComponent<CTransform>(eComponentType::Transform);
 	CPlayerMoveScript* playerScript = this->GetComponent<CPlayerMoveScript>(eComponentType::Script);
 
+	// Set String about Sight
+	{
+		std::wstring str;
+
+		switch (mAimSight->GetSight())
+		{
+		case CAimSight::eSight::Left:
+			str = L"_Left";
+			break;
+		case CAimSight::eSight::Right:
+			str = L"_Right";
+			break;
+		case CAimSight::eSight::Down:
+			str = L"_Down";
+			break;
+		case CAimSight::eSight::Up:
+			str = L"_Up";
+			break;
+		}
+
+		SetStrAboutState(str);
+	}
+
 	// Idle 상태일 때
 	if (mState->GetCurState() == eState::Idle && mState->GetPrevState() != eState::Idle)
 	{
 		playerScript->ResetComboAttackNum();
 
-		switch (mAimSight->GetSight())
-		{
-		case CAimSight::eSight::Left:
-			at->PlayAnimation(L"Will_Idle_Left", true);
-			break;
-		case CAimSight::eSight::Right:
-			at->PlayAnimation(L"Will_Idle_Right", true);
-			break;
-		case CAimSight::eSight::Up:
-			at->PlayAnimation(L"Will_Idle_Up", true);
-			break;
-		case CAimSight::eSight::Down:
-			at->PlayAnimation(L"Will_Idle_Down", true);
-			break;
-		}
+		std::wstring str = L"Will_Idle";
+		str += mSightStr;
+		at->PlayAnimation(str, true);
 		mState->SetState(eState::Idle);
 	}
 
 	// Roll
 	if (mState->GetCurState() == eState::Roll && mState->GetPrevState() != eState::Roll)
 	{
-		switch (mAimSight->GetSight())
-		{
-		case CAimSight::eSight::Left:
-			at->PlayAnimation(L"Will_Roll_Left", false);
-			break;
-		case CAimSight::eSight::Right:
-			at->PlayAnimation(L"Will_Roll_Right", false);
-			break;
-		case CAimSight::eSight::Up:
-			at->PlayAnimation(L"Will_Roll_Up", false);
-			break;
-		case CAimSight::eSight::Down:
-			at->PlayAnimation(L"Will_Roll_Down", false);
-			break;
-		}
+		std::wstring str = L"Will_Roll";
+		str += mSightStr;
+		at->PlayAnimation(str, false);
 		mState->SetState(eState::Roll);
 	}
 
@@ -116,26 +117,15 @@ void CPlayer::Update()
 	// Walk
 	if (mState->GetCurState() == eState::Walk && mState->GetPrevState() != eState::Walk)
 	{
-		switch (mAimSight->GetSight())
-		{
-		case CAimSight::eSight::Left:
-			at->PlayAnimation(L"Will_Walk_Left", true);
-			break;
-		case CAimSight::eSight::Right:
-			at->PlayAnimation(L"Will_Walk_Right", true);
-			break;
-		case CAimSight::eSight::Up:
-			at->PlayAnimation(L"Will_Walk_Up", true);
-			break;
-		case CAimSight::eSight::Down:
-			at->PlayAnimation(L"Will_Walk_Down", true);
-			break;
-		}
+		std::wstring str = L"Will_Walk";
+		str += mSightStr;
+		at->PlayAnimation(str, false);
 	}
 	
 	// Attack
 	if (mState->GetCurState() == eState::Attack)
 	{
+		// Attack Stay
 		if (mState->GetPrevState() == eState::Attack)
 		{
 			if (at->GetCurAnimation()->IsComplete() == true)
@@ -164,6 +154,7 @@ void CPlayer::Update()
 			}
 		}
 
+		// Attack Enter
 		else
 		{
 			// BigSword
@@ -194,22 +185,7 @@ void CPlayer::Update()
 					return;
 				}
 
-				// Direction
-				switch (mAimSight->GetSight())
-				{
-				case CAimSight::eSight::Left:
-					aniString += L"_Left";
-					break;
-				case CAimSight::eSight::Right:
-					aniString += L"_Right";
-					break;
-				case CAimSight::eSight::Down:
-					aniString += L"_Down";
-					break;
-				case CAimSight::eSight::Up:
-					aniString += L"_Up";
-					break;
-				}
+				aniString += mSightStr;
 
 				// Combo
 				switch (playerScript->GetComboAttackNum())
@@ -240,48 +216,42 @@ void CPlayer::Update()
 			{
 				std::wstring aniString = L"Will_Bow";
 
-				// Direction
-				switch (mAimSight->GetSight())
+				// SubAttack
+				if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::End)
 				{
-				case CAimSight::eSight::Left:
-					aniString += L"_Left";
-					break;
-				case CAimSight::eSight::Right:
-					aniString += L"_Right";
-					break;
-				case CAimSight::eSight::Down:
-					aniString += L"_Down";
-					break;
-				case CAimSight::eSight::Up:
-					aniString += L"_Up";
-					break;
+					aniString += mSightStr;
+					at->PlayAnimation(aniString, false);
+					
+					mState->SetState(eState::Attack);
+					CGameObject::Update();
+					return;
 				}
-
-				at->PlayAnimation(aniString, false);
-				mState->SetState(eState::Attack);
+				else
+				{
+					switch (playerScript->GetSubAttackState())
+					{
+					case CPlayerMoveScript::eSubAttackState::Enter:
+						aniString += L"_SubAttack";
+						aniString += mSightStr;
+						tr->SetScale(Vector3(0.4f, 0.45f, 0.0f));
+						at->PlayAnimation(aniString, false);
+						break;
+					case CPlayerMoveScript::eSubAttackState::Stay:
+						break;
+					case CPlayerMoveScript::eSubAttackState::Exit:
+						mState->SetBoolStateChange(true);
+						mState->SetState(eState::Idle);
+						tr->SetScale(Vector3(0.25f, 0.47f, 0.0f));
+						playerScript->SetSubAttackState(CPlayerMoveScript::eSubAttackState::End);
+						break;
+					}
+				}
 			}
 
 			// Spear
 			else if (mWeapon->GetWeaponType() == CWeapon::eWeaponType::Spear)
 			{
 				std::wstring aniString = L"Will_Spear";
-
-				// Direction
-				switch (mAimSight->GetSight())
-				{
-				case CAimSight::eSight::Left:
-					aniString += L"_Left";
-					break;
-				case CAimSight::eSight::Right:
-					aniString += L"_Right";
-					break;
-				case CAimSight::eSight::Down:
-					aniString += L"_Down";
-					break;
-				case CAimSight::eSight::Up:
-					aniString += L"_Up";
-					break;
-				}
 
 				at->PlayAnimation(aniString, false);
 				mState->SetState(eState::Attack);

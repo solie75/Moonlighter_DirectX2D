@@ -205,6 +205,9 @@
     <Filter Include="GameObject\Object\Player\Weapon">
       <UniqueIdentifier>{6a206750-1676-49b4-bf29-457a1f269ab1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Object\Projectile\Arrow">
+      <UniqueIdentifier>{00a12609-dab2-495e-ac5d-a4301879b551}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -405,6 +408,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CWeapon.h">
       <Filter>GameObject\Object\Player\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CArrow.h">
+      <Filter>GameObject\Object\Projectile\Arrow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -589,6 +595,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CWeapon.cpp">
       <Filter>GameObject\Object\Player\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CArrow.cpp">
+      <Filter>GameObject\Object\Projectile\Arrow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

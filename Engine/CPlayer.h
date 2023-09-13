@@ -18,6 +18,9 @@ private:
 
     CWeapon* mWeapon; // 여기에 나중에는 다른 방어구와 아이템 물약을 포함한 모든 것들을 가진 싱글톤 인벤토리가 들어가게 된다.
 
+    std::wstring mWeaponTypeStr;
+    std::wstring mSightStr;
+
 public:
     CPlayer();
     ~CPlayer();
@@ -32,5 +35,16 @@ public:
     CAimSight* GetAimSight() { return mAimSight; }
     void SetWeapon(CWeapon* weapon) { mWeapon = weapon; }
     CWeapon* GetWeapon() { return mWeapon; }
+
+    void SetStrAboutState(std::wstring sight)
+    {
+        //mWeaponTypeStr = weaponType;
+        mSightStr = sight;
+    }
+
+    std::wstring GetSightStr()
+    {
+        return mSightStr;
+    }
 };
 

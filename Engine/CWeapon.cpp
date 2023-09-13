@@ -1,16 +1,17 @@
 #include "CWeapon.h"
 #include "CPlayerMoveScript.h"
+#include "CCollider2D.h"
 
 
 CWeapon::CWeapon()
 	:  mMainWeaponType(eWeaponType::Bow)
 	, mBigSwordType(eBigSwordType::Vulcan)
-	, mBowType(eBowType::End)
+	, mBowType(eBowType::Hunter)
 	, mSpearType(eSpearType::End)
 	, mComboNum(0)
+	, mbArrow(true)
 {
 	ResetWeaponAniName();
-	mPlayer = nullptr;
 }
 
 CWeapon::~CWeapon()
@@ -24,17 +25,19 @@ void CWeapon::Initialize()
 
 void CWeapon::Update()
 {
-	if (mPlayer != nullptr)
+	CPlayer* mPlayer = dynamic_cast<CPlayer*>(this->GetParentObject());
+
+	if (this->GetParentObject() != nullptr)
 	{
 		CAnimator* At = GetComponent<CAnimator>(eComponentType::Animator);
 		CTransform* Tr = GetComponent<CTransform>(eComponentType::Transform);
 		
 		//Vector3 v = Tr->GetPosition();
-		CTransform* playerTr = mPlayer->GetComponent<CTransform>(eComponentType::Transform);
+		CTransform* playerTr = this->GetParentObject()->GetComponent<CTransform>(eComponentType::Transform);
 		Vector3 vec = playerTr->GetPosition();
 		vec.z -= 0.001f;
 		Tr->SetPosition(vec);
-		Tr->SetScale(Vector3(1.0f, 1.4f, 0.0f));
+		
 
 		CState* playerState = mPlayer->GetState();
 		CAimSight* playerSight = mPlayer->GetAimSight();
@@ -103,57 +106,152 @@ void CWeapon::Update()
 				break;
 			}
 
-			// subAttack
-			if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::Enter)
-			{
-				mAniName += L"_SubAttack";
-				At->PlayAnimation(mAniName, false);
-				return;
-			}
-			else if(playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::Exit)
-			{
-				At->PlayAnimation(L"", false);
-				return;
-			}
-
-			// 방향
-			switch (playerSight->GetSight())
-			{
-			case CAimSight::eSight::Down :
-				mAniName += L"_Down";
-				break;
-			case CAimSight::eSight::Left :
-				mAniName += L"_Left";
-				break;
-			case CAimSight::eSight::Right :
-				mAniName += L"_Right";
-				break;
-			case CAimSight::eSight::Up:
-				mAniName += L"_Up";
-				break;
-			}
-
-
 			// 무기 종류가 BigSword 라면 콤보 단계를 추가한다.
-			if (mMainWeaponType == eWeaponType::BigSword)
+			if (mMainWeaponType == eWeaponType::BigSword) 
 			{
-				switch (mComboNum)
+
+				// SubAttack
+				if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::Enter)
 				{
-				case 1:
-					mAniName += L"_First";
+					mAniName += L"_SubAttack";
 					At->PlayAnimation(mAniName, false);
-					mComboNum = 0;
-					break;
-				case 2:
-					mAniName += L"_Second";
+					CGameObject::Update();
+					return;
+				}
+				else if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::Exit)
+				{
+					At->PlayAnimation(L"", false);
+					CGameObject::Update();
+					return;
+				}
+				else if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::End)
+				{
+					mAniName += mPlayer->GetSightStr();
+
+					switch (mComboNum)
+					{
+					case 1:
+						mAniName += L"_First";
+						At->PlayAnimation(mAniName, false);
+						mComboNum = 0;
+						break;
+					case 2:
+						mAniName += L"_Second";
+						At->PlayAnimation(mAniName, false);
+						mComboNum = 0;
+						break;
+					case 3:
+						mAniName += L"_Third";
+						At->PlayAnimation(mAniName, false);
+						mComboNum = 0;
+						break;
+					}
+				}
+
+				Tr->SetScale(Vector3(1.0f, 1.4f, 0.0f));
+				
+			}
+			else if(mMainWeaponType == eWeaponType::Bow)
+			{
+				// SubAttack
+				if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::Enter)
+				{
+					mAniName += L"_SubAttack";
+					mAniName += mPlayer->GetSightStr();
+					Tr->SetScale(Vector3(0.5f, 0.7f, 0.0f));
 					At->PlayAnimation(mAniName, false);
-					mComboNum = 0;
-					break;
-				case 3:
-					mAniName += L"_Third";
-					At->PlayAnimation(mAniName, false);
-					mComboNum = 0;
-					break;
+					CGameObject::Update();
+					return;
+				}
+				else if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::Stay)
+				{
+					switch (playerSight->GetSight())
+					{
+					case CAimSight::eSight::Left:
+						vec.x -= 0.1f;
+						break;
+					case CAimSight::eSight::Right:
+						vec.x += 0.1f;
+						break;
+					case CAimSight::eSight::Down:
+						vec.y -= 0.2f;
+						break;
+					case CAimSight::eSight::Up:
+						vec.y += 0.2f;
+						break;
+					}
+					Tr->SetPosition(vec);
+
+					if (At->GetCurAnimation()->GetAnimationIndex() == 18 && mbArrow == true)
+					{
+						CArrow* arrow = new CArrow((UINT)mBowType, (UINT)playerSight->GetSight());
+						arrow->SetParentObject(this);
+						arrow->SetSpeed(0.01f);
+
+						ownScene->AddGameObject(eLayerType::PlayerProjectile, arrow, L"Arrow", Tr->GetPosition()
+							, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"", true);
+
+						CCollider2D* arrowCd = arrow->AddComponent<CCollider2D>();
+						CAnimator* arrowAt = arrow->GetComponent<CAnimator>(eComponentType::Animator);
+						arrowAt->PlayAnimation(L"Weapon_Arrow_Hunter_Idle", true);
+						mbArrow = false;
+					}
+					CGameObject::Update();
+					return;
+				}
+				else if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::Exit)
+				{
+					At->PlayAnimation(L"", false);
+					mbArrow = true;
+					CGameObject::Update();
+					return;
+				}
+				else if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::End)
+				{ // Bow 의 SubAttack 이 아닐 때 -> 일반 공격일 때
+					// Bow 에서 규격 수정
+					if (playerSight->GetSight() == CAimSight::eSight::Left)
+					{
+						vec.x += 0.05f;
+						Tr->SetPosition(vec);
+					}
+					else if (playerSight->GetSight() == CAimSight::eSight::Right)
+					{
+						vec.x -= 0.05f;
+						Tr->SetPosition(vec);
+					}
+
+					Tr->SetScale(Vector3(0.5f, 0.7f, 0.0f));
+					if (mComboNum == 0)
+					{
+						mAniName += mPlayer->GetSightStr();
+						At->PlayAnimation(mAniName, false); // Weapon:Bow 의 Animation;
+						mComboNum += 1;
+					}
+					else
+					{
+						if (At->GetCurAnimation()->IsComplete() == true)
+						{
+							SetComboNum(0);
+							mbArrow = true;
+						}
+						else if(At->GetCurAnimation()->GetAnimationIndex() == 3 && mbArrow == true)
+						{ // 한 번의 animation Index 에 두번의 Tick이 된다.
+							CArrow* arrow = new CArrow((UINT)mBowType, (UINT)playerSight->GetSight());
+							arrow->SetParentObject(this);
+							arrow->SetSpeed(0.015f);
+
+							ownScene->AddGameObject(eLayerType::PlayerProjectile, arrow, L"Arrow", Tr->GetPosition()
+								, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"", true);
+
+							CTransform* arrowTr = arrow->GetComponent<CTransform>(eComponentType::Transform);
+							CAnimator* arrowAt = arrow->GetComponent<CAnimator>(eComponentType::Animator);
+							CCollider2D* arrowCd = arrow->AddComponent<CCollider2D>();
+
+							arrowAt->PlayAnimation(L"Weapon_Arrow_Hunter_Idle", true);
+							mbArrow = false;
+						}
+					}
+
 				}
 			}
 		}

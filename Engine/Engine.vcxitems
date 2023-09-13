@@ -18,6 +18,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CAnimation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CArrow.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CCameraMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CCameraMoveScript.h" />
@@ -86,6 +87,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CAnimation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CArrow.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CCameraMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CCameraMoveScript.cpp" />
