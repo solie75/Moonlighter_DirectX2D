@@ -184,7 +184,7 @@ void CWeapon::Update()
 
 					if (At->GetCurAnimation()->GetAnimationIndex() == 18 && mbArrow == true)
 					{
-						CArrow* arrow = new CArrow((UINT)mBowType, (UINT)playerSight->GetSight());
+						CArrow* arrow = new CArrow((UINT)mBowType, (UINT)playerSight->GetSight(), (UINT)CArrow::eArrowType::SubAttack);
 						arrow->SetParentObject(this);
 						arrow->SetSpeed(0.01f);
 
@@ -207,7 +207,7 @@ void CWeapon::Update()
 					return;
 				}
 				else if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::End)
-				{ // Bow 의 SubAttack 이 아닐 때 -> 일반 공격일 때
+				{ // Bow 의 SubAttack 이 아닐 때 -> 일반 공격일 때 
 					// Bow 에서 규격 수정
 					if (playerSight->GetSight() == CAimSight::eSight::Left)
 					{
@@ -236,7 +236,7 @@ void CWeapon::Update()
 						}
 						else if(At->GetCurAnimation()->GetAnimationIndex() == 3 && mbArrow == true)
 						{ // 한 번의 animation Index 에 두번의 Tick이 된다.
-							CArrow* arrow = new CArrow((UINT)mBowType, (UINT)playerSight->GetSight());
+							CArrow* arrow = new CArrow((UINT)mBowType, (UINT)playerSight->GetSight(), (UINT)CArrow::eArrowType::Main);
 							arrow->SetParentObject(this);
 							arrow->SetSpeed(0.015f);
 

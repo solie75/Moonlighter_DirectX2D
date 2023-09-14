@@ -4,11 +4,12 @@
 #include "CPlayerMoveScript.h"
 
 
-CArrow::CArrow(UINT type, UINT sight)
+CArrow::CArrow(UINT BowType, UINT sight, UINT arrowType)
 {
-	mBowType = (eBowType)type;
+	mBowType = (eBowType)BowType;
 	mSight = (CAimSight::eSight)sight;
 	speed = 0.0f;
+	mArrowType = (eArrowType)arrowType;
 }
   
 CArrow::~CArrow()
@@ -75,8 +76,33 @@ void CArrow::Update()
 		}
 		else
 		{
-			At->PlayAnimation(L"Weapon_Arrow_Hunter_Collide", false);
-			this->SetState(eObjectState::Paused);
+			// 화살이 몬스터와 충돌한 경우
+			if (cd->GetColliderData(eLayerType::Monster).id != 0)
+			{
+				if (mArrowType == eArrowType::Main)
+				{
+					At->PlayAnimation(L"Weapon_Arrow_Hunter_Collide", false);
+					this->SetState(eObjectState::Paused);
+				}
+				else if (mArrowType == eArrowType::SubAttack)
+				{
+					// arrow 가 SubAttack 일 때 몬스터와 충돌한 경우
+					if (time > speed)
+					{
+						Vector3 pos = Tr->GetPosition();
+						pos.x += direction.x * 0.1;
+						pos.y += direction.y * 0.1;
+						Tr->SetPosition(pos);
+						time = 0;
+					}
+				}
+			}
+			// 화살이 배경 벽과 충돌한 경우
+			else if (cd->GetColliderData(eLayerType::Background).id != 0)
+			{
+				At->PlayAnimation(L"Weapon_Arrow_Hunter_Collide", false);
+				this->SetState(eObjectState::Paused);
+			}
 		}
 	}
 	else if(this->GetState() == CGameObject::eObjectState::Paused)

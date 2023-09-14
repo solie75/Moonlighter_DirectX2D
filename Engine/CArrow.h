@@ -22,6 +22,13 @@ public:
         End,
     };
 
+    enum class eArrowType
+    {
+        Main,
+        SubAttack,
+        End,
+    };
+
 private:
     int DirectNum;
     Vector3 direction;
@@ -31,8 +38,9 @@ private:
 
     eBowType mBowType;
     CAimSight::eSight mSight;
+    eArrowType mArrowType;
 public:
-    CArrow(UINT type, UINT sight);
+    CArrow(UINT type, UINT sight, UINT arrowType);
     ~CArrow();
 
     virtual void Initialize();
@@ -42,5 +50,6 @@ public:
 
     void SetDirection(Vector3 direct) { direction = direct; }
     void SetSpeed(float f) { speed = f; }
+    void SetArrowType(eArrowType type) { mArrowType = type; }
 };
 

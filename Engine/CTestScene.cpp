@@ -25,6 +25,12 @@ void CTestScene::Initialize()
 	paintShader->SetTarget(paintTexture);
 	paintShader->OnExcute();
 
+	CGameObject* BackgroundLeft = new CGameObject();
+	AddGameObject(eLayerType::Background, BackgroundLeft, L"BackgroundLeft", Vector3(-6.625f, 0.0f, 10.0006f),
+		Vector3(1.0f, 1.0f, 0.0f), false, L"Mesh", L"", false);
+	CCollider2D* backgroundCd = BackgroundLeft->AddComponent<CCollider2D>();
+	backgroundCd->SetSize(Vector2(0.3f, 10.f));
+
 	// Will
 	CPlayer* Will = new CPlayer();
 	AddGameObject(eLayerType::Player, Will, L"Will", Vector3(3.0f, 0.0f, 1.0002f)
