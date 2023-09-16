@@ -19,7 +19,7 @@ private:
 	vector<Vector2> mvMapList;
 	vector<Vector2> mvAroundCenterList;
 	Vector2 mAroundStardardArray[4];
-	std::map<UINT,vector<eGateDirection>> mmGateList; // mvMapList 의 각 요소(map) 이 가지고 있는 Gate 목록
+	std::map<Vector2,vector<eGateDirection>> mmGateList; // mvMapList 의 각 요소(map) 이 가지고 있는 Gate 목록
 
 public :
 	CDungeonMgr();
