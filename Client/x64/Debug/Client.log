@@ -1,4 +1,4 @@
-﻿  unity_B129XTJYWM8HROLJ.cpp
+﻿  unity_DJ2VYXHC9UJ30KPT.cpp
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CAnimation.cpp(34,44): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CAnimation.cpp(43,32): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CAnimation.cpp(61,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
@@ -27,6 +27,11 @@ D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossSquareScript.cpp(112,45)
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossSquareScript.cpp(126,45): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossTriangleScript.cpp(112,45): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossTriangleScript.cpp(126,45): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(60,45): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(60,32): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(65,50): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(65,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(201,14): warning C4834: 'nodiscard' 특성이 포함된 함수의 반환 값을 버리는 중
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CFireBall.cpp(21,43): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CFireBall.cpp(33,26): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CFireBall.cpp(34,26): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.

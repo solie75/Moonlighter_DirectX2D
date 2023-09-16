@@ -208,6 +208,9 @@
     <Filter Include="GameObject\Object\Projectile\Arrow">
       <UniqueIdentifier>{00a12609-dab2-495e-ac5d-a4301879b551}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\DungeonMgr">
+      <UniqueIdentifier>{0852c581-6b64-4619-9250-a88f87633f38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -411,6 +414,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CArrow.h">
       <Filter>GameObject\Object\Projectile\Arrow</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDungeonMgr.h">
+      <Filter>Manager\DungeonMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -598,6 +604,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CArrow.cpp">
       <Filter>GameObject\Object\Projectile\Arrow</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDungeonMgr.cpp">
+      <Filter>Manager\DungeonMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

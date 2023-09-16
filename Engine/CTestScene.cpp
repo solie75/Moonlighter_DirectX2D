@@ -6,6 +6,7 @@
 #include "CParticleSystem.h"
 #include "CWeapon.h"
 #include "CCollisionMgr.h"
+#include "CDungeonMgr.h"
 
 CTestScene::CTestScene()
 {
@@ -90,6 +91,8 @@ void CTestScene::Initialize()
 		lightComp->SetColor(Vector4(0.0f, 0.0f, 1.0f, 1.0f));
 		lightComp->SetRadius(3.0f);
 	}
+
+	CDungeonMgr::GetInst()->CreateMap();
 
 	CScene::Initialize();
 }
