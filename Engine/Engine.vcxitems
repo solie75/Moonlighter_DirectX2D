@@ -35,6 +35,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossSquareScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossTriangleScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDesertDungeonScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CDungeonMgr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CDungeonsEntranceScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CEditor.h" />
@@ -105,6 +106,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBossScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBossSquareScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CDesertBossTriangleScript.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDesertDungeonScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CDungeonMgr.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CDungeonsEntranceScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CEditor.cpp" />

@@ -32,5 +32,7 @@ public :
 
 	void CreateMap();
 	void SetGateList();
+
+	UINT GetMapListSize() { return mvMapList.size(); }
 };
 

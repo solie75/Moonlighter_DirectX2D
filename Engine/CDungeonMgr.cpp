@@ -132,17 +132,12 @@ void CDungeonMgr::CreateMap()
 				SetGateList();
 				return;
 			}
-			
 			{
 				mvMapList.clear();
 				vRandomMapList.clear();
 			}
 		}
 	}
-
-
-
-
 }
 
 void CDungeonMgr::SetGateList()

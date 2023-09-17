@@ -435,9 +435,30 @@ void CRenderMgr::Init()
 			LoadTexture(L"Item_Coin", L"..\\Resource\\Texture\\Item\\Item_Coin.png");
 			LoadMaterial(shader, L"Item_Coin", eRenderingMode::CutOut);
 		}
-		{	// Desert Boss
+		{	// Desert Background
 			LoadTexture(L"DesertBossBackground", L"..\\Resource\\Texture\\DesertBoss_Background.png");
 			LoadMaterial(shader, L"DesertBossBackground", eRenderingMode::Opaque);
+
+			LoadTexture(L"Dungeon3_Map1", L"..\\Resource\\Texture\\Dungeon3_Map1.png");
+			LoadMaterial(shader, L"Dungeon3_Map1", eRenderingMode::CutOut);
+
+			LoadTexture(L"Dungeon3_Map2", L"..\\Resource\\Texture\\Dungeon3_Map2.png");
+			LoadMaterial(shader, L"Dungeon3_Map2", eRenderingMode::CutOut);
+
+			LoadTexture(L"Dungeon3_Map3", L"..\\Resource\\Texture\\Dungeon3_Map3.png");
+			LoadMaterial(shader, L"Dungeon3_Map3", eRenderingMode::CutOut);
+
+			LoadTexture(L"Dungeon3_Map4", L"..\\Resource\\Texture\\Dungeon3_Map4.png");
+			LoadMaterial(shader, L"Dungeon3_Map4", eRenderingMode::CutOut);
+
+			LoadTexture(L"Dungeon3_Map5", L"..\\Resource\\Texture\\Dungeon3_Map5.png");
+			LoadMaterial(shader, L"Dungeon3_Map5", eRenderingMode::CutOut);
+
+			LoadTexture(L"Dungeon3_Map6", L"..\\Resource\\Texture\\Dungeon3_Map6.png"); // pool
+			LoadMaterial(shader, L"Dungeon3_Map6", eRenderingMode::CutOut);
+
+			LoadTexture(L"Dungeon3_Map7", L"..\\Resource\\Texture\\Dungeon3_Map7.png"); // mini map
+			LoadMaterial(shader, L"Dungeon3_Map7", eRenderingMode::CutOut);
 
 			// Boss Head
 

@@ -5,6 +5,7 @@
 #include "CDesertBossScene.h"
 #include "CDungeonsEntranceScene.h"
 #include "CTestScene.h"
+#include "CDesertDungeonScene.h"
 
 CSceneMgr::CSceneMgr()
 	: mActiveScene(nullptr)
@@ -22,7 +23,8 @@ void CSceneMgr::Initialize()
 	//AddScene<CDungeonsEntranceScene>(L"CDungeonsEntranceScene");
 	//AddScene<CVillageScene>(L"VillageScene");
 	//AddScene<CDesertBossScene>(L"CDesertBossScene");
-	AddScene<CTestScene>(L"CTestScene");
+	//AddScene<CTestScene>(L"CTestScene");
+	AddScene<CDesertDungeonScene>(L"CDesertDungeonScene");
 }
 
 void CSceneMgr::Update()

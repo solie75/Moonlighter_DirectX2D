@@ -211,6 +211,9 @@
     <Filter Include="Manager\DungeonMgr">
       <UniqueIdentifier>{0852c581-6b64-4619-9250-a88f87633f38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\06.DesertDungeonScene">
+      <UniqueIdentifier>{a38cf4fe-fb58-4779-bc61-1667e4a871b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -417,6 +420,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CDungeonMgr.h">
       <Filter>Manager\DungeonMgr</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CDesertDungeonScene.h">
+      <Filter>Scene\06.DesertDungeonScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -607,6 +613,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CDungeonMgr.cpp">
       <Filter>Manager\DungeonMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CDesertDungeonScene.cpp">
+      <Filter>Scene\06.DesertDungeonScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
