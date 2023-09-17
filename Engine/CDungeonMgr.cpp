@@ -84,23 +84,6 @@ void CDungeonMgr::CreateMap()
 				mStepConnectedMapList.insert(make_pair(i, mapList));
 			}
 
-			//// 3.3 과 연결된 맵을 저장
-			//for (int i = 0; i < 4; i++)
-			//{
-			//	Vector2 centerVec = Vector2(3, 3);
-
-			//	// (3,3)과 연결 가능성이 있는 맵의 위치
-			//	Vector2 mapVec = Vector2(centerVec.x + mAroundStardardArray[i].x, centerVec.y + mAroundStardardArray[i].y);
-
-			//	if (std::find(vRandomMapList.begin(), vRandomMapList.end(), mapVec) != vRandomMapList.end())
-			//	{
-			//		int listIndex = std::find(vRandomMapList.begin(), vRandomMapList.end(), mapVec) - vRandomMapList.begin();
-
-			//		// vMapList 에 존재하는 3.3 과 연결괸 맵을 mvMapList 에 저장한다.
-			//		mvMapList.push_back(vRandomMapList[listIndex]);
-			//	}
-			//}
-
 			// mvMapList 에 존재하는 요소들 각각에 주변에 연결된 map 을 vMapList 에서 검색하여 mvMapList 에 저장한다.
 			std::map<UINT, vector<Vector2>>::iterator prevIter;
 			std::map<UINT, vector<Vector2>>::iterator curIter;
@@ -146,6 +129,7 @@ void CDungeonMgr::CreateMap()
 			if (iter->second.size() >= 3 &&	mvMapList.size() > 8)
 			{
 				mvMapList.push_back(Vector2(3, 3));
+				SetGateList();
 				return;
 			}
 			
@@ -153,38 +137,6 @@ void CDungeonMgr::CreateMap()
 				mvMapList.clear();
 				vRandomMapList.clear();
 			}
-
-			//// 3.3 과 연결된 맵이 3개 이상 존재하는 지에 대한 확인
-			//if (vRandomMapList.size() >= 3)
-			//{
-			//	// (3,3) 과 연결되지 않은 map 을 mvMapList 에서 삭제한다.
-
-			//	// 1. (3.3) 와 일차적으로 연결된 map 검색
-			//	for (int i = 0; i < mvMapList.size(); i++)
-			//	{
-			//		if(std::find(mvMapList.begin(), mvMapList.end(), Vector2(mapVector[i]))
-			//	}
-
-			//	if (std::find(mvMapList.begin(), mvMapList.end(), ))
-			//	{
-
-			//	}
-
-			//	for (UINT i = 0; i < mvMapList.size(); i++)
-			//	{
-			//		bool vConnected = false;
-			//		for (UINT j = 0; j < 4; j++)
-			//		{
-			//			std::find(mvMapList.begin(), mvMapList.end(), )
-			//		}
-			//		mvMapList[i].x
-			//	}
-			//}
-			//else //3.3 과 연결된 맵이 2개 이상 존재하지 않는 경우 처음주터 다시 map 을 구축한다.
-			//{
-			//	mvMapList.clear();
-			//}
-
 		}
 	}
 
@@ -195,10 +147,31 @@ void CDungeonMgr::CreateMap()
 
 void CDungeonMgr::SetGateList()
 {
+	mmGateList.erase(mmGateList.begin(), mmGateList.end());
 	// 1. 각 mvList 에 주변 map 이 존재하는지 파악한다.
 	for (int i = 0; i < mvMapList.size(); i++)
 	{
-		mvMapList[0];
+		for (int j = 0; j < 4; j++)
+		{
+			// 존재하는지 검색의 대상이 되는 맵
+			Vector2 mapVec = Vector2(mvMapList[i].x + mAroundStardardArray[j].x, mvMapList[i].y + mAroundStardardArray[j].y);
+
+			// map이 mvMaplist 에 존재하는지 검색
+			if (std::find(mvMapList.begin(), mvMapList.end(), mapVec) != mvMapList.end())
+			{
+				// 존재하는 경우
+				std::map<UINT, vector<eGateDirection>>::iterator iter = mmGateList.find(mvMapList[i].x*10 + mvMapList[i].y);
+				if (iter == mmGateList.end())
+				{
+					vector<eGateDirection> gateDirection;
+					gateDirection.push_back((eGateDirection)j);
+					mmGateList.insert(make_pair(mvMapList[i].x * 10 + mvMapList[i].y, gateDirection));
+				}
+				else
+				{
+					iter->second.push_back((eGateDirection)j);
+				}
+			}
+		}
 	}
-	
 }
