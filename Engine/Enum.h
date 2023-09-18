@@ -38,6 +38,7 @@ enum class eLayerType
 	Camera,
 	Weapon,
 	PlayerProjectile,
+	Portal,
 	End,
 };
 

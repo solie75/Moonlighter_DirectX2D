@@ -171,10 +171,10 @@ void CDungeonMgr::SetGateList()
 	}
 }
 
-Vector2 CDungeonMgr::GetMapPos(UINT num)
+Vector2 CDungeonMgr::GetMapPos(UINT mapNum)
 {
 	std::map<UINT, vector<eGateDirection>>::iterator iter = mmGateList.begin();
-	for (int i = 0; i < num; i++)
+	for (int i = 0; i < mapNum; i++)
 	{
 		iter++;
 	}
@@ -183,3 +183,14 @@ Vector2 CDungeonMgr::GetMapPos(UINT num)
 	vec2.y = (iter->first) % 10;
 	return vec2;
 }
+
+vector<CDungeonMgr::eGateDirection> CDungeonMgr::GetDoorList(UINT mapNum)
+{
+	std::map<UINT, vector<eGateDirection>>::iterator iter = mmGateList.begin();
+	for (int i = 0; i < mapNum; i++)
+	{
+		iter++;
+	}
+
+	return iter->second;
+};

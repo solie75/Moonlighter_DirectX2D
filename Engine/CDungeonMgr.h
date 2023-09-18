@@ -6,6 +6,7 @@
 class CDungeonMgr
 	: public CSingleton<CDungeonMgr>
 {
+public:
 	enum class eGateDirection
 	{
 		Left,
@@ -34,6 +35,7 @@ public :
 	void SetGateList();
 
 	UINT GetMapListSize() { return mvMapList.size(); }
-	Vector2 GetMapPos(UINT num);
+	Vector2 GetMapPos(UINT mapNum);
+	vector<eGateDirection> GetDoorList(UINT mapNum);
+	
 };
-

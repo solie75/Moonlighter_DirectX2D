@@ -460,6 +460,9 @@ void CRenderMgr::Init()
 			LoadTexture(L"Dungeon3_Map7", L"..\\Resource\\Texture\\Dungeon3_Map7.png"); // pool
 			LoadMaterial(shader, L"Dungeon3_Map7", eRenderingMode::CutOut);
 
+			LoadTexture(L"Dungeon3_Map8", L"..\\Resource\\Texture\\Dungeon3_Map8.png"); // Dongeon Entrance
+			LoadMaterial(shader, L"Dungeon3_Map8", eRenderingMode::CutOut);
+
 			// Boss Head
 
 			LoadTexture(L"DesertBossCircle", L"..\\Resource\\Texture\\boss3\\Boss3_circle_attack_1.png");
