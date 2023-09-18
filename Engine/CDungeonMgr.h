@@ -34,5 +34,6 @@ public :
 	void SetGateList();
 
 	UINT GetMapListSize() { return mvMapList.size(); }
+	Vector2 GetMapPos(UINT num);
 };
 

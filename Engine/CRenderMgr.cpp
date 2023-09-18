@@ -454,10 +454,10 @@ void CRenderMgr::Init()
 			LoadTexture(L"Dungeon3_Map5", L"..\\Resource\\Texture\\Dungeon3_Map5.png");
 			LoadMaterial(shader, L"Dungeon3_Map5", eRenderingMode::CutOut);
 
-			LoadTexture(L"Dungeon3_Map6", L"..\\Resource\\Texture\\Dungeon3_Map6.png"); // pool
+			LoadTexture(L"Dungeon3_Map6", L"..\\Resource\\Texture\\Dungeon3_Map6.png"); // mini boss map
 			LoadMaterial(shader, L"Dungeon3_Map6", eRenderingMode::CutOut);
 
-			LoadTexture(L"Dungeon3_Map7", L"..\\Resource\\Texture\\Dungeon3_Map7.png"); // mini map
+			LoadTexture(L"Dungeon3_Map7", L"..\\Resource\\Texture\\Dungeon3_Map7.png"); // pool
 			LoadMaterial(shader, L"Dungeon3_Map7", eRenderingMode::CutOut);
 
 			// Boss Head
