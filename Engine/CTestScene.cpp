@@ -19,6 +19,7 @@ CTestScene::~CTestScene()
 void CTestScene::Initialize()
 {
 	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::PlayerProjectile, eLayerType::Monster, true);
+	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Player, eLayerType::Monster, true);
 	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::PlayerProjectile, eLayerType::Background, true);
 
 	std::shared_ptr<CPaintShader> paintShader = CResourceMgr::GetInst()->Find<CPaintShader>(L"PaintShader"); // paintShader °¡ empty ÀÌ´Ù.
@@ -71,7 +72,7 @@ void CTestScene::Initialize()
 	CCamera* mainCamComp = mainCamera->AddComponent<CCamera>();
 	mainCamComp->SetCameraType(eCameraType::Main);
 	mainCamComp->TurnLayerMask(eLayerType::UI, false);
-	CCameraMoveScript* CameraMoveScript = mainCamera->AddComponent<CCameraMoveScript>();
+	CCameraMoveScript* CameraMoveScript = mainCamera->GetComponent<CCameraMoveScript>(eComponentType::Script);
 	CameraMoveScript->SetPlayerTr(PlayerTr);
 
 	// Light

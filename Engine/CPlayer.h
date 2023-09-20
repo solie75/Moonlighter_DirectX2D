@@ -3,9 +3,9 @@
 #include "CGameObject.h"
 #include "CState.h"
 #include "CAimSight.h"
-//#include "CWeapon.h"
+#include "CWeapon.h"
 
-class CWeapon;
+//class CWeapon;
 
 class CPlayer :
     public CGameObject
@@ -20,6 +20,7 @@ private:
 
     std::wstring mWeaponTypeStr;
     std::wstring mSightStr;
+
 
 public:
     CPlayer();
@@ -45,6 +46,19 @@ public:
     std::wstring GetSightStr()
     {
         return mSightStr;
+    }
+
+    void ChangeWeaponType()
+    {
+        if (mWeapon->GetWeaponType() == CWeapon::eWeaponType::BigSword)
+        {
+            mWeapon->SetWeaponType(CWeapon::eWeaponType::Bow);
+        }
+        else if (mWeapon->GetWeaponType() == CWeapon::eWeaponType::Bow)
+        {
+            mWeapon->SetWeaponType(CWeapon::eWeaponType::BigSword);
+        }
+        
     }
 };
 

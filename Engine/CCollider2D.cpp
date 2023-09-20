@@ -47,6 +47,7 @@ void CCollider2D::LateUpdate()
     //tr->SetPosition(pos);
 
     mPosition = pos;
+
     DebugMesh debugMesh = {};
     debugMesh.position = mPosition;
     debugMesh.scale = scale;

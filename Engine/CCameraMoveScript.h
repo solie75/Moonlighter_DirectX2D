@@ -8,10 +8,22 @@ class CTransform;
 class CCameraMoveScript :
     public CScript
 {
-private:
-    bool OnFixed; // 플레이어 중심으로 카메라 고정
+public:
+    enum class eCameraFocusing
+    {
+        Player,
+        Map,
+        None,
+        End,
+    };
 
+private:
+    //bool OnFixedToPlayer; // 플레이어 중심으로 카메라 고정
+    //bool OnFinxedToMap;
+
+    eCameraFocusing cameraFocused;
     CTransform* PlayerTr;
+    Vector2 FocusedOnMapPos;
 
 public:
     CCameraMoveScript();
@@ -23,15 +35,13 @@ public:
     virtual void Render();
 
     void SetPlayerTr(CTransform* tr) { PlayerTr = tr; }
-    void ChangeCameraFixMode()
+    void ChangeCameraFocusing(eCameraFocusing cf)
     {
-        if (OnFixed == false)
-        {
-            OnFixed = true;
-        }
-        else
-        {
-            OnFixed = false;
-        }
+        cameraFocused = cf;
     }
+    void SetMapPos(Vector2 v2)
+    {
+        FocusedOnMapPos = v2;
+    }
+    Vector2 GetFocusedMapPos() { return FocusedOnMapPos; }
 };

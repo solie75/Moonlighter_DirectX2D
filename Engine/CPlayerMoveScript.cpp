@@ -140,6 +140,13 @@ void CPlayerMoveScript::Update()
 	{
 		mSubAttackState = eSubAttackState::Exit;
 	}
+
+	// Change Weapon
+	if (CKeyMgr::GetInst()->GetKeyState(KEY::Z) == KEY_STATE::TAP)
+	{
+		CPlayer* player = dynamic_cast<CPlayer*>(GetOwner());
+		player->ChangeWeaponType();
+	}
 }
 
 void CPlayerMoveScript::LateUpdate()

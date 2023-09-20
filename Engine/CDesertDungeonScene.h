@@ -1,8 +1,18 @@
 #pragma once
 #include "CScene.h"
+#include "CPlayer.h"
+
 class CDesertDungeonScene :
     public CScene
 {
+private:
+    CPlayer* player;
+    CGameObject* mainCamera;
+
+    float mXPosStandard = 8.202f;
+    float mYPosStandard = 4.492f;
+
+    bool mbTranslateMapPos;
 public:
     CDesertDungeonScene();
     ~CDesertDungeonScene();
@@ -11,5 +21,7 @@ public:
     void Update();
     void LateUpdate();
     void Render();
+
+    void SetBoolTranslateMapPos(bool b) { mbTranslateMapPos = b; }
 };
 

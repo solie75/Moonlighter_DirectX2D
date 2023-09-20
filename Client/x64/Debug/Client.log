@@ -27,32 +27,32 @@ D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossSquareScript.cpp(112,45)
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossSquareScript.cpp(126,45): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossTriangleScript.cpp(112,45): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertBossTriangleScript.cpp(126,45): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.h(37,24): warning C4267: 'return': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertDungeonScene.cpp(26,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertDungeonScene.cpp(62,51): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertDungeonScene.cpp(66,54): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertDungeonScene.cpp(70,51): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertDungeonScene.cpp(95,10): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertDungeonScene.cpp(137,51): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertDungeonScene.cpp(141,54): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertDungeonScene.cpp(145,51): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.h(46,24): warning C4267: 'return': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertDungeonScene.cpp(75,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertDungeonScene.cpp(111,51): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertDungeonScene.cpp(115,54): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertDungeonScene.cpp(119,51): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertDungeonScene.cpp(146,10): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertDungeonScene.cpp(188,51): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertDungeonScene.cpp(192,54): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDesertDungeonScene.cpp(196,51): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(60,45): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(60,32): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(65,50): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(65,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(158,95): warning C4244: '인수': 'float'에서 'const unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(177,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(182,25): warning C4244: '=': 'const _Ty1'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(183,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(188,25): warning C4244: '=': 'const _Ty1'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
           with
           [
               _Ty1=const UINT
           ]
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(183,25): warning C4244: '=': 'const _Ty1'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(189,25): warning C4244: '=': 'const _Ty1'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
           with
           [
               _Ty1=const UINT
           ]
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(190,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(196,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CFireBall.cpp(21,43): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CFireBall.cpp(33,26): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CFireBall.cpp(34,26): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -136,12 +136,12 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.3132
               _Pr=std::less<UINT>,
               _Alloc=std::allocator<std::pair<const UINT,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>>>
           ]
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(163): message : 컴파일되는 함수 템플릿 인스턴스화 'std::pair<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const UINT,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>>>>>,bool> std::map<UINT,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>,std::less<UINT>,std::allocator<std::pair<const UINT,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>>>>::insert<std::pair<float,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>>,0>(_Valty &&)'에 대한 참조를 확인하세요.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(164): message : 컴파일되는 함수 템플릿 인스턴스화 'std::pair<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const UINT,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>>>>>,bool> std::map<UINT,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>,std::less<UINT>,std::allocator<std::pair<const UINT,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>>>>::insert<std::pair<float,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>>,0>(_Valty &&)'에 대한 참조를 확인하세요.
           with
           [
               _Valty=std::pair<float,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>>
           ]
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(163): message : 컴파일되는 함수 템플릿 인스턴스화 'std::pair<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const UINT,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>>>>>,bool> std::map<UINT,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>,std::less<UINT>,std::allocator<std::pair<const UINT,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>>>>::insert<std::pair<float,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>>,0>(_Valty &&)'에 대한 참조를 확인하세요.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(164): message : 컴파일되는 함수 템플릿 인스턴스화 'std::pair<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const UINT,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>>>>>,bool> std::map<UINT,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>,std::less<UINT>,std::allocator<std::pair<const UINT,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>>>>::insert<std::pair<float,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>>,0>(_Valty &&)'에 대한 참조를 확인하세요.
           with
           [
               _Valty=std::pair<float,std::vector<CDungeonMgr::eGateDirection,std::allocator<CDungeonMgr::eGateDirection>>>

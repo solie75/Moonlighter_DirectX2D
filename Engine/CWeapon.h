@@ -82,5 +82,6 @@ public:
     void SetScene(CScene* scene) { ownScene = scene; }
     void SetComboNum(UINT num) { mComboNum = num; }
     //void SetPlayerToWeapon(CPlayer* player) { mPlayer = player; }
+    void SetWeaponType(eWeaponType type) { mMainWeaponType = type; }
 };
 

@@ -9,10 +9,10 @@ CDungeonMgr::CDungeonMgr()
 	mvAroundCenterList.push_back(Vector2(3,2));
 	mvAroundCenterList.push_back(Vector2(3,4));
 
-	mAroundStardardArray[0] = Vector2(-1, 0);
-	mAroundStardardArray[1] = Vector2(1, 0);
-	mAroundStardardArray[2] = Vector2(0, -1);
-	mAroundStardardArray[3] = Vector2(0, 1);
+	mAroundStandardArray[0] = Vector2(-1, 0);
+	mAroundStandardArray[1] = Vector2(1, 0);
+	mAroundStandardArray[2] = Vector2(0, -1);
+	mAroundStandardArray[3] = Vector2(0, 1);
 }
 
 CDungeonMgr::~CDungeonMgr()
@@ -102,7 +102,7 @@ void CDungeonMgr::CreateMap()
 				{
 					for (int j = 0; j < 4; j++)
 					{
-						Vector2 mapVec = Vector2((curIter->second)[i].x + mAroundStardardArray[j].x, (curIter->second)[i].y + mAroundStardardArray[j].y);
+						Vector2 mapVec = Vector2((curIter->second)[i].x + mAroundStandardArray[j].x, (curIter->second)[i].y + mAroundStandardArray[j].y);
 						if (std::find(vRandomMapList.begin(), vRandomMapList.end(), mapVec) != vRandomMapList.end())
 						{
 							if (k == 0)
@@ -149,7 +149,7 @@ void CDungeonMgr::SetGateList()
 		for (int j = 0; j < 4; j++)
 		{
 			// 존재하는지 검색의 대상이 되는 맵
-			Vector2 mapVec = Vector2(mvMapList[i].x + mAroundStardardArray[j].x, mvMapList[i].y + mAroundStardardArray[j].y);
+			Vector2 mapVec = Vector2(mvMapList[i].x + mAroundStandardArray[j].x, mvMapList[i].y + mAroundStandardArray[j].y);
 
 			// map이 mvMaplist 에 존재하는지 검색
 			if (std::find(mvMapList.begin(), mvMapList.end(), mapVec) != mvMapList.end())
@@ -158,6 +158,7 @@ void CDungeonMgr::SetGateList()
 				std::map<UINT, vector<eGateDirection>>::iterator iter = mmGateList.find(mvMapList[i].x*10 + mvMapList[i].y);
 				if (iter == mmGateList.end())
 				{
+					// 각 map 에 대한 Gate 저장
 					vector<eGateDirection> gateDirection;
 					gateDirection.push_back((eGateDirection)j);
 					mmGateList.insert(make_pair(mvMapList[i].x * 10 + mvMapList[i].y, gateDirection));
@@ -169,6 +170,11 @@ void CDungeonMgr::SetGateList()
 			}
 		}
 	}
+}
+
+void CDungeonMgr::SetGateLinkData()
+{
+
 }
 
 Vector2 CDungeonMgr::GetMapPos(UINT mapNum)

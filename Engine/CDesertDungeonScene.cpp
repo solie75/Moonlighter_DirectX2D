@@ -1,9 +1,15 @@
 #include "CDesertDungeonScene.h"
 #include "CDungeonMgr.h"
-#include "CPlayer.h"
+#include "CCollider2D.h"
+#include "CCollisionMgr.h"
+#include "CWeapon.h"
+
 
 CDesertDungeonScene::CDesertDungeonScene()
 {
+	player = new CPlayer;
+	mainCamera = new CGameObject;
+	mbTranslateMapPos = false;
 }
 
 CDesertDungeonScene::~CDesertDungeonScene()
@@ -12,15 +18,58 @@ CDesertDungeonScene::~CDesertDungeonScene()
 
 void CDesertDungeonScene::Initialize()
 {
+	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Player, eLayerType::Portal, true);
+
+	// player
+	//CPlayer* player = new CPlayer;
+	AddGameObject(eLayerType::Player, player, L"Will", Vector3(2.0f, 0.0f, 1.0002f)
+		, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down", true);
+	CTransform* PlayerTr = player->GetComponent<CTransform>(eComponentType::Transform);
+
+	// weapon
+	CWeapon* Weapon = new CWeapon();
+	AddGameObject(eLayerType::Player, Weapon, L"Weapon", Vector3(0.0f, 0.0f, 0.0f),
+		Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"", true);
+	//Weapon->SetPlayerToWeapon(Will);
+	Weapon->SetParentObject(player);
+	Weapon->SetScene(this);
+
+	player->SetWeapon(Weapon);
+
+	// Main Camera
+	//CGameObject* mainCamera = new CGameObject;
+	AddGameObject(eLayerType::Camera, mainCamera, L"MainCamera", Vector3(0.0f, 0.0f, -10.0f),
+		Vector3(1.0f, 1.0f, 1.0f), false, L"", L"", false);
+	CCamera* mainCamComp = mainCamera->AddComponent<CCamera>();
+	mainCamComp->SetCameraType(eCameraType::Main);
+	mainCamComp->TurnLayerMask(eLayerType::UI, false);
+	CCameraMoveScript* CameraMoveScript = mainCamera->GetComponent<CCameraMoveScript>(eComponentType::Script);
+	CameraMoveScript->ChangeCameraFocusing(CCameraMoveScript::eCameraFocusing::Map);
+	CameraMoveScript->SetMapPos(Vector2(0.0f, 0.0f));
+	CameraMoveScript->SetPlayerTr(PlayerTr);
+
+	// UI Camera
+	CGameObject* uiCamera = new CGameObject();
+	AddGameObject(eLayerType::Camera, uiCamera, L"UICamera", Vector3(0.0f, 0.0f, -10.0f),
+		Vector3(1.0f, 1.0f, 1.0f), false, L"", L"", false);
+	CCamera* uiCamComp = uiCamera->AddComponent<CCamera>();
+	uiCamComp->SetCameraType(eCameraType::UI);
+	uiCamComp->TurnLayerMask(eLayerType::Player, false);
+	uiCamComp->TurnLayerMask(eLayerType::Monster, false);
+	uiCamComp->TurnLayerMask(eLayerType::Background, false);
+	uiCamComp->TurnLayerMask(eLayerType::Projectile, false);
+	uiCamComp->TurnLayerMask(eLayerType::Portal, false);
+
+	// light
+	CGameObject* light = new CGameObject();
+	light->SetName(L"light");
+	AddGameObject(eLayerType::Light, light, L"light", Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f), false, L"", L"", false);
+	CLight* lightComp = light->AddComponent<CLight>();
+	lightComp->SetType(eLightType::Directional);
+	lightComp->SetColor(Vector4(0.8f, 0.8f, 0.8f, 1.0f));
+
 	// 맴의 초기화
 	CDungeonMgr::GetInst()->CreateMap();
-
-	// Map Texture Setting
-	 // dongeon Map 의 좌표 이동 기준은 x : 8.202f, y : 4.492f 이다. 
-	 // Doungeon Map
-	float xPosStandard = 8.202f;
-	float yPosStandard = 4.492f;
-
 	UINT BasicDoorNum = 0;
 
 	for (int i = 0; i < CDungeonMgr::GetInst()->GetMapListSize(); i++)
@@ -79,6 +128,8 @@ void CDesertDungeonScene::Initialize()
 				// Basic Door 애니메이션
 				CAnimator* BasicDoorAt = Dungeon3_BasicDoor->GetComponent<CAnimator>(eComponentType::Animator);
 				BasicDoorAt->PlayAnimation(L"Dungeon3_BasicDoor_Cycle", true);
+				CCollider2D* BasicDoorCd = Dungeon3_BasicDoor->AddComponent<CCollider2D>();
+				BasicDoorCd->SetSize(Vector2(0.3f, 0.3f));
 			}
 		}
 		// Dongeon normal map
@@ -87,8 +138,8 @@ void CDesertDungeonScene::Initialize()
 			mapPosVec2.x = mapPosVec2.x - 3;
 			mapPosVec2.y = (mapPosVec2.y * -1) + 3;
 
-			mapPosVec2.x *= xPosStandard;
-			mapPosVec2.y *= yPosStandard;
+			mapPosVec2.x *= mXPosStandard;
+			mapPosVec2.y *= mYPosStandard;
 
 			Vector3 mapPosVec3 = Vector3(mapPosVec2.x, mapPosVec2.y, 10.0000f + (0.00001f * i));
 
@@ -154,52 +205,55 @@ void CDesertDungeonScene::Initialize()
 				// Basic Door 애니메이션
 				CAnimator* BasicDoorAt = Dungeon3_BasicDoor->GetComponent<CAnimator>(eComponentType::Animator);
 				BasicDoorAt->PlayAnimation(L"Dungeon3_BasicDoor_Cycle", true);
+				CCollider2D* BasicDoorCd = Dungeon3_BasicDoor->AddComponent<CCollider2D>();
+				BasicDoorCd->SetSize(Vector2(0.3f, 0.3f));
 			}
 		}
 	}
-
-	// player
-	CPlayer* Will = new CPlayer();
-	AddGameObject(eLayerType::Player, Will, L"Will", Vector3(3.0f, 0.0f, 1.0002f)
-		, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down", true);
-	CTransform* PlayerTr = Will->GetComponent<CTransform>(eComponentType::Transform);
-
-
-	// Main Camera
-	CGameObject* mainCamera = new CGameObject();
-	AddGameObject(eLayerType::Camera, mainCamera, L"MainCamera", Vector3(0.0f, 0.0f, -10.0f),
-		Vector3(1.0f, 1.0f, 1.0f), false, L"", L"", false);
-	CCamera* mainCamComp = mainCamera->AddComponent<CCamera>();
-	mainCamComp->SetCameraType(eCameraType::Main);
-	mainCamComp->TurnLayerMask(eLayerType::UI, false);
-	CCameraMoveScript* CameraMoveScript = mainCamera->AddComponent<CCameraMoveScript>();
-	CameraMoveScript->SetPlayerTr(PlayerTr);
-
-	// UI Camera
-	CGameObject* uiCamera = new CGameObject();
-	AddGameObject(eLayerType::Camera, uiCamera, L"UICamera", Vector3(0.0f, 0.0f, -10.0f),
-		Vector3(1.0f, 1.0f, 1.0f), false, L"", L"", false);
-	CCamera* uiCamComp = uiCamera->AddComponent<CCamera>();
-	uiCamComp->SetCameraType(eCameraType::UI);
-	uiCamComp->TurnLayerMask(eLayerType::Player, false);
-	uiCamComp->TurnLayerMask(eLayerType::Monster, false);
-	uiCamComp->TurnLayerMask(eLayerType::Background, false);
-	uiCamComp->TurnLayerMask(eLayerType::Projectile, false);
-	uiCamComp->TurnLayerMask(eLayerType::Portal, false);
-
-	CGameObject* light = new CGameObject();
-	light->SetName(L"light");
-	AddGameObject(eLayerType::Light, light, L"light", Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f), false, L"", L"", false);
-	CLight* lightComp = light->AddComponent<CLight>();
-	lightComp->SetType(eLightType::Directional);
-	lightComp->SetColor(Vector4(0.8f, 0.8f, 0.8f, 1.0f));
-
 	CScene::Initialize();
 }
 
 void CDesertDungeonScene::Update()
 {
-	
+	CCollider2D* playerCD = player->GetComponent<CCollider2D>(eComponentType::Collider2D);
+	CCameraMoveScript* mainCameraScript = mainCamera->GetComponent<CCameraMoveScript>(eComponentType::Script);
+	CTransform* mainCameraTr = mainCamera->GetComponent<CTransform>(eComponentType::Transform);
+	Vector2 CurMapPos = mainCameraScript->GetFocusedMapPos();
+	Vector2 mainCameraPos = Vector2(mainCameraTr->GetPosition().x, mainCameraTr->GetPosition().y);
+
+	if (mbTranslateMapPos == true && CurMapPos == mainCameraPos)
+	{
+		mbTranslateMapPos = false;
+	}
+
+	// 플레이어가 door 와 충돌한 경우
+	if (playerCD->GetColliderData(eLayerType::Portal).id != 0) // && mbTranslateMapPos == false
+	{
+		Vector2 CollideDoorPos = playerCD->GetColliderData(eLayerType::Portal).pos;
+		
+		if(CollideDoorPos.x > CurMapPos.x)
+		{
+			// door 가 map 의 오른쪽에 있다.
+			mainCameraScript->SetMapPos(Vector2(CurMapPos.x + mXPosStandard, CurMapPos.y));
+		}
+		else if (CollideDoorPos.x < CurMapPos.x)
+		{
+			// door 가 map 의 왼쪽에 있다.
+			mainCameraScript->SetMapPos(Vector2(CurMapPos.x - mXPosStandard, CurMapPos.y));
+		}
+		else if (CollideDoorPos.y > CurMapPos.y)
+		{
+			// door 가 map 의 윗쪽에 있다.
+			mainCameraScript->SetMapPos(Vector2(CurMapPos.x , CurMapPos.y + mYPosStandard));
+		}
+		else if (CollideDoorPos.y < CurMapPos.y)
+		{
+			// door 가 map 의 아래쪽에 있다.
+			mainCameraScript->SetMapPos(Vector2(CurMapPos.x, CurMapPos.y - mYPosStandard));
+		}
+
+		mbTranslateMapPos = true;
+	}
 
 	CScene::Update();
 }

@@ -76,7 +76,7 @@ void CDesertBossScene::Initialize()
 	CCamera* mainCamComp = mainCamera->AddComponent<CCamera>();
 	mainCamComp->SetCameraType(eCameraType::Main);
 	mainCamComp->TurnLayerMask(eLayerType::UI, false);
-	CCameraMoveScript* CameraMoveScript = mainCamera->AddComponent<CCameraMoveScript>();
+	CCameraMoveScript* CameraMoveScript = mainCamera->GetComponent<CCameraMoveScript>(eComponentType::Script);
 	CameraMoveScript->SetPlayerTr(PlayerTr);
 
 	// UI Camera
