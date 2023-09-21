@@ -224,7 +224,6 @@ void CDesertDungeonScene::Update()
 	CCameraMoveScript* mainCameraScript = mainCamera->GetComponent<CCameraMoveScript>(eComponentType::Script);
 
 	Vector2 doorPos = playerCD->GetColliderData(eLayerType::Portal).pos;
-	//Vector2 CurMapPos = mainCameraScript->GetFocusedMapPos();
 	CTransform* mainCamTr = mainCameraScript->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	Vector3 mainCamPos = mainCamTr->GetPosition();
 
@@ -233,9 +232,9 @@ void CDesertDungeonScene::Update()
 		
 
 		float diff = Vector2::Distance(Vector2(mainCamPos.x, mainCamPos.y), NextMapPos);
-		if (diff < 1.0f)
+		if (diff < 0.1f)
 		{
-			mainCameraScript->SetMapPos(NextMapPos);
+			mainCamTr->SetPosition(Vector3(NextMapPos.x, NextMapPos.y, mainCamPos.z));
 			mbTranslateMapPos = false;
 		}
 		else
