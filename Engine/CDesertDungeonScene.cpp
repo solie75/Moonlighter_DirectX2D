@@ -4,6 +4,7 @@
 #include "CCollisionMgr.h"
 #include "CWeapon.h"
 #include "CTimeMgr.h"
+#include "CPlayerMoveScript.h"
 
 
 CDesertDungeonScene::CDesertDungeonScene()
@@ -220,22 +221,23 @@ void CDesertDungeonScene::Update()
 
 	// 1. map 이 이동하는 조건 (player 와 door 의 충돌
 	CCollider2D* playerCD = player->GetComponent<CCollider2D>(eComponentType::Collider2D);
+	CPlayerMoveScript* playerST = player->GetComponent<CPlayerMoveScript>(eComponentType::Script);
 	CTransform* playerTr = player->GetComponent<CTransform>(eComponentType::Transform);
 	CCameraMoveScript* mainCameraScript = mainCamera->GetComponent<CCameraMoveScript>(eComponentType::Script);
 
 	Vector2 doorPos = playerCD->GetColliderData(eLayerType::Portal).pos;
 	CTransform* mainCamTr = mainCameraScript->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	Vector3 mainCamPos = mainCamTr->GetPosition();
+	CState* playerState = player->GetState();
 
 	if (mbTranslateMapPos == true)
 	{
-		
-
 		float diff = Vector2::Distance(Vector2(mainCamPos.x, mainCamPos.y), NextMapPos);
 		if (diff < 0.1f)
 		{
 			mainCamTr->SetPosition(Vector3(NextMapPos.x, NextMapPos.y, mainCamPos.z));
 			mbTranslateMapPos = false;
+			playerState->SetBoolStateChange(true);
 		}
 		else
 		{
@@ -265,22 +267,33 @@ void CDesertDungeonScene::Update()
 	if (playerCD->GetColliderData(eLayerType::Portal).id != 0 && mbTranslateMapPos == false)
 	{
 		mbTranslateMapPos = true;
+		playerState->SetBoolStateChange(false);
 		
+		Vector3 playerPos = playerTr->GetPosition();
+
 		if (doorPos.x > mainCamPos.x) // 오른쪽으로
 		{
 			NextMapPos = Vector2(mainCamPos.x + mXPosStandard, mainCamPos.y);
+			playerPos.x += 2.5f;
+			playerTr->SetPosition(playerPos);
 		}
 		else if (doorPos.x < mainCamPos.x) // 왼쪽으로
 		{
 			NextMapPos = Vector2(mainCamPos.x - mXPosStandard, mainCamPos.y);
+			playerPos.x -= 2.5f;
+			playerTr->SetPosition(playerPos);
 		}
 		else if (doorPos.y < mainCamPos.y) // 아래쪽으로
 		{
 			NextMapPos = Vector2(mainCamPos.x, mainCamPos.y - mYPosStandard);
+			playerPos.y -= 1.6f;
+			playerTr->SetPosition(playerPos);
 		}
 		else if (doorPos.y > mainCamPos.y) // 위쪽으로
 		{
 			NextMapPos = Vector2(mainCamPos.x, mainCamPos.y + mYPosStandard);
+			playerPos.y += 1.6f;
+			playerTr->SetPosition(playerPos);
 		}
 	}
 

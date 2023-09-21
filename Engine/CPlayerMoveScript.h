@@ -21,6 +21,7 @@ private:
     bool mbNextCombo;
     //bool mbSubAttack;
     eSubAttackState mSubAttackState;
+    bool mbplayerMove;
 
 public:
     CPlayerMoveScript();
@@ -38,5 +39,6 @@ public:
 
     eSubAttackState GetSubAttackState() { return mSubAttackState; }
     void SetSubAttackState(eSubAttackState state) { mSubAttackState = state; }
+
 };
 
