@@ -3,6 +3,7 @@
 #include "CCollider2D.h"
 #include "CCollisionMgr.h"
 #include "CWeapon.h"
+#include "CTimeMgr.h"
 
 
 CDesertDungeonScene::CDesertDungeonScene()
@@ -215,44 +216,73 @@ void CDesertDungeonScene::Initialize()
 
 void CDesertDungeonScene::Update()
 {
-	CCollider2D* playerCD = player->GetComponent<CCollider2D>(eComponentType::Collider2D);
-	CCameraMoveScript* mainCameraScript = mainCamera->GetComponent<CCameraMoveScript>(eComponentType::Script);
-	CTransform* mainCameraTr = mainCamera->GetComponent<CTransform>(eComponentType::Transform);
-	Vector2 CurMapPos = mainCameraScript->GetFocusedMapPos();
-	Vector2 mainCameraPos = Vector2(mainCameraTr->GetPosition().x, mainCameraTr->GetPosition().y);
+	// map 의 이동
 
-	if (mbTranslateMapPos == true && CurMapPos == mainCameraPos)
+	// 1. map 이 이동하는 조건 (player 와 door 의 충돌
+	CCollider2D* playerCD = player->GetComponent<CCollider2D>(eComponentType::Collider2D);
+	CTransform* playerTr = player->GetComponent<CTransform>(eComponentType::Transform);
+	CCameraMoveScript* mainCameraScript = mainCamera->GetComponent<CCameraMoveScript>(eComponentType::Script);
+
+	Vector2 doorPos = playerCD->GetColliderData(eLayerType::Portal).pos;
+	//Vector2 CurMapPos = mainCameraScript->GetFocusedMapPos();
+	CTransform* mainCamTr = mainCameraScript->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
+	Vector3 mainCamPos = mainCamTr->GetPosition();
+
+	if (mbTranslateMapPos == true)
 	{
-		mbTranslateMapPos = false;
+		
+
+		float diff = Vector2::Distance(Vector2(mainCamPos.x, mainCamPos.y), NextMapPos);
+		if (diff < 1.0f)
+		{
+			mainCameraScript->SetMapPos(NextMapPos);
+			mbTranslateMapPos = false;
+		}
+		else
+		{
+			if (mainCamPos.x > NextMapPos.x)
+			{
+				mainCamPos.x -= (float)(5.0 * CTimeMgr::GetInst()->GetDeltaTime());
+				mainCamTr->SetPosition(mainCamPos);
+			}
+			else if (mainCamPos.x < NextMapPos.x)
+			{
+				mainCamPos.x += (float)(5.0 * CTimeMgr::GetInst()->GetDeltaTime());
+				mainCamTr->SetPosition(mainCamPos);
+			}
+			else if (mainCamPos.y > NextMapPos.y)
+			{
+				mainCamPos.y -= (float)(5.0 * CTimeMgr::GetInst()->GetDeltaTime());
+				mainCamTr->SetPosition(mainCamPos);
+			}
+			else if (mainCamPos.y < NextMapPos.y)
+			{
+				mainCamPos.y += (float)(5.0 * CTimeMgr::GetInst()->GetDeltaTime());
+				mainCamTr->SetPosition(mainCamPos);
+			}
+		}
 	}
 
-	// 플레이어가 door 와 충돌한 경우
-	if (playerCD->GetColliderData(eLayerType::Portal).id != 0) // && mbTranslateMapPos == false
+	if (playerCD->GetColliderData(eLayerType::Portal).id != 0 && mbTranslateMapPos == false)
 	{
-		Vector2 CollideDoorPos = playerCD->GetColliderData(eLayerType::Portal).pos;
-		
-		if(CollideDoorPos.x > CurMapPos.x)
-		{
-			// door 가 map 의 오른쪽에 있다.
-			mainCameraScript->SetMapPos(Vector2(CurMapPos.x + mXPosStandard, CurMapPos.y));
-		}
-		else if (CollideDoorPos.x < CurMapPos.x)
-		{
-			// door 가 map 의 왼쪽에 있다.
-			mainCameraScript->SetMapPos(Vector2(CurMapPos.x - mXPosStandard, CurMapPos.y));
-		}
-		else if (CollideDoorPos.y > CurMapPos.y)
-		{
-			// door 가 map 의 윗쪽에 있다.
-			mainCameraScript->SetMapPos(Vector2(CurMapPos.x , CurMapPos.y + mYPosStandard));
-		}
-		else if (CollideDoorPos.y < CurMapPos.y)
-		{
-			// door 가 map 의 아래쪽에 있다.
-			mainCameraScript->SetMapPos(Vector2(CurMapPos.x, CurMapPos.y - mYPosStandard));
-		}
-
 		mbTranslateMapPos = true;
+		
+		if (doorPos.x > mainCamPos.x) // 오른쪽으로
+		{
+			NextMapPos = Vector2(mainCamPos.x + mXPosStandard, mainCamPos.y);
+		}
+		else if (doorPos.x < mainCamPos.x) // 왼쪽으로
+		{
+			NextMapPos = Vector2(mainCamPos.x - mXPosStandard, mainCamPos.y);
+		}
+		else if (doorPos.y < mainCamPos.y) // 아래쪽으로
+		{
+			NextMapPos = Vector2(mainCamPos.x, mainCamPos.y - mYPosStandard);
+		}
+		else if (doorPos.y > mainCamPos.y) // 위쪽으로
+		{
+			NextMapPos = Vector2(mainCamPos.x, mainCamPos.y + mYPosStandard);
+		}
 	}
 
 	CScene::Update();

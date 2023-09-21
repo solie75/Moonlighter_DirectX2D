@@ -13,6 +13,8 @@ private:
     float mYPosStandard = 4.492f;
 
     bool mbTranslateMapPos;
+
+    Vector2 NextMapPos;
 public:
     CDesertDungeonScene();
     ~CDesertDungeonScene();

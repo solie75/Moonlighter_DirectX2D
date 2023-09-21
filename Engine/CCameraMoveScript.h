@@ -44,4 +44,5 @@ public:
         FocusedOnMapPos = v2;
     }
     Vector2 GetFocusedMapPos() { return FocusedOnMapPos; }
+    void MoveCameraForMap();
 };

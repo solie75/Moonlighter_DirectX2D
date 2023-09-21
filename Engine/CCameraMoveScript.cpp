@@ -69,26 +69,7 @@ void CCameraMoveScript::Update()
 	}
 	else if (cameraFocused == eCameraFocusing::Map)
 	{
-		float diff = (tr->GetPosition().x - FocusedOnMapPos.x) + (tr->GetPosition().y - FocusedOnMapPos.y);
-
-		if (diff <= 0.01f)
-		{
-			tr->SetPosition(Vector3(FocusedOnMapPos.x, FocusedOnMapPos.y, 0.0f));
-		}
-		else if (diff > 0.01f)
-		{
-			Vector2 direction = tr->GetPosition() - FocusedOnMapPos;
-			direction.x /= direction.x;
-			direction.y /= direction.y;
-
-			pos.x += (float)(5.0 * CTimeMgr::GetInst()->GetDeltaTime());
-			pos.y += (float)(5.0 * CTimeMgr::GetInst()->GetDeltaTime());
-			tr->SetPosition(pos);
-		}
-		else if (diff == 0)
-		{
-
-		}
+		MoveCameraForMap();
 	}
 	else if (cameraFocused == eCameraFocusing::End)
 	{
@@ -105,4 +86,8 @@ void CCameraMoveScript::LateUpdate()
 void CCameraMoveScript::Render()
 {
 	CScript::Render();
+}
+
+void CCameraMoveScript::MoveCameraForMap()
+{
 }
