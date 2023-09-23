@@ -1,0 +1,452 @@
+{
+    "Map1": 
+    [
+        {
+            "id": 1,
+            "Position": [121, 85],
+			"Quadrant": [2],
+			"Scale": [122, 30],
+			"Type": [0],
+			"MapNum": [1]
+        },
+		{
+            "id": 2,
+            "Position": [124, 85],
+			"Quadrant": [1],
+			"Scale": [122, 30],
+			"Type": [0],
+			"MapNum": [1]
+        },
+		{
+            "id": 3,
+            "Position": [124, 84],
+			"Quadrant": [4],
+			"Scale": [122, 30],
+			"Type": [0],
+			"MapNum": [1]
+        },
+		{
+            "id": 4,
+            "Position": [122, 84],
+			"Quadrant": [3],
+			"Scale": [122, 30],
+			"Type": [0],
+			"MapNum": [1]
+        },
+		{
+            "id": 5,
+            "Position": [168, 38],
+			"Quadrant": [2],
+			"Scale": [30, 90],
+			"Type": [0],
+			"MapNum": [1]
+        },
+		{
+            "id": 6,
+            "Position": [168, 38],
+			"Quadrant": [4],
+			"Scale": [30, 90],
+			"Type": [0],
+			"MapNum": [1]
+        },
+		{
+            "id": 7,
+            "Position": [0, 84],
+			"Quadrant": [4],
+			"Scale": [122, 30],
+			"Type": [1],
+			"MapNum": [1]
+        },
+		{
+            "id": 8,
+            "Position": [0, 84],
+			"Quadrant": [1],
+			"Scale": [122, 30],
+			"Type": [1],
+			"MapNum": [1]
+        }
+    ],
+
+	"Map2":
+	[
+		{
+			"id": 9,
+            "Position": [214, 72],
+			"Quadrant": [4],
+			"Scale": [30, 90],
+			"Type": [0],
+			"MapNum": [2]
+		},
+        {
+			"id":10,
+            "Position": [210, 50],
+			"Quadrant": [2],
+			"Scale": [30, 90],
+			"Type": [0],
+			"MapNum": [2]
+		},
+        {
+			"id":11,
+            "Position": [205, 90],
+			"Quadrant": [3],
+			"Scale": [30, 60],
+			"Type": [0],
+			"MapNum": [2]
+		},
+        {
+			"id":12,
+            "Position": [215, 68],
+			"Quadrant": [1],
+			"Scale": [30, 60],
+			"Type": [0],
+			"MapNum": [2]
+		},
+        {
+			"id":13,
+            "Position": [133, 84],
+			"Quadrant": [1],
+			"Scale": [190, 30],
+			"Type": [0],
+			"MapNum": [2]
+		},
+        {
+			"id":14,
+            "Position": [130, 84],
+			"Quadrant": [2],
+			"Scale": [190, 30],
+			"Type": [0],
+			"MapNum": [2]
+		},
+        {
+			"id":15,
+            "Position": [128, 105],
+			"Quadrant": [3],
+			"Scale": [190, 30],
+			"Type": [0],
+			"MapNum": [2]
+		},
+        {
+			"id":16,
+            "Position": [134, 105],
+			"Quadrant": [4],
+			"Scale": [190, 30],
+			"Type": [0],
+			"MapNum": [2]
+		},
+        {
+			"id":17,
+            "Position": [290, 145],
+			"Quadrant": [1],
+			"Scale": [30, 30],
+			"Type": [1],
+			"MapNum": [2]
+		},
+        {
+			"id":18,
+            "Position": [287, 146],
+			"Quadrant": [2],
+			"Scale": [30, 30],
+			"Type": [1],
+			"MapNum": [2]
+		},
+        {
+			"id":19,
+            "Position": [290, 146],
+			"Quadrant": [3],
+			"Scale": [30, 30],
+			"Type": [1],
+			"MapNum": [2]
+		},
+        {
+			"id":20,
+            "Position": [292, 145],
+			"Quadrant": [4],
+			"Scale": [30, 30],
+			"Type": [1],
+			"MapNum": [2]
+		}
+
+	],
+
+    "Map3": 
+    [
+        {
+			"id":21,
+            "Position": [73, 60],
+			"Quadrant": [1],
+			"Scale": [30, 30],
+			"Type": [0],
+			"MapNum": [3]
+		},
+        {
+			"id":22,
+            "Position": [73, 58],
+			"Quadrant": [2],
+			"Scale": [30, 30],
+			"Type": [0],
+			"MapNum": [3]
+		},
+        {
+			"id":23,
+            "Position": [73, 64],
+			"Quadrant": [3],
+			"Scale": [30, 30],
+			"Type": [0],
+			"MapNum": [3]
+		},
+        {
+			"id":24,
+            "Position": [75, 66],
+			"Quadrant": [4],
+			"Scale": [30, 30],
+			"Type": [0],
+			"MapNum": [3]
+		},
+        {
+			"id":25,
+            "Position": [188, 110],
+			"Quadrant": [1],
+			"Scale": [240, 120],
+			"Type": [1],
+			"MapNum": [3]
+		},
+        {
+			"id":26,
+            "Position": [188, 110],
+			"Quadrant": [2],
+			"Scale": [240, 120],
+			"Type": [1],
+			"MapNum": [3]
+		},
+        {
+			"id":27,
+            "Position": [188, 120],
+			"Quadrant": [3],
+			"Scale": [240, 120],
+			"Type": [1],
+			"MapNum": [3]
+		},
+        {
+			"id":28,
+            "Position": [188, 120],
+			"Quadrant": [4],
+			"Scale": [240, 120],
+			"Type": [1],
+			"MapNum": [3]
+		}
+
+    ],
+
+    "Map4": 
+    [
+        {
+            "id":29,
+            "Position": [75, 119],
+            "Quadrant": [1],
+            "Scale": [30, 100],
+            "Type": [0],
+            "MapNum": [4]
+        },
+        {
+            "id":30,
+            "Position": [75, 121],
+            "Quadrant": [2],
+            "Scale": [30, 100],
+            "Type": [0],
+            "MapNum": [4]
+        },
+        {
+            "id":31,
+            "Position": [75, 121],
+            "Quadrant": [3],
+            "Scale": [30, 100],
+            "Type": [0],
+            "MapNum": [4]
+        },
+        {
+            "id":32,
+            "Position": [75, 121],
+            "Quadrant": [4],
+            "Scale": [30, 100],
+            "Type": [0],
+            "MapNum": [4]
+        },
+        {
+            "id":33,
+            "Position": [262, 57],
+            "Quadrant": [1],
+            "Scale": [100, 30],
+            "Type": [0],
+            "MapNum": [4]
+        },
+        {
+            "id":34,
+            "Position": [262, 57],
+            "Quadrant": [2],
+            "Scale": [100, 30],
+            "Type": [0],
+            "MapNum": [4]
+        },
+        {
+            "id":35,
+            "Position": [262, 61],
+            "Quadrant": [3],
+            "Scale": [100, 30],
+            "Type": [0],
+            "MapNum": [4]
+        },
+        {
+            "id":36,
+            "Position": [262, 61],
+            "Quadrant": [4],
+            "Scale": [100, 30],
+            "Type": [0],
+            "MapNum": [4]
+        },
+        {
+            "id":37,
+            "Position": [10, 2],
+            "Quadrant": [4],
+            "Scale": [240, 16],
+            "Type": [1],
+            "MapNum": [4]
+        },
+        {
+            "id":38,
+            "Position": [135, 1],
+            "Quadrant": [4],
+            "Scale": [17, 78],
+            "Type": [1],
+            "MapNum": [4]
+        },
+        {
+            "id":39,
+            "Position": [110, 1],
+            "Quadrant": [3],
+            "Scale": [17, 78],
+            "Type": [1],
+            "MapNum": [4]
+        }
+    ],
+
+    "Map5": 
+    [
+        {
+            "id":40,
+            "Position": [275, 148],
+            "Quadrant": [1],
+            "Scale": [60, 30],
+            "Type": [0],
+            "MapNum": [4]
+        },
+        {
+            "id":41,
+            "Position": [290, 130],
+            "Quadrant": [1],
+            "Scale": [30, 60],
+            "Type": [0],
+            "MapNum": [4]
+        },
+        {
+            "id":42,
+            "Position": [275, 144],
+            "Quadrant": [2],
+            "Scale": [60, 30],
+            "Type": [0],
+            "MapNum": [4]
+        },
+        {
+            "id":43,
+            "Position": [290, 130],
+            "Quadrant": [2],
+            "Scale": [30, 60],
+            "Type": [0],
+            "MapNum": [4]
+        },
+        {
+            "id":44,
+            "Position": [275, 146],
+            "Quadrant": [3],
+            "Scale": [60, 30],
+            "Type": [0],
+            "MapNum": [4]
+        },
+        {
+            "id":45,
+            "Position": [290, 130],
+            "Quadrant": [3],
+            "Scale": [30, 60],
+            "Type": [0],
+            "MapNum": [4]
+        },
+        {
+            "id":46,
+            "Position": [290, 130],
+            "Quadrant": [4],
+            "Scale": [30, 60],
+            "Type": [0],
+            "MapNum": [4]
+        },
+        {
+            "id":47,
+            "Position": [275, 146],
+            "Quadrant": [4],
+            "Scale": [60, 30],
+            "Type": [0],
+            "MapNum": [4]
+        },
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {
+            "id":40,
+            "Position": [183, 13],
+            "Quadrant": [2],
+            "Scale": [45, 170],
+            "Type": [1],
+            "MapNum": [4]
+        },
+        {
+            "id":41,
+            "Position": [60, 12],
+            "Quadrant": [2],
+            "Scale": [45, 170],
+            "Type": [1],
+            "MapNum": [4]
+        },
+        {
+            "id":42,
+            "Position": [62, 12],
+            "Quadrant": [1],
+            "Scale": [45, 170],
+            "Type": [1],
+            "MapNum": [4]
+        },
+        {
+            "id":43,
+            "Position": [185, 12],
+            "Quadrant": [1],
+            "Scale": [45, 170],
+            "Type": [1],
+            "MapNum": [4]
+        }
+    ],
+
+    "__commnet(RenderingMode's num)" :
+    {
+        "Opaque" : "0",
+        "CutOut" : "1",
+        "Transparent" : "2",
+        "End" : "3"
+    }
+}

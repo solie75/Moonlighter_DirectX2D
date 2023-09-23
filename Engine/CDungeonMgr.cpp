@@ -3,16 +3,16 @@
 
 CDungeonMgr::CDungeonMgr()
 {
-	// center(3.3) 에 문으로 연결될 수 있는 주변 map
-	mvAroundCenterList.push_back(Vector2(2,3));
-	mvAroundCenterList.push_back(Vector2(4,3));
-	mvAroundCenterList.push_back(Vector2(3,2));
-	mvAroundCenterList.push_back(Vector2(3,4));
-
 	mAroundStandardArray[0] = Vector2(-1, 0);
 	mAroundStandardArray[1] = Vector2(1, 0);
 	mAroundStandardArray[2] = Vector2(0, -1);
 	mAroundStandardArray[3] = Vector2(0, 1);
+
+	for (UINT i = 1; i < 6; i++)
+	{
+		vector<sColliderOnMap> initVector;
+		mmColliderList.insert(std::make_pair(i, initVector));
+	}
 }
 
 CDungeonMgr::~CDungeonMgr()
@@ -21,8 +21,6 @@ CDungeonMgr::~CDungeonMgr()
 
 void CDungeonMgr::Init()
 {
-
-
 }
 
 void CDungeonMgr::Update()
@@ -76,7 +74,6 @@ void CDungeonMgr::CreateMap()
 			for (int i = 0; i < mapSize; i++)
 			{
 				vector<Vector2> mapList;
-				//mapList.clear();
 				if (i == 0)
 				{
 					mapList.push_back(Vector2(3, 3));
@@ -126,6 +123,7 @@ void CDungeonMgr::CreateMap()
 			}
 
 			std::map<UINT, vector<Vector2>>::iterator iter = mStepConnectedMapList.find(1);
+
 			if (iter->second.size() >= 3 &&	mvMapList.size() > 8)
 			{
 				mvMapList.push_back(Vector2(3, 3));
@@ -172,10 +170,125 @@ void CDungeonMgr::SetGateList()
 	}
 }
 
-void CDungeonMgr::SetGateLinkData()
+void CDungeonMgr::SetObjectList(UINT mapNum)
 {
+	sObjectOnMap ObjectDataOnMap;
 
+	SetMonsterList(ObjectDataOnMap, mapNum);
+	SetColliderList(ObjectDataOnMap, mapNum);
+
+	mmObjectList.insert(std::make_pair(mapNum, ObjectDataOnMap));
 }
+
+void CDungeonMgr::SetMonsterList(sObjectOnMap data, UINT mapNum)
+{
+	switch (mapNum)
+	{
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	case 5:
+		break;
+	}
+}
+
+void CDungeonMgr::SetColliderList(sObjectOnMap data, UINT mapNum)
+{
+	std::filesystem::path dataFilePath = L"..\\Data\\Dungeon3MapColliderData.json";
+
+	std::wifstream DataFile(dataFilePath);
+	if(DataFile.is_open())
+	{
+		std::wstring line;
+		int idNum = 1;
+		int mapNum;
+		while (std::getline(DataFile, line))
+		{
+			
+			std::wstring ColliderId = L"\"id\": ";
+			ColliderId += std::to_wstring(idNum);
+			if (line.find(ColliderId) != std::string::npos)
+			{
+				sColliderOnMap colliderData;
+				if (line.find(L"\"Position\": ") != std::string::npos)
+				{
+					size_t startPos = line.find(L"[") + 1;
+					size_t endPos = line.find(L"]");
+					std::wstring numStr = line.substr(startPos, endPos - startPos);
+					int PosX, PosY;
+					swscanf_s(numStr.c_str(), L"%d, %d", &PosX, &PosY);
+					colliderData.vColliderPos.x = PosX * 0.01f;
+					colliderData.vColliderPos.y = PosY * 0.01f;
+				}
+				std::getline(DataFile, line);
+				if (line.find(L"\"Quadrant\": ") != std::string::npos)
+				{
+					size_t startPos = line.find(L"[") + 1;
+					size_t endPos = line.find(L"]");
+					std::wstring numStr = line.substr(startPos, endPos - startPos);
+
+					int quadrant;
+					swscanf_s(numStr.c_str(), L"%d", &quadrant);
+					switch (quadrant)
+					{
+					case 1 : 
+						break;
+					case 2:
+						colliderData.vColliderPos.x *= -1;
+						break;
+					case 3:
+						colliderData.vColliderPos.x *= -1;
+						colliderData.vColliderPos.y *= -1;
+						break;
+					case 4:
+						colliderData.vColliderPos.y *= -1;
+						break;
+					}
+				}
+				std::getline(DataFile, line);
+				if (line.find(L"\"Scale\": ") != std::string::npos)
+				{
+					size_t startPos = line.find(L"[") + 1;
+					size_t endPos = line.find(L"]");
+					std::wstring numStr = line.substr(startPos, endPos - startPos);
+					int ScaleX, ScaleY;
+					swscanf_s(numStr.c_str(), L"%d, %d", &ScaleX, &ScaleY);
+					colliderData.vColliderScale.x = ScaleX * 0.01f;
+					colliderData.vColliderScale.y = ScaleY * 0.01f;
+				}
+				std::getline(DataFile, line);
+				if (line.find(L"\"Type\": ") != std::string::npos)
+				{
+					size_t startPos = line.find(L"[") + 1;
+					size_t endPos = line.find(L"]");
+					std::wstring numStr = line.substr(startPos, endPos - startPos);
+
+					int type;
+					swscanf_s(numStr.c_str(), L"%d", &type);
+					colliderData.ColliderType = (BackgroundColliderType)type;
+				}
+				std::getline(DataFile, line);
+				if (line.find(L"\"MapNum\": ") != std::string::npos)
+				{
+					size_t startPos = line.find(L"[") + 1;
+					size_t endPos = line.find(L"]");
+					std::wstring numStr = line.substr(startPos, endPos - startPos);
+
+					swscanf_s(numStr.c_str(), L"%d", &mapNum);
+
+					std::map<UINT, vector<sColliderOnMap>>::iterator iter = mmColliderList.find(mapNum);
+					iter->second.push_back(colliderData);
+				}
+			}
+		}
+	}
+}
+
 
 Vector2 CDungeonMgr::GetMapPos(UINT mapNum)
 {

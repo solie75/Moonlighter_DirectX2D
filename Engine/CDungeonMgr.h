@@ -23,12 +23,42 @@ public:
 		eGateDirection DestinationGatesDirection;
 	};
 
+	enum class BackgroundColliderType
+	{
+		Wall,
+		Hole,
+		End,
+	};
+
+	struct sColliderOnMap
+	{
+		Vector2 vColliderPos;
+		Vector2 vColliderScale;
+		BackgroundColliderType ColliderType;
+	};
+
+	struct sMonsterOnMap
+	{
+		Vector2 vMonsterScale;
+		std::wstring sMonsterName;
+	};
+
+	struct sObjectOnMap
+	{
+		vector<sColliderOnMap> vColliderOnMap;
+		vector<sMonsterOnMap> vMonsterOnMap;
+	};
+
+	
+
 private:
 	vector<Vector2> mvMapList;
-	vector<Vector2> mvAroundCenterList;
 	Vector2 mAroundStandardArray[4];
 	std::map<UINT, vector<eGateDirection>> mmGateList; // mvMapList 의 각 요소(map) 이 가지고 있는 Gate 목록, 이때 key 가 되는 UINT 는 Vector2.x *10 + Vector2.y + 1 의 결과 값이다.
-	std::map<UINT, CAimSight::eSight> mmGateLinkData; // 하나의 door 가 어디에 연결되어 있는지 연결된 door 가 바라보는 방향은 어디인지 
+	std::map<UINT, sObjectOnMap> mmObjectList; // mvMapList 의 각 요소(map) 이 가지고 있는 object 목록
+	std::map<UINT, vector<sColliderOnMap>> mmColliderList;
+
+
 
 public :
 	CDungeonMgr();
@@ -41,10 +71,14 @@ public :
 
 	void CreateMap();
 	void SetGateList();
-	void SetGateLinkData();
+	void SetObjectList(UINT mapNum);
+	void SetMonsterList(sObjectOnMap data, UINT mapNum);
+	void SetColliderList(sObjectOnMap data, UINT mapNum);
 
 	UINT GetMapListSize() { return mvMapList.size(); }
 	Vector2 GetMapPos(UINT mapNum);
 	vector<eGateDirection> GetDoorList(UINT mapNum);
-	
+
+
+
 };

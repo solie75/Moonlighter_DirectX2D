@@ -38,6 +38,14 @@ void CDesertDungeonScene::Initialize()
 
 	player->SetWeapon(Weapon);
 
+	CGameObject* BackgroundCollider = new CGameObject();
+	AddGameObject(eLayerType::Background, BackgroundCollider, L"BackgroundCollider"
+		// 여기
+		, Vector3(2.75f, -1.46f, 2.000f)
+		, Vector3(0.6f, 0.3f, 0.0f), false, L"Mesh", L"", false);
+	CCollider2D* cd = BackgroundCollider->AddComponent<CCollider2D>();
+	//cd->SetSize(Vector2(13.5f, 0.3f));
+
 	// Main Camera
 	//CGameObject* mainCamera = new CGameObject;
 	AddGameObject(eLayerType::Camera, mainCamera, L"MainCamera", Vector3(0.0f, 0.0f, -10.0f),
@@ -85,9 +93,13 @@ void CDesertDungeonScene::Initialize()
 		// Dongeon Entrance
 		if (mapPosVec2.x == 3 && mapPosVec2.y == 3)
 		{
-			AddGameObject(eLayerType::Background, Dungeon3_Map, L"Dungeon3_Map8", Vector3(0.0f, 0.0f, 10.0000f + (0.0001f * i)),
+			/*AddGameObject(eLayerType::Background, Dungeon3_Map, L"Dungeon3_Map8", Vector3(0.0f, 0.0f, 10.0000f + (0.0001f * i)),
 				Vector3(8.2f, 4.49f, 0.0f), true, L"Mesh", L"mt_Dungeon3_Map8", false);
-			
+			*/
+			AddGameObject(eLayerType::Background, Dungeon3_Map, L"Dungeon3_Map5", Vector3(0.0f, 0.0f, 10.0000f + (0.0001f * i)),
+				Vector3(8.2f, 4.49f, 0.0f), true, L"Mesh", L"mt_Dungeon3_Map5", false);
+
+
 			mapPosVec2.x = mapPosVec2.x - 3;
 			mapPosVec2.y = (mapPosVec2.y * -1) + 3;
 
@@ -156,11 +168,15 @@ void CDesertDungeonScene::Initialize()
 				// map 의 위치 지정
 				AddGameObject(eLayerType::Background, Dungeon3_Map, mapName, mapPosVec3,
 					Vector3(8.2f, 4.49f, 0.0f), true, L"Mesh", materialString, false);
+
+				// 여기에서 각 map 에 맞는 Collider와 Monster 추가.
+				// 이렇게 미리 추가하면 한번에 계산해야할 연산량이 너무 많다.
 			}
 			else if (i == CDungeonMgr::GetInst()->GetMapListSize() - 2)
 			{
 				AddGameObject(eLayerType::Background, Dungeon3_Map, L"Dungeon3_Map6", mapPosVec3,
 					Vector3(8.2f, 4.49f, 0.0f), true, L"Mesh", L"mt_Dungeon3_Map6", false);
+				// 여기에서 heal pool 추가
 			}
 			else if (i == CDungeonMgr::GetInst()->GetMapListSize() - 1)
 			{
@@ -230,6 +246,8 @@ void CDesertDungeonScene::Update()
 	Vector3 mainCamPos = mainCamTr->GetPosition();
 	CState* playerState = player->GetState();
 
+
+	// map 의 이동
 	if (mbTranslateMapPos == true)
 	{
 		float diff = Vector2::Distance(Vector2(mainCamPos.x, mainCamPos.y), NextMapPos);
@@ -264,6 +282,7 @@ void CDesertDungeonScene::Update()
 		}
 	}
 
+	//  맵 이동 시에 플레이어의 이동
 	if (playerCD->GetColliderData(eLayerType::Portal).id != 0 && mbTranslateMapPos == false)
 	{
 		mbTranslateMapPos = true;
