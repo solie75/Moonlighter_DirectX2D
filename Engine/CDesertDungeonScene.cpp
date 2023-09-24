@@ -96,8 +96,8 @@ void CDesertDungeonScene::Initialize()
 			/*AddGameObject(eLayerType::Background, Dungeon3_Map, L"Dungeon3_Map8", Vector3(0.0f, 0.0f, 10.0000f + (0.0001f * i)),
 				Vector3(8.2f, 4.49f, 0.0f), true, L"Mesh", L"mt_Dungeon3_Map8", false);
 			*/
-			AddGameObject(eLayerType::Background, Dungeon3_Map, L"Dungeon3_Map5", Vector3(0.0f, 0.0f, 10.0000f + (0.0001f * i)),
-				Vector3(8.2f, 4.49f, 0.0f), true, L"Mesh", L"mt_Dungeon3_Map5", false);
+			AddGameObject(eLayerType::Background, Dungeon3_Map, L"Dungeon3_Map8", Vector3(0.0f, 0.0f, 10.0000f + (0.0001f * i)),
+				Vector3(8.2f, 4.49f, 0.0f), true, L"Mesh", L"mt_Dungeon3_Map8", false);
 
 
 			mapPosVec2.x = mapPosVec2.x - 3;
@@ -153,7 +153,7 @@ void CDesertDungeonScene::Initialize()
 			mapPosVec2.y = (mapPosVec2.y * -1) + 3;
 
 			mapPosVec2.x *= mXPosStandard;
-			mapPosVec2.y *= mYPosStandard;
+			 .y *= mYPosStandard;
 
 			Vector3 mapPosVec3 = Vector3(mapPosVec2.x, mapPosVec2.y, 10.0000f + (0.00001f * i));
 
@@ -282,7 +282,7 @@ void CDesertDungeonScene::Update()
 		}
 	}
 
-	//  맵 이동 시에 플레이어의 이동
+	// 맵 이동 시에 플레이어의 이동
 	if (playerCD->GetColliderData(eLayerType::Portal).id != 0 && mbTranslateMapPos == false)
 	{
 		mbTranslateMapPos = true;
@@ -314,6 +314,13 @@ void CDesertDungeonScene::Update()
 			playerPos.y += 1.6f;
 			playerTr->SetPosition(playerPos);
 		}
+
+		// NextMapPos 를 근거로 해당 Map의 번호를 가져올 수 있나?
+		Vector2 mapNum = Vector2(NextMapPos.x / mXPosStandard, NextMapPos.y / mYPosStandard);
+		mapNum.x += 3;
+		mapNum.y *= -1;
+		mapNum.y += 3;
+		mapNum;
 	}
 
 	CScene::Update();

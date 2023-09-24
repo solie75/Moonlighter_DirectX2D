@@ -137,7 +137,7 @@ void CDungeonMgr::CreateMap()
 				vRandomMapList.clear();
 			}
 		}
-	}
+	}  
 }
 
 void CDungeonMgr::SetGateList()
@@ -293,6 +293,13 @@ void CDungeonMgr::SetColliderList()
 			}
 		}
 	}
+}
+
+vector<CDungeonMgr::sColliderOnMap> CDungeonMgr::GetColliderData(UINT mapNum)
+{
+	std::map<UINT, vector<sColliderOnMap>>::iterator iter = mmColliderList.find(mapNum);
+
+	return iter->second;
 }
 
 

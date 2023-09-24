@@ -15,6 +15,10 @@ private:
     bool mbTranslateMapPos;
 
     Vector2 NextMapPos;
+    UINT CurMapNumber;
+
+    std::vector<CGameObject*> mTempGameObjects;
+
 public:
     CDesertDungeonScene();
     ~CDesertDungeonScene();

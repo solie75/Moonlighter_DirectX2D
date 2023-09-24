@@ -74,6 +74,8 @@ public :
 	void SetObjectList(UINT mapNum);
 	void SetMonsterList(sObjectOnMap data, UINT mapNum);
 	void SetColliderList();
+	vector<sColliderOnMap> GetColliderData(UINT mapNum);
+
 
 	UINT GetMapListSize() { return mvMapList.size(); }
 	Vector2 GetMapPos(UINT mapNum);
