@@ -56,7 +56,7 @@ private:
 	Vector2 mAroundStandardArray[4];
 	std::map<UINT, vector<eGateDirection>> mmGateList; // mvMapList 의 각 요소(map) 이 가지고 있는 Gate 목록, 이때 key 가 되는 UINT 는 Vector2.x *10 + Vector2.y + 1 의 결과 값이다.
 	std::map<UINT, sObjectOnMap> mmObjectList; // mvMapList 의 각 요소(map) 이 가지고 있는 object 목록
-	std::map<UINT, vector<sColliderOnMap>> mmColliderList;
+	std::map<UINT, vector<sColliderOnMap>> mmColliderList; // map num, ColliderData
 
 
 
@@ -73,7 +73,7 @@ public :
 	void SetGateList();
 	void SetObjectList(UINT mapNum);
 	void SetMonsterList(sObjectOnMap data, UINT mapNum);
-	void SetColliderList(sObjectOnMap data, UINT mapNum);
+	void SetColliderList();
 
 	UINT GetMapListSize() { return mvMapList.size(); }
 	Vector2 GetMapPos(UINT mapNum);

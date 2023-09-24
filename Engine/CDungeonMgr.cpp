@@ -128,6 +128,8 @@ void CDungeonMgr::CreateMap()
 			{
 				mvMapList.push_back(Vector2(3, 3));
 				SetGateList();
+				SetColliderList();
+				mmColliderList;
 				return;
 			}
 			{
@@ -175,7 +177,7 @@ void CDungeonMgr::SetObjectList(UINT mapNum)
 	sObjectOnMap ObjectDataOnMap;
 
 	SetMonsterList(ObjectDataOnMap, mapNum);
-	SetColliderList(ObjectDataOnMap, mapNum);
+	SetColliderList();
 
 	mmObjectList.insert(std::make_pair(mapNum, ObjectDataOnMap));
 }
@@ -197,7 +199,7 @@ void CDungeonMgr::SetMonsterList(sObjectOnMap data, UINT mapNum)
 	}
 }
 
-void CDungeonMgr::SetColliderList(sObjectOnMap data, UINT mapNum)
+void CDungeonMgr::SetColliderList()
 {
 	std::filesystem::path dataFilePath = L"..\\Data\\Dungeon3MapColliderData.json";
 
@@ -206,15 +208,18 @@ void CDungeonMgr::SetColliderList(sObjectOnMap data, UINT mapNum)
 	{
 		std::wstring line;
 		int idNum = 1;
-		int mapNum;
+		int mapNum = 0;
 		while (std::getline(DataFile, line))
 		{
 			
 			std::wstring ColliderId = L"\"id\": ";
 			ColliderId += std::to_wstring(idNum);
+
 			if (line.find(ColliderId) != std::string::npos)
 			{
 				sColliderOnMap colliderData;
+
+				std::getline(DataFile, line);
 				if (line.find(L"\"Position\": ") != std::string::npos)
 				{
 					size_t startPos = line.find(L"[") + 1;
@@ -283,6 +288,7 @@ void CDungeonMgr::SetColliderList(sObjectOnMap data, UINT mapNum)
 
 					std::map<UINT, vector<sColliderOnMap>>::iterator iter = mmColliderList.find(mapNum);
 					iter->second.push_back(colliderData);
+					idNum++;
 				}
 			}
 		}
