@@ -298,8 +298,14 @@ void CDungeonMgr::SetColliderList()
 vector<CDungeonMgr::sColliderOnMap> CDungeonMgr::GetColliderData(UINT mapNum)
 {
 	std::map<UINT, vector<sColliderOnMap>>::iterator iter = mmColliderList.find(mapNum);
+	if (iter != mmColliderList.end())
+	{
+		return iter->second;
+	}
 
-	return iter->second;
+	vector<CDungeonMgr::sColliderOnMap> dummy;
+
+	return dummy;
 }
 
 

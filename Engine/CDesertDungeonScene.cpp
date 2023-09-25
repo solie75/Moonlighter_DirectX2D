@@ -38,12 +38,12 @@ void CDesertDungeonScene::Initialize()
 
 	player->SetWeapon(Weapon);
 
-	CGameObject* BackgroundCollider = new CGameObject();
-	AddGameObject(eLayerType::Background, BackgroundCollider, L"BackgroundCollider"
-		// 여기
-		, Vector3(2.75f, -1.46f, 2.000f)
-		, Vector3(0.6f, 0.3f, 0.0f), false, L"Mesh", L"", false);
-	CCollider2D* cd = BackgroundCollider->AddComponent<CCollider2D>();
+	//CGameObject* BackgroundCollider = new CGameObject();
+	//AddGameObject(eLayerType::Background, BackgroundCollider, L"BackgroundCollider"
+	//	// 여기
+	//	, Vector3(2.75f, -1.46f, 2.000f)
+	//	, Vector3(0.6f, 0.3f, 0.0f), false, L"Mesh", L"", false);
+	//CCollider2D* cd = BackgroundCollider->AddComponent<CCollider2D>();
 	//cd->SetSize(Vector2(13.5f, 0.3f));
 
 	// Main Camera
@@ -78,7 +78,7 @@ void CDesertDungeonScene::Initialize()
 	lightComp->SetType(eLightType::Directional);
 	lightComp->SetColor(Vector4(0.8f, 0.8f, 0.8f, 1.0f));
 
-	// 맴의 초기화
+	// 맵의 초기화
 	CDungeonMgr::GetInst()->CreateMap();
 	UINT BasicDoorNum = 0;
 
@@ -89,7 +89,7 @@ void CDesertDungeonScene::Initialize()
 		
 		std::wstring mapName = L"Dungeon3_Map";
 		Vector2 mapPosVec2 = CDungeonMgr::GetInst()->GetMapPos(i);
-
+		UINT MapNum = 0;
 		// Dongeon Entrance
 		if (mapPosVec2.x == 3 && mapPosVec2.y == 3)
 		{
@@ -99,9 +99,12 @@ void CDesertDungeonScene::Initialize()
 			AddGameObject(eLayerType::Background, Dungeon3_Map, L"Dungeon3_Map8", Vector3(0.0f, 0.0f, 10.0000f + (0.0001f * i)),
 				Vector3(8.2f, 4.49f, 0.0f), true, L"Mesh", L"mt_Dungeon3_Map8", false);
 
+			MapNum = mapPosVec2.x * 10 + mapPosVec2.y;
 
 			mapPosVec2.x = mapPosVec2.x - 3;
 			mapPosVec2.y = (mapPosVec2.y * -1) + 3;
+
+			CDungeonMgr::GetInst()->SetMapNumList(MapNum, 8);
 
 			// Basic Door Setting
 			vector<CDungeonMgr::eGateDirection> gateList = CDungeonMgr::GetInst()->GetDoorList(i);
@@ -149,11 +152,13 @@ void CDesertDungeonScene::Initialize()
 		// Dongeon normal map
 		else
 		{
+			MapNum = mapPosVec2.x * 10 + mapPosVec2.y;
+
 			mapPosVec2.x = mapPosVec2.x - 3;
 			mapPosVec2.y = (mapPosVec2.y * -1) + 3;
 
 			mapPosVec2.x *= mXPosStandard;
-			 .y *= mYPosStandard;
+			mapPosVec2.y *= mYPosStandard;
 
 			Vector3 mapPosVec3 = Vector3(mapPosVec2.x, mapPosVec2.y, 10.0000f + (0.00001f * i));
 
@@ -168,6 +173,7 @@ void CDesertDungeonScene::Initialize()
 				// map 의 위치 지정
 				AddGameObject(eLayerType::Background, Dungeon3_Map, mapName, mapPosVec3,
 					Vector3(8.2f, 4.49f, 0.0f), true, L"Mesh", materialString, false);
+				CDungeonMgr::GetInst()->SetMapNumList(MapNum, i % 5 + 1);
 
 				// 여기에서 각 map 에 맞는 Collider와 Monster 추가.
 				// 이렇게 미리 추가하면 한번에 계산해야할 연산량이 너무 많다.
@@ -176,12 +182,14 @@ void CDesertDungeonScene::Initialize()
 			{
 				AddGameObject(eLayerType::Background, Dungeon3_Map, L"Dungeon3_Map6", mapPosVec3,
 					Vector3(8.2f, 4.49f, 0.0f), true, L"Mesh", L"mt_Dungeon3_Map6", false);
+				CDungeonMgr::GetInst()->SetMapNumList(MapNum, 6);
 				// 여기에서 heal pool 추가
 			}
 			else if (i == CDungeonMgr::GetInst()->GetMapListSize() - 1)
 			{
 				AddGameObject(eLayerType::Background, Dungeon3_Map, L"Dungeon3_Map7", mapPosVec3,
 					Vector3(8.2f, 4.49f, 0.0f), true, L"Mesh", L"mt_Dungeon3_Map7", false);
+				CDungeonMgr::GetInst()->SetMapNumList(MapNum, 7);
 			}
 
 			// BasicDoor Setting
@@ -321,6 +329,26 @@ void CDesertDungeonScene::Update()
 		mapNum.y *= -1;
 		mapNum.y += 3;
 		mapNum;
+
+		UINT texNum = CDungeonMgr::GetInst()->GetMapTexNum(mapNum.x * 10 + mapNum.y);
+
+		vector<CDungeonMgr::sColliderOnMap> ColliderList = CDungeonMgr::GetInst()->GetColliderData(texNum);
+
+		for (int i = 0; i < mTempGameObjects.size(); i++)
+		{
+			mTempGameObjects[i]->SetState(CGameObject::eObjectState::Dead);
+		}
+		mTempGameObjects.clear();
+
+		for (int i = 0; i < ColliderList.size(); i++)
+		{
+			CGameObject* backColliderObj = new CGameObject;
+			AddGameObject(eLayerType::Background, backColliderObj, L"BackgroundCollider", Vector3(NextMapPos.x + ColliderList[i].vColliderPos.x, NextMapPos.y + ColliderList[i].vColliderPos.y, 2.000f + 0.0001f * i),
+				Vector3(ColliderList[i].vColliderScale.x, ColliderList[i].vColliderScale.y, 0.0f), false, L"Mesh", L"", false);
+			backColliderObj->AddComponent<CCollider2D>();
+
+			mTempGameObjects.push_back(backColliderObj);
+		}
 	}
 
 	CScene::Update();
