@@ -214,6 +214,12 @@
     <Filter Include="Scene\06.DesertDungeonScene">
       <UniqueIdentifier>{a38cf4fe-fb58-4779-bc61-1667e4a871b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Component\Script\MonsterScript">
+      <UniqueIdentifier>{34d07807-4aa2-40e4-a6c8-a2a858e1d7ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Script\MonsterScript\CKatamariScript">
+      <UniqueIdentifier>{9a9c11e3-0352-47f8-a028-80ef6b5c0c87}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -423,6 +429,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CDesertDungeonScene.h">
       <Filter>Scene\06.DesertDungeonScene</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CkatamariScript.h">
+      <Filter>GameObject\Component\Script\MonsterScript\CKatamariScript</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -616,6 +625,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CDesertDungeonScene.cpp">
       <Filter>Scene\06.DesertDungeonScene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CkatamariScript.cpp">
+      <Filter>GameObject\Component\Script\MonsterScript\CKatamariScript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

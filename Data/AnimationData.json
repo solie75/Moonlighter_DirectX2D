@@ -432,7 +432,7 @@
         }
     ],
 
-    "Will":
+    "Will2":
     [
         {
             "id": 45,
@@ -875,40 +875,112 @@
     [
         {
             "id": 92,
-            "name": "Katamari_Attack_Down",
+            "name": "Katamari_Attack_Down_First",
             "objectName": "Katamari",
-            "spriteNumber": [37],
+            "spriteNumber": [13],
             "renderingMode": [1],
             "size": [55, 76],
             "duration": [100] 
         },
         {
             "id": 93,
-            "name": "Katamari_Attack_Left",
+            "name": "Katamari_Attack_Down_Second",
             "objectName": "Katamari",
-            "spriteNumber": [37],
+            "spriteNumber": [3],
             "renderingMode": [1],
             "size": [55, 76],
             "duration": [100] 
         },
         {
             "id": 94,
-            "name": "Katamari_Attack_Right",
+            "name": "Katamari_Attack_Down_Third",
             "objectName": "Katamari",
-            "spriteNumber": [37],
+            "spriteNumber": [21],
             "renderingMode": [1],
             "size": [55, 76],
             "duration": [100] 
         },
         {
             "id": 95,
-            "name": "Katamari_Attack_Right",
+            "name": "Katamari_Attack_Right_First",
             "objectName": "Katamari",
-            "spriteNumber": [37],
+            "spriteNumber": [13],
             "renderingMode": [1],
             "size": [55, 76],
             "duration": [100] 
         },
+        {
+            "id": 96,
+            "name": "Katamari_Attack_Right_Second",
+            "objectName": "Katamari",
+            "spriteNumber": [3],
+            "renderingMode": [1],
+            "size": [55, 76],
+            "duration": [100] 
+        },
+        {
+            "id": 97,
+            "name": "Katamari_Attack_Right_Third",
+            "objectName": "Katamari",
+            "spriteNumber": [21],
+            "renderingMode": [1],
+            "size": [55, 76],
+            "duration": [100] 
+        },
+        {
+            "id": 98,
+            "name": "Katamari_Attack_Left_First",
+            "objectName": "Katamari",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [55, 76],
+            "duration": [100] 
+        },
+        {
+            "id": 99,
+            "name": "Katamari_Attack_Left_Second",
+            "objectName": "Katamari",
+            "spriteNumber": [3],
+            "renderingMode": [1],
+            "size": [55, 76],
+            "duration": [100] 
+        },
+        {
+            "id": 100,
+            "name": "Katamari_Attack_Left_Third",
+            "objectName": "Katamari",
+            "spriteNumber": [21],
+            "renderingMode": [1],
+            "size": [55, 76],
+            "duration": [100] 
+        },
+        {
+            "id": 101,
+            "name": "Katamari_Attack_Up_First",
+            "objectName": "Katamari",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [55, 76],
+            "duration": [100] 
+        },
+        {
+            "id": 102,
+            "name": "Katamari_Attack_Up_Second",
+            "objectName": "Katamari",
+            "spriteNumber": [3],
+            "renderingMode": [1],
+            "size": [55, 76],
+            "duration": [100] 
+        },
+        {
+            "id": 103,
+            "name": "Katamari_Attack_Up_Third",
+            "objectName": "Katamari",
+            "spriteNumber": [21],
+            "renderingMode": [1],
+            "size": [55, 76],
+            "duration": [100] 
+        }
     ],
 
     "__commnet(RenderingMode's num)" :
