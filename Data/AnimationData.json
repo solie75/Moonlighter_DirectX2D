@@ -871,6 +871,46 @@
         }
     ],
 
+    "Monster1(Katamari)" :
+    [
+        {
+            "id": 92,
+            "name": "Katamari_Attack_Down",
+            "objectName": "Katamari",
+            "spriteNumber": [37],
+            "renderingMode": [1],
+            "size": [55, 76],
+            "duration": [100] 
+        },
+        {
+            "id": 93,
+            "name": "Katamari_Attack_Left",
+            "objectName": "Katamari",
+            "spriteNumber": [37],
+            "renderingMode": [1],
+            "size": [55, 76],
+            "duration": [100] 
+        },
+        {
+            "id": 94,
+            "name": "Katamari_Attack_Right",
+            "objectName": "Katamari",
+            "spriteNumber": [37],
+            "renderingMode": [1],
+            "size": [55, 76],
+            "duration": [100] 
+        },
+        {
+            "id": 95,
+            "name": "Katamari_Attack_Right",
+            "objectName": "Katamari",
+            "spriteNumber": [37],
+            "renderingMode": [1],
+            "size": [55, 76],
+            "duration": [100] 
+        },
+    ],
+
     "__commnet(RenderingMode's num)" :
     {
         "Opaque" : "0",
