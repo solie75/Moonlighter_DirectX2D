@@ -28,6 +28,32 @@ void CDesertDungeonScene::Initialize()
 		, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down", true);
 	CTransform* PlayerTr = player->GetComponent<CTransform>(eComponentType::Transform);
 
+	// Monster
+	//CGameObject* Katamari = new CGameObject;
+	//AddGameObject(eLayerType::Monster, Katamari, L"Katamari", Vector3(-2.0f, 0.0f, 1.0003f)
+	//	, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"", true);
+
+	// Background
+	CGameObject* BackgroundUp = new CGameObject();
+	AddGameObject(eLayerType::Background, BackgroundUp, L"BackgroundBorderUp", Vector3(0.0f, 1.8f, 4.0001f),
+		Vector3(8.0f, 0.2f, 0.0f), false, L"Mesh", L"", false);
+	CCollider2D* BackgroundCD = BackgroundUp->AddComponent<CCollider2D>();
+
+	CGameObject* BackgroundDown = new CGameObject();
+	AddGameObject(eLayerType::Background, BackgroundDown, L"BackgroundBorderDown", Vector3(0.0f, -1.8f, 4.0002f),
+		Vector3(8.0f, 0.2f, 0.0f), false, L"Mesh", L"", false);
+	BackgroundCD = BackgroundDown->AddComponent<CCollider2D>();
+
+	CGameObject* BackgroundLeft = new CGameObject();
+	AddGameObject(eLayerType::Background, BackgroundLeft, L"BackgroundBorderLeft", Vector3(-3.2f, 0.0f, 4.0003f),
+		Vector3(0.2f, 4.0f, 0.0f), false, L"Mesh", L"", false);
+	BackgroundCD = BackgroundLeft->AddComponent<CCollider2D>();
+
+	CGameObject* BackgroundRight = new CGameObject();
+	AddGameObject(eLayerType::Background, BackgroundRight, L"BackgroundBorderRight", Vector3(3.2f, 0.0f, 4.0004f),
+		Vector3(0.2f, 4.0f, 0.0f), false, L"Mesh", L"", false);
+	BackgroundCD = BackgroundRight->AddComponent<CCollider2D>();
+
 	// weapon
 	CWeapon* Weapon = new CWeapon();
 	AddGameObject(eLayerType::Player, Weapon, L"Weapon", Vector3(0.0f, 0.0f, 0.0f),
@@ -37,14 +63,6 @@ void CDesertDungeonScene::Initialize()
 	Weapon->SetScene(this);
 
 	player->SetWeapon(Weapon);
-
-	//CGameObject* BackgroundCollider = new CGameObject();
-	//AddGameObject(eLayerType::Background, BackgroundCollider, L"BackgroundCollider"
-	//	// 여기
-	//	, Vector3(2.75f, -1.46f, 2.000f)
-	//	, Vector3(0.6f, 0.3f, 0.0f), false, L"Mesh", L"", false);
-	//CCollider2D* cd = BackgroundCollider->AddComponent<CCollider2D>();
-	//cd->SetSize(Vector2(13.5f, 0.3f));
 
 	// Main Camera
 	//CGameObject* mainCamera = new CGameObject;
@@ -86,16 +104,12 @@ void CDesertDungeonScene::Initialize()
 	{
 		CGameObject* Dungeon3_Map = new CGameObject;
 
-		
 		std::wstring mapName = L"Dungeon3_Map";
 		Vector2 mapPosVec2 = CDungeonMgr::GetInst()->GetMapPos(i);
 		UINT MapNum = 0;
 		// Dongeon Entrance
 		if (mapPosVec2.x == 3 && mapPosVec2.y == 3)
 		{
-			/*AddGameObject(eLayerType::Background, Dungeon3_Map, L"Dungeon3_Map8", Vector3(0.0f, 0.0f, 10.0000f + (0.0001f * i)),
-				Vector3(8.2f, 4.49f, 0.0f), true, L"Mesh", L"mt_Dungeon3_Map8", false);
-			*/
 			AddGameObject(eLayerType::Background, Dungeon3_Map, L"Dungeon3_Map8", Vector3(0.0f, 0.0f, 10.0000f + (0.0001f * i)),
 				Vector3(8.2f, 4.49f, 0.0f), true, L"Mesh", L"mt_Dungeon3_Map8", false);
 
@@ -343,12 +357,49 @@ void CDesertDungeonScene::Update()
 		for (int i = 0; i < ColliderList.size(); i++)
 		{
 			CGameObject* backColliderObj = new CGameObject;
-			AddGameObject(eLayerType::Background, backColliderObj, L"BackgroundCollider", Vector3(NextMapPos.x + ColliderList[i].vColliderPos.x, NextMapPos.y + ColliderList[i].vColliderPos.y, 2.000f + 0.0001f * i),
+			AddGameObject(eLayerType::Background, backColliderObj, L"BackgroundCollider", Vector3(NextMapPos.x + ColliderList[i].vColliderPos.x, NextMapPos.y + ColliderList[i].vColliderPos.y, 3.000f + 0.0001f * i),
 				Vector3(ColliderList[i].vColliderScale.x, ColliderList[i].vColliderScale.y, 0.0f), false, L"Mesh", L"", false);
 			backColliderObj->AddComponent<CCollider2D>();
 
 			mTempGameObjects.push_back(backColliderObj);
 		}
+
+
+		// MapColliderBorder 의 이동
+		CLayer& layer = CScene::GetLayer(eLayerType::Background);
+		const std::vector<CGameObject*>& backgroundObjects = layer.GetGameObjects();
+		for (int i = 0; i < backgroundObjects.size(); i++)
+		{
+			if (backgroundObjects[i]->GetName() == L"BackgroundBorderUp")
+			{
+				CTransform* Tr = backgroundObjects[i]->GetComponent<CTransform>(eComponentType::Transform);
+				{
+					Tr->SetPosition(Vector3(NextMapPos.x, NextMapPos.y + 1.8f, 4.0001f));
+				}
+			}
+			else if (backgroundObjects[i]->GetName() == L"BackgroundBorderDown")
+			{
+				CTransform* Tr = backgroundObjects[i]->GetComponent<CTransform>(eComponentType::Transform);
+				{
+					Tr->SetPosition(Vector3(NextMapPos.x, NextMapPos.y - 1.8f, 4.0001f));
+				}
+			}
+			else if (backgroundObjects[i]->GetName() == L"BackgroundBorderRight")
+			{
+				CTransform* Tr = backgroundObjects[i]->GetComponent<CTransform>(eComponentType::Transform);
+				{
+					Tr->SetPosition(Vector3(NextMapPos.x + 3.2f, NextMapPos.y, 4.0001f));
+				}
+			}
+			else if (backgroundObjects[i]->GetName() == L"BackgroundBorderLeft")
+			{
+				CTransform* Tr = backgroundObjects[i]->GetComponent<CTransform>(eComponentType::Transform);
+				{
+					Tr->SetPosition(Vector3(NextMapPos.x - 3.2f, NextMapPos.y, 4.0001f));
+				}
+			}
+		}
+
 	}
 
 	CScene::Update();

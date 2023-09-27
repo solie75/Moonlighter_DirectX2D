@@ -86,3 +86,14 @@ void CLayer::AddGameObject(CGameObject* gameObj)
 {
 	mGameObjects.push_back(gameObj);
 }
+
+//CGameObject* CLayer::FindGameObject(std::wstring objName)
+//{
+//	for (int i = 0; i < mGameObjects.size(); i++)
+//	{
+//		if (mGameObjects[i]->GetName() == objName)
+//		{
+//			return mGameObjects[i];
+//		}
+//	}
+//}

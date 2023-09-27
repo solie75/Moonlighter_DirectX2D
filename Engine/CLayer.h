@@ -20,6 +20,8 @@ public:
 
     void AddGameObject(CGameObject* gameObj);
 
+    //CGameObject* FindGameObject(std::wstring objName);
+
     const std::vector<CGameObject*> GetGameObjects()
     {
         return mGameObjects;

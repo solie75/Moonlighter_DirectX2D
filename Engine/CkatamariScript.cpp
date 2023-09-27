@@ -7,6 +7,7 @@ CkatamariScript::CkatamariScript()
 	mState = new CState;
 	mState->SetState(eState::Pause);
 	mState->SetState(eState::Pause);
+	mAimSight->SetSight(CAimSight::eSight::Down);
 }
 
 CkatamariScript::~CkatamariScript()
