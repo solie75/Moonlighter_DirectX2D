@@ -17,7 +17,7 @@ public:
     virtual void Render() override;
 
 	LightAttribute GetAttribute() { return mAttribute; }
-	void SetType(eLightType rype) { mAttribute.type = rype; }
+	void SetLightType(eLightType rype) { mAttribute.type = rype; }
 	void SetRadius(float radius) { mAttribute.radius = radius; }
 	void SetAngle(float angle) { mAttribute.angle = angle; }
 	void SetColor(Vector4 color) { mAttribute.color = color; }

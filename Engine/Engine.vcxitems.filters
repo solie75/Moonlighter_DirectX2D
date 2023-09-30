@@ -429,7 +429,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CDesertDungeonScene.h">
       <Filter>Scene\06.DesertDungeonScene</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CkatamariScript.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)CKatamariScript.h">
       <Filter>GameObject\Component\Script\MonsterScript\CKatamariScript</Filter>
     </ClInclude>
   </ItemGroup>
@@ -626,7 +626,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CDesertDungeonScene.cpp">
       <Filter>Scene\06.DesertDungeonScene</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CkatamariScript.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)CKatamariScript.cpp">
       <Filter>GameObject\Component\Script\MonsterScript\CKatamariScript</Filter>
     </ClCompile>
   </ItemGroup>

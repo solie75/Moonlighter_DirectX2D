@@ -2,6 +2,12 @@
 #include "CComponent.h"
 #include "CTransform.h"
 
+enum eCollideType
+{
+    Background,
+    Damage,
+    End,
+};
 
 class CCollider2D :
     public CComponent
@@ -19,7 +25,8 @@ private:
     static UINT mColliderNumber;
     std::map<UINT, ColliderData> mColliderDataList; // UINT 에는 id 를 ColliderData 에는 충돌한 충돌체의 정보를 저장한다.
     UINT mColliderID;
-    eColliderType mType;
+    eColliderType mColliderType;
+    eCollideType mCollideType;
 
     CTransform* mTransform;
 
@@ -41,8 +48,11 @@ public:
     virtual void LateUpdate() override;
     virtual void Render() override;
 
-    void SetType(eColliderType type) { mType = type; }
-    eColliderType GetColliderType() { return mType; }
+    void SetColliderType(eColliderType type) { mColliderType = type; }
+    eColliderType GetColliderType() { return mColliderType; }
+    void SetCollideType(eCollideType type) { mCollideType = type; }
+    eCollideType GetCollideType() { return mCollideType; }
+
     Vector2 GetColliderPosition() { return Vector2(mPosition.x, mPosition.y); }
     Vector2 GetSize() { return mSize; }
     void SetSize(Vector2 size) { mSize = size; }

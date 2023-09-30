@@ -875,7 +875,7 @@
     [
         {
             "id": 92,
-            "name": "Katamari_Attack_Down_First",
+            "name": "Monster_Katamari_Attack_Down_First",
             "objectName": "Katamari",
             "spriteNumber": [13],
             "renderingMode": [1],
@@ -884,7 +884,7 @@
         },
         {
             "id": 93,
-            "name": "Katamari_Attack_Down_Second",
+            "name": "Monster_Katamari_Attack_Down_Second",
             "objectName": "Katamari",
             "spriteNumber": [3],
             "renderingMode": [1],
@@ -893,7 +893,7 @@
         },
         {
             "id": 94,
-            "name": "Katamari_Attack_Down_Third",
+            "name": "Monster_Katamari_Attack_Down_Third",
             "objectName": "Katamari",
             "spriteNumber": [21],
             "renderingMode": [1],
@@ -902,7 +902,7 @@
         },
         {
             "id": 95,
-            "name": "Katamari_Attack_Right_First",
+            "name": "Monster_Katamari_Attack_Right_First",
             "objectName": "Katamari",
             "spriteNumber": [13],
             "renderingMode": [1],
@@ -911,7 +911,7 @@
         },
         {
             "id": 96,
-            "name": "Katamari_Attack_Right_Second",
+            "name": "Monster_Katamari_Attack_Right_Second",
             "objectName": "Katamari",
             "spriteNumber": [3],
             "renderingMode": [1],
@@ -920,7 +920,7 @@
         },
         {
             "id": 97,
-            "name": "Katamari_Attack_Right_Third",
+            "name": "Monster_Katamari_Attack_Right_Third",
             "objectName": "Katamari",
             "spriteNumber": [21],
             "renderingMode": [1],
@@ -929,7 +929,7 @@
         },
         {
             "id": 98,
-            "name": "Katamari_Attack_Left_First",
+            "name": "Monster_Katamari_Attack_Left_First",
             "objectName": "Katamari",
             "spriteNumber": [13],
             "renderingMode": [1],
@@ -938,7 +938,7 @@
         },
         {
             "id": 99,
-            "name": "Katamari_Attack_Left_Second",
+            "name": "Monster_Katamari_Attack_Left_Second",
             "objectName": "Katamari",
             "spriteNumber": [3],
             "renderingMode": [1],
@@ -947,7 +947,7 @@
         },
         {
             "id": 100,
-            "name": "Katamari_Attack_Left_Third",
+            "name": "Monster_Katamari_Attack_Left_Third",
             "objectName": "Katamari",
             "spriteNumber": [21],
             "renderingMode": [1],
@@ -956,7 +956,7 @@
         },
         {
             "id": 101,
-            "name": "Katamari_Attack_Up_First",
+            "name": "Monster_Katamari_Attack_Up_First",
             "objectName": "Katamari",
             "spriteNumber": [13],
             "renderingMode": [1],
@@ -965,7 +965,7 @@
         },
         {
             "id": 102,
-            "name": "Katamari_Attack_Up_Second",
+            "name": "Monster_Katamari_Attack_Up_Second",
             "objectName": "Katamari",
             "spriteNumber": [3],
             "renderingMode": [1],
@@ -974,7 +974,7 @@
         },
         {
             "id": 103,
-            "name": "Katamari_Attack_Up_Third",
+            "name": "Monster_Katamari_Attack_Up_Third",
             "objectName": "Katamari",
             "spriteNumber": [21],
             "renderingMode": [1],

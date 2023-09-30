@@ -5,6 +5,7 @@
 #include "CWeapon.h"
 #include "CTimeMgr.h"
 #include "CPlayerMoveScript.h"
+#include "CKatamariScript.h"
 
 
 CDesertDungeonScene::CDesertDungeonScene()
@@ -21,6 +22,9 @@ CDesertDungeonScene::~CDesertDungeonScene()
 void CDesertDungeonScene::Initialize()
 {
 	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Player, eLayerType::Portal, true);
+	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Player, eLayerType::Background, true);
+	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Player, eLayerType::Monster, true);
+	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Background, eLayerType::Monster, true);
 
 	// player
 	//CPlayer* player = new CPlayer;
@@ -29,9 +33,25 @@ void CDesertDungeonScene::Initialize()
 	CTransform* PlayerTr = player->GetComponent<CTransform>(eComponentType::Transform);
 
 	// Monster
-	//CGameObject* Katamari = new CGameObject;
-	//AddGameObject(eLayerType::Monster, Katamari, L"Katamari", Vector3(-2.0f, 0.0f, 1.0003f)
-	//	, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"", true);
+	CGameObject* Katamari = new CGameObject;
+	AddGameObject(eLayerType::Monster, Katamari, L"Katamari", Vector3(-2.0f, 0.0f, 1.0003f)
+		, Vector3(0.6f, 0.8f, 0.0f), true, L"Mesh", L"", true);
+	CKatamariScript* KatamariScript = Katamari->AddComponent<CKatamariScript>();
+	CAnimator* KatamariAt = Katamari->GetComponent<CAnimator>(eComponentType::Animator);
+
+	KatamariScript->ChangeState(eState::Idle);
+	CCollider2D* KatamariCDforBackground = Katamari->AddComponent<CCollider2D>();
+	KatamariCDforBackground->SetName(L"KatamariCDforBackground");
+	KatamariCDforBackground->SetCollideType(eCollideType::Background);
+	KatamariCDforBackground->SetSize(Vector2(0.71f, 0.6f));
+	KatamariCDforBackground->SetOffset(Vector2(0.0f, -0.12f));
+
+	CCollider2D* KatamariCDforHit = Katamari->AddComponent<CCollider2D>();
+	KatamariCDforHit->SetName(L"KatamariCDforHit");
+	KatamariCDforHit->SetCollideType(eCollideType::Background);
+	KatamariCDforHit->SetSize(Vector2(0.71f, 0.6f));
+	KatamariCDforHit->SetOffset(Vector2(0.0f, -0.12f));
+
 
 	// Background
 	CGameObject* BackgroundUp = new CGameObject();
@@ -93,7 +113,7 @@ void CDesertDungeonScene::Initialize()
 	light->SetName(L"light");
 	AddGameObject(eLayerType::Light, light, L"light", Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f), false, L"", L"", false);
 	CLight* lightComp = light->AddComponent<CLight>();
-	lightComp->SetType(eLightType::Directional);
+	lightComp->SetLightType(eLightType::Directional);
 	lightComp->SetColor(Vector4(0.8f, 0.8f, 0.8f, 1.0f));
 
 	// ∏ ¿« √ ±‚»≠
