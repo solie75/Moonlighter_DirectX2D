@@ -63,7 +63,7 @@ void CEditor::Release()
 
 void CEditor::DebugRender(const DebugMesh& mesh)
 {
-	CDebugObject* debugObj = mDebugObjects[(UINT)mesh.type];
+	CDebugObject* debugObj = mDebugObjects[(UINT)mesh.ColliderType];
 
 	CTransform* tr = debugObj->GetComponent<CTransform>(eComponentType::Transform);
 	// 이러면 mDebugObjects[ColliderType::Rect]의 Transform이 바뀌에 되지 않나?
@@ -90,12 +90,24 @@ void CEditor::DebugRender(const DebugMesh& mesh)
 	}
 	else
 	{
-		DebugColorCB cb;
-		cb.DebugColor = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
-		CConstantBuffer* colliderCB = new CConstantBuffer;
-		colliderCB->InitConstantBuffer(sizeof(DebugColorCB), eCBType::DebugColor, &cb);
-		CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, colliderCB);
-		CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::PS, colliderCB);
+		if (mesh.CollideType == eCollideType::Hit)
+		{
+			DebugColorCB cb;
+			cb.DebugColor = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+			CConstantBuffer* colliderCB = new CConstantBuffer;
+			colliderCB->InitConstantBuffer(sizeof(DebugColorCB), eCBType::DebugColor, &cb);
+			CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, colliderCB);
+			CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::PS, colliderCB);
+		}
+		else if(mesh.CollideType == eCollideType::Background)
+		{
+			DebugColorCB cb;
+			cb.DebugColor = Vector4(1.0f, 1.0f, 0.0f, 1.0f);
+			CConstantBuffer* colliderCB = new CConstantBuffer;
+			colliderCB->InitConstantBuffer(sizeof(DebugColorCB), eCBType::DebugColor, &cb);
+			CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, colliderCB);
+			CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::PS, colliderCB);
+		}
 	}
 
 	// debugObj 가 렌더링 되기 전에 그에 대한 viewMatrix 와 projection matrix 의 기준은 maincamera 여야 한다.

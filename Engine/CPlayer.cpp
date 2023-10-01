@@ -13,8 +13,14 @@ CPlayer::CPlayer()
 	mState = new CState();
 	mAimSight = new CAimSight();
 	this->AddComponent<CPlayerMoveScript>();
-	CCollider2D* cd = this->AddComponent<CCollider2D>();
-	cd->SetSize(Vector2(0.7f, 0.7f));
+	CCollider2D* CDforBackground = this->AddComponent<CCollider2D>();
+	CDforBackground->SetCollideType(eCollideType::Background);
+	CDforBackground->SetSize(Vector2(0.7f, 0.15f));
+	CDforBackground->SetOffset(Vector2(0.f, -0.1f));
+	CCollider2D* CDforHit = this->AddComponent<CCollider2D>();
+	CDforHit->SetCollideType(eCollideType::Hit);
+	CDforHit->SetSize(Vector2(0.7f, 0.7f));
+	
 }
 
 CPlayer::~CPlayer()

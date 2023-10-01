@@ -40,15 +40,16 @@ void CDesertDungeonScene::Initialize()
 	CAnimator* KatamariAt = Katamari->GetComponent<CAnimator>(eComponentType::Animator);
 
 	KatamariScript->ChangeState(eState::Idle);
+
 	CCollider2D* KatamariCDforBackground = Katamari->AddComponent<CCollider2D>();
 	KatamariCDforBackground->SetName(L"KatamariCDforBackground");
 	KatamariCDforBackground->SetCollideType(eCollideType::Background);
-	KatamariCDforBackground->SetSize(Vector2(0.71f, 0.6f));
-	KatamariCDforBackground->SetOffset(Vector2(0.0f, -0.12f));
+	KatamariCDforBackground->SetSize(Vector2(0.71f, 0.3f));
+	KatamariCDforBackground->SetOffset(Vector2(0.0f, -0.24f));
 
 	CCollider2D* KatamariCDforHit = Katamari->AddComponent<CCollider2D>();
 	KatamariCDforHit->SetName(L"KatamariCDforHit");
-	KatamariCDforHit->SetCollideType(eCollideType::Background);
+	KatamariCDforHit->SetCollideType(eCollideType::Hit);
 	KatamariCDforHit->SetSize(Vector2(0.71f, 0.6f));
 	KatamariCDforHit->SetOffset(Vector2(0.0f, -0.12f));
 

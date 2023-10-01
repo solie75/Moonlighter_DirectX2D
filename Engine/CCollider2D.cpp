@@ -10,6 +10,7 @@ CCollider2D::CCollider2D()
 {
     mColliderNumber++;
     mColliderID = mColliderNumber;
+    mCollideType = eCollideType::Background;
 }
 
 
@@ -52,7 +53,8 @@ void CCollider2D::LateUpdate()
     debugMesh.position = mPosition;
     debugMesh.scale = scale;
     debugMesh.rotation = tr->GetRotation();
-    debugMesh.type = eColliderType::Rect;
+    debugMesh.ColliderType = eColliderType::Rect;
+    debugMesh.CollideType = mCollideType;
     debugMesh.IsCollider = mIsCollider;
     
     CRenderMgr::GetInst()->AddDebugMesh(debugMesh);

@@ -126,7 +126,8 @@ struct LightAttribute
 
 struct DebugMesh
 {
-	eColliderType type;
+	eColliderType ColliderType;
+	eCollideType CollideType;
 	Vector3 position;
 	Vector3 rotation;
 	Vector3 scale;

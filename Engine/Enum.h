@@ -59,6 +59,13 @@ enum class eColliderType
 	End,
 };
 
+enum class eCollideType
+{
+	Background,
+	Hit,
+	End,
+};
+
 enum class eCameraType
 {
 	Main,

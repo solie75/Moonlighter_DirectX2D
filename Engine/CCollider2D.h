@@ -2,12 +2,7 @@
 #include "CComponent.h"
 #include "CTransform.h"
 
-enum eCollideType
-{
-    Background,
-    Damage,
-    End,
-};
+
 
 class CCollider2D :
     public CComponent
