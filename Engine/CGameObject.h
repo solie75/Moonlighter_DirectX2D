@@ -42,9 +42,10 @@ public:
     void SetHP(UINT hp) { mHP = hp; }
 
     template <typename T>
-    T* AddComponent()
+    T* AddComponent(eComponentType type)
     {
         T* comp = new T();
+        comp->SetType(type);
         mComponent.push_back(comp);
         comp->SetOwner(this);
 

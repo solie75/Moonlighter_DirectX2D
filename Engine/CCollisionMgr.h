@@ -3,6 +3,7 @@
 #include "Enum.h"
 #include "CSingleton.h"
 #include "CCollider2D.h"
+#include "CColliderMgr.h"
 
 class CCollisionMgr
 	: public CSingleton<CCollisionMgr>
@@ -31,6 +32,7 @@ public:
 	void LateUpdate();
 	void DecreaseDeadObject(eLayerType leftLayer, eLayerType rightLayer);
 	void ObjectCollision(eLayerType leftLayer, eLayerType rightLayer);
+	void ColliderListCollision(CColliderMgr* leftColList, CColliderMgr* rightColList);
 	void ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCol);
 	bool Intersect(CCollider2D* leftCol, CCollider2D* rightCol);
 	void SetCollideLayer(eLayerType leftLayer, eLayerType rightLeyer, bool enable);

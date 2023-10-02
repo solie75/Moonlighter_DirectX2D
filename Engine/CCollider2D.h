@@ -1,11 +1,13 @@
 #pragma once
-#include "CComponent.h"
+//#include "CComponent.h"
+#include "CEntity.h"
 #include "CTransform.h"
 
 
 
-class CCollider2D :
-    public CComponent
+class CCollider2D 
+    // : public CComponent
+    : public CEntity
 {
 public:
     struct ColliderData
@@ -38,10 +40,15 @@ public:
     CCollider2D();
     ~CCollider2D();
 
-    virtual void Initialize() override;
+    /*virtual void Initialize() override;
     virtual void Update() override;
-    virtual void LateUpdate() override;
-    virtual void Render() override;
+    virtual void LateUpdate();
+    virtual void Render() override;*/
+
+    void Initialize();
+    void Update();
+    void LateUpdate(CTransform* tr);
+    void Render();
 
     void SetColliderType(eColliderType type) { mColliderType = type; }
     eColliderType GetColliderType() { return mColliderType; }

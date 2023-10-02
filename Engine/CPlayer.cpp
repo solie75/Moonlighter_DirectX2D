@@ -3,6 +3,7 @@
 #include "CTimeMgr.h"
 #include "CPlayerMoveScript.h"
 #include "CCollider2D.h"
+#include "CColliderMgr.h"
 #include "CWeapon.h"
 
 CPlayer::CPlayer()
@@ -13,14 +14,22 @@ CPlayer::CPlayer()
 	mState = new CState();
 	mAimSight = new CAimSight();
 	this->AddComponent<CPlayerMoveScript>();
-	CCollider2D* CDforBackground = this->AddComponent<CCollider2D>();
+
+	// CCollider2D Ãß°¡
+	CColliderMgr* PlayerCdList = this->AddComponent<CColliderMgr>();
+
+	CCollider2D* CDforBackground = new CCollider2D;
+	//CCollider2D* CDforBackground = this->AddComponent<CCollider2D>();
 	CDforBackground->SetCollideType(eCollideType::Background);
 	CDforBackground->SetSize(Vector2(0.7f, 0.15f));
 	CDforBackground->SetOffset(Vector2(0.f, -0.1f));
-	CCollider2D* CDforHit = this->AddComponent<CCollider2D>();
+	PlayerCdList->AddCollider(CDforBackground);
+
+	CCollider2D* CDforHit = new CCollider2D;
+	//CCollider2D* CDforHit = this->AddComponent<CCollider2D>();
 	CDforHit->SetCollideType(eCollideType::Hit);
 	CDforHit->SetSize(Vector2(0.7f, 0.7f));
-	
+	PlayerCdList->AddCollider(CDforHit);
 }
 
 CPlayer::~CPlayer()

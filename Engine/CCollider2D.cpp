@@ -34,7 +34,7 @@ void CCollider2D::Update()
     }
 }
 
-void CCollider2D::LateUpdate()
+void CCollider2D::LateUpdate(CTransform* tr)
 {
     CTransform* tr = GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
     

@@ -133,7 +133,7 @@ struct DebugMesh
 	Vector3 scale;
 
 	float radius;
-	float duration;
+	float duration;  
 	float time;
 
 	bool IsCollider; // true: 충돌 상태, false: 충돌 상태 아님

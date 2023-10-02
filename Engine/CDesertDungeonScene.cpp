@@ -1,6 +1,7 @@
 #include "CDesertDungeonScene.h"
 #include "CDungeonMgr.h"
 #include "CCollider2D.h"
+#include "CColliderMgr.h"
 #include "CCollisionMgr.h"
 #include "CWeapon.h"
 #include "CTimeMgr.h"
@@ -41,39 +42,52 @@ void CDesertDungeonScene::Initialize()
 
 	KatamariScript->ChangeState(eState::Idle);
 
-	CCollider2D* KatamariCDforBackground = Katamari->AddComponent<CCollider2D>();
+	CColliderMgr* KatamariCdList = Katamari->AddComponent<CColliderMgr>();
+	
+	CCollider2D* KatamariCDforBackground = new CCollider2D;
+	//CCollider2D* KatamariCDforBackground = Katamari->AddComponent<CCollider2D>();
 	KatamariCDforBackground->SetName(L"KatamariCDforBackground");
 	KatamariCDforBackground->SetCollideType(eCollideType::Background);
 	KatamariCDforBackground->SetSize(Vector2(0.71f, 0.3f));
 	KatamariCDforBackground->SetOffset(Vector2(0.0f, -0.24f));
+	KatamariCdList->AddCollider(KatamariCDforBackground);
 
-	CCollider2D* KatamariCDforHit = Katamari->AddComponent<CCollider2D>();
+	CCollider2D* KatamariCDforHit = new CCollider2D;
+	//CCollider2D* KatamariCDforHit = Katamari->AddComponent<CCollider2D>();
 	KatamariCDforHit->SetName(L"KatamariCDforHit");
 	KatamariCDforHit->SetCollideType(eCollideType::Hit);
 	KatamariCDforHit->SetSize(Vector2(0.71f, 0.6f));
 	KatamariCDforHit->SetOffset(Vector2(0.0f, -0.12f));
-
+	KatamariCdList->AddCollider(KatamariCDforHit);
 
 	// Background
 	CGameObject* BackgroundUp = new CGameObject();
 	AddGameObject(eLayerType::Background, BackgroundUp, L"BackgroundBorderUp", Vector3(0.0f, 1.8f, 4.0001f),
 		Vector3(8.0f, 0.2f, 0.0f), false, L"Mesh", L"", false);
-	CCollider2D* BackgroundCD = BackgroundUp->AddComponent<CCollider2D>();
+	CColliderMgr* BackgroundUpCDList = BackgroundUp->AddComponent<CColliderMgr>(eComponentType::ColliderList);
+	BackgroundUpCDList->AddCollider(new CCollider2D);
+	//CCollider2D* BackgroundCD = BackgroundUp->AddComponent<CCollider2D>();
 
 	CGameObject* BackgroundDown = new CGameObject();
 	AddGameObject(eLayerType::Background, BackgroundDown, L"BackgroundBorderDown", Vector3(0.0f, -1.8f, 4.0002f),
 		Vector3(8.0f, 0.2f, 0.0f), false, L"Mesh", L"", false);
-	BackgroundCD = BackgroundDown->AddComponent<CCollider2D>();
+	CColliderMgr* BackgroundDownCDList = BackgroundDown->AddComponent<CColliderMgr>();
+	BackgroundDownCDList->AddCollider(new CCollider2D);
+	//BackgroundCD = BackgroundDown->AddComponent<CCollider2D>();
 
 	CGameObject* BackgroundLeft = new CGameObject();
 	AddGameObject(eLayerType::Background, BackgroundLeft, L"BackgroundBorderLeft", Vector3(-3.2f, 0.0f, 4.0003f),
 		Vector3(0.2f, 4.0f, 0.0f), false, L"Mesh", L"", false);
-	BackgroundCD = BackgroundLeft->AddComponent<CCollider2D>();
+	CColliderMgr* BackgroundLeftCDList = BackgroundLeft->AddComponent<CColliderMgr>();
+	BackgroundLeftCDList->AddCollider(new CCollider2D);
+	//BackgroundCD = BackgroundLeft->AddComponent<CCollider2D>();
 
 	CGameObject* BackgroundRight = new CGameObject();
 	AddGameObject(eLayerType::Background, BackgroundRight, L"BackgroundBorderRight", Vector3(3.2f, 0.0f, 4.0004f),
 		Vector3(0.2f, 4.0f, 0.0f), false, L"Mesh", L"", false);
-	BackgroundCD = BackgroundRight->AddComponent<CCollider2D>();
+	CColliderMgr* BackgroundRightCDList = BackgroundRight->AddComponent<CColliderMgr>();
+	BackgroundRightCDList->AddCollider(new CCollider2D);
+	//BackgroundCD = BackgroundRight->AddComponent<CCollider2D>();
 
 	// weapon
 	CWeapon* Weapon = new CWeapon();
@@ -180,8 +194,12 @@ void CDesertDungeonScene::Initialize()
 				// Basic Door 애니메이션
 				CAnimator* BasicDoorAt = Dungeon3_BasicDoor->GetComponent<CAnimator>(eComponentType::Animator);
 				BasicDoorAt->PlayAnimation(L"Dungeon3_BasicDoor_Cycle", true);
-				CCollider2D* BasicDoorCd = Dungeon3_BasicDoor->AddComponent<CCollider2D>();
+				CColliderMgr* BasicDoorCdList = Dungeon3_BasicDoor->AddComponent<CColliderMgr>();
+				//CCollider2D* BasicDoorCd = Dungeon3_BasicDoor->AddComponent<CCollider2D>();
+				
+				CCollider2D* BasicDoorCd = new CCollider2D;
 				BasicDoorCd->SetSize(Vector2(0.3f, 0.3f));
+				BasicDoorCdList->AddCollider(BasicDoorCd);
 			}
 		}
 		// Dongeon normal map
@@ -266,8 +284,12 @@ void CDesertDungeonScene::Initialize()
 				// Basic Door 애니메이션
 				CAnimator* BasicDoorAt = Dungeon3_BasicDoor->GetComponent<CAnimator>(eComponentType::Animator);
 				BasicDoorAt->PlayAnimation(L"Dungeon3_BasicDoor_Cycle", true);
-				CCollider2D* BasicDoorCd = Dungeon3_BasicDoor->AddComponent<CCollider2D>();
+				CColliderMgr* BasicDoorCdList = Dungeon3_BasicDoor->AddComponent<CColliderMgr>();
+				//CCollider2D* BasicDoorCd = Dungeon3_BasicDoor->AddComponent<CCollider2D>();
+
+				CCollider2D* BasicDoorCd = new CCollider2D;
 				BasicDoorCd->SetSize(Vector2(0.3f, 0.3f));
+				BasicDoorCdList->AddCollider(BasicDoorCd);
 			}
 		}
 	}
@@ -279,12 +301,13 @@ void CDesertDungeonScene::Update()
 	// map 의 이동
 
 	// 1. map 이 이동하는 조건 (player 와 door 의 충돌
-	CCollider2D* playerCD = player->GetComponent<CCollider2D>(eComponentType::Collider2D);
+	//CCollider2D* playerCD = player->GetComponent<CCollider2D>(eComponentType::Collider2D);
+	CCollider2D* playerCDforBackground = player->GetComponent<CColliderMgr>(eComponentType::ColliderList)->GetCollider(eCollideType::Background);
 	CPlayerMoveScript* playerST = player->GetComponent<CPlayerMoveScript>(eComponentType::Script);
 	CTransform* playerTr = player->GetComponent<CTransform>(eComponentType::Transform);
 	CCameraMoveScript* mainCameraScript = mainCamera->GetComponent<CCameraMoveScript>(eComponentType::Script);
 
-	Vector2 doorPos = playerCD->GetColliderData(eLayerType::Portal).pos;
+	Vector2 doorPos = playerCDforBackground->GetColliderData(eLayerType::Portal).pos;
 	CTransform* mainCamTr = mainCameraScript->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	Vector3 mainCamPos = mainCamTr->GetPosition();
 	CState* playerState = player->GetState();
@@ -326,7 +349,7 @@ void CDesertDungeonScene::Update()
 	}
 
 	// 맵 이동 시에 플레이어의 이동
-	if (playerCD->GetColliderData(eLayerType::Portal).id != 0 && mbTranslateMapPos == false)
+	if (playerCDforBackground->GetColliderData(eLayerType::Portal).id != 0 && mbTranslateMapPos == false)
 	{
 		mbTranslateMapPos = true;
 		playerState->SetBoolStateChange(false);
@@ -380,7 +403,9 @@ void CDesertDungeonScene::Update()
 			CGameObject* backColliderObj = new CGameObject;
 			AddGameObject(eLayerType::Background, backColliderObj, L"BackgroundCollider", Vector3(NextMapPos.x + ColliderList[i].vColliderPos.x, NextMapPos.y + ColliderList[i].vColliderPos.y, 3.000f + 0.0001f * i),
 				Vector3(ColliderList[i].vColliderScale.x, ColliderList[i].vColliderScale.y, 0.0f), false, L"Mesh", L"", false);
-			backColliderObj->AddComponent<CCollider2D>();
+			CColliderMgr* BackColliderList = backColliderObj->AddComponent<CColliderMgr>();
+			BackColliderList->AddCollider(new CCollider2D);
+			//backColliderObj->AddComponent<CCollider2D>();
 
 			mTempGameObjects.push_back(backColliderObj);
 		}

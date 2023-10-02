@@ -23,5 +23,6 @@ public:
     CGameObject* GetOwner() { return mOwner; }
 
     eComponentType GetType() { return mType; }
+    void SetType(eComponentType type) { mType = type; }
 };
 

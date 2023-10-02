@@ -1,4 +1,5 @@
 #include "CCollisionMgr.h"
+
 #include "CGameObject.h"
 
 
@@ -50,8 +51,13 @@ void CCollisionMgr::DecreaseDeadObject(eLayerType leftLayer, eLayerType rightLay
 	{
 		for (CGameObject* rightObj : rights)
 		{
-			CCollider2D* leftCol = leftObj->GetComponent<CCollider2D>(eComponentType::Collider2D);
-			CCollider2D* rightCol = rightObj->GetComponent<CCollider2D>(eComponentType::Collider2D);
+			// 두 개의 객체에 대한 충돌의 검색
+			CColliderMgr* LeftColList = leftObj->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+			CColliderMgr* RightColList = rightObj->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+
+			ColliderListCollision(LeftColList, RightColList);
+			//CCollider2D* leftCol = leftObj->GetComponent<CCollider2D>(eComponentType::Collider2D);
+			//CCollider2D* rightCol = rightObj->GetComponent<CCollider2D>(eComponentType::Collider2D);
 
 			if (leftCol != nullptr && rightCol != nullptr)
 			{
@@ -64,6 +70,17 @@ void CCollisionMgr::DecreaseDeadObject(eLayerType leftLayer, eLayerType rightLay
 					leftCol->OnCollisionExit(rightCol);
 				}
 			}
+		}
+	}
+}
+
+void CCollisionMgr::ColliderListCollision(CColliderMgr* leftColList, CColliderMgr* rightColList)
+{
+	for (CCollider2D* leftCol : leftColList->GetColliderList())
+	{
+		for (CCollider2D* RightCol : rightColList->GetColliderList())
+		{
+
 		}
 	}
 }
@@ -104,6 +121,8 @@ void CCollisionMgr::ObjectCollision(eLayerType leftLayer, eLayerType rightLayer)
 		}
 	}
 }
+
+
 
 void CCollisionMgr::ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCol)
 {
