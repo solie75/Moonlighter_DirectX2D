@@ -1,6 +1,7 @@
 #include "CTransform.h"
 #include "CGameObject.h"
 #include "CCollider2D.h"
+#include "CColliderMgr.h"
 
 
 CTransform::CTransform()
@@ -39,11 +40,13 @@ void CTransform::LateUpdate()
 	position.Translation(mPosition);
 
 	mWorld = scale * rotation * position;
+	/*CColliderMgr* CdList = this->GetOwner()->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+	CCoolider
 	CCollider2D* cd = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
 	if (nullptr != cd)
 	{
 		mColliderPosition = Vector3(mPosition.x + cd->GetOffset().x, mPosition.y + cd->GetOffset().y, 0.0f);
-	}
+	}*/
 
 	mUp = Vector3::TransformNormal(Vector3::Up, rotation);
 	mFoward = Vector3::TransformNormal(Vector3::Forward, rotation);

@@ -46,7 +46,7 @@ void CScene::AddGameObject(eLayerType type, CGameObject* gameObj, const std::wst
 	gameObj->GetComponent<CTransform>(eComponentType::Transform)->SetScale(scale);
 	if (meshRenderBool == true)
 	{
-		CMeshRender* mr = gameObj->AddComponent<CMeshRender>();
+		CMeshRender* mr = gameObj->AddComponent<CMeshRender>(eComponentType::MeshRender);
 		mr->SetName(L"mr_" + objName);
 		mr->SetMesh(CResourceMgr::Find<CMesh>(meshName));
 		if (materialName == L"")
@@ -63,7 +63,7 @@ void CScene::AddGameObject(eLayerType type, CGameObject* gameObj, const std::wst
 	}
 	if (animationBool == true)
 	{
-		CAnimator* at = gameObj->AddComponent<CAnimator>();
+		CAnimator* at = gameObj->AddComponent<CAnimator>(eComponentType::Animator);
 		CResourceMgr::GetInst()->CreateAnimationTest(objName, at);
 	}
 	

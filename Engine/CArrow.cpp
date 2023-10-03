@@ -1,8 +1,8 @@
 #include "CArrow.h"
 #include "CTimeMgr.h"
 #include "CCollider2D.h"
+#include "CColliderMgr.h"
 #include "CPlayerMoveScript.h"
-
 
 CArrow::CArrow(UINT BowType, UINT sight, UINT arrowType)
 {
@@ -10,6 +10,14 @@ CArrow::CArrow(UINT BowType, UINT sight, UINT arrowType)
 	mSight = (CAimSight::eSight)sight;
 	speed = 0.0f;
 	mArrowType = (eArrowType)arrowType;
+
+	CColliderMgr* CDList = this->AddComponent<CColliderMgr>(eComponentType::ColliderList);
+	CCollider2D* CDforBackground = new CCollider2D();
+	CDforBackground->SetCollideType(eCollideType::Background);
+	CCollider2D* CDforHit = new CCollider2D();
+	CDforHit->SetCollideType(eCollideType::Hit);
+	CDList->AddCollider(CDforBackground);
+	CDList->AddCollider(CDforHit);
 }
   
 CArrow::~CArrow()
@@ -61,9 +69,12 @@ void CArrow::Update()
 
 	if (this->GetState() != CGameObject::eObjectState::Paused)
 	{
-		CCollider2D* cd = this->GetComponent<CCollider2D>(eComponentType::Collider2D);
+		CColliderMgr* cdList = this->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+		CCollider2D* CDforBackground = cdList->GetCollider(eCollideType::Background);
+		CCollider2D* CDforHit = cdList->GetCollider(eCollideType::Hit);
+
 		
-		if (cd->GetIsCollider() == false)
+		if (CDforBackground->GetIsCollider() == false && CDforHit->GetIsCollider() == false)
 		{
 			if (time > speed)
 			{
@@ -77,7 +88,7 @@ void CArrow::Update()
 		else
 		{
 			// 화살이 몬스터와 충돌한 경우
-			if (cd->GetColliderData(eLayerType::Monster).id != 0)
+			if (CDforHit->GetColliderData(eLayerType::Monster).id != 0)
 			{
 				if (mArrowType == eArrowType::Main)
 				{
@@ -98,7 +109,7 @@ void CArrow::Update()
 				}
 			}
 			// 화살이 배경 벽과 충돌한 경우
-			else if (cd->GetColliderData(eLayerType::Background).id != 0)
+			else if (CDforBackground->GetColliderData(eLayerType::Background).id != 0)
 			{
 				At->PlayAnimation(L"Weapon_Arrow_Hunter_Collide", false);
 				this->SetState(eObjectState::Paused);

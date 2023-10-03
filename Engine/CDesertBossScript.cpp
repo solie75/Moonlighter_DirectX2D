@@ -3,6 +3,7 @@
 #include "CTimeMgr.h"
 #include "CTransform.h"
 #include "CCollider2D.h"
+#include "CColliderMgr.h"
 #include "CMonster.h"
 
 CDesertBossScript::CDesertBossScript()
@@ -40,7 +41,10 @@ void CDesertBossScript::Update()
 
 	CGameObject* parentObj = this->GetOwner()->GetParentObject();
 	CTransform* tr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
-	CCollider2D* cd = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
+	//CCollider2D* cd = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
+	CColliderMgr* CdList = this->GetOwner()->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+	CCollider2D* CDforBackground = CdList->GetCollider(eCollideType::Background);
+
 	Vector3 pos = tr->GetPosition();
 
 	if (GetOwner()->GetHP() <= 0)
@@ -77,13 +81,13 @@ void CDesertBossScript::Update()
 		tr->SetPosition(pos);
 
 		// 충돌체를 실제 객체의 Aim 기준 앞에 둔다.
-		cd->SetOffset(Vector2(mAimNormal.x * (1.5f), mAimNormal.y * (1.5f)));
+		CDforBackground->SetOffset(Vector2(mAimNormal.x * (1.5f), mAimNormal.y * (1.5f)));
 
 		// 현재 Head 가 충돌 중인 경우
-		if (cd->GetIsCollider())
+		if (CDforBackground->GetIsCollider())
 		{
 			// 배경 벽 과 충돌하였을 경우
-			if (cd->GetColliderData(eLayerType::Background).id != 0) 
+			if (CDforBackground->GetColliderData(eLayerType::Background).id != 0)
 			{
 				mState.SetState(eState::Turn);
 			}
@@ -129,10 +133,13 @@ void CDesertBossScript::LateUpdate()
 {
 	CTransform* tr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	Vector3 pos = tr->GetPosition();
-	CCollider2D* cd = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
+	//CCollider2D* cd = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
+	CColliderMgr* CdList = this->GetOwner()->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+	CCollider2D* CDforBackground = CdList->GetCollider(eCollideType::Background);
 	Vector2 otherPos;
 
-	if (0 != cd->GetColliderData(eLayerType::Player).id)
+	// 캐릭터에게 데미지를 입는 부분
+	if (0 != CDforBackground->GetColliderData(eLayerType::Player).id)
 	{
 		//DecreaseHP(1);
 		//DecreaseHP(cd->GetColliderData(eLayerType::Player).damage);
@@ -142,7 +149,7 @@ void CDesertBossScript::LateUpdate()
 	if (mState.GetPrevState() != eState::Turn && mState.GetCurState() == eState::Turn)
 	{
 		TurnCount++;
-		otherPos = cd->GetColliderData(eLayerType::Background).pos;
+		otherPos = CDforBackground->GetColliderData(eLayerType::Background).pos;
 		if (otherPos.y != 0)
 		{
 			mExpectedAimNormal.x = otherPos.x - pos.x;

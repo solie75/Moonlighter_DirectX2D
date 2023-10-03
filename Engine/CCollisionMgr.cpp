@@ -55,32 +55,23 @@ void CCollisionMgr::DecreaseDeadObject(eLayerType leftLayer, eLayerType rightLay
 			CColliderMgr* LeftColList = leftObj->GetComponent<CColliderMgr>(eComponentType::ColliderList);
 			CColliderMgr* RightColList = rightObj->GetComponent<CColliderMgr>(eComponentType::ColliderList);
 
-			ColliderListCollision(LeftColList, RightColList);
-			//CCollider2D* leftCol = leftObj->GetComponent<CCollider2D>(eComponentType::Collider2D);
-			//CCollider2D* rightCol = rightObj->GetComponent<CCollider2D>(eComponentType::Collider2D);
-
-			if (leftCol != nullptr && rightCol != nullptr)
+			for (CCollider2D* LeftCol : LeftColList->GetColliderList())
 			{
-				if (leftObj->GetState() == CGameObject::eObjectState::Dead)
+				for (CCollider2D* RightCol : RightColList->GetColliderList())
 				{
-					rightCol->OnCollisionExit(leftCol);
-				}
-				if (rightObj->GetState() == CGameObject::eObjectState::Dead)
-				{
-					leftCol->OnCollisionExit(rightCol);
+					if (LeftCol != nullptr && RightCol != nullptr)
+					{
+						if (leftObj->GetState() == CGameObject::eObjectState::Dead)
+						{
+							RightCol->OnCollisionExit(LeftCol);
+						}
+						if (rightObj->GetState() == CGameObject::eObjectState::Dead)
+						{
+							LeftCol->OnCollisionExit(RightCol);
+						}
+					}
 				}
 			}
-		}
-	}
-}
-
-void CCollisionMgr::ColliderListCollision(CColliderMgr* leftColList, CColliderMgr* rightColList)
-{
-	for (CCollider2D* leftCol : leftColList->GetColliderList())
-	{
-		for (CCollider2D* RightCol : rightColList->GetColliderList())
-		{
-
 		}
 	}
 }
@@ -95,32 +86,42 @@ void CCollisionMgr::ObjectCollision(eLayerType leftLayer, eLayerType rightLayer)
 	const std::vector<CGameObject*>& rights =
 	CSceneMgr::GetInst()->GetActiveScene()->GetLayer(rightLayer).GetGameObjects();
 
-	for (CGameObject* leftObj : lefts)
+	for (CGameObject* LeftObj : lefts)
 	{
-		CCollider2D* leftCol = leftObj->GetComponent<CCollider2D>(eComponentType::Collider2D);
-
-		if (leftCol == nullptr || leftObj->GetState() != CGameObject::eObjectState::Active)
+		CColliderMgr* vLeftColList = LeftObj->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+		if (LeftObj->GetState() != CGameObject::eObjectState::Active || vLeftColList == nullptr)
 		{
 			continue;
 		}
-
-		for (CGameObject* rightObj : rights)
+		for (CGameObject* RightObj : rights)
 		{
-			CCollider2D* rightCol = rightObj->GetComponent<CCollider2D>(eComponentType::Collider2D);
-
-			if (leftObj == rightObj)
+			CColliderMgr* vRightColList = RightObj->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+			if (RightObj->GetState() != CGameObject::eObjectState::Active || vRightColList == nullptr)
 			{
 				continue;
 			}
-			if (rightCol == nullptr || rightObj->GetState() != CGameObject::eObjectState::Active)
+			if (LeftObj == RightObj)
 			{
 				continue;
 			}
+			ColliderListCollision(vLeftColList, vRightColList);
+		}
+	}
+}
 
+
+void CCollisionMgr::ColliderListCollision(CColliderMgr* leftColList, CColliderMgr* rightColList)
+{
+
+	for (CCollider2D* leftCol : leftColList->GetColliderList())
+	{
+		for (CCollider2D* rightCol : rightColList->GetColliderList())
+		{
 			ColliderCollision(leftCol, rightCol);
 		}
 	}
 }
+
 
 
 
@@ -182,11 +183,14 @@ bool CCollisionMgr::Intersect(CCollider2D* leftCol, CCollider2D* rightCol)
 		Vector3(-0.5f, -0.5f, 0.0f)
 	};
 
-	CTransform* leftTr = leftCol->GetOwner()->GetComponent <CTransform>(eComponentType::Transform);
-	CTransform* rightTr = rightCol->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
+	/*CTransform* leftTr =  ->GetOwner()->GetComponent <CTransform>(eComponentType::Transform);
+	CTransform* rightTr = rightCol->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);*/
 
-	Matrix leftMatrix = leftTr->GetWorldMatrix(); // 월드 변환
-	Matrix rightMatrix = rightTr->GetWorldMatrix();
+	//Matrix leftMatrix = leftTr->GetWorldMatrix(); // 월드 변환
+	//Matrix rightMatrix = rightTr->GetWorldMatrix();
+
+	Matrix leftMatrix = leftCol->GetColliderWorldMatrix();
+	Matrix rightMatrix = rightCol->GetColliderWorldMatrix();
 
 	Vector3 leftScale = Vector3(leftCol->GetSize().x, leftCol->GetSize().y, 1.0f);
 	Matrix  leftScaleMatrix = Matrix::CreateScale(leftScale);
@@ -220,7 +224,8 @@ bool CCollisionMgr::Intersect(CCollider2D* leftCol, CCollider2D* rightCol)
 	}
 	
 	// 두 충돌체의 중심 사이의 거리
-	Vector3 vDist = leftTr->GetColliderPosition() - rightTr->GetColliderPosition();
+	//Vector3 vDist = leftTr->GetColliderPosition() - rightTr->GetColliderPosition();
+	Vector3 vDist = leftCol->GetColliderPosition() - rightCol->GetColliderPosition();
 	vDist.z = 0.0f;
 
 	Vector3 vDistBetweenCols = vDist;
@@ -245,11 +250,6 @@ bool CCollisionMgr::Intersect(CCollider2D* leftCol, CCollider2D* rightCol)
 			// 즉, 하나의 분리축으로 두 도형을 사영했을 때 빈 공간이 있는 경우 충돌하지 않았다.
 			return false;
 		}
-	}
-
-	if (leftCol->GetOwner()->GetName() == L"Boss3_Head" || rightCol->GetOwner()->GetName() == L"Boss3_Head")
-	{
-		int a = 0;
 	}
 
 	return true;

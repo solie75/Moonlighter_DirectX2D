@@ -7,7 +7,7 @@ CGameObject::CGameObject()
 	//, mDirection(eDirection::Down)
 	, mHP(0)
 {
-	CTransform* tr = AddComponent<CTransform>();
+	CTransform* tr = AddComponent<CTransform>(eComponentType::Transform);
 }
 
 CGameObject::~CGameObject()

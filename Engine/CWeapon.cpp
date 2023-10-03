@@ -1,6 +1,7 @@
 #include "CWeapon.h"
 #include "CPlayerMoveScript.h"
 #include "CCollider2D.h"
+#include "CColliderMgr.h"
 
 
 CWeapon::CWeapon()
@@ -190,8 +191,8 @@ void CWeapon::Update()
 
 						ownScene->AddGameObject(eLayerType::PlayerProjectile, arrow, L"Arrow", Tr->GetPosition()
 							, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"", true);
-
-						CCollider2D* arrowCd = arrow->AddComponent<CCollider2D>();
+						
+						//CCollider2D* arrowCd = arrow->AddComponent<CCollider2D>();
 						CAnimator* arrowAt = arrow->GetComponent<CAnimator>(eComponentType::Animator);
 						arrowAt->PlayAnimation(L"Weapon_Arrow_Hunter_Idle", true);
 						mbArrow = false;
@@ -245,7 +246,10 @@ void CWeapon::Update()
 
 							CTransform* arrowTr = arrow->GetComponent<CTransform>(eComponentType::Transform);
 							CAnimator* arrowAt = arrow->GetComponent<CAnimator>(eComponentType::Animator);
-							CCollider2D* arrowCd = arrow->AddComponent<CCollider2D>();
+							/*CColliderMgr* arrowCdList = arrow->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+							CCollider2D* arrowCDforBackground = arrowCdList->GetCollider(eCollideType::Background);
+
+							CCollider2D* arrowCd = arrow->AddComponent<CCollider2D>(eComponentType::ColliderList);*/
 
 							arrowAt->PlayAnimation(L"Weapon_Arrow_Hunter_Idle", true);
 							mbArrow = false;

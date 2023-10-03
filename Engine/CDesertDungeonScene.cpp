@@ -37,12 +37,12 @@ void CDesertDungeonScene::Initialize()
 	CGameObject* Katamari = new CGameObject;
 	AddGameObject(eLayerType::Monster, Katamari, L"Katamari", Vector3(-2.0f, 0.0f, 1.0003f)
 		, Vector3(0.6f, 0.8f, 0.0f), true, L"Mesh", L"", true);
-	CKatamariScript* KatamariScript = Katamari->AddComponent<CKatamariScript>();
+	CKatamariScript* KatamariScript = Katamari->AddComponent<CKatamariScript>(eComponentType::Script);
 	CAnimator* KatamariAt = Katamari->GetComponent<CAnimator>(eComponentType::Animator);
 
 	KatamariScript->ChangeState(eState::Idle);
 
-	CColliderMgr* KatamariCdList = Katamari->AddComponent<CColliderMgr>();
+	CColliderMgr* KatamariCdList = Katamari->AddComponent<CColliderMgr>(eComponentType::ColliderList);
 	
 	CCollider2D* KatamariCDforBackground = new CCollider2D;
 	//CCollider2D* KatamariCDforBackground = Katamari->AddComponent<CCollider2D>();
@@ -71,21 +71,21 @@ void CDesertDungeonScene::Initialize()
 	CGameObject* BackgroundDown = new CGameObject();
 	AddGameObject(eLayerType::Background, BackgroundDown, L"BackgroundBorderDown", Vector3(0.0f, -1.8f, 4.0002f),
 		Vector3(8.0f, 0.2f, 0.0f), false, L"Mesh", L"", false);
-	CColliderMgr* BackgroundDownCDList = BackgroundDown->AddComponent<CColliderMgr>();
+	CColliderMgr* BackgroundDownCDList = BackgroundDown->AddComponent<CColliderMgr>(eComponentType::ColliderList);
 	BackgroundDownCDList->AddCollider(new CCollider2D);
 	//BackgroundCD = BackgroundDown->AddComponent<CCollider2D>();
 
 	CGameObject* BackgroundLeft = new CGameObject();
 	AddGameObject(eLayerType::Background, BackgroundLeft, L"BackgroundBorderLeft", Vector3(-3.2f, 0.0f, 4.0003f),
 		Vector3(0.2f, 4.0f, 0.0f), false, L"Mesh", L"", false);
-	CColliderMgr* BackgroundLeftCDList = BackgroundLeft->AddComponent<CColliderMgr>();
+	CColliderMgr* BackgroundLeftCDList = BackgroundLeft->AddComponent<CColliderMgr>(eComponentType::ColliderList);
 	BackgroundLeftCDList->AddCollider(new CCollider2D);
 	//BackgroundCD = BackgroundLeft->AddComponent<CCollider2D>();
 
 	CGameObject* BackgroundRight = new CGameObject();
 	AddGameObject(eLayerType::Background, BackgroundRight, L"BackgroundBorderRight", Vector3(3.2f, 0.0f, 4.0004f),
 		Vector3(0.2f, 4.0f, 0.0f), false, L"Mesh", L"", false);
-	CColliderMgr* BackgroundRightCDList = BackgroundRight->AddComponent<CColliderMgr>();
+	CColliderMgr* BackgroundRightCDList = BackgroundRight->AddComponent<CColliderMgr>(eComponentType::ColliderList);
 	BackgroundRightCDList->AddCollider(new CCollider2D);
 	//BackgroundCD = BackgroundRight->AddComponent<CCollider2D>();
 
@@ -103,7 +103,7 @@ void CDesertDungeonScene::Initialize()
 	//CGameObject* mainCamera = new CGameObject;
 	AddGameObject(eLayerType::Camera, mainCamera, L"MainCamera", Vector3(0.0f, 0.0f, -10.0f),
 		Vector3(1.0f, 1.0f, 1.0f), false, L"", L"", false);
-	CCamera* mainCamComp = mainCamera->AddComponent<CCamera>();
+	CCamera* mainCamComp = mainCamera->AddComponent<CCamera>(eComponentType::Camera);
 	mainCamComp->SetCameraType(eCameraType::Main);
 	mainCamComp->TurnLayerMask(eLayerType::UI, false);
 	CCameraMoveScript* CameraMoveScript = mainCamera->GetComponent<CCameraMoveScript>(eComponentType::Script);
@@ -115,7 +115,7 @@ void CDesertDungeonScene::Initialize()
 	CGameObject* uiCamera = new CGameObject();
 	AddGameObject(eLayerType::Camera, uiCamera, L"UICamera", Vector3(0.0f, 0.0f, -10.0f),
 		Vector3(1.0f, 1.0f, 1.0f), false, L"", L"", false);
-	CCamera* uiCamComp = uiCamera->AddComponent<CCamera>();
+	CCamera* uiCamComp = uiCamera->AddComponent<CCamera>(eComponentType::Camera);
 	uiCamComp->SetCameraType(eCameraType::UI);
 	uiCamComp->TurnLayerMask(eLayerType::Player, false);
 	uiCamComp->TurnLayerMask(eLayerType::Monster, false);
@@ -127,7 +127,7 @@ void CDesertDungeonScene::Initialize()
 	CGameObject* light = new CGameObject();
 	light->SetName(L"light");
 	AddGameObject(eLayerType::Light, light, L"light", Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f), false, L"", L"", false);
-	CLight* lightComp = light->AddComponent<CLight>();
+	CLight* lightComp = light->AddComponent<CLight>(eComponentType::Light);
 	lightComp->SetLightType(eLightType::Directional);
 	lightComp->SetColor(Vector4(0.8f, 0.8f, 0.8f, 1.0f));
 
@@ -194,7 +194,7 @@ void CDesertDungeonScene::Initialize()
 				// Basic Door 애니메이션
 				CAnimator* BasicDoorAt = Dungeon3_BasicDoor->GetComponent<CAnimator>(eComponentType::Animator);
 				BasicDoorAt->PlayAnimation(L"Dungeon3_BasicDoor_Cycle", true);
-				CColliderMgr* BasicDoorCdList = Dungeon3_BasicDoor->AddComponent<CColliderMgr>();
+				CColliderMgr* BasicDoorCdList = Dungeon3_BasicDoor->AddComponent<CColliderMgr>(eComponentType::ColliderList);
 				//CCollider2D* BasicDoorCd = Dungeon3_BasicDoor->AddComponent<CCollider2D>();
 				
 				CCollider2D* BasicDoorCd = new CCollider2D;
@@ -284,7 +284,7 @@ void CDesertDungeonScene::Initialize()
 				// Basic Door 애니메이션
 				CAnimator* BasicDoorAt = Dungeon3_BasicDoor->GetComponent<CAnimator>(eComponentType::Animator);
 				BasicDoorAt->PlayAnimation(L"Dungeon3_BasicDoor_Cycle", true);
-				CColliderMgr* BasicDoorCdList = Dungeon3_BasicDoor->AddComponent<CColliderMgr>();
+				CColliderMgr* BasicDoorCdList = Dungeon3_BasicDoor->AddComponent<CColliderMgr>(eComponentType::ColliderList);
 				//CCollider2D* BasicDoorCd = Dungeon3_BasicDoor->AddComponent<CCollider2D>();
 
 				CCollider2D* BasicDoorCd = new CCollider2D;
@@ -403,7 +403,7 @@ void CDesertDungeonScene::Update()
 			CGameObject* backColliderObj = new CGameObject;
 			AddGameObject(eLayerType::Background, backColliderObj, L"BackgroundCollider", Vector3(NextMapPos.x + ColliderList[i].vColliderPos.x, NextMapPos.y + ColliderList[i].vColliderPos.y, 3.000f + 0.0001f * i),
 				Vector3(ColliderList[i].vColliderScale.x, ColliderList[i].vColliderScale.y, 0.0f), false, L"Mesh", L"", false);
-			CColliderMgr* BackColliderList = backColliderObj->AddComponent<CColliderMgr>();
+			CColliderMgr* BackColliderList = backColliderObj->AddComponent<CColliderMgr>(eComponentType::ColliderList);
 			BackColliderList->AddCollider(new CCollider2D);
 			//backColliderObj->AddComponent<CCollider2D>();
 

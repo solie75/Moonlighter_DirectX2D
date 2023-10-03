@@ -73,7 +73,7 @@ public:
 		mCamType = type; 
 		if (type == eCameraType::Main) 
 		{
-			this->GetOwner()->AddComponent<CCameraMoveScript>();
+			this->GetOwner()->AddComponent<CCameraMoveScript>(eComponentType::Script);
 		} 
 	}
 

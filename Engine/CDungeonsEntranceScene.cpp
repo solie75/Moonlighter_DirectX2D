@@ -28,7 +28,7 @@ void CDungeonsEntranceScene::Initialize()
 		CGameObject* mainCamera = new CGameObject();
 		AddGameObject(eLayerType::Player, mainCamera, L"MainCamera", Vector3(0.0f, 0.0f, -10.0f),
 			Vector3(1.0f, 1.0f, 1.0f), false, L"", L"", false);
-		CCamera* mainCamComp = mainCamera->AddComponent<CCamera>();
+		CCamera* mainCamComp = mainCamera->AddComponent<CCamera>(eComponentType::Camera);
 		mainCamComp->SetCameraType(eCameraType::Main);
 		mainCamComp->TurnLayerMask(eLayerType::UI, false);
 		//mainCamera->AddComponent<CCameraMoveScript>();
@@ -37,7 +37,7 @@ void CDungeonsEntranceScene::Initialize()
 		CGameObject* uiCamera = new CGameObject();
 		AddGameObject(eLayerType::Player, uiCamera, L"UICamera", Vector3(0.0f, 0.0f, -10.0f),
 			Vector3(1.0f, 1.0f, 1.0f), false, L"", L"", false);
-		CCamera* uiCamComp = uiCamera->AddComponent<CCamera>();
+		CCamera* uiCamComp = uiCamera->AddComponent<CCamera>(eComponentType::Camera);
 		uiCamComp->SetCameraType(eCameraType::UI);
 		uiCamComp->TurnLayerMask(eLayerType::Player, false);
 		uiCamComp->TurnLayerMask(eLayerType::Background, false);

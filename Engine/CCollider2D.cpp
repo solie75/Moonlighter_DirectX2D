@@ -1,8 +1,8 @@
 #include "CCollider2D.h"
 
 CCollider2D::CCollider2D()
-	: CComponent(eComponentType::Collider2D)
-    , mTransform(nullptr)
+	//: CComponent(eComponentType::Collider2D)
+    : mTransform(nullptr)
     , mSize(Vector2::One)
     , mOffset(Vector2::Zero)
     , mIsCollider(false)
@@ -11,6 +11,8 @@ CCollider2D::CCollider2D()
     mColliderNumber++;
     mColliderID = mColliderNumber;
     mCollideType = eCollideType::Background;
+    mRotationValue = 0.0f;
+    mLayerType = eLayerType::End;
 }
 
 
@@ -36,28 +38,43 @@ void CCollider2D::Update()
 
 void CCollider2D::LateUpdate(CTransform* tr)
 {
-    CTransform* tr = GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
-    
-    Vector3 scale = tr->GetScale();
-    scale.x *= mSize.x;
-    scale.y *= mSize.y;
+    mLayerType = tr->GetOwner()->GetLayerType();
 
-    Vector3 pos = tr->GetPosition();
-    pos.x += mOffset.x; // offset
-    pos.y += mOffset.y;
-    //tr->SetPosition(pos);
+    Vector3 CdScale = tr->GetScale();
+    CdScale.x *= mSize.x;
+    CdScale.y *= mSize.y;
 
-    mPosition = pos;
+    mColliderScale = CdScale;
+
+    Vector3 CdPos = tr->GetPosition();
+    CdPos.x += mOffset.x; // offset
+    CdPos.y += mOffset.y;
+
+    mColliderPosition = CdPos;
+
+    //mPosition = CdPos;
 
     DebugMesh debugMesh = {};
-    debugMesh.position = mPosition;
-    debugMesh.scale = scale;
+    debugMesh.position = CdPos;
+    debugMesh.scale = CdScale;
     debugMesh.rotation = tr->GetRotation();
     debugMesh.ColliderType = eColliderType::Rect;
     debugMesh.CollideType = mCollideType;
     debugMesh.IsCollider = mIsCollider;
     
     CRenderMgr::GetInst()->AddDebugMesh(debugMesh);
+
+    // 충돌체의 Worldmatrix 변환
+    mWorldMat = Matrix::Identity;
+    Matrix scale = Matrix::CreateScale(CdScale);
+    Matrix rotation;
+    rotation = Matrix::CreateRotationX(tr->GetRotation().x);
+    rotation *= Matrix::CreateRotationY(tr->GetRotation().y);
+    rotation *= Matrix::CreateRotationZ(tr->GetRotation().z + mRotationValue);
+    Matrix position;
+    position.Translation(CdPos);
+
+    mWorldMat = scale * rotation * position;
 }
 
 void CCollider2D::Render()
@@ -68,8 +85,8 @@ void CCollider2D::OnCollisionEnter(CCollider2D* other)
 {
     ColliderData data = {};
     data.id = other->GetColliderID(); // 0부터 시작하는데 0을 없는 데이터의 기준으로 사용하므로
-    data.type = other->GetOwner()->GetLayerType();
-    data.pos = other->GetColliderPosition();
+    data.type = other->GetLayerType();
+    data.pos = Vector2(other->GetColliderPosition().x, other->GetColliderPosition().y);
     data.damage = other->GetColliderDamege();
 
     mColliderDataList.insert(std::make_pair(data.id, data));

@@ -1,10 +1,18 @@
 #include "CLavaBall.h"
 #include "CCollider2D.h"
+#include "CColliderMgr.h"
 #include "CTimeMgr.h"
 
 CLavaBall::CLavaBall()
 {
-	this->AddComponent<CCollider2D>();
+	CColliderMgr* thisCdList = this->AddComponent<CColliderMgr>(eComponentType::ColliderList);
+	CCollider2D* thisCDforBackground = new CCollider2D;
+	thisCDforBackground->SetCollideType(eCollideType::Background);
+	thisCdList->AddCollider(thisCDforBackground);
+	CCollider2D* thisCDforHit = new CCollider2D;
+	thisCDforHit->SetCollideType(eCollideType::Hit);
+	thisCdList->AddCollider(thisCDforHit);
+
 	dropSpeed = 0.0f;
 	mLavaState = eLavaState::Ball;
 	mPrevLavaState = eLavaState::End;

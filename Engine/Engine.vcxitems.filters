@@ -294,9 +294,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CDesertBossScene.h">
       <Filter>Scene\05.DesertBossScene</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CTransform.h">
-      <Filter>GameObject\Component\Transform</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CCamera.h">
       <Filter>GameObject\Component\Camera</Filter>
     </ClInclude>
@@ -437,6 +434,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CColliderMgr.h">
       <Filter>GameObject\Component\ColliderMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CTransform.h">
+      <Filter>GameObject\Object\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

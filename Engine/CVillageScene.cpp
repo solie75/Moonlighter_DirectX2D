@@ -25,7 +25,7 @@ void CVillageScene::Initialize()
 			CGameObject* light = new CGameObject();
 			light->SetName(L"light");
 			AddGameObject(eLayerType::Light, light, L"light", Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f), false, L"", L"", false);
-			CLight* lightComp = light->AddComponent<CLight>();
+			CLight* lightComp = light->AddComponent<CLight>(eComponentType::Light);
 			lightComp->SetLightType(eLightType::Directional);
 			lightComp->SetColor(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 		}
@@ -412,7 +412,7 @@ void CVillageScene::Initialize()
 	CGameObject* mainCamera = new CGameObject();
 	AddGameObject(eLayerType::Player, mainCamera, L"MainCamera", Vector3(0.0f, 0.0f, -10.0f),
 		Vector3(1.0f, 1.0f, 1.0f), false, L"", L"", false);
-	CCamera* mainCamComp = mainCamera->AddComponent<CCamera>();
+	CCamera* mainCamComp = mainCamera->AddComponent<CCamera>(eComponentType::Camera);
 	mainCamComp->SetCameraType(eCameraType::Main);
 	mainCamComp->TurnLayerMask(eLayerType::UI, false);
 	//mainCamera->AddComponent<CCameraMoveScript>();
@@ -421,7 +421,7 @@ void CVillageScene::Initialize()
 	CGameObject* uiCamera = new CGameObject();
 	AddGameObject(eLayerType::Player, uiCamera, L"UICamera", Vector3(0.0f, 0.0f, -10.0f),
 		Vector3(1.0f, 1.0f, 1.0f), false, L"", L"", false);
-	CCamera* uiCamComp = uiCamera->AddComponent<CCamera>();
+	CCamera* uiCamComp = uiCamera->AddComponent<CCamera>(eComponentType::Camera);
 	uiCamComp->SetCameraType(eCameraType::UI);
 	uiCamComp->TurnLayerMask(eLayerType::Player, false);
 	uiCamComp->TurnLayerMask(eLayerType::Background, false);

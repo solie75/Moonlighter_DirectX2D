@@ -13,10 +13,10 @@ CPlayer::CPlayer()
 {
 	mState = new CState();
 	mAimSight = new CAimSight();
-	this->AddComponent<CPlayerMoveScript>();
+	this->AddComponent<CPlayerMoveScript>(eComponentType::Script);
 
 	// CCollider2D Ãß°¡
-	CColliderMgr* PlayerCdList = this->AddComponent<CColliderMgr>();
+	CColliderMgr* PlayerCdList = this->AddComponent<CColliderMgr>(eComponentType::ColliderList);
 
 	CCollider2D* CDforBackground = new CCollider2D;
 	//CCollider2D* CDforBackground = this->AddComponent<CCollider2D>();

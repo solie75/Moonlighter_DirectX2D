@@ -2,6 +2,8 @@
 #include "CGameObject.h"
 #include "CTimeMgr.h"
 #include <random>
+#include "CColliderMgr.h"
+//#include "CCollider2D.h"
 
 CKatamariScript::CKatamariScript()
 {
@@ -24,12 +26,14 @@ void CKatamariScript::Initialize()
 void CKatamariScript::Update()
 {
 	CAnimator* thisAt = this->GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
-	CCollider2D* thisCD = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
+	CColliderMgr* thisCDList = this->GetOwner()->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+	CCollider2D* thisCDforBackground = thisCDList->GetCollider(eCollideType::Background);
+	CCollider2D* thisCDforHit = thisCDList->GetCollider(eCollideType::Hit);
 	CTransform* thisTr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 
 	mPosBeforeCollide = thisTr->GetPosition();
 
-	if (thisCD->GetColliderData(eLayerType::Background).id != 0)
+	if (thisCDforBackground->GetColliderData(eLayerType::Background).id != 0)
 	{
 		// background Collider 로부터 떨어지기 위해 충돌 직전의 위치로 되돌린다.
 		Vector3 pos = thisTr->GetPosition();
@@ -92,7 +96,7 @@ void CKatamariScript::Update()
 			}
 			else if(thisAt->GetCurAnimation()->GetAnimationIndex() > 10)
 			{ 
-				if (thisCD->GetColliderData(eLayerType::Background).id != 0)
+				if (thisCDforBackground->GetColliderData(eLayerType::Background).id != 0)
 				{
 					mState->SetState(eState::Pause);
 				}
@@ -124,7 +128,7 @@ void CKatamariScript::Update()
 	}
 	else if (mState->GetCurState() == eState::Attack)
 	{
-		if (thisCD->GetColliderData(eLayerType::Background).id != 0)
+		if (thisCDforBackground->GetColliderData(eLayerType::Background).id != 0)
 		{
 			mState->SetState(eState::Pause);
 			aniName += L"Third";
@@ -174,7 +178,7 @@ void CKatamariScript::LateUpdate()
 void CKatamariScript::ChangeSight()
 {
 	CTransform* thisTr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
-	CCollider2D* thisCD = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
+	//CCollider2D* thisCD = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
 
 	std::random_device rd;
 	std::mt19937 generator(rd());

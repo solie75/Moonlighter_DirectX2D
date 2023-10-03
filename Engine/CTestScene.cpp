@@ -30,8 +30,12 @@ void CTestScene::Initialize()
 	CGameObject* BackgroundLeft = new CGameObject();
 	AddGameObject(eLayerType::Background, BackgroundLeft, L"BackgroundLeft", Vector3(-6.625f, 0.0f, 10.0006f),
 		Vector3(1.0f, 1.0f, 0.0f), false, L"Mesh", L"", false);
-	CCollider2D* backgroundCd = BackgroundLeft->AddComponent<CCollider2D>();
-	backgroundCd->SetSize(Vector2(0.3f, 10.f));
+	CColliderMgr* BackgroundCdList = BackgroundLeft->AddComponent<CColliderMgr>(eComponentType::ColliderList);
+	CCollider2D* BackgroundCd = new CCollider2D;
+	BackgroundCd->SetCollideType(eCollideType::Background);
+	BackgroundCd->SetSize(Vector2(0.3f, 10.f));
+	BackgroundCdList->AddCollider(BackgroundCd);
+
 
 	// Will
 	CPlayer* Will = new CPlayer();
@@ -55,21 +59,29 @@ void CTestScene::Initialize()
 		, Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"mt_Smile", false);
 	CMeshRender* mr = Smile->GetComponent<CMeshRender>(eComponentType::MeshRender);
 	std::shared_ptr<CMaterial> mt = mr->GetMaterial();
-	Smile->AddComponent<CCollider2D>();
+	CColliderMgr* SmileList = Smile->AddComponent<CColliderMgr>(eComponentType::ColliderList);
+	CCollider2D* SmileCdforBackground = new CCollider2D;
+	SmileCdforBackground->SetCollideType(eCollideType::Background);
+	SmileList->AddCollider(SmileCdforBackground);
+	CCollider2D* SmileCdforHit = new CCollider2D;
+	SmileCdforHit->SetCollideType(eCollideType::Hit);
+	SmileList->AddCollider(SmileCdforHit);
+
+	//Smile->AddComponent<CCollider2D>(eComponentType::);
 	//mt->SetTexture(paintTexture);
 
 	// Particle
 	CGameObject* particle = new CGameObject();
 	particle->SetName(L"Particle");
 	AddGameObject(eLayerType::Monster, particle, L"Particle", Vector3(0.0f, 0.0f, 1.0f), Vector3(0.2f, 0.2f, 0.2f), false, L"", L"", false);
-	CParticleSystem* pts = particle->AddComponent<CParticleSystem>();
+	CParticleSystem* pts = particle->AddComponent<CParticleSystem>(eComponentType::Particle);
 
 
 	// Camera
 	CGameObject* mainCamera = new CGameObject();
 	AddGameObject(eLayerType::Camera, mainCamera, L"MainCamera", Vector3(0.0f, 0.0f, -10.0f),
 		Vector3(1.0f, 1.0f, 1.0f), false, L"", L"", false);
-	CCamera* mainCamComp = mainCamera->AddComponent<CCamera>();
+	CCamera* mainCamComp = mainCamera->AddComponent<CCamera>(eComponentType::Camera);
 	mainCamComp->SetCameraType(eCameraType::Main);
 	mainCamComp->TurnLayerMask(eLayerType::UI, false);
 	CCameraMoveScript* CameraMoveScript = mainCamera->GetComponent<CCameraMoveScript>(eComponentType::Script);
@@ -79,7 +91,7 @@ void CTestScene::Initialize()
 	CGameObject* light = new CGameObject();
 	light->SetName(L"light");
 	AddGameObject(eLayerType::Light, light, L"light", Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f), false, L"", L"", false);
-	CLight* lightComp = light->AddComponent<CLight>();
+	CLight* lightComp = light->AddComponent<CLight>(eComponentType::Light);
 	lightComp->SetLightType(eLightType::Directional);
 	lightComp->SetColor(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 
@@ -87,7 +99,7 @@ void CTestScene::Initialize()
 		CGameObject* light = new CGameObject();
 		light->SetName(L"Smile");
 		AddGameObject(eLayerType::Light, light, L"light", Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f), false, L"", L"", false);
-		CLight* lightComp = light->AddComponent<CLight>();
+		CLight* lightComp = light->AddComponent<CLight>(eComponentType::Light);
 		lightComp->SetLightType(eLightType::Point);
 		lightComp->SetColor(Vector4(0.0f, 0.0f, 1.0f, 1.0f));
 		lightComp->SetRadius(3.0f);

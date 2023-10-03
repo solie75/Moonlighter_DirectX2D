@@ -4,6 +4,7 @@
 #include "CKeyMgr.h"
 #include "CFireBall.h"
 #include "CCollider2D.h"
+#include "CColliderMgr.h"
 #include "CDesertBossScript.h"
 #include <random>
 
@@ -37,7 +38,9 @@ void CDesertBossRhombusScript::Update()
 	CTransform* thisTr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	Vector3 thisPos = thisTr->GetPosition();
 	CAnimator* at = this->GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
-	CCollider2D* cd = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
+	CColliderMgr* CDList = this->GetOwner()->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+	CCollider2D* CDforBackground = CDList->GetCollider(eCollideType::Background);
+
 
 	CDesertBossScript* HeadScript = parentObj->GetParentObject()->GetComponent<CDesertBossScript>(eComponentType::Script);
 
@@ -75,18 +78,18 @@ void CDesertBossRhombusScript::Update()
 		Vector3 v3 = tr->GetPosition();
 
 		// 벽과 충돌했을 때 mAimNormal 변경
-		Vector2 otherPos = cd->GetColliderData(eLayerType::Background).pos;
+		Vector2 otherPos = CDforBackground->GetColliderData(eLayerType::Background).pos;
 		CCollider2D::ColliderData CD;
 		CD.id = 0;
 		CD.type = eLayerType::End;
 		CD.pos = Vector2(0.0f, 0.0f);
-		if (cd->GetColliderData(eLayerType::Monster).id != 0)
+		if (CDforBackground->GetColliderData(eLayerType::Monster).id != 0)
 		{
-			CD = cd->GetColliderData(eLayerType::Monster);
+			CD = CDforBackground->GetColliderData(eLayerType::Monster);
 		}
-		if (cd->GetColliderData(eLayerType::Background).id != 0)
+		if (CDforBackground->GetColliderData(eLayerType::Background).id != 0)
 		{
-			CD = cd->GetColliderData(eLayerType::Background);
+			CD = CDforBackground->GetColliderData(eLayerType::Background);
 		}
 
 
@@ -176,8 +179,8 @@ void CDesertBossRhombusScript::Update()
 					fb->SetSpeed(1.0f);
 					ownScene->AddGameObject(eLayerType::Projectile, fb, L"Fire_Ball", FireBallPos, Vector3(0.2f, 0.2f, 0.0f),
 						true, L"Mesh", L"mt_atlas_Fire_Ball", true);
-					CCollider2D* cd = fb->AddComponent<CCollider2D>();
-					cd->SetSize(Vector2(0.5f, 0.5f));
+					//CCollider2D* cd = fb->AddComponent<CCollider2D>();
+					//cd->SetSize(Vector2(0.5f, 0.5f));
 					CAnimator* fireballAT = fb->GetComponent<CAnimator>(eComponentType::Animator);
 					fireballAT->PlayAnimation(L"Fire_Ball", true);
 					CTransform* fireballTr = fb->GetComponent<CTransform>(eComponentType::Transform);

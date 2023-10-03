@@ -27,23 +27,25 @@ private:
 
     CTransform* mTransform;
 
-    Vector3 mPosition;
+    //Vector3 mPosition;
     Vector2 mSize;
     Vector2 mOffset;
+    float mRotationValue;
+
+    Vector3 mColliderPosition;
+    Vector3 mColliderScale;
+    eLayerType mLayerType;
 
     CConstantBuffer* mColliderCB;
     
     UINT mDamege;
 
+    Matrix mWorldMat;
+
     bool mIsCollider;
 public:
     CCollider2D();
     ~CCollider2D();
-
-    /*virtual void Initialize() override;
-    virtual void Update() override;
-    virtual void LateUpdate();
-    virtual void Render() override;*/
 
     void Initialize();
     void Update();
@@ -55,7 +57,9 @@ public:
     void SetCollideType(eCollideType type) { mCollideType = type; }
     eCollideType GetCollideType() { return mCollideType; }
 
-    Vector2 GetColliderPosition() { return Vector2(mPosition.x, mPosition.y); }
+    eLayerType GetLayerType() { return mLayerType; }
+
+    //Vector2 GetColliderPosition() { return Vector2(mPosition.x, mPosition.y); }
     Vector2 GetSize() { return mSize; }
     void SetSize(Vector2 size) { mSize = size; }
     void SetOffset(Vector2 offset) { mOffset = offset; }
@@ -64,6 +68,10 @@ public:
     CConstantBuffer* GetColliderCB() { return mColliderCB; }
     bool GetIsCollider() { return mIsCollider; }
     UINT GetColliderDamege() { return mDamege; }
+    Matrix& GetColliderWorldMatrix() { return mWorldMat; }
+    Vector3 GetColliderPosition() { return mColliderPosition; }
+    Vector3 GetColliderScale() { return mColliderScale; }
+
     size_t GetColliderDataListSize()
     {
         return mColliderDataList.size();

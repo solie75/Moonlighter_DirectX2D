@@ -1,6 +1,7 @@
 #include "CColliderMgr.h"
 
 CColliderMgr::CColliderMgr()
+	: CComponent(eComponentType::ColliderList)
 {
 }
 
@@ -24,7 +25,7 @@ void CColliderMgr::LateUpdate()
 {
 	for (CCollider2D* collider : ColliderList)
 	{
-		collider->LateUpdate();
+		collider->LateUpdate(this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform));
 	}
 }
 

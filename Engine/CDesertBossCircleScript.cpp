@@ -3,6 +3,7 @@
 #include "CTimeMgr.h"
 #include "CKeyMgr.h"
 #include "CCollider2D.h"
+#include "CColliderMgr.h"
 #include "CDesertBossScript.h"
 #include <random>
 
@@ -34,8 +35,9 @@ void CDesertBossCircleScript::Update()
 	CTransform* thisTr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	Vector3 thisPos = thisTr->GetPosition();
 	CAnimator* at = this->GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
-	CCollider2D* cd = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
-	
+	CColliderMgr* CdList = this->GetOwner()->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+	CCollider2D * CDforBackground = CdList->GetCollider(eCollideType::Background);
+
 	CDesertBossScript* HeadScript = parentObj->GetComponent<CDesertBossScript>(eComponentType::Script);
 
 	// Parts Attack Enter
@@ -71,47 +73,47 @@ void CDesertBossCircleScript::Update()
 	if (mCircleAttackState == eCircleAttackState::Parts)
 	{
 		// 벽과 충돌했을 때 mAimNormal 변경
-		Vector2 otherPos = cd->GetColliderData(eLayerType::Background).pos;
-		CCollider2D::ColliderData CD;
-		CD.id = 0;
-		CD.type = eLayerType::End;
-		CD.pos = Vector2(0.0f, 0.0f);
+		Vector2 otherPos = CDforBackground->GetColliderData(eLayerType::Background).pos;
+		CCollider2D::ColliderData CdData;
+		CdData.id = 0;
+		CdData.type = eLayerType::End;
+		CdData.pos = Vector2(0.0f, 0.0f);
 
-		if (cd->GetColliderData(eLayerType::Monster).id != 0)
+		if (CDforBackground->GetColliderData(eLayerType::Monster).id != 0)
 		{
-			CD = cd->GetColliderData(eLayerType::Monster);
+			CdData = CDforBackground->GetColliderData(eLayerType::Monster);
 		}
-		if (cd->GetColliderData(eLayerType::Background).id != 0)
+		if (CDforBackground->GetColliderData(eLayerType::Background).id != 0)
 		{
-			CD = cd->GetColliderData(eLayerType::Background);
+			CdData = CDforBackground->GetColliderData(eLayerType::Background);
 		}
 		
-		if (CD.type == eLayerType::Monster) // 충돌체가 배경 
+		if (CdData.type == eLayerType::Monster) // 충돌체가 배경 
 		{
-			if (CD.id != CollideId)
+			if (CdData.id != CollideId)
 			{
-				mAimNormal.x = thisPos.x - CD.pos.x;
-				mAimNormal.y = thisPos.y - CD.pos.y;
-				CollideId = CD.id;
+				mAimNormal.x = thisPos.x - CdData.pos.x;
+				mAimNormal.y = thisPos.y - CdData.pos.y;
+				CollideId = CdData.id;
 
 				mAimNormal.Normalize();
 			}
 			
 		}
-		if (CD.type == eLayerType::Background) // 충돌체가 배경 벽일 때
+		if (CdData.type == eLayerType::Background) // 충돌체가 배경 벽일 때
 		{
-			if (CD.id != CollideId)
+			if (CdData.id != CollideId)
 			{
 				if (otherPos.x == 0) // 충돌한 벽 충돌체가 Up 과 Down 일 때
 				{
 					mAimNormal.y *= -1;
-					CollideId = CD.id;
+					CollideId = CdData.id;
 					mAimNormal.Normalize();
 				}
 				if (otherPos.y == 0)
 				{
 					mAimNormal.x *= -1;
-					CollideId = CD.id;
+					CollideId = CdData.id;
 					mAimNormal.Normalize();
 				}
 			}
@@ -174,8 +176,8 @@ void CDesertBossCircleScript::Update()
 				CFireBall* fb = new CFireBall; //(i, BossHeadPos) 여기에서 회전행렬 소스 전달 monster 면 화면에 나온다.
 				ownScene->AddGameObject(eLayerType::Projectile, fb, L"Fire_Ball", FireBallPos, Vector3(0.2f, 0.2f, 0.0f),
 					true, L"Mesh", L"mt_atlas_Fire_Ball", true);
-				CCollider2D* cd = fb->AddComponent<CCollider2D>();
-				cd->SetSize(Vector2(0.5f, 0.5f));
+				/*CCollider2D* cd = fb->AddComponent<CCollider2D>(); 
+				cd->SetSize(Vector2(0.5f, 0.5f));*/
 				CAnimator* fireball = fb->GetComponent<CAnimator>(eComponentType::Animator);
 				fireball->PlayAnimation(L"Fire_Ball", true);
 				CTransform* fireballTr = fb->GetComponent<CTransform>(eComponentType::Transform);
@@ -188,8 +190,6 @@ void CDesertBossCircleScript::Update()
 			mtime = 0.0f;// 한번 쏘고 0으로 초기화 한 뒤 또 솔 수 있다.
 		}
 	}
-
-	
 
 	CScript::Update();
 }

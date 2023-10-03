@@ -15,16 +15,6 @@ private:
 	//UINT64 mCollisionID;
 
 public:
-	/*struct collisionID
-	{
-		struct
-		{
-			UINT Left;
-			UINT Right;
-		};
-		UINT64 CollisionId;
-	};*/
-
 	CCollisionMgr();
 	~CCollisionMgr();
 
