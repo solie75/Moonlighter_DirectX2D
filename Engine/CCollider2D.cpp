@@ -99,5 +99,9 @@ void CCollider2D::OnCollisionStay(CCollider2D* other)
 
 void CCollider2D::OnCollisionExit(CCollider2D* other)
 {
-    mColliderDataList.erase(other->GetColliderID());
+    std::map<UINT, ColliderData>::iterator iter = mColliderDataList.find(other->GetColliderID());
+    if (iter != mColliderDataList.end())
+    {
+        mColliderDataList.erase(other->GetColliderID());
+    }
 }

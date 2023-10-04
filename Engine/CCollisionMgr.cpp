@@ -51,27 +51,70 @@ void CCollisionMgr::DecreaseDeadObject(eLayerType leftLayer, eLayerType rightLay
 	{
 		for (CGameObject* rightObj : rights)
 		{
-			// 두 개의 객체에 대한 충돌의 검색
-			CColliderMgr* LeftColList = leftObj->GetComponent<CColliderMgr>(eComponentType::ColliderList);
-			CColliderMgr* RightColList = rightObj->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+			vector<CCollider2D*> RightCdList = rightObj->GetComponent<CColliderMgr>(eComponentType::ColliderList)->GetColliderList();
+			vector<CCollider2D*> LeftCdList = leftObj->GetComponent<CColliderMgr>(eComponentType::ColliderList)->GetColliderList();
 
-			for (CCollider2D* LeftCol : LeftColList->GetColliderList())
+			if (leftObj->GetState() == CGameObject::eObjectState::Dead)
 			{
-				for (CCollider2D* RightCol : RightColList->GetColliderList())
+				for (CCollider2D* RightCol : RightCdList)
 				{
-					if (LeftCol != nullptr && RightCol != nullptr)
+					for (CCollider2D* LeftCol : LeftCdList)
 					{
-						if (leftObj->GetState() == CGameObject::eObjectState::Dead)
-						{
-							RightCol->OnCollisionExit(LeftCol);
-						}
-						if (rightObj->GetState() == CGameObject::eObjectState::Dead)
-						{
-							LeftCol->OnCollisionExit(RightCol);
-						}
+						RightCol->OnCollisionExit(LeftCol);
 					}
 				}
 			}
+			if (rightObj->GetState() == CGameObject::CGameObject::Dead)
+			{
+				for (CCollider2D* LeftCol : LeftCdList)
+				{
+					for (CCollider2D* RightCol : RightCdList)
+					{
+						LeftCol->OnCollisionExit(RightCol);
+					}
+				}
+			}
+
+
+			//// 두 개의 객체에 대한 충돌의 검색
+			//CColliderMgr* LeftColList = leftObj->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+			//CColliderMgr* RightColList = rightObj->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+
+
+
+			//// Background 충돌체를 가지고 객체의 Dead 상태를 판단한다.
+			//CCollider2D* LeftColforBackground = LeftColList->GetCollider(eCollideType::Background);
+			//CCollider2D* RightColforBackground = RightColList->GetCollider(eCollideType::Background);
+
+			//if (LeftColforBackground != nullptr && RightColforBackground)
+			//{
+			//	if (leftObj->GetState() == CGameObject::eObjectState::Dead)
+			//	{
+			//		RightColforBackground->OnCollisionExit(LeftColforBackground);
+			//	}
+			//	if (rightObj->GetState() == CGameObject::eObjectState::Dead)
+			//	{
+			//		LeftCol->OnCollisionExit(RightCol);
+			//	}
+			//}
+
+			//for (CCollider2D* LeftCol : LeftColList->GetColliderList())
+			//{
+			//	for (CCollider2D* RightCol : RightColList->GetColliderList())
+			//	{
+			//		if (LeftCol != nullptr && RightCol != nullptr)
+			//		{
+			//			if (leftObj->GetState() == CGameObject::eObjectState::Dead)
+			//			{
+			//				RightCol->OnCollisionExit(LeftCol);
+			//			}
+			//			if (rightObj->GetState() == CGameObject::eObjectState::Dead)
+			//			{
+			//				LeftCol->OnCollisionExit(RightCol);
+			//			}
+			//		}
+			//	}
+			//}
 		}
 	}
 }

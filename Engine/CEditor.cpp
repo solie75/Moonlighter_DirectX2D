@@ -22,7 +22,7 @@ void CEditor::Initialize()
 	mDebugObjects[(UINT)eColliderType::Rect] = new CDebugObject();
 	//mDebugObjects[(UINT)eColliderType::Rect]->AddComponent<CTransform>();
 	// DebugObject 는 CGameObject 를 상속 받았기 때문에 기본적으로 CTransform 컴포넌트를 갖고 있지 않나>
-	CMeshRender* mr = mDebugObjects[(UINT)eColliderType::Rect]->AddComponent<CMeshRender>();
+	CMeshRender* mr = mDebugObjects[(UINT)eColliderType::Rect]->AddComponent<CMeshRender>(eComponentType::MeshRender);
 	mr->SetMaterial(material);
 	mr->SetMesh(mesh);
 }

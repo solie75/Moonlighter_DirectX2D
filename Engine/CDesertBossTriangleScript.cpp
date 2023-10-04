@@ -6,6 +6,7 @@
 #include "CKeyMgr.h"
 #include "CLavaBall.h"
 #include "CCollider2D.h"
+#include "CColliderMgr.h"
 #include <random>
 
 CDesertBossTriangleScript::CDesertBossTriangleScript()
@@ -35,7 +36,10 @@ void CDesertBossTriangleScript::Update()
 	CTransform* thisTr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	Vector3 thisPos = thisTr->GetPosition();
 	CAnimator* at = this->GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
-	CCollider2D* cd = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
+	CColliderMgr* CdList = this->GetOwner()->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+	CCollider2D* CDforBackgound = CdList->GetCollider(eCollideType::Background);
+
+	//CCollider2D* cd = this->GetOwner()->GetComponent<CCollider2D>(eComponentType::Collider2D);
 
 	if (HeadScript->GetAttackState() == CDesertBossScript::eAttackState::Parts && mTriangleAttackState != eTriangleAttackState::Parts)
 	{
@@ -67,18 +71,18 @@ void CDesertBossTriangleScript::Update()
 
 	if (mTriangleAttackState == eTriangleAttackState::Parts)
 	{
-		Vector2 otherPos = cd->GetColliderData(eLayerType::Background).pos;
+		Vector2 otherPos = CDforBackgound->GetColliderData(eLayerType::Background).pos;
 		CCollider2D::ColliderData CD;
 		CD.id = 0;
 		CD.type = eLayerType::End;
 		CD.pos = Vector2(0.0f, 0.0f);
-		if (cd->GetColliderData(eLayerType::Monster).id != 0)
+		if (CDforBackgound->GetColliderData(eLayerType::Monster).id != 0)
 		{
-			CD = cd->GetColliderData(eLayerType::Monster);
+			CD = CDforBackgound->GetColliderData(eLayerType::Monster);
 		}
-		if (cd->GetColliderData(eLayerType::Background).id != 0)
+		if (CDforBackgound->GetColliderData(eLayerType::Background).id != 0)
 		{
-			CD = cd->GetColliderData(eLayerType::Background);
+			CD = CDforBackgound->GetColliderData(eLayerType::Background);
 		}
 
 
