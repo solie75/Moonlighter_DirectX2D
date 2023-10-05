@@ -3,7 +3,7 @@
 CCollider2D::CCollider2D()
 	//: CComponent(eComponentType::Collider2D)
     : mTransform(nullptr)
-    , mSize(Vector2::One)
+    , mColliderSize(Vector2::One)
     , mOffset(Vector2::Zero)
     , mIsCollider(false)
     , mDamege(0)
@@ -13,6 +13,7 @@ CCollider2D::CCollider2D()
     mCollideType = eCollideType::Background;
     mRotationValue = 0.0f;
     mLayerType = eLayerType::End;
+    OwnerObjectSize = Vector2::One;
 }
 
 
@@ -40,11 +41,6 @@ void CCollider2D::LateUpdate(CTransform* tr)
 {
     mLayerType = tr->GetOwner()->GetLayerType();
 
-    Vector3 CdScale = tr->GetScale();
-    CdScale.x *= mSize.x;
-    CdScale.y *= mSize.y;
-
-    mColliderScale = CdScale;
 
     Vector3 CdPos = tr->GetPosition();
     CdPos.x += mOffset.x; // offset
@@ -52,11 +48,9 @@ void CCollider2D::LateUpdate(CTransform* tr)
 
     mColliderPosition = CdPos;
 
-    //mPosition = CdPos;
-
     DebugMesh debugMesh = {};
     debugMesh.position = CdPos;
-    debugMesh.scale = CdScale;
+    debugMesh.scale = Vector3(mColliderSize.x, mColliderSize.y, 0.f);
     debugMesh.rotation = tr->GetRotation();
     debugMesh.ColliderType = eColliderType::Rect;
     debugMesh.CollideType = mCollideType;
@@ -66,7 +60,7 @@ void CCollider2D::LateUpdate(CTransform* tr)
 
     // 충돌체의 Worldmatrix 변환
     mWorldMat = Matrix::Identity;
-    Matrix scale = Matrix::CreateScale(CdScale);
+    Matrix scale = Matrix::CreateScale(Vector3(mColliderSize.x, mColliderSize.y, 0.f));
     Matrix rotation;
     rotation = Matrix::CreateRotationX(tr->GetRotation().x);
     rotation *= Matrix::CreateRotationY(tr->GetRotation().y);

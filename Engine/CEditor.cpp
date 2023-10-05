@@ -66,11 +66,9 @@ void CEditor::DebugRender(const DebugMesh& mesh)
 	CDebugObject* debugObj = mDebugObjects[(UINT)mesh.ColliderType];
 
 	CTransform* tr = debugObj->GetComponent<CTransform>(eComponentType::Transform);
-	// 이러면 mDebugObjects[ColliderType::Rect]의 Transform이 바뀌에 되지 않나?
-	//CCollider2D* cd2D = debugObj->GetComponent<CCollider2D>(eComponentType::Collider2D);
 
 	Vector3 pos = mesh.position;
-	pos.z -= 0.0001f;// 1.0002f
+	pos.z -= 0.0001f;
 
 
 	tr->SetPosition(pos);

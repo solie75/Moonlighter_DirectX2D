@@ -45,20 +45,20 @@ void CDesertDungeonScene::Initialize()
 	CColliderMgr* KatamariCdList = Katamari->AddComponent<CColliderMgr>(eComponentType::ColliderList);
 	
 	CCollider2D* KatamariCDforBackground = new CCollider2D;
-	//CCollider2D* KatamariCDforBackground = Katamari->AddComponent<CCollider2D>();
 	KatamariCDforBackground->SetName(L"KatamariCDforBackground");
 	KatamariCDforBackground->SetCollideType(eCollideType::Background);
-	KatamariCDforBackground->SetSize(Vector2(0.71f, 0.3f));
+	
 	KatamariCDforBackground->SetOffset(Vector2(0.0f, -0.24f));
 	KatamariCdList->AddCollider(KatamariCDforBackground);
+	KatamariCDforBackground->SetSize(Vector2(0.71f, 0.3f));
 
 	CCollider2D* KatamariCDforHit = new CCollider2D;
-	//CCollider2D* KatamariCDforHit = Katamari->AddComponent<CCollider2D>();
 	KatamariCDforHit->SetName(L"KatamariCDforHit");
 	KatamariCDforHit->SetCollideType(eCollideType::Hit);
-	KatamariCDforHit->SetSize(Vector2(0.71f, 0.6f));
+	
 	KatamariCDforHit->SetOffset(Vector2(0.0f, -0.12f));
 	KatamariCdList->AddCollider(KatamariCDforHit);
+	KatamariCDforHit->SetSize(Vector2(0.71f, 0.6f));
 
 	// Background
 	CGameObject* BackgroundUp = new CGameObject();
@@ -66,34 +66,29 @@ void CDesertDungeonScene::Initialize()
 		Vector3(8.0f, 0.2f, 0.0f), false, L"Mesh", L"", false);
 	CColliderMgr* BackgroundUpCDList = BackgroundUp->AddComponent<CColliderMgr>(eComponentType::ColliderList);
 	BackgroundUpCDList->AddCollider(new CCollider2D);
-	//CCollider2D* BackgroundCD = BackgroundUp->AddComponent<CCollider2D>();
 
 	CGameObject* BackgroundDown = new CGameObject();
 	AddGameObject(eLayerType::Background, BackgroundDown, L"BackgroundBorderDown", Vector3(0.0f, -1.8f, 4.0002f),
 		Vector3(8.0f, 0.2f, 0.0f), false, L"Mesh", L"", false);
 	CColliderMgr* BackgroundDownCDList = BackgroundDown->AddComponent<CColliderMgr>(eComponentType::ColliderList);
 	BackgroundDownCDList->AddCollider(new CCollider2D);
-	//BackgroundCD = BackgroundDown->AddComponent<CCollider2D>();
 
 	CGameObject* BackgroundLeft = new CGameObject();
 	AddGameObject(eLayerType::Background, BackgroundLeft, L"BackgroundBorderLeft", Vector3(-3.2f, 0.0f, 4.0003f),
 		Vector3(0.2f, 4.0f, 0.0f), false, L"Mesh", L"", false);
 	CColliderMgr* BackgroundLeftCDList = BackgroundLeft->AddComponent<CColliderMgr>(eComponentType::ColliderList);
 	BackgroundLeftCDList->AddCollider(new CCollider2D);
-	//BackgroundCD = BackgroundLeft->AddComponent<CCollider2D>();
 
 	CGameObject* BackgroundRight = new CGameObject();
 	AddGameObject(eLayerType::Background, BackgroundRight, L"BackgroundBorderRight", Vector3(3.2f, 0.0f, 4.0004f),
 		Vector3(0.2f, 4.0f, 0.0f), false, L"Mesh", L"", false);
 	CColliderMgr* BackgroundRightCDList = BackgroundRight->AddComponent<CColliderMgr>(eComponentType::ColliderList);
 	BackgroundRightCDList->AddCollider(new CCollider2D);
-	//BackgroundCD = BackgroundRight->AddComponent<CCollider2D>();
 
 	// weapon
 	CWeapon* Weapon = new CWeapon();
 	AddGameObject(eLayerType::Player, Weapon, L"Weapon", Vector3(0.0f, 0.0f, 0.0f),
 		Vector3(1.0f, 1.0f, 0.0f), true, L"Mesh", L"", true);
-	//Weapon->SetPlayerToWeapon(Will);
 	Weapon->SetParentObject(player);
 	Weapon->SetScene(this);
 

@@ -31,32 +31,9 @@ void CKatamariScript::Update()
 	CCollider2D* thisCDforHit = thisCDList->GetCollider(eCollideType::Hit);
 	CTransform* thisTr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 
-	mPosBeforeCollide = thisTr->GetPosition();
+	//mPosBeforeCollide = thisTr->GetPosition();
 
-	if (thisCDforBackground->GetColliderData(eLayerType::Background).id != 0)
-	{
-		// background Collider 로부터 떨어지기 위해 충돌 직전의 위치로 되돌린다.
-		Vector3 pos = thisTr->GetPosition();
-		switch (mAimSight->GetSight())
-		{
-		case CAimSight::eSight::Down:
-			pos.y += (float)(4.0 * CTimeMgr::GetInst()->GetDeltaTime());
-			thisTr->SetPosition(pos);
-			break;
-		case CAimSight::eSight::Right:
-			pos.x -= (float)(4.0 * CTimeMgr::GetInst()->GetDeltaTime());
-			thisTr->SetPosition(pos);
-			break;
-		case CAimSight::eSight::Left:
-			pos.x += (float)(4.0 * CTimeMgr::GetInst()->GetDeltaTime());
-			thisTr->SetPosition(pos);
-			break;
-		case CAimSight::eSight::Up:
-			pos.y -= (float)(4.0 * CTimeMgr::GetInst()->GetDeltaTime());
-			thisTr->SetPosition(pos);
-			break;
-		}
-	}
+	
 
 	// animation Name
 	std::wstring aniName = L"Monster_Katamari_Attack_";
@@ -173,6 +150,34 @@ void CKatamariScript::Update()
 
 void CKatamariScript::LateUpdate()
 {
+	CColliderMgr* thisCDList = this->GetOwner()->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+	CCollider2D* thisCDforBackground = thisCDList->GetCollider(eCollideType::Background);
+	CTransform* thisTr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
+
+	if (thisCDforBackground->GetColliderData(eLayerType::Background).id != 0)
+	{
+		// background Collider 로부터 떨어지기 위해 충돌 직전의 위치로 되돌린다.
+		Vector3 pos = thisTr->GetPosition();
+		switch (mAimSight->GetSight())
+		{
+		case CAimSight::eSight::Down:
+			pos.y += (float)(4.0 * CTimeMgr::GetInst()->GetDeltaTime());
+			thisTr->SetPosition(pos);
+			break;
+		case CAimSight::eSight::Right:
+			pos.x -= (float)(4.0 * CTimeMgr::GetInst()->GetDeltaTime());
+			thisTr->SetPosition(pos);
+			break;
+		case CAimSight::eSight::Left:
+			pos.x += (float)(4.0 * CTimeMgr::GetInst()->GetDeltaTime());
+			thisTr->SetPosition(pos);
+			break;
+		case CAimSight::eSight::Up:
+			pos.y -= (float)(4.0 * CTimeMgr::GetInst()->GetDeltaTime());
+			thisTr->SetPosition(pos);
+			break;
+		}
+	}
 }
 
 void CKatamariScript::ChangeSight()

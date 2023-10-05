@@ -28,7 +28,9 @@ private:
     CTransform* mTransform;
 
     //Vector3 mPosition;
-    Vector2 mSize;
+    Vector2 OwnerObjectSize;
+
+    Vector2 mColliderSize;
     Vector2 mOffset;
     float mRotationValue;
 
@@ -59,9 +61,26 @@ public:
 
     eLayerType GetLayerType() { return mLayerType; }
 
-    //Vector2 GetColliderPosition() { return Vector2(mPosition.x, mPosition.y); }
-    Vector2 GetSize() { return mSize; }
-    void SetSize(Vector2 size) { mSize = size; }
+    void SetOwnerObjectScale(Vector3 objScale)
+    {
+        
+        OwnerObjectSize.x = objScale.x;
+        OwnerObjectSize.y = objScale.y;
+
+        // SetSize() 를 호출하지 않는 경우 : 충돌체와 객체의 크기가 똑같은 경우
+        if (mColliderSize != Vector2::One)
+        {
+            mColliderSize.x *= objScale.x;
+            mColliderSize *= objScale.y;
+        }
+        else
+        {
+            mColliderSize.x = objScale.x;
+            mColliderSize.y = objScale.y;
+        }
+    }
+    Vector2 GetSize() { return mColliderSize; }
+    void SetSize(Vector2 size) { mColliderSize.x *= size.x; mColliderSize.y *= size.y; }
     void SetOffset(Vector2 offset) { mOffset = offset; }
     Vector2 GetOffset() { return mOffset; }
     UINT GetColliderID() { return mColliderID; }

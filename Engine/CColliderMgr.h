@@ -19,6 +19,7 @@ public:
 
 	void AddCollider(CCollider2D* Collider2D)
 	{
+		Collider2D->SetOwnerObjectScale(this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform)->GetScale());
 		ColliderList.push_back(Collider2D);
 	}
 
