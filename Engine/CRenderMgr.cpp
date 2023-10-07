@@ -169,6 +169,13 @@ void CRenderMgr::Init()
 			LoadTexture(L"HUD_MiniRoll", L"..\\Resource\\Texture\\UI\\HUD_MiniRoll.png");
 			LoadMaterial(shader, L"HUD_MiniRoll", eRenderingMode::CutOut);
 
+			// hp
+			LoadTexture(L"HealthBar_Monster", L"..\\Resource\\Texture\\UI\\HealthBar_Monster.png");
+			LoadMaterial(shader, L"HealthBar_Monster", eRenderingMode::CutOut);
+
+			LoadTexture(L"HealthBar_Monster_Background", L"..\\Resource\\Texture\\UI\\HealthBar_Monster_Background.png");
+			LoadMaterial(shader, L"HealthBar_Monster_Background", eRenderingMode::CutOut);
+
 		}
 		{ // Start Menu
 			LoadTexture(L"Start_Intro_Door_Left", L"..\\Resource\\Texture\\Start_Menu\\Start_Intro_Door_Left.png");

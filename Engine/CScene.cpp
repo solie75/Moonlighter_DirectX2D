@@ -66,7 +66,6 @@ void CScene::AddGameObject(eLayerType type, CGameObject* gameObj, const std::wst
 		CAnimator* at = gameObj->AddComponent<CAnimator>(eComponentType::Animator);
 		CResourceMgr::GetInst()->CreateAnimationTest(objName, at);
 	}
-	
 }
 
 void CScene::Destroy()

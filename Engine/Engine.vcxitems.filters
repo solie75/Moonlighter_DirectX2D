@@ -438,6 +438,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CTransform.h">
       <Filter>GameObject\Object\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CMonsterScript.h">
+      <Filter>GameObject\Component\Script\MonsterScript</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -637,6 +640,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CColliderMgr.cpp">
       <Filter>GameObject\Component\ColliderMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CMonsterScript.cpp">
+      <Filter>GameObject\Component\Script\MonsterScript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -32,6 +32,7 @@ enum class eLayerType
 	Grid,
 	Player,
 	Monster,
+	Monster_Boss,
 	Projectile,
 	Light,
 	UI,
@@ -40,6 +41,7 @@ enum class eLayerType
 	Weapon,
 	PlayerProjectile,
 	Portal,
+	HP,
 	End,
 };
 

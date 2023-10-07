@@ -1,5 +1,6 @@
 #pragma once
-#include "CScript.h"
+
+#include "CMonsterScript.h"
 
 #include "CAimSight.h"
 #include "CState.h"
@@ -8,13 +9,14 @@
 #include "CCollider2D.h"
 
 class CKatamariScript :
-    public CScript
+    public CMonsterScript
 {
 private:
-    CState* mState;
-    CAimSight* mAimSight;
+    //CState* mState;
+    //CAimSight* mAimSight;
     Vector3 mPosBeforeCollide;
 
+    //CHPScript* mHpScript;
 public:
     CKatamariScript();
     ~CKatamariScript();
@@ -24,6 +26,6 @@ public:
     virtual void LateUpdate();
 
     void ChangeSight();
-    void ChangeState(eState state) { mState->SetState(state); };
+    void ChangeState(eState state) { GetMonsterState()->SetState(state); };
 };
 

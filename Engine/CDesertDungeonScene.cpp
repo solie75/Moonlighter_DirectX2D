@@ -7,6 +7,7 @@
 #include "CTimeMgr.h"
 #include "CPlayerMoveScript.h"
 #include "CKatamariScript.h"
+#include "CHPScript.h"
 
 
 CDesertDungeonScene::CDesertDungeonScene()
@@ -26,6 +27,7 @@ void CDesertDungeonScene::Initialize()
 	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Player, eLayerType::Background, true);
 	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Player, eLayerType::Monster, true);
 	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Background, eLayerType::Monster, true);
+	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::PlayerProjectile, eLayerType::Monster, true);
 
 	// player
 	//CPlayer* player = new CPlayer;
@@ -35,10 +37,20 @@ void CDesertDungeonScene::Initialize()
 
 	// Monster
 	CGameObject* Katamari = new CGameObject;
-	AddGameObject(eLayerType::Monster, Katamari, L"Katamari", Vector3(-2.0f, 0.0f, 1.0003f)
+	AddGameObject(eLayerType::Monster, Katamari, L"Katamari", Vector3(-2.0f, 0.0f, 4.0003f)
 		, Vector3(0.6f, 0.8f, 0.0f), true, L"Mesh", L"", true);
 	CKatamariScript* KatamariScript = Katamari->AddComponent<CKatamariScript>(eComponentType::Script);
 	CAnimator* KatamariAt = Katamari->GetComponent<CAnimator>(eComponentType::Animator);
+
+	// Monster HP
+	CGameObject* KatamariHP_Background = new CGameObject;
+	KatamariHP_Background->SetParentObject(Katamari);
+	AddGameObject(eLayerType::HP, KatamariHP_Background, L"KatamariHP_Background", Vector3(0.0f, 0.0f, 0.0f)
+		, Vector3(0.2f, 0.03f, 0.0f), true, L"Mesh", L"mt_HealthBar_Monster_Background", false);
+	CHPScript* HpBackground = KatamariHP_Background->AddComponent<CHPScript>(eComponentType::Script);
+	HpBackground->AddHpObject(this);
+	HpBackground->SetHpOffSet(Vector2(-0.12f, 0.15f));
+	
 
 	KatamariScript->ChangeState(eState::Idle);
 

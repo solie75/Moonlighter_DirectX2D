@@ -3,15 +3,11 @@
 #include "CTimeMgr.h"
 #include <random>
 #include "CColliderMgr.h"
-//#include "CCollider2D.h"
+#include "CHPScript.h"
 
 CKatamariScript::CKatamariScript()
 {
-	mAimSight = new CAimSight;
-	mState = new CState;
-	mState->SetState(eState::End);
-	mState->SetState(eState::Pause);
-	mAimSight->SetSight(CAimSight::eSight::Down);
+	
 }
 
 CKatamariScript::~CKatamariScript()
@@ -20,7 +16,9 @@ CKatamariScript::~CKatamariScript()
 
 void CKatamariScript::Initialize()
 {
-	CScript::Initialize();
+	CMonsterScript::Initialize();
+	GetOwner()->SetHP(100);
+	SetOwnerOnMonsterScript(GetOwner());
 }
 
 void CKatamariScript::Update()
@@ -31,14 +29,10 @@ void CKatamariScript::Update()
 	CCollider2D* thisCDforHit = thisCDList->GetCollider(eCollideType::Hit);
 	CTransform* thisTr = this->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 
-	//mPosBeforeCollide = thisTr->GetPosition();
-
-	
-
 	// animation Name
 	std::wstring aniName = L"Monster_Katamari_Attack_";
 
-	switch (mAimSight->GetSight())
+	switch (GetMonsterAimSight()->GetSight())
 	{
 	case CAimSight::eSight::Down :
 		aniName += L"Down_";
@@ -55,19 +49,21 @@ void CKatamariScript::Update()
 	}
 
 	// 상태 변화
-	if (mState->GetCurState() == eState::Idle)
+	eState curState = GetMonsterState()->GetCurState();
+	eState prevState = GetMonsterState()->GetPrevState();
+	if (curState == eState::Idle)
 	{
-		if (mState->GetPrevState() == eState::Pause)
+		if (prevState == eState::Pause)
 		{
 			aniName += L"First";
 			thisAt->PlayAnimation(aniName, false);
-			mState->SetState(eState::Idle);
+			GetMonsterState()->SetState(eState::Idle);
 		}
 		else if (thisAt->GetCurAnimation() != nullptr)
 		{
 			if (thisAt->GetCurAnimation()->IsComplete() == true)
 			{
-				mState->SetState(eState::Attack);
+				GetMonsterState()->SetState(eState::Attack);
 				aniName += L"Second";
 				thisAt->PlayAnimation(aniName, true);
 			}
@@ -75,12 +71,12 @@ void CKatamariScript::Update()
 			{ 
 				if (thisCDforBackground->GetColliderData(eLayerType::Background).id != 0)
 				{
-					mState->SetState(eState::Pause);
+					GetMonsterState()->SetState(eState::Pause);
 				}
 				else
 				{
 					Vector3 pos = thisTr->GetPosition();
-					switch (mAimSight->GetSight())
+					switch (GetMonsterAimSight()->GetSight())
 					{
 					case CAimSight::eSight::Down:
 						pos.y -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
@@ -103,18 +99,18 @@ void CKatamariScript::Update()
 			}
 		}
 	}
-	else if (mState->GetCurState() == eState::Attack)
+	else if (curState == eState::Attack)
 	{
 		if (thisCDforBackground->GetColliderData(eLayerType::Background).id != 0)
 		{
-			mState->SetState(eState::Pause);
+			GetMonsterState()->SetState(eState::Pause);
 			aniName += L"Third";
 			thisAt->PlayAnimation(aniName, false);
 		}
 		else
 		{ 
 			Vector3 pos = thisTr->GetPosition();
-			switch (mAimSight->GetSight())
+			switch (GetMonsterAimSight()->GetSight())
 			{
 			case CAimSight::eSight::Down:
 				pos.y -= (float)(3.0 * CTimeMgr::GetInst()->GetDeltaTime());
@@ -135,17 +131,19 @@ void CKatamariScript::Update()
 			}
 		}
 	}
-	else if (mState->GetCurState() == eState::Pause)
+	else if (curState == eState::Pause)
 	{
 		if (thisAt->GetCurAnimation() != nullptr)
 		{
 			if (thisAt->GetCurAnimation()->IsComplete() == true)
 			{
 				ChangeSight();
-				mState->SetState(eState::Idle);
+				GetMonsterState()->SetState(eState::Idle);
 			}
 		}
 	}
+
+	CMonsterScript::Update();
 }
 
 void CKatamariScript::LateUpdate()
@@ -158,7 +156,7 @@ void CKatamariScript::LateUpdate()
 	{
 		// background Collider 로부터 떨어지기 위해 충돌 직전의 위치로 되돌린다.
 		Vector3 pos = thisTr->GetPosition();
-		switch (mAimSight->GetSight())
+		switch (GetMonsterAimSight()->GetSight())
 		{
 		case CAimSight::eSight::Down:
 			pos.y += (float)(4.0 * CTimeMgr::GetInst()->GetDeltaTime());
@@ -178,6 +176,8 @@ void CKatamariScript::LateUpdate()
 			break;
 		}
 	}
+
+	CMonsterScript::LateUpdate();
 }
 
 void CKatamariScript::ChangeSight()
@@ -196,7 +196,7 @@ void CKatamariScript::ChangeSight()
 	int randomInt = distribution(generator);
 
 	// 첫번재 방향 전환
-	UINT sightInt = (UINT)mAimSight->GetSight();
+	UINT sightInt = (UINT)GetMonsterAimSight()->GetSight();
 	if (randomInt > sightInt)
 	{
 		sightInt = randomInt - sightInt;
@@ -207,5 +207,5 @@ void CKatamariScript::ChangeSight()
 		sightInt -= randomInt;
 	}
 
-	mAimSight->SetSight((CAimSight::eSight)sightInt);
+	GetMonsterAimSight()->SetSight((CAimSight::eSight)sightInt);
 }
