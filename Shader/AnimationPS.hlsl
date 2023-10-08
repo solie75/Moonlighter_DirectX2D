@@ -18,6 +18,9 @@ struct VSOut
 float4 main(VSOut In) : SV_TARGET
 {
 	float4 color = (float4) 1.0f;
+    
+    float2 modifiendTexcoord = In.UV * SpriteSize + Offset;
+    color = atlasTexture.Sample(anisotropicSampler, modifiendTexcoord);
 
     if (AnimationType == 0) // 0 : Basic
     {

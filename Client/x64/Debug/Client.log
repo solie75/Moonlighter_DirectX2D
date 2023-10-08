@@ -1,7 +1,7 @@
 ﻿  unity_L9N01RP46BHMP9XB.cpp
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CAnimation.cpp(34,44): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CAnimation.cpp(43,32): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CAnimation.cpp(61,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CAnimation.cpp(35,44): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CAnimation.cpp(44,32): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CAnimation.cpp(62,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CArrow.cpp(34,43): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CArrow.cpp(47,41): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CArrow.cpp(51,39): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -59,7 +59,8 @@ D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CDungeonMgr.cpp(328,20): warning C4
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CFireBall.cpp(30,43): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CFireBall.cpp(45,26): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CFireBall.cpp(46,26): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CKatamariScript.cpp(196,16): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CKatamariScript.cpp(210,16): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CMonsterScript.cpp(54,37): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CPaintShader.cpp(7,56): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CPaintShader.cpp(8,57): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\shinjoongeun\Moonlighter_DirectX2D\Engine\CParticleShader.cpp(40,56): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
