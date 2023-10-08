@@ -13,9 +13,12 @@ CArrow::CArrow(UINT BowType, UINT sight, UINT arrowType)
 
 	CColliderMgr* CDList = this->AddComponent<CColliderMgr>(eComponentType::ColliderList);
 	CCollider2D* CDforBackground = new CCollider2D();
+	CDforBackground->SetSize(Vector2(0.07f, 0.32f));
 	CDforBackground->SetCollideType(eCollideType::Background);
 	CCollider2D* CDforHit = new CCollider2D();
 	CDforHit->SetCollideType(eCollideType::Hit);
+	CDforHit->SetColliderDamage(50);
+	CDforHit->SetSize(Vector2(0.07f, 0.32f));
 	CDList->AddCollider(CDforBackground);
 	CDList->AddCollider(CDforHit);
 }
@@ -81,6 +84,8 @@ void CArrow::Update()
 				Vector3 pos = Tr->GetPosition();
 				pos.x += direction.x * 0.1;
 				pos.y += direction.y * 0.1;
+				/*pos.x += direction.x * 0.0f;
+				pos.y += direction.y * 0.0f;*/
 				Tr->SetPosition(pos);
 				time = 0;
 			}

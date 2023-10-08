@@ -106,6 +106,7 @@ void CDesertDungeonScene::Initialize()
 
 	player->SetWeapon(Weapon);
 
+
 	// Main Camera
 	//CGameObject* mainCamera = new CGameObject;
 	AddGameObject(eLayerType::Camera, mainCamera, L"MainCamera", Vector3(0.0f, 0.0f, -10.0f),

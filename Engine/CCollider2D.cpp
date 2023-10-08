@@ -6,7 +6,7 @@ CCollider2D::CCollider2D()
     , mColliderSize(Vector2::One)
     , mOffset(Vector2::Zero)
     , mIsCollider(false)
-    , mDamege(0)
+    , mDamage(0)
 {
     mColliderNumber++;
     mColliderID = mColliderNumber;
@@ -81,7 +81,7 @@ void CCollider2D::OnCollisionEnter(CCollider2D* other)
     data.id = other->GetColliderID(); // 0부터 시작하는데 0을 없는 데이터의 기준으로 사용하므로
     data.type = other->GetLayerType();
     data.pos = Vector2(other->GetColliderPosition().x, other->GetColliderPosition().y);
-    data.damage = other->GetColliderDamege();
+    data.damage = other->GetColliderDamage();
 
     mColliderDataList.insert(std::make_pair(data.id, data));
     this;

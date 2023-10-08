@@ -1,4 +1,4 @@
-#include "CMonsterScript.h"
+    #include "CMonsterScript.h"
 #include "CColliderMgr.h"
 
 CMonsterScript::CMonsterScript()
@@ -10,6 +10,7 @@ CMonsterScript::CMonsterScript()
 	mAimSight = new CAimSight;
 	mAimSight->SetSight(CAimSight::eSight::Down);
 	mHitTime = 0.f;
+	//mHitColId = 0;
 }
 
 CMonsterScript::~CMonsterScript()
@@ -47,21 +48,21 @@ void CMonsterScript::Update()
 				curAni->SetAnimationType(eAnimationType::HitRed);
 			}
 		}
-	}
+	}  
 	else if (mState->GetCurState() == eState::Hit)
 	{
 		// 여기에서 시간의 흐름에 따라 AnimationPS.hlsl 에서 쓰일 AnimationType 을 변경한다.
 		mHitTime += CTimeMgr::GetDeltaTime();
 		CAnimation* curAni = mOwner->GetComponent<CAnimator>(eComponentType::Animator)->GetCurAnimation();
-		if (mHitTime > 0.2f && curAni->GetAnimationType() != eAnimationType::HitWhite)
+		if (mHitTime > 1.f && curAni->GetAnimationType() != eAnimationType::HitWhite)
 		{
 			curAni->SetAnimationType(eAnimationType::HitWhite);
 		}
-		else if (mHitTime > 0.4f && curAni->GetAnimationType() != eAnimationType::HitRed)
+		else if (mHitTime > 1.5f && curAni->GetAnimationType() != eAnimationType::HitRed)
 		{
 			curAni->SetAnimationType(eAnimationType::HitRed);
 		}
-		else if (mHitTime > 0.6)
+		else if (mHitTime > 2.0f)
 		{
 			curAni->SetAnimationType(eAnimationType::Basic);
 			mHitTime = 0.f;

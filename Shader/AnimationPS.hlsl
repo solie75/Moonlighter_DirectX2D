@@ -18,26 +18,29 @@ struct VSOut
 float4 main(VSOut In) : SV_TARGET
 {
 	float4 color = (float4) 1.0f;
-    
     float2 modifiendTexcoord = In.UV * SpriteSize + Offset;
-    color = atlasTexture.Sample(anisotropicSampler, modifiendTexcoord);
-
     if (AnimationType == 0) // 0 : Basic
     {
-        float2 modifiendTexcoord = In.UV * SpriteSize + Offset;
+       
         color = atlasTexture.Sample(anisotropicSampler, modifiendTexcoord);
     }
     else if (AnimationType == 1) // 1 : HitRed
     {
-        color = float4(1.0f, 0.0f, 0.0f, 1.0f);
+        color = atlasTexture.Sample(anisotropicSampler, modifiendTexcoord);
+        color *= float4(10.0f, 0.0f, 0.0f, 1.0f);
+        //color = atlasTexture.Sample(float4(1.0f, 0.0f, 0.0f, 1.0f), modifiendTexcoord);
     }
     else if (AnimationType == 2) // 2 : HitWhite
     {
-        color = float4(1.0f, 1.0f, 1.0f, 1.0f);
+        color = atlasTexture.Sample(anisotropicSampler, modifiendTexcoord);
+        color *= float4(10.0f, 10.0f, 10.0f, 1.0f);
+        //color = atlasTexture.Sample(float4(1.0f, 1.0f, 1.0f, 1.0f), modifiendTexcoord);
+        
     }
     
     // color *= lightsAttribute[0].color;
     float4 lightColor = float4(0.2f, 0.2f, 0.2f, 1.0f);
+    //float4 lightColor = float4(1.0f, 0.f, 0.f, 0.0f);
 	
     for (int i = 0; i < 2; i++)
     {

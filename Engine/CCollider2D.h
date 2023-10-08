@@ -40,7 +40,7 @@ private:
 
     CConstantBuffer* mColliderCB;
     
-    UINT mDamege;
+    UINT mDamage;
 
     Matrix mWorldMat;
 
@@ -86,7 +86,8 @@ public:
     UINT GetColliderID() { return mColliderID; }
     CConstantBuffer* GetColliderCB() { return mColliderCB; }
     bool GetIsCollider() { return mIsCollider; }
-    UINT GetColliderDamege() { return mDamege; }
+    void SetColliderDamage(UINT damage) { mDamage = damage; }
+    UINT GetColliderDamage() { return mDamage; }
     Matrix& GetColliderWorldMatrix() { return mWorldMat; }
     Vector3 GetColliderPosition() { return mColliderPosition; }
     Vector3 GetColliderScale() { return mColliderScale; }

@@ -14,6 +14,7 @@ private:
     CAimSight* mAimSight;
     float mHitTime;
     CGameObject* mOwner;
+    //UINT mHitColId;
 
 public:
     CMonsterScript();
