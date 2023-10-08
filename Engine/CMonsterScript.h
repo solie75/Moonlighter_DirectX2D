@@ -3,6 +3,7 @@
 #include "CState.h"
 #include "CAimSight.h"
 #include "CGameObject.h"
+#include "CTimeMgr.h"
 
 
 class CMonsterScript :
@@ -11,7 +12,7 @@ class CMonsterScript :
 private:
     CState* mState;
     CAimSight* mAimSight;
-
+    float mHitTime;
     CGameObject* mOwner;
 
 public:

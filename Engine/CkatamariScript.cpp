@@ -23,6 +23,8 @@ void CKatamariScript::Initialize()
 
 void CKatamariScript::Update()
 {
+	CMonsterScript::Update();
+
 	CAnimator* thisAt = this->GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
 	CColliderMgr* thisCDList = this->GetOwner()->GetComponent<CColliderMgr>(eComponentType::ColliderList);
 	CCollider2D* thisCDforBackground = thisCDList->GetCollider(eCollideType::Background);
@@ -142,8 +144,16 @@ void CKatamariScript::Update()
 			}
 		}
 	}
+	else if (curState == eState::Hit)
+	{
+		if (prevState != eState::Hit)
+		{
+			// 입력된 데미지를 가지고 계산한다.
 
-	CMonsterScript::Update();
+		}
+	}
+
+	
 }
 
 void CKatamariScript::LateUpdate()

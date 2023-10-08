@@ -13,11 +13,24 @@ cbuffer Grid : register(b2)
     float2 Resolution;
 }
 
+//enum class AniHitType
+//{
+//    Red,
+//    White,
+//    End,
+//};
+
 cbuffer Animator : register(b3)
 {
     float2 SpriteSize;
     float2 Offset;
     uint AnimationType;
+
+    // AnimationType
+    // 0 : Basic,
+    // 1 : HitRed,
+    // 2 : HitWhite,
+    // 3 : End,
 }
 
 cbuffer DebugColor : register(b4)

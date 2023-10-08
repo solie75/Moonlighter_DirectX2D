@@ -83,3 +83,11 @@ enum class eCreatureType
 	NPC,
 	End,
 };
+
+enum class eAnimationType
+{
+	Basic,
+	HitRed,
+	HitWhite,
+	End,
+};

@@ -13,6 +13,7 @@ CAnimation::CAnimation()
 	, mTime(0.0f)
 	, mbComplete(false)
 {
+	mAnimationType = eAnimationType::Basic;
 }
 
 CAnimation::~CAnimation()
@@ -83,7 +84,7 @@ void CAnimation::Binds(CConstantBuffer* aniCB)
 	AnimatorCB cb;
 	cb.SpriteSize = scale;
 	cb.Offset = offset;
-	cb.AnimationType = 1;
+	cb.AnimationType = (UINT)mAnimationType;
 
 	aniCB->InitConstantBuffer(sizeof(AnimatorCB), eCBType::Animator, &cb);
 	CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, aniCB);

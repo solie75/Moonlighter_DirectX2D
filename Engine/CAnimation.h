@@ -32,6 +32,7 @@ private:
 	float mTime;
 	bool mbComplete;
 
+	eAnimationType mAnimationType;
 
 public:
 	CAnimation();
@@ -55,7 +56,8 @@ public:
 
 	bool IsComplete() { return mbComplete; }
 	int GetAnimationIndex() { return mIndex; }
-
+	void SetAnimationType(eAnimationType aniType) { mAnimationType = aniType; }
+	eAnimationType GetAnimationType() { return mAnimationType; }
 	virtual HRESULT ResourceLoad(const std::wstring name, const std::wstring& path) { return S_FALSE; }
 
 	//void CreateAtlas(const std::wstring& path, const std::wstring& spriteName, int spriteNum);
