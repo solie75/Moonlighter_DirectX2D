@@ -223,6 +223,9 @@
     <Filter Include="GameObject\Component\ColliderMgr">
       <UniqueIdentifier>{cbfe1163-0737-4927-b09c-2ca8eb4446b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Component\Script\NaviScript">
+      <UniqueIdentifier>{76d03e7d-7841-4fcb-afa5-357bc24869d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
@@ -441,6 +444,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CMonsterScript.h">
       <Filter>GameObject\Component\Script\MonsterScript</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CNaviScript.h">
+      <Filter>GameObject\Component\Script\NaviScript</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CApplication.cpp">
@@ -643,6 +649,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CMonsterScript.cpp">
       <Filter>GameObject\Component\Script\MonsterScript</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CNaviScript.cpp">
+      <Filter>GameObject\Component\Script\NaviScript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
