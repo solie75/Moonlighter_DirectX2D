@@ -54,15 +54,18 @@ void CMonsterScript::Update()
 		// 여기에서 시간의 흐름에 따라 AnimationPS.hlsl 에서 쓰일 AnimationType 을 변경한다.
 		mHitTime += CTimeMgr::GetDeltaTime();
 		CAnimation* curAni = mOwner->GetComponent<CAnimator>(eComponentType::Animator)->GetCurAnimation();
-		if (mHitTime > 1.f && curAni->GetAnimationType() != eAnimationType::HitWhite)
-		{
-			curAni->SetAnimationType(eAnimationType::HitWhite);
-		}
-		else if (mHitTime > 1.5f && curAni->GetAnimationType() != eAnimationType::HitRed)
+		//if (mHitTime < 1.f && curAni->GetAnimationType() != eAnimationType::HitWhite)
+		if (mHitTime < 0.2f)
 		{
 			curAni->SetAnimationType(eAnimationType::HitRed);
 		}
-		else if (mHitTime > 2.0f)
+		//else if (mHitTime < 1.5f && curAni->GetAnimationType() != eAnimationType::HitRed)
+		else if (mHitTime < 0.5f)
+		{
+			curAni->SetAnimationType(eAnimationType::HitWhite);
+		}
+		//else if (mHitTime > 1.5f)
+		else
 		{
 			curAni->SetAnimationType(eAnimationType::Basic);
 			mHitTime = 0.f;

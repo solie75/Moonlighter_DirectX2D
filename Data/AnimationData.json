@@ -983,6 +983,82 @@
         }
     ],
 
+    "Monster2(GolemSoldier)" :
+    [
+        {
+            "id": 104,
+            "name": "Monster_GolemSoldier_Attack_Down",
+            "objectName": "GolemSoldier",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [43, 87],
+            "duration": [100] 
+        },
+        {
+            "id": 105,
+            "name": "Monster_GolemSoldier_Attack_Left",
+            "objectName": "GolemSoldier",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [70, 65],
+            "duration": [100] 
+        },
+        {
+            "id": 106,
+            "name": "Monster_GolemSoldier_Attack_Right",
+            "objectName": "GolemSoldier",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [70, 65],
+            "duration": [100] 
+        },
+        {
+            "id": 107,
+            "name": "Monster_GolemSoldier_Attack_Up",
+            "objectName": "GolemSoldier",
+            "spriteNumber": [13],
+            "renderingMode": [1],
+            "size": [42, 74],
+            "duration": [100] 
+        },
+        {
+            "id": 108,
+            "name": "Monster_GolemSoldier_Floating_Down",
+            "objectName": "GolemSoldier",
+            "spriteNumber": [8],
+            "renderingMode": [1],
+            "size": [43, 57],
+            "duration": [100] 
+        },
+        {
+            "id": 109,
+            "name": "Monster_GolemSoldier_Floating_Left",
+            "objectName": "GolemSoldier",
+            "spriteNumber": [8],
+            "renderingMode": [1],
+            "size": [41, 57],
+            "duration": [100] 
+        },
+        {
+            "id": 110,
+            "name": "Monster_GolemSoldier_Floating_Right",
+            "objectName": "GolemSoldier",
+            "spriteNumber": [8],
+            "renderingMode": [1],
+            "size": [39, 61],
+            "duration": [100] 
+        },
+        {
+            "id": 111,
+            "name": "Monster_GolemSoldier_Floating_Up",
+            "objectName": "GolemSoldier",
+            "spriteNumber": [8],
+            "renderingMode": [1],
+            "size": [42, 57],
+            "duration": [100] 
+        }
+    ],
+
     "__commnet(RenderingMode's num)" :
     {
         "Opaque" : "0",
