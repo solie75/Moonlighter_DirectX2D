@@ -494,6 +494,8 @@ void CDesertDungeonScene::Update()
 		AddGameObject(eLayerType::Monster, golemSoldier, L"GolemSoldier", Vector3(NextMapPos.x, NextMapPos.y, 4.0004f)
 			, Vector3(0.5f, 0.7f, 0.0f), true, L"Mesh", L"", true);
 		CGolemSoldierScript* golemSoldierScript = golemSoldier->AddComponent<CGolemSoldierScript>(eComponentType::Script);
+		golemSoldierScript->Initialize();
+		//golemSoldierScript->SetOwnerOnMonsterScript(golemSoldier);
 		//CNaviScript* NaviForGolemSoldier = golemSoldier->AddComponent<CNaviScript>(eComponentType::Script);
 		golemSoldierScript->SetNaviData(NextMapPos, CurMapNum, Vector2(0.5f, 0.5f)); // 여기에서 objScale 은 CDforBackground->SetSize() 의 값과 같다.
 		golemSoldierScript->GetNaviScript()->Initialize();
@@ -505,9 +507,9 @@ void CDesertDungeonScene::Update()
 		golemSoldierCDforBackground->SetName(L"golemSoldierCDforBackground");
 		golemSoldierCDforBackground->SetCollideType(eCollideType::Background);
 
-		golemSoldierCDforBackground->SetOffset(Vector2(0.0f, 0.0f));
+		golemSoldierCDforBackground->SetOffset(Vector2(0.0f, -0.2f));
 		golemSoldierCdList->AddCollider(golemSoldierCDforBackground);
-		golemSoldierCDforBackground->SetSize(Vector2(0.5f, 0.5f));
+		golemSoldierCDforBackground->SetSize(Vector2(0.4f, 0.1f));
 
 		CCollider2D* golemSoldierCDforHit = new CCollider2D;
 		golemSoldierCDforHit->SetName(L"KatamariCDforHit");
@@ -516,6 +518,8 @@ void CDesertDungeonScene::Update()
 		golemSoldierCDforHit->SetOffset(Vector2(0.0f, 0.0f));
 		golemSoldierCdList->AddCollider(golemSoldierCDforHit);
 		golemSoldierCDforHit->SetSize(Vector2(1.0f, 1.0f));
+
+		
 	}
 
 	CScene::Update();

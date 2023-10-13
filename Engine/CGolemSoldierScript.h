@@ -26,5 +26,6 @@ public:
         // 여기에서 ObjScale 을 기본 Scale 기준으로 환산하여 Navi 에 Set 한다.
         mNaviScript->SetObjScaleforDongeonMap(Vector2(objScale.x / (mScaleforDongeonMap.x / 6.2f), objScale.y / (mScaleforDongeonMap.y / 3.4f)));
     }
+    //void SetOwnerToMonsterScript() { CMonsterScript::SetOwnerOnMonsterScript(GetOwner()); }
 };
 

@@ -40,5 +40,6 @@ public:
     void SetMapNum(UINT num) { mMapNum = num; }
     void SetMapPos(Vector2 vec) { mMapPos = vec; };
     void SetOwnerScript(CScript* script) { OwnerScript = script; }
+    bool IsNodeCollideToBackground(float nodePos, Vector2 nodeSize, vector<CDungeonMgr::sColliderOnMap> ColList);
 };
 

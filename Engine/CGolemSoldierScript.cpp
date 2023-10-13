@@ -12,9 +12,10 @@ CGolemSoldierScript::~CGolemSoldierScript()
 
 void CGolemSoldierScript::Initialize()
 {
+	SetOwnerOnMonsterScript(GetOwner());
 	CMonsterScript::Initialize();
 	GetOwner()->SetHP(100);
-	SetOwnerOnMonsterScript(GetOwner());
+	
 	GetMonsterState()->SetState(eState::Idle);
 }
 
