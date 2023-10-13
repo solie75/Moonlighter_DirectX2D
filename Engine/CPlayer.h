@@ -43,7 +43,7 @@ public:
         mSightStr = sight;
     }
 
-    std::wstring GetSightStr()
+    std::wstring GetCurSightStr()
     {
         return mSightStr;
     }

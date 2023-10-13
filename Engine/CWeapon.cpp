@@ -127,7 +127,7 @@ void CWeapon::Update()
 				}
 				else if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::End)
 				{
-					mAniName += mPlayer->GetSightStr();
+					mAniName += mPlayer->GetCurSightStr();
 
 					switch (mComboNum)
 					{
@@ -158,7 +158,7 @@ void CWeapon::Update()
 				if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::Enter)
 				{
 					mAniName += L"_SubAttack";
-					mAniName += mPlayer->GetSightStr();
+					mAniName += mPlayer->GetCurSightStr();
 					Tr->SetScale(Vector3(0.5f, 0.7f, 0.0f));
 					At->PlayAnimation(mAniName, false);
 					CGameObject::Update();
@@ -166,7 +166,7 @@ void CWeapon::Update()
 				}
 				else if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::Stay)
 				{
-					switch (playerSight->GetSight())
+					switch (playerSight->GetCurSight())
 					{
 					case CAimSight::eSight::Left:
 						vec.x -= 0.1f;
@@ -185,7 +185,7 @@ void CWeapon::Update()
 
 					if (At->GetCurAnimation()->GetAnimationIndex() == 18 && mbArrow == true)
 					{
-						CArrow* arrow = new CArrow((UINT)mBowType, (UINT)playerSight->GetSight(), (UINT)CArrow::eArrowType::SubAttack);
+						CArrow* arrow = new CArrow((UINT)mBowType, (UINT)playerSight->GetCurSight(), (UINT)CArrow::eArrowType::SubAttack);
 						arrow->SetParentObject(this);
 						arrow->SetSpeed(0.01f);
 
@@ -210,12 +210,12 @@ void CWeapon::Update()
 				else if (playerScript->GetSubAttackState() == CPlayerMoveScript::eSubAttackState::End)
 				{ // Bow 의 SubAttack 이 아닐 때 -> 일반 공격일 때 
 					// Bow 에서 규격 수정
-					if (playerSight->GetSight() == CAimSight::eSight::Left)
+					if (playerSight->GetCurSight() == CAimSight::eSight::Left)
 					{
 						vec.x += 0.05f;
 						Tr->SetPosition(vec);
 					}
-					else if (playerSight->GetSight() == CAimSight::eSight::Right)
+					else if (playerSight->GetCurSight() == CAimSight::eSight::Right)
 					{
 						vec.x -= 0.05f;
 						Tr->SetPosition(vec);
@@ -224,7 +224,7 @@ void CWeapon::Update()
 					Tr->SetScale(Vector3(0.5f, 0.7f, 0.0f));
 					if (mComboNum == 0)
 					{
-						mAniName += mPlayer->GetSightStr();
+						mAniName += mPlayer->GetCurSightStr();
 						At->PlayAnimation(mAniName, false); // Weapon:Bow 의 Animation;
 						mComboNum += 1;
 					}
@@ -237,7 +237,7 @@ void CWeapon::Update()
 						}
 						else if(At->GetCurAnimation()->GetAnimationIndex() == 3 && mbArrow == true)
 						{ // 한 번의 animation Index 에 두번의 Tick이 된다.
-							CArrow* arrow = new CArrow((UINT)mBowType, (UINT)playerSight->GetSight(), (UINT)CArrow::eArrowType::Main);
+							CArrow* arrow = new CArrow((UINT)mBowType, (UINT)playerSight->GetCurSight(), (UINT)CArrow::eArrowType::Main);
 							arrow->SetParentObject(this);
 							arrow->SetSpeed(0.015f);
 

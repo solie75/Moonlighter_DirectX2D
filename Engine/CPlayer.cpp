@@ -49,7 +49,7 @@ void CPlayer::Update()
 	{
 		std::wstring str;
 
-		switch (mAimSight->GetSight())
+		switch (mAimSight->GetCurSight())
 		{
 		case CAimSight::eSight::Left:
 			str = L"_Left";
@@ -98,7 +98,7 @@ void CPlayer::Update()
 		CTransform* tr = this->GetComponent<CTransform>(eComponentType::Transform);
 		Vector3 pos = tr->GetPosition();
 
-		switch (mAimSight->GetSight())
+		switch (mAimSight->GetCurSight())
 		{
 		case CAimSight::eSight::Left: // 특정 시간 동안, 특정 거리 만큼, 이동한다.
 			pos.x -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());

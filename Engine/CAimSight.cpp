@@ -1,7 +1,7 @@
 #include "CAimSight.h"
 
 CAimSight::CAimSight()
-	: mAimSight(eSight::Down)
+	: mCurAimSight(eSight::Down)
 {
 }
 

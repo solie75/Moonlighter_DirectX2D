@@ -217,14 +217,17 @@
     <Filter Include="GameObject\Component\Script\MonsterScript">
       <UniqueIdentifier>{34d07807-4aa2-40e4-a6c8-a2a858e1d7ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Component\Script\MonsterScript\CKatamariScript">
-      <UniqueIdentifier>{9a9c11e3-0352-47f8-a028-80ef6b5c0c87}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Component\ColliderMgr">
       <UniqueIdentifier>{cbfe1163-0737-4927-b09c-2ca8eb4446b5}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject\Component\Script\NaviScript">
       <UniqueIdentifier>{76d03e7d-7841-4fcb-afa5-357bc24869d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Script\MonsterScript\KatamariScript">
+      <UniqueIdentifier>{9a9c11e3-0352-47f8-a028-80ef6b5c0c87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Script\MonsterScript\GolemSoldier">
+      <UniqueIdentifier>{143767a8-1d53-48f1-a6bc-8af66deb49fe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -433,7 +436,7 @@
       <Filter>Scene\06.DesertDungeonScene</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CKatamariScript.h">
-      <Filter>GameObject\Component\Script\MonsterScript\CKatamariScript</Filter>
+      <Filter>GameObject\Component\Script\MonsterScript\KatamariScript</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CColliderMgr.h">
       <Filter>GameObject\Component\ColliderMgr</Filter>
@@ -446,6 +449,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CNaviScript.h">
       <Filter>GameObject\Component\Script\NaviScript</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CGolemSoldierScript.h">
+      <Filter>GameObject\Component\Script\MonsterScript\GolemSoldier</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -642,7 +648,7 @@
       <Filter>Scene\06.DesertDungeonScene</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CKatamariScript.cpp">
-      <Filter>GameObject\Component\Script\MonsterScript\CKatamariScript</Filter>
+      <Filter>GameObject\Component\Script\MonsterScript\KatamariScript</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CColliderMgr.cpp">
       <Filter>GameObject\Component\ColliderMgr</Filter>
@@ -652,6 +658,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CNaviScript.cpp">
       <Filter>GameObject\Component\Script\NaviScript</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CGolemSoldierScript.cpp">
+      <Filter>GameObject\Component\Script\MonsterScript\GolemSoldier</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

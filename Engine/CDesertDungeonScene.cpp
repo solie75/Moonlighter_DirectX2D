@@ -7,7 +7,9 @@
 #include "CTimeMgr.h"
 #include "CPlayerMoveScript.h"
 #include "CKatamariScript.h"
+#include "CGolemSoldierScript.h"
 #include "CHPScript.h"
+#include "CNaviScript.h"
 
 
 CDesertDungeonScene::CDesertDungeonScene()
@@ -31,48 +33,80 @@ void CDesertDungeonScene::Initialize()
 
 	// player
 	//CPlayer* player = new CPlayer;
-	AddGameObject(eLayerType::Player, player, L"Will", Vector3(2.0f, 0.0f, 1.0002f)
+	AddGameObject(eLayerType::Player, player, L"Will", Vector3(2.0, 0.0f, 1.0002f)
 		, Vector3(0.25f, 0.47f, 0.0f), true, L"Mesh", L"mt_atlas_Will_Idle_Down", true);
 	CTransform* PlayerTr = player->GetComponent<CTransform>(eComponentType::Transform);
 
-	// Monster
-	CGameObject* Katamari = new CGameObject;
-	AddGameObject(eLayerType::Monster, Katamari, L"Katamari", Vector3(-2.0f, 0.0f, 4.0003f)
-		, Vector3(0.6f, 0.8f, 0.0f), true, L"Mesh", L"", true);
-	CKatamariScript* KatamariScript = Katamari->AddComponent<CKatamariScript>(eComponentType::Script);
-	CAnimator* KatamariAt = Katamari->GetComponent<CAnimator>(eComponentType::Animator);
+	// Monster (Katamari)
+	//CGameObject* Katamari = new CGameObject;
+	//AddGameObject(eLayerType::Monster, Katamari, L"Katamari", Vector3(-2.0f, 0.0f, 4.0003f)
+	//	, Vector3(0.6f, 0.8f, 0.0f), true, L"Mesh", L"", true);
+	//CKatamariScript* KatamariScript = Katamari->AddComponent<CKatamariScript>(eComponentType::Script);
 
-	// Monster HP
-	CGameObject* KatamariHP_Background = new CGameObject;
-	KatamariHP_Background->SetParentObject(Katamari);
-	AddGameObject(eLayerType::HP, KatamariHP_Background, L"KatamariHP_Background", Vector3(0.0f, 0.0f, 0.0f)
-		, Vector3(0.2f, 0.03f, 0.0f), true, L"Mesh", L"mt_HealthBar_Monster_Background", false);
-	CHPScript* HpBackground = KatamariHP_Background->AddComponent<CHPScript>(eComponentType::Script);
-	HpBackground->AddHpObject(this);
-	HpBackground->SetHpOffSet(Vector2(-0.12f, 0.15f));
-	
+	//// Monster HP
+	//CGameObject* KatamariHP_Background = new CGameObject;
+	//KatamariHP_Background->SetParentObject(Katamari);
+	//AddGameObject(eLayerType::HP, KatamariHP_Background, L"KatamariHP_Background", Vector3(0.0f, 0.0f, 0.0f)
+	//	, Vector3(0.2f, 0.03f, 0.0f), true, L"Mesh", L"mt_HealthBar_Monster_Background", false);
+	//CHPScript* HpBackground = KatamariHP_Background->AddComponent<CHPScript>(eComponentType::Script);
+	//HpBackground->AddHpObject(this);
+	//HpBackground->SetHpOffSet(Vector2(-0.12f, 0.15f));
 
-	KatamariScript->ChangeState(eState::Idle);
+	//KatamariScript->ChangeState(eState::Idle);
 
-	CColliderMgr* KatamariCdList = Katamari->AddComponent<CColliderMgr>(eComponentType::ColliderList);
-	
-	CCollider2D* KatamariCDforBackground = new CCollider2D;
-	KatamariCDforBackground->SetName(L"KatamariCDforBackground");
-	KatamariCDforBackground->SetCollideType(eCollideType::Background);
-	
-	KatamariCDforBackground->SetOffset(Vector2(0.0f, -0.24f));
-	KatamariCdList->AddCollider(KatamariCDforBackground);
-	KatamariCDforBackground->SetSize(Vector2(0.71f, 0.3f));
+	//CColliderMgr* KatamariCdList = Katamari->AddComponent<CColliderMgr>(eComponentType::ColliderList);
+	//
+	//CCollider2D* KatamariCDforBackground = new CCollider2D;
+	//KatamariCDforBackground->SetName(L"KatamariCDforBackground");
+	//KatamariCDforBackground->SetCollideType(eCollideType::Background);
+	//
+	//KatamariCDforBackground->SetOffset(Vector2(0.0f, -0.24f));
+	//KatamariCdList->AddCollider(KatamariCDforBackground);
+	//KatamariCDforBackground->SetSize(Vector2(0.71f, 0.3f));
 
-	CCollider2D* KatamariCDforHit = new CCollider2D;
-	KatamariCDforHit->SetName(L"KatamariCDforHit");
-	KatamariCDforHit->SetCollideType(eCollideType::Hit);
-	
-	KatamariCDforHit->SetOffset(Vector2(0.0f, -0.12f));
-	KatamariCdList->AddCollider(KatamariCDforHit);
-	KatamariCDforHit->SetSize(Vector2(0.71f, 0.6f));
+	//CCollider2D* KatamariCDforHit = new CCollider2D;
+	//KatamariCDforHit->SetName(L"KatamariCDforHit");
+	//KatamariCDforHit->SetCollideType(eCollideType::Hit);
+	//
+	//KatamariCDforHit->SetOffset(Vector2(0.0f, -0.12f));
+	//KatamariCdList->AddCollider(KatamariCDforHit);
+	//KatamariCDforHit->SetSize(Vector2(0.71f, 0.6f));
+
+	// Monster (Soldier)
+	//CGameObject* golemSoldier = new CGameObject;
+	//AddGameObject(eLayerType::Monster, golemSoldier, L"GolemSoldier", Vector3(0.0f, 0.0f, 4.0004f)
+	//	, Vector3(0.5f, 0.7f, 0.0f), true, L"Mesh", L"", true);
+	//CNaviScript* NaviForGolemSoldier = golemSoldier->AddComponent<CNaviScript>(eComponentType::Script);
+	//NaviForGolemSoldier->SetScene(this);
+	////CGolemSoldierScript* golemSoldierScript = golemSoldier->AddComponent<CGolemSoldierScript>(eComponentType::Script);
+	////NaviForGolemSoldier->SetObjScaleforDongeonMap(golemSoldierScript->GetScaleforDongeonMap());
+
+	//CColliderMgr* golemSoldierCdList = golemSoldier->AddComponent<CColliderMgr>(eComponentType::ColliderList);
+
+	//CCollider2D* golemSoldierCDforBackground = new CCollider2D;
+	//golemSoldierCDforBackground->SetName(L"golemSoldierCDforBackground");
+	//golemSoldierCDforBackground->SetCollideType(eCollideType::Background);
+
+	//golemSoldierCDforBackground->SetOffset(Vector2(0.0f, 0.0f));
+	//golemSoldierCdList->AddCollider(golemSoldierCDforBackground);
+	//golemSoldierCDforBackground->SetSize(Vector2(0.5f, 0.5f));
+
+	//CCollider2D* golemSoldierCDforHit = new CCollider2D;
+	//golemSoldierCDforHit->SetName(L"KatamariCDforHit");
+	//golemSoldierCDforHit->SetCollideType(eCollideType::Hit);
+
+	//golemSoldierCDforHit->SetOffset(Vector2(0.0f, 0.0f));
+	//golemSoldierCdList->AddCollider(golemSoldierCDforHit);
+	//golemSoldierCDforHit->SetSize(Vector2(12.4f, 4.85f));
+
 
 	// Background
+	/*CGameObject* BackgroundTest = new CGameObject();
+	AddGameObject(eLayerType::Background, BackgroundTest, L"BackgroundTest", Vector3(-3.1f, -1.7f, 4.0005f),
+		Vector3(0.1, 0.1f, 0.0f), false, L"Mesh", L"", false);
+	CColliderMgr* BackgroundTestCDList = BackgroundTest->AddComponent<CColliderMgr>(eComponentType::ColliderList);
+	BackgroundTestCDList->AddCollider(new CCollider2D);*/
+
 	CGameObject* BackgroundUp = new CGameObject();
 	AddGameObject(eLayerType::Background, BackgroundUp, L"BackgroundBorderUp", Vector3(0.0f, 1.8f, 4.0001f),
 		Vector3(8.0f, 0.2f, 0.0f), false, L"Mesh", L"", false);
@@ -150,6 +184,7 @@ void CDesertDungeonScene::Initialize()
 		std::wstring mapName = L"Dungeon3_Map";
 		Vector2 mapPosVec2 = CDungeonMgr::GetInst()->GetMapPos(i);
 		UINT MapNum = 0;
+
 		// Dongeon Entrance
 		if (mapPosVec2.x == 3 && mapPosVec2.y == 3)
 		{
@@ -389,16 +424,16 @@ void CDesertDungeonScene::Update()
 			playerTr->SetPosition(playerPos);
 		}
 
-		// NextMapPos 를 근거로 해당 Map의 번호를 가져올 수 있나?
+		// NextMapPos 를 이용하여 해당 Map의 번호를 가져올 수 있나?
 		Vector2 mapNum = Vector2(NextMapPos.x / mXPosStandard, NextMapPos.y / mYPosStandard);
 		mapNum.x += 3;
 		mapNum.y *= -1;
 		mapNum.y += 3;
 		mapNum;
 
-		UINT texNum = CDungeonMgr::GetInst()->GetMapTexNum(mapNum.x * 10 + mapNum.y);
+		UINT CurMapNum = CDungeonMgr::GetInst()->GetMapTexNum(mapNum.x * 10 + mapNum.y);
 
-		vector<CDungeonMgr::sColliderOnMap> ColliderList = CDungeonMgr::GetInst()->GetColliderData(texNum);
+		vector<CDungeonMgr::sColliderOnMap> ColliderList = CDungeonMgr::GetInst()->GetColliderData(CurMapNum);
 
 		for (int i = 0; i < mTempGameObjects.size(); i++)
 		{
@@ -454,6 +489,33 @@ void CDesertDungeonScene::Update()
 			}
 		}
 
+		// Monster 생성
+		CGameObject* golemSoldier = new CGameObject;
+		AddGameObject(eLayerType::Monster, golemSoldier, L"GolemSoldier", Vector3(NextMapPos.x, NextMapPos.y, 4.0004f)
+			, Vector3(0.5f, 0.7f, 0.0f), true, L"Mesh", L"", true);
+		CGolemSoldierScript* golemSoldierScript = golemSoldier->AddComponent<CGolemSoldierScript>(eComponentType::Script);
+		//CNaviScript* NaviForGolemSoldier = golemSoldier->AddComponent<CNaviScript>(eComponentType::Script);
+		golemSoldierScript->SetNaviData(NextMapPos, CurMapNum, Vector2(0.5f, 0.5f)); // 여기에서 objScale 은 CDforBackground->SetSize() 의 값과 같다.
+		golemSoldierScript->GetNaviScript()->Initialize();
+		golemSoldierScript->GetNaviScript()->SetScene(this);
+		golemSoldierScript->GetNaviScript()->SetOwnerScript(golemSoldierScript);
+		CColliderMgr* golemSoldierCdList = golemSoldier->AddComponent<CColliderMgr>(eComponentType::ColliderList);
+
+		CCollider2D* golemSoldierCDforBackground = new CCollider2D;
+		golemSoldierCDforBackground->SetName(L"golemSoldierCDforBackground");
+		golemSoldierCDforBackground->SetCollideType(eCollideType::Background);
+
+		golemSoldierCDforBackground->SetOffset(Vector2(0.0f, 0.0f));
+		golemSoldierCdList->AddCollider(golemSoldierCDforBackground);
+		golemSoldierCDforBackground->SetSize(Vector2(0.5f, 0.5f));
+
+		CCollider2D* golemSoldierCDforHit = new CCollider2D;
+		golemSoldierCDforHit->SetName(L"KatamariCDforHit");
+		golemSoldierCDforHit->SetCollideType(eCollideType::Hit);
+
+		golemSoldierCDforHit->SetOffset(Vector2(0.0f, 0.0f));
+		golemSoldierCdList->AddCollider(golemSoldierCDforHit);
+		golemSoldierCDforHit->SetSize(Vector2(1.0f, 1.0f));
 	}
 
 	CScene::Update();

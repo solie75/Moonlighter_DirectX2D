@@ -43,6 +43,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CDevice.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CFireBall.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CGolemSoldierScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CGridScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CHPScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CKatamariScript.h" />
@@ -118,6 +119,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CDevice.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CFireBall.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CGolemSoldierScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CGridScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CHPScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CKatamariScript.cpp" />

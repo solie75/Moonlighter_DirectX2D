@@ -15,7 +15,7 @@ private:
     bool mbTranslateMapPos;
 
     Vector2 NextMapPos;
-    UINT CurMapNumber;
+    UINT CurMapNum;
 
     std::vector<CGameObject*> mTempGameObjects;
 
@@ -29,5 +29,6 @@ public:
     void Render();
 
     void SetBoolTranslateMapPos(bool b) { mbTranslateMapPos = b; }
+    UINT GetCurMapNum() { return CurMapNum; }
 };
 

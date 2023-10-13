@@ -34,7 +34,7 @@ void CKatamariScript::Update()
 	// animation Name
 	std::wstring aniName = L"Monster_Katamari_Attack_";
 
-	switch (GetMonsterAimSight()->GetSight())
+	switch (GetMonsterAimSight()->GetCurSight())
 	{
 	case CAimSight::eSight::Down :
 		aniName += L"Down_";
@@ -78,7 +78,7 @@ void CKatamariScript::Update()
 				else
 				{
 					Vector3 pos = thisTr->GetPosition();
-					switch (GetMonsterAimSight()->GetSight())
+					switch (GetMonsterAimSight()->GetCurSight())
 					{
 					case CAimSight::eSight::Down:
 						pos.y -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
@@ -112,7 +112,7 @@ void CKatamariScript::Update()
 		else
 		{ 
 			Vector3 pos = thisTr->GetPosition();
-			switch (GetMonsterAimSight()->GetSight())
+			switch (GetMonsterAimSight()->GetCurSight())
 			{
 			case CAimSight::eSight::Down:
 				pos.y -= (float)(3.0 * CTimeMgr::GetInst()->GetDeltaTime());
@@ -166,7 +166,7 @@ void CKatamariScript::LateUpdate()
 	{
 		// background Collider 로부터 떨어지기 위해 충돌 직전의 위치로 되돌린다.
 		Vector3 pos = thisTr->GetPosition();
-		switch (GetMonsterAimSight()->GetSight())
+		switch (GetMonsterAimSight()->GetCurSight())
 		{
 		case CAimSight::eSight::Down:
 			pos.y += (float)(4.0 * CTimeMgr::GetInst()->GetDeltaTime());
@@ -206,7 +206,7 @@ void CKatamariScript::ChangeSight()
 	int randomInt = distribution(generator);
 
 	// 첫번재 방향 전환
-	UINT sightInt = (UINT)GetMonsterAimSight()->GetSight();
+	UINT sightInt = (UINT)GetMonsterAimSight()->GetCurSight();
 	if (randomInt > sightInt)
 	{
 		sightInt = randomInt - sightInt;

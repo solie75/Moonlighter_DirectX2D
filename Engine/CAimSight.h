@@ -15,13 +15,14 @@ public:
     };
 
 private:
-    eSight mAimSight;
-
+    eSight mCurAimSight;
+    eSight mPrevAimSight;
 public:
     CAimSight();
     ~CAimSight();
 
-    void SetSight(eSight sight) { mAimSight = sight; }
-    eSight GetSight() { return mAimSight; }
+    void SetSight(eSight sight) { mPrevAimSight = mCurAimSight;  mCurAimSight = sight; }
+    eSight GetCurSight() { return mCurAimSight; }
+    eSight GetPrevSight() { return mPrevAimSight; }
 };
 
