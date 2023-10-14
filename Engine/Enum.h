@@ -42,6 +42,7 @@ enum class eLayerType
 	PlayerProjectile,
 	Portal,
 	HP,
+	Node,
 	End,
 };
 
@@ -66,6 +67,7 @@ enum class eCollideType
 {
 	Background,
 	Hit,
+	Node,
 	End,
 };
 

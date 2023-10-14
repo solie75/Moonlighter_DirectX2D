@@ -62,31 +62,67 @@ void CNaviScript::SetNodeList(Vector2 ObjColSize, UINT mapNum)
 			float NodePosX = mMapPos.x - 3.1f + (j * NodeSize.x) - (NodeSize.x / 2.0f);
 			Vector2 NodePos = Vector2(NodePosX, NodePosY);
 
-			for (vector<CDungeonMgr::sColliderOnMap>::iterator iter = BackColList.begin(); iter != BackColList.end(); iter++)
+			// background Col 과 Node 의 충돌 여부 // 충돌 시에 mNodeList 에 추가하지 않는다.
+			if (IsNodeCollideToBackground(NodePos, NodeSize, BackColList) == false)
 			{
-				iter
-			}
+				mNodeList.insert(std::make_pair((UINT)100 * j + i, NodePos)); // 천과 백자리 -> x  십과 일자리-> y
 
-			mNodeList.insert(std::make_pair((UINT)100 * j + i, NodePos)); // 천과 백자리 -> x  십과 일자리-> y
+				std::wstring NodeIdStr = std::to_wstring(100 * j + i);
+				CGameObject* NodeObject = new CGameObject;
+				CSceneMgr::GetInst()->GetActiveScene()->AddGameObject(eLayerType::Node, NodeObject, L"NodeObject_" + NodeIdStr,
+					Vector3(NodePos.x, NodePos.y, 0.0f), Vector3(NodeSize.x, NodeSize.y, 0.0f),
+					true, L"Mesh", L"", false);
+				CColliderMgr* NodeObjColList = NodeObject->AddComponent<CColliderMgr>(eComponentType::ColliderList);
+				CCollider2D* NodeObjCol = new CCollider2D;
+				NodeObjCol->SetCollideType(eCollideType::Node);
+				NodeObjColList->AddCollider(NodeObjCol);
+			}
 		}
 	}
 
 	// 초기화된 노드 중 Background 와 충돌하는 노드 제거
 	
 	// NodePos 의 위치를 Collider 에 비교하고 몬스터가 Background 에 부딪혔을 때에는 미끄러지듯이 Background 를 피해서 앞으로 진행하도록 한다.
-	vector<CDungeonMgr::sColliderOnMap>::iterator ColListIter = BackColList.begin();
+	/*vector<CDungeonMgr::sColliderOnMap>::iterator ColListIter = BackColList.begin();
 	for (; ColListIter != BackColList.end(); ColListIter++)
 	{
 
 	}
 
-	BackColList;
+	BackColList;*/
 }
 
-bool CNaviScript::IsNodeCollideToBackground(float nodePos, Vector2 nodeSize, vector<CDungeonMgr::sColliderOnMap> ColList)
+bool CNaviScript::IsNodeCollideToBackground(Vector2 nodePos, Vector2 nodeSize, vector<CDungeonMgr::sColliderOnMap> ColList)
 {
-	
-	if()
+	for (vector<CDungeonMgr::sColliderOnMap>::iterator iter = ColList.begin(); iter != ColList.end(); iter++)
+	{
+		float DiffX;
+		if (iter->vColliderPos.x > nodePos.x)
+		{
+			DiffX = iter->vColliderPos.x - nodePos.x;
+		}
+		else if (iter->vColliderPos.x < nodePos.x)
+		{
+			DiffX = nodePos.x - iter->vColliderPos.x;
+		}
+
+		float DiffY;
+		if (iter->vColliderPos.y > nodePos.y)
+		{
+			DiffY = iter->vColliderPos.y - nodePos.y;
+		}
+		else if (iter->vColliderPos.y < nodePos.y)
+		{
+			DiffY = nodePos.y - iter->vColliderPos.y;
+		}
+
+		if (DiffX < nodeSize.x / 2.f + iter->vColliderScale.x / 2.f && DiffY < nodeSize.y / 2.f + iter->vColliderScale.y / 2.f)
+		{
+			// Node 와 backCollider 가 충돌한 경우
+			return true;
+		}
+	}
+
 	return false;
 }
   

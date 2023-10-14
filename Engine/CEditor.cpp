@@ -106,6 +106,15 @@ void CEditor::DebugRender(const DebugMesh& mesh)
 			CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, colliderCB);
 			CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::PS, colliderCB);
 		}
+		else if (mesh.CollideType == eCollideType::Node)
+		{
+			DebugColorCB cb;
+			cb.DebugColor = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+			CConstantBuffer* colliderCB = new CConstantBuffer;
+			colliderCB->InitConstantBuffer(sizeof(DebugColorCB), eCBType::DebugColor, &cb);
+			CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::VS, colliderCB);
+			CRenderMgr::GetInst()->BindConstantBuffer(eShaderStage::PS, colliderCB);
+		}
 	}
 
 	// debugObj 가 렌더링 되기 전에 그에 대한 viewMatrix 와 projection matrix 의 기준은 maincamera 여야 한다.
