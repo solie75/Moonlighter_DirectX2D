@@ -519,8 +519,8 @@ void CDesertDungeonScene::Update()
 		golemSoldierCDforHit->SetOffset(Vector2(0.0f, 0.0f));
 		golemSoldierCdList->AddCollider(golemSoldierCDforHit);
 		golemSoldierCDforHit->SetSize(Vector2(1.0f, 1.0f));
-
 		
+		golemSoldierScript->GetNaviScript()->DeleteNodeCollideWithBackCol();
 	}
 
 	CScene::Update();

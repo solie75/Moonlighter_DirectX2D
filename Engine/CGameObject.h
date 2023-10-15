@@ -12,6 +12,7 @@ public:
         Active,
         Paused,
         Dead,
+        End,
     };
 
 private:

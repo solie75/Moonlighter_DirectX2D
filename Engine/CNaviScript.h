@@ -33,7 +33,7 @@ public:
     virtual void Update();
     virtual void LateUpdate();
 
-    void SetGrid(Vector2 mapSize, UINT mapNum);
+    //void SetGrid(Vector2 mapSize, UINT mapNum);
     void SetScene(CScene* scene) { mCurScene = scene; }
     // map position range (x : -3.1 ~ 3.1, y : -1.7 + 1.7) 
     void SetNodeList(Vector2 ObjColSize, UINT mapNum);
@@ -42,6 +42,6 @@ public:
     void SetMapPos(Vector2 vec) { mMapPos = vec; };
     void SetOwnerScript(CScript* script) { OwnerScript = script; }
     bool IsNodeCollideToBackground(Vector2 nodePos, Vector2 nodeSize, vector<CDungeonMgr::sColliderOnMap> ColList);
-    void DeleteNodeCollideWithBackCol(vector<CDungeonMgr::sColliderOnMap> ColList);
+    void DeleteNodeCollideWithBackCol();
 };
 

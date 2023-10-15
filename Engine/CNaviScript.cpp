@@ -66,9 +66,7 @@ void CNaviScript::SetNodeList(Vector2 ObjColSize, UINT mapNum)
 			// background Col 과 Node 의 충돌 여부 // 충돌 시에 mNodeList 에 추가하지 않는다.
 			if (IsNodeCollideToBackground(NodePos, NodeSize, BackColList) == false)
 			{
-				// 여기에서 처음의 sNode 를 추기화
-				mNodeList.insert(std::make_pair((UINT)100 * j + i, NodePos)); // 천과 백자리 -> x  십과 일자리-> y
-
+				
 				std::wstring NodeIdStr = std::to_wstring(100 * j + i);
 				CGameObject* NodeObject = new CGameObject;
 				CSceneMgr::GetInst()->GetActiveScene()->AddGameObject(eLayerType::Node, NodeObject, L"NodeObject_" + NodeIdStr,
@@ -78,62 +76,31 @@ void CNaviScript::SetNodeList(Vector2 ObjColSize, UINT mapNum)
 				CCollider2D* NodeObjCol = new CCollider2D;
 				NodeObjCol->SetCollideType(eCollideType::Node);
 				NodeObjColList->AddCollider(NodeObjCol);
+
+
+				sNode nodeData;
+				nodeData.nodeObj = NodeObject;
+				nodeData.nodePos = NodePos;
+
+					// 여기에서 처음의 sNode 를 추기화
+				mNodeList.insert(std::make_pair((UINT)100 * j + i, nodeData)); // 천과 백자리 -> x  십과 일자리-> y
 			}
 		}
 	}
-
-	// 초기화된 노드 중 Background 와 충돌하는 노드 제거
-	
-	// NodePos 의 위치를 Collider 에 비교하고 몬스터가 Background 에 부딪혔을 때에는 미끄러지듯이 Background 를 피해서 앞으로 진행하도록 한다.
-	/*vector<CDungeonMgr::sColliderOnMap>::iterator ColListIter = BackColList.begin();
-	for (; ColListIter != BackColList.end(); ColListIter++)
-	{
-
-	}
-
-	BackColList;*/
 }
 
-void CNaviScript::DeleteNodeCollideWithBackCol(vector<CDungeonMgr::sColliderOnMap> ColList)
+void CNaviScript::DeleteNodeCollideWithBackCol()
 {
-	std::map<UINT, Vector2>::iterator iter = mNodeList.begin();
+	std::map<UINT, sNode>::iterator iter = mNodeList.begin();
+	CColliderMgr* iterCdMgr;
 	for (; iter != mNodeList.end(); iter++)
 	{
-		iter->Get
+		iterCdMgr = iter->second.nodeObj->GetComponent<CColliderMgr>(eComponentType::ColliderList);
+		CCollider2D* iterCdforBack = iterCdMgr->GetCollider(eCollideType::Node);
+		if (iterCdforBack->GetColliderData(eLayerType::Background).id != 0)
+		{
+			iter->second.nodeObj->SetState(CGameObject::eObjectState::Dead);
+			mNodeList.erase(iter->first);
+		}
 	}
 }
-
-//bool CNaviScript::IsNodeCollideToBackground(Vector2 nodePos, Vector2 nodeSize, vector<CDungeonMgr::sColliderOnMap> ColList)
-//{
-//	for (vector<CDungeonMgr::sColliderOnMap>::iterator iter = ColList.begin(); iter != ColList.end(); iter++)
-//	{
-//		float DiffX;
-//		if (iter->vColliderPos.x > nodePos.x)
-//		{
-//			DiffX = iter->vColliderPos.x - nodePos.x;
-//		}
-//		else if (iter->vColliderPos.x < nodePos.x)
-//		{
-//			DiffX = nodePos.x - iter->vColliderPos.x;
-//		}
-//
-//		float DiffY;
-//		if (iter->vColliderPos.y > nodePos.y)
-//		{
-//			DiffY = iter->vColliderPos.y - nodePos.y;
-//		}
-//		else if (iter->vColliderPos.y < nodePos.y)
-//		{
-//			DiffY = nodePos.y - iter->vColliderPos.y;
-//		}
-//
-//		if (DiffX < nodeSize.x / 2.f + iter->vColliderScale.x / 2.f && DiffY < nodeSize.y / 2.f + iter->vColliderScale.y / 2.f)
-//		{
-//			// Node 와 backCollider 가 충돌한 경우
-//			return true;
-//		}
-//	}
-//
-//	return false;
-//}
-  
