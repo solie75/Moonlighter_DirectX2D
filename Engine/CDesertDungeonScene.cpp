@@ -30,6 +30,7 @@ void CDesertDungeonScene::Initialize()
 	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Player, eLayerType::Monster, true);
 	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Background, eLayerType::Monster, true);
 	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::PlayerProjectile, eLayerType::Monster, true);
+	CCollisionMgr::GetInst()->SetCollideLayer(eLayerType::Node, eLayerType::Background, true);
 
 	// player
 	//CPlayer* player = new CPlayer;
@@ -497,7 +498,7 @@ void CDesertDungeonScene::Update()
 		golemSoldierScript->Initialize();
 		//golemSoldierScript->SetOwnerOnMonsterScript(golemSoldier);
 		//CNaviScript* NaviForGolemSoldier = golemSoldier->AddComponent<CNaviScript>(eComponentType::Script);
-		golemSoldierScript->SetNaviData(NextMapPos, CurMapNum, Vector2(0.5f, 0.5f)); // 여기에서 objScale 은 CDforBackground->SetSize() 의 값과 같다.
+		golemSoldierScript->SetNaviData(NextMapPos, CurMapNum, Vector2(0.4f, 0.1f)); // 여기에서 objScale 은 CDforBackground->SetSize() 의 값과 같다.
 		golemSoldierScript->GetNaviScript()->Initialize();
 		golemSoldierScript->GetNaviScript()->SetScene(this);
 		golemSoldierScript->GetNaviScript()->SetOwnerScript(golemSoldierScript);

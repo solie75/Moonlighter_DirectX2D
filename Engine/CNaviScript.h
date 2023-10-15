@@ -14,12 +14,13 @@ public:
         UINT curSideValue;
         Vector2 nodePos;
         sNode* ParentNode;
+        CGameObject* nodeObj;
     };
 
 private:
     Vector2 mNodeSize;
     Vector2 mObjScaleforDongeonMap;
-    std::map<UINT, Vector2> mNodeList;
+    std::map<UINT, sNode> mNodeList;
     CScene* mCurScene;
     UINT mMapNum;
     Vector2 mMapPos;
@@ -41,5 +42,6 @@ public:
     void SetMapPos(Vector2 vec) { mMapPos = vec; };
     void SetOwnerScript(CScript* script) { OwnerScript = script; }
     bool IsNodeCollideToBackground(Vector2 nodePos, Vector2 nodeSize, vector<CDungeonMgr::sColliderOnMap> ColList);
+    void DeleteNodeCollideWithBackCol(vector<CDungeonMgr::sColliderOnMap> ColList);
 };
 
