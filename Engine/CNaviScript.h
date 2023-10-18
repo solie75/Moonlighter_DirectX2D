@@ -21,11 +21,15 @@ public:
 private:
     Vector2 mNodeSize;
     Vector2 mObjScaleforDongeonMap;
-    std::map<UINT, sNode> mNodeList;
+    std::map<UINT, sNode> mTotalNodeList;
     CScene* mCurScene;
     UINT mMapNum;
     Vector2 mMapPos;
     CScript* OwnerScript;
+    UINT mCurNodeId;
+    UINT mNextNodeId;
+    std::map<UINT, sNode> mAroundNodeList;
+    std::map<UINT, sNode> mWayNodeList;
 
 public:
     CNaviScript();
@@ -46,8 +50,12 @@ public:
     void SetMapPos(Vector2 vec) { mMapPos = vec; };
     void SetOwnerScript(CScript* script) { OwnerScript = script; }
     //bool IsNodeCollideToBackground(Vector2 nodePos, Vector2 nodeSize, vector<CDungeonMgr::sColliderOnMap> ColList);
-    void DeleteNodeCollideWithBackCol(std::vector<CGameObject*> mBackColObj);
-    Vector2 GetNextNodePos(Vector2 startObjPos, Vector2 DestObjPos);
+    //void DeleteNodeCollideWithBackCol(std::vector<CGameObject*> mBackColObj);
+    void SetNodeIdOnThisObj(Vector2 startObjPos);
+    void SetAroundNodeList(UINT NodeId);
+    void SetWayNodeList();
+    void WayNodeListClear();
+    UINT GetNextNode();
 
 };
 

@@ -8,7 +8,9 @@ class CGolemSoldierScript :
 private:
     Vector2 mScaleforDongeonMap = Vector2(12.4, 4.85f);
     CNaviScript* mNaviScript;
-    CGameObject* player;
+    CCollider2D* playerCol;
+    bool mbLockOn;
+    Vector2 mTargetPos;
 
 
 public:

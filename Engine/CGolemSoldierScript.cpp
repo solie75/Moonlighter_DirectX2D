@@ -5,7 +5,8 @@
 CGolemSoldierScript::CGolemSoldierScript()
 {
 	mNaviScript = new CNaviScript;
-	player = nullptr;
+	mbLockOn = false;
+	mTargetPos = Vector2::Zero;
 }
 
 CGolemSoldierScript::~CGolemSoldierScript()
@@ -31,12 +32,21 @@ void CGolemSoldierScript::Initialize()
 	golemSoldierCDforBackground->SetSize(Vector2(0.4f, 0.1f));
 
 	CCollider2D* golemSoldierCDforHit = new CCollider2D;
-	golemSoldierCDforHit->SetName(L"KatamariCDforHit");
+	golemSoldierCDforHit->SetName(L"golemSoldierCDforHit");
 	golemSoldierCDforHit->SetCollideType(eCollideType::Hit);
 
 	golemSoldierCDforHit->SetOffset(Vector2(0.0f, 0.0f));
 	golemSoldierCdList->AddCollider(golemSoldierCDforHit);
 	golemSoldierCDforHit->SetSize(Vector2(1.0f, 1.0f));
+
+	CCollider2D* golemSoldierCdforDetection = new CCollider2D;
+	golemSoldierCdforDetection->SetName(L"golemSoldierCdforDetection");
+	golemSoldierCdforDetection->SetCollideType(eCollideType::Detection);
+
+	golemSoldierCdforDetection->SetOffset(Vector2(0.0f, 0.0f));
+	golemSoldierCdforDetection->SetSize(Vector2(3.0f, 3.0f));
+	golemSoldierCdList->AddCollider(golemSoldierCdforDetection);
+	
 }
 
 void CGolemSoldierScript::Update()
@@ -49,6 +59,8 @@ void CGolemSoldierScript::Update()
 	CAnimator* thisAt = GetOwner()->GetComponent<CAnimator>(eComponentType::Animator);
 	CTransform* thisTr = GetOwner()->GetComponent<CTransform>(eComponentType::Transform);
 	Vector3 thisPos = thisTr->GetPosition();
+
+	CColliderMgr* thisColList = GetOwner()->GetComponent<CColliderMgr>(eComponentType::ColliderList);
 
 	if (curState == eState::Idle)
 	{
@@ -93,26 +105,38 @@ void CGolemSoldierScript::Update()
 		}*/
 
 		// Lock on 된 대상자가 없을 때
-		if (player == nullptr)
+		if (playerCol == nullptr)
 		{
+			CCollider2D* golemDetectionCol = thisColList->GetCollider(eCollideType::Detection);
 
+			if (golemDetectionCol->GetColliderData(eLayerType::Player).id != 0)
+			{
+				playerCol = golemDetectionCol->GetColliderData(eLayerType::Player).otherCol;
+				mbLockOn = true;
+				
+			}
+			else
+			{
+				// 여기에서 BackCol 과 충돌하지 않은 node 를 하나 지정하며 움직인다. 목적지에 도달하면 몇초간 멈췄다가 다시 움직인다.
+			}
 		}
 		else // 대상자가 lock on 되었을 때
 		{
-			// 이 부분에서 A* 알고리즘 구현
-			mNaviScript->GetNextNodePos()
+			// 노드 리스트 초기화
+			mNaviScript->WayNodeListClear();
+
+			// 현재 GolemSoldier 가 위치한 노드의 정보를 초기화
+			CCollider2D* golemBackCol = thisColList->GetCollider(eCollideType::Background);
+			Vector3 golemBackColPos = golemBackCol->GetColliderPosition();
+
+			// golemsoldier 가 현재 위치한 Node 의 아이디를 지정한다.
+			mNaviScript->SetNodeIdOnThisObj(Vector2(golemBackColPos.x, golemBackColPos.y));
+			// 이 부분에서 A* 알고리즘 구현 (NodeList 구현)
+			mNaviScript->SetWayNodeList();
+			
 		}
 
 		
-
-		
-
-
-
-		
-
-
-
 	}
 	else if (curState == eState::Attack)
 	{

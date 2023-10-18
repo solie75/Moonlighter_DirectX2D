@@ -30,8 +30,8 @@ void CNaviScript::Update()
 		Vector2 thisColforBackgroundScale = thisColforBackground->GetSize();
 	}*/
 	
-	//std::map<UINT, sNode>::iterator iter = mNodeList.begin();
-	//for (; iter != mNodeList.end(); iter++)
+	//std::map<UINT, sNode>::iterator iter = mTotalNodeList.begin();
+	//for (; iter != mTotalNodeList.end(); iter++)
 	//{
 	//	iter->second.nodeObj->Update();
 	//}
@@ -39,8 +39,8 @@ void CNaviScript::Update()
 
 void CNaviScript::LateUpdate()
 {
-	//std::map<UINT, sNode>::iterator iter = mNodeList.begin();
-	//for (; iter != mNodeList.end(); iter++)
+	//std::map<UINT, sNode>::iterator iter = mTotalNodeList.begin();
+	//for (; iter != mTotalNodeList.end(); iter++)
 	//{
 	//	iter->second.nodeObj->LateUpdate();
 	//}
@@ -83,8 +83,8 @@ void CNaviScript::SetNodeList(Vector2 ObjColSize, UINT mapNum)
 			nodeData.nodePos = NodePos;
 			nodeData.IsCollide = false;
 
-			// 여기에서 처음의 sNode 를 추기화
-			mNodeList.insert(std::make_pair((UINT)100 * j + i, nodeData)); // 천과 백자리 -> x  십과 일자리-> y
+			// 여기에서 처음의 sNode 를 초기화
+			mTotalNodeList.insert(std::make_pair((UINT)100 * j + i, nodeData)); // 천과 백자리 -> x  십과 일자리-> y
 		}
 	}
 
@@ -94,9 +94,9 @@ void CNaviScript::SetNodeList(Vector2 ObjColSize, UINT mapNum)
 
 void CNaviScript::SetIsCollide(UINT mapNum)
 {
-	std::map<UINT, sNode>::iterator iter = mNodeList.begin();
+	std::map<UINT, sNode>::iterator iter = mTotalNodeList.begin();
 	vector<CDungeonMgr::sColliderOnMap> ColliderList = CDungeonMgr::GetInst()->GetColliderData(mapNum);
-	for (; iter != mNodeList.end(); iter++)
+	for (; iter != mTotalNodeList.end(); iter++)
 	{
 		for (int i = 0; i < ColliderList.size(); i++)
 		{
@@ -131,40 +131,40 @@ void CNaviScript::SetIsCollide(UINT mapNum)
 			}
 		}
 	}
+}
 
+// 현재 객체의 위치가 어는 Node 위에 있는지 검색
+void CNaviScript::SetNodeIdOnThisObj(Vector2 startObjPos)
+{
+	//Vector2 PosBasedOn = Vector2(startObjPos.x - mMapPos.x, startObjPos.y - mMapPos.y);
+	std::map<UINT, sNode>::iterator iter = mTotalNodeList.begin();
+	float firstNodeLeftPos = iter->second.nodePos.x - mNodeSize.x/2.0f;
+	float firstNodeUpPos = iter->second.nodePos.y + mNodeSize.y/2.0f;
+
+	UINT NodeNumBitweenMapLeftAndStartObj = (startObjPos.x - firstNodeLeftPos) / mNodeSize.x;
+	UINT NodeNumBitweenMapUpAndstartObj = (firstNodeUpPos - startObjPos.y) / mNodeSize.y;
+
+	mCurNodeId = NodeNumBitweenMapLeftAndStartObj * 10 + NodeNumBitweenMapUpAndstartObj;
+}
+
+void CNaviScript::SetAroundNodeList(UINT NodeId)
+{
 
 }
 
-void CNaviScript::DeleteNodeCollideWithBackCol(std::vector<CGameObject*> mBackColObj)
+void CNaviScript::SetWayNodeList()
 {
-	//std::map<UINT, sNode>::iterator iter = mNodeList.begin();
-
-	//for (; iter != mNodeList.end(); iter++)
-	//{
-	//	CCollider2D* iterCdforBack = iterCdMgr->GetCollider(eCollideType::Node);
-
-	//	for (int i = 0; i < mBackColObj.size(); i++)
-	//	{
-	//		CCollider2D* backCol  =  mBackColObj[i]->GetComponent<CColliderMgr>(eComponentType::ColliderList)->GetCollider(eCollideType::Background);
-	//		if (CCollisionMgr::GetInst()->Intersect(iterCdforBack, backCol))
-	//		{
-	//			iter->second.IsCollide = true;
-	//			//a++;
-	//		}
-	//	}
-	//}
-
-	//for (; iter != mNodeList.end(); iter++) {
-	//	if (iter->second.IsCollide == true)
-	//	{
-	//		iter->second.nodeObj->SetState(CGameObject::eObjectState::Dead);
-	//	}
-	//}
+	GetNextNode();
 }
 
-Vector2 CNaviScript::GetNextNodePos(Vector2 startObjPos, Vector2 DestObjPos)
+void CNaviScript::WayNodeListClear()
 {
+	mWayNodeList.clear();
+}
 
+UINT CNaviScript::GetNextNode(UINT curNodeId, UINT DestNodeId)
+{
+	UINT NextNodeId;
 
-	return Vector2();
+	return NextNodeId;
 }

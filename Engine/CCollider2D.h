@@ -16,6 +16,7 @@ public:
         eLayerType type;
         Vector2 pos;
         UINT damage;
+        CCollider2D* otherCol;
     };
 
 private:
@@ -125,6 +126,7 @@ public:
             data.type = eLayerType::End;
             data.pos = Vector2(0.0f, 0.0f);
             data.damage = 0;
+            data.otherCol = nullptr;
 
             return data;
         }
@@ -137,6 +139,7 @@ public:
         data.type = eLayerType::End;
         data.pos = Vector2(0.0f, 0.0f);
         data.damage = 0;
+        data.otherCol = nullptr;
 
         if (mColliderDataList.size() == 0)
         {

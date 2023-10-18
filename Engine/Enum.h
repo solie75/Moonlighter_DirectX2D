@@ -67,6 +67,7 @@ enum class eCollideType
 {
 	Background,
 	Hit,
+	Detection,
 	Node,
 	End,
 };
