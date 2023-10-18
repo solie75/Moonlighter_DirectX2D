@@ -149,6 +149,10 @@ void CCollisionMgr::ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCo
 			{
 				leftCol->OnCollisionEnter(rightCol);
 			}
+			else if (leftCol->GetCollideType() == eCollideType::Node && rightCol->GetCollideType() == eCollideType::Background)
+			{
+				leftCol->OnCollisionEnter(rightCol);
+			}
 			
 		}
 
@@ -161,6 +165,10 @@ void CCollisionMgr::ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCo
 			if (leftCol->GetCollideType() == rightCol->GetCollideType())
 			{
 				rightCol->OnCollisionEnter(leftCol);
+			}
+			else if (leftCol->GetCollideType() == eCollideType::Node && rightCol->GetCollideType() == eCollideType::Background)
+			{
+				leftCol->OnCollisionEnter(rightCol);
 			}
 		}
 	}
@@ -200,22 +208,8 @@ bool CCollisionMgr::Intersect(CCollider2D* leftCol, CCollider2D* rightCol)
 		Vector3(-0.5f, -0.5f, 0.0f)
 	};
 
-	/*CTransform* leftTr =  ->GetOwner()->GetComponent <CTransform>(eComponentType::Transform);
-	CTransform* rightTr = rightCol->GetOwner()->GetComponent<CTransform>(eComponentType::Transform);*/
-
-	//Matrix leftMatrix = leftTr->GetWorldMatrix(); // 월드 변환
-	//Matrix rightMatrix = rightTr->GetWorldMatrix();
-
 	Matrix leftMatrix = leftCol->GetColliderWorldMatrix();
 	Matrix rightMatrix = rightCol->GetColliderWorldMatrix();
-
-	//Vector3 leftScale = Vector3(leftCol->GetSize().x, leftCol->GetSize().y, 1.0f);
-	//Matrix  leftScaleMatrix = Matrix::CreateScale(leftScale);
-	//leftMatrix *= leftScaleMatrix; // 월드 변환에 충돌체의 크기 적용
-
-	//Vector3 rightScale = Vector3(rightCol->GetSize().x, rightCol->GetSize().y, 1.0f);
-	//Matrix rightScaleMatrix = Matrix::CreateScale(rightScale);
-	//rightMatrix *= rightScaleMatrix;
 	
 	// 분리축 배열
 	Vector3 Axis[4] = {};
@@ -241,7 +235,6 @@ bool CCollisionMgr::Intersect(CCollider2D* leftCol, CCollider2D* rightCol)
 	}
 	
 	// 두 충돌체의 중심 사이의 거리
-	//Vector3 vDist = leftTr->GetColliderPosition() - rightTr->GetColliderPosition();
 	Vector3 vDist = leftCol->GetColliderPosition() - rightCol->GetColliderPosition();
 	vDist.z = 0.0f;
 

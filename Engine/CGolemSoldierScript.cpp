@@ -1,9 +1,11 @@
 #include "CGolemSoldierScript.h"
 #include "CKeyMgr.h"
+#include "CColliderMgr.h"
 
 CGolemSoldierScript::CGolemSoldierScript()
 {
 	mNaviScript = new CNaviScript;
+	player = nullptr;
 }
 
 CGolemSoldierScript::~CGolemSoldierScript()
@@ -17,6 +19,24 @@ void CGolemSoldierScript::Initialize()
 	GetOwner()->SetHP(100);
 	
 	GetMonsterState()->SetState(eState::Idle);
+
+	CColliderMgr* golemSoldierCdList = GetOwner()->AddComponent<CColliderMgr>(eComponentType::ColliderList);
+
+	CCollider2D* golemSoldierCDforBackground = new CCollider2D;
+	golemSoldierCDforBackground->SetName(L"golemSoldierCDforBackground");
+	golemSoldierCDforBackground->SetCollideType(eCollideType::Background);
+
+	golemSoldierCDforBackground->SetOffset(Vector2(0.0f, -0.2f));
+	golemSoldierCdList->AddCollider(golemSoldierCDforBackground);
+	golemSoldierCDforBackground->SetSize(Vector2(0.4f, 0.1f));
+
+	CCollider2D* golemSoldierCDforHit = new CCollider2D;
+	golemSoldierCDforHit->SetName(L"KatamariCDforHit");
+	golemSoldierCDforHit->SetCollideType(eCollideType::Hit);
+
+	golemSoldierCDforHit->SetOffset(Vector2(0.0f, 0.0f));
+	golemSoldierCdList->AddCollider(golemSoldierCDforHit);
+	golemSoldierCDforHit->SetSize(Vector2(1.0f, 1.0f));
 }
 
 void CGolemSoldierScript::Update()
@@ -43,7 +63,7 @@ void CGolemSoldierScript::Update()
 		}
 
 		// 우선 키 버튼으로 정상적으로 움직이는 지 확인한다.
-		if (CKeyMgr::GetInst()->GetKeyState(KEY::F) == KEY_STATE::PRESSED)
+		/*if (CKeyMgr::GetInst()->GetKeyState(KEY::F) == KEY_STATE::PRESSED)
 		{
 			GetMonsterAimSight()->SetSight(CAimSight::eSight::Left);
 			thisPos.x -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
@@ -70,7 +90,29 @@ void CGolemSoldierScript::Update()
 		if (CKeyMgr::GetInst()->GetKeyState(KEY::Y) == KEY_STATE::PRESSED)
 		{
 			GetMonsterState()->SetState(eState::Attack);
+		}*/
+
+		// Lock on 된 대상자가 없을 때
+		if (player == nullptr)
+		{
+
 		}
+		else // 대상자가 lock on 되었을 때
+		{
+			// 이 부분에서 A* 알고리즘 구현
+			mNaviScript->GetNextNodePos()
+		}
+
+		
+
+		
+
+
+
+		
+
+
+
 	}
 	else if (curState == eState::Attack)
 	{

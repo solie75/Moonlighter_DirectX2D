@@ -1,6 +1,7 @@
 #pragma once
 #include "CScene.h"
 #include "CPlayer.h"
+#include "CNaviScript.h"
 
 class CDesertDungeonScene :
     public CScene
@@ -18,7 +19,7 @@ private:
     UINT CurMapNum;
 
     std::vector<CGameObject*> mTempGameObjects;
-
+    CNaviScript* golemNaviScript;
 public:
     CDesertDungeonScene();
     ~CDesertDungeonScene();

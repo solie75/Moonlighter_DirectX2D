@@ -54,6 +54,8 @@ public:
     void LateUpdate(CTransform* tr);
     void Render();
 
+    void SetWorldMat(Vector3 scale, Vector3 pos);
+
     void SetColliderType(eColliderType type) { mColliderType = type; }
     eColliderType GetColliderType() { return mColliderType; }
     void SetCollideType(eCollideType type) { mCollideType = type; }
@@ -71,7 +73,7 @@ public:
         if (mColliderSize != Vector2::One)
         {
             mColliderSize.x *= objScale.x;
-            mColliderSize *= objScale.y;
+            mColliderSize.y *= objScale.y;
         }
         else
         {

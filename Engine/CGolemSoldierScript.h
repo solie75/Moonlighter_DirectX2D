@@ -8,6 +8,8 @@ class CGolemSoldierScript :
 private:
     Vector2 mScaleforDongeonMap = Vector2(12.4, 4.85f);
     CNaviScript* mNaviScript;
+    CGameObject* player;
+
 
 public:
     CGolemSoldierScript();

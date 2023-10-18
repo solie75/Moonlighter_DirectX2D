@@ -75,6 +75,21 @@ void CCollider2D::Render()
 {
 }
 
+//void CCollider2D::SetWorldMat(Vector3 scale)
+void CCollider2D::SetWorldMat(Vector3 size, Vector3 pos)
+{
+    mWorldMat = Matrix::Identity;
+    Matrix scale = Matrix::CreateScale(Vector3(size.x, size.y, 0.f));
+    Matrix rotation;
+    rotation = Matrix::CreateRotationX(0.0f);
+    rotation *= Matrix::CreateRotationY(0.0f);
+    rotation *= Matrix::CreateRotationZ(0.0f);
+    Matrix position;
+    position.Translation(pos);
+
+    mWorldMat = scale * rotation * position;
+}
+
 void CCollider2D::OnCollisionEnter(CCollider2D* other)
 {
     ColliderData data = {};

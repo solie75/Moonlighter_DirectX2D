@@ -14,7 +14,8 @@ public:
         UINT curSideValue;
         Vector2 nodePos;
         sNode* ParentNode;
-        CGameObject* nodeObj;
+        //CGameObject* nodeObj;
+        bool IsCollide;
     };
 
 private:
@@ -25,6 +26,7 @@ private:
     UINT mMapNum;
     Vector2 mMapPos;
     CScript* OwnerScript;
+
 public:
     CNaviScript();
     ~CNaviScript();
@@ -32,6 +34,8 @@ public:
     virtual void Initialize();
     virtual void Update();
     virtual void LateUpdate();
+
+    void SetIsCollide(UINT mapNum);
 
     //void SetGrid(Vector2 mapSize, UINT mapNum);
     void SetScene(CScene* scene) { mCurScene = scene; }
@@ -41,7 +45,9 @@ public:
     void SetMapNum(UINT num) { mMapNum = num; }
     void SetMapPos(Vector2 vec) { mMapPos = vec; };
     void SetOwnerScript(CScript* script) { OwnerScript = script; }
-    bool IsNodeCollideToBackground(Vector2 nodePos, Vector2 nodeSize, vector<CDungeonMgr::sColliderOnMap> ColList);
-    void DeleteNodeCollideWithBackCol();
+    //bool IsNodeCollideToBackground(Vector2 nodePos, Vector2 nodeSize, vector<CDungeonMgr::sColliderOnMap> ColList);
+    void DeleteNodeCollideWithBackCol(std::vector<CGameObject*> mBackColObj);
+    Vector2 GetNextNodePos(Vector2 startObjPos, Vector2 DestObjPos);
+
 };
 
