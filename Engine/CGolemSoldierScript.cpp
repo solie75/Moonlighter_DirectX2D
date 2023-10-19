@@ -1,12 +1,14 @@
 #include "CGolemSoldierScript.h"
 #include "CKeyMgr.h"
 #include "CColliderMgr.h"
+#include <random>
 
 CGolemSoldierScript::CGolemSoldierScript()
 {
 	mNaviScript = new CNaviScript;
 	mbLockOn = false;
 	mTargetPos = Vector2::Zero;
+	mbMoving = false;
 }
 
 CGolemSoldierScript::~CGolemSoldierScript()
@@ -15,6 +17,9 @@ CGolemSoldierScript::~CGolemSoldierScript()
 
 void CGolemSoldierScript::Initialize()
 {
+	/*Vector3 GetBackColSize = GetOwner()->GetComponent<CColliderMgr>(eComponentType::ColliderList)->GetCollider(eCollideType::Background)->GetColliderScale();
+	mNaviScript->SetNodeSize(Vector2(GetBackColSize.x, GetBackColSize.y));*/
+
 	SetOwnerOnMonsterScript(GetOwner());
 	CMonsterScript::Initialize();
 	GetOwner()->SetHP(100);
@@ -74,40 +79,58 @@ void CGolemSoldierScript::Update()
 			GetMonsterState()->SetState(eState::Idle);
 		}
 
-		// 우선 키 버튼으로 정상적으로 움직이는 지 확인한다.
-		/*if (CKeyMgr::GetInst()->GetKeyState(KEY::F) == KEY_STATE::PRESSED)
-		{
-			GetMonsterAimSight()->SetSight(CAimSight::eSight::Left);
-			thisPos.x -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-			thisTr->SetPosition(thisPos);
-		}
-		if (CKeyMgr::GetInst()->GetKeyState(KEY::H) == KEY_STATE::PRESSED)
-		{
-			GetMonsterAimSight()->SetSight(CAimSight::eSight::Right);
-			thisPos.x += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-			thisTr->SetPosition(thisPos);
-		}
-		if (CKeyMgr::GetInst()->GetKeyState(KEY::T) == KEY_STATE::PRESSED)
-		{
-			GetMonsterAimSight()->SetSight(CAimSight::eSight::Up);
-			thisPos.y += (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-			thisTr->SetPosition(thisPos);
-		}
-		if (CKeyMgr::GetInst()->GetKeyState(KEY::G) == KEY_STATE::PRESSED)
-		{
-			GetMonsterAimSight()->SetSight(CAimSight::eSight::Down);
-			thisPos.y -= (float)(2.0 * CTimeMgr::GetInst()->GetDeltaTime());
-			thisTr->SetPosition(thisPos);
-		}
-		if (CKeyMgr::GetInst()->GetKeyState(KEY::Y) == KEY_STATE::PRESSED)
-		{
-			GetMonsterState()->SetState(eState::Attack);
-		}*/
 
 		// Lock on 된 대상자가 없을 때
 		if (playerCol == nullptr)
 		{
 			CCollider2D* golemDetectionCol = thisColList->GetCollider(eCollideType::Detection);
+
+			if (mbMoving == false)
+			{
+				int randomInt_X = 0;
+				int randomInt_Y = 0;
+
+				while (true)
+				{
+					std::random_device rd;
+					std::mt19937 generator(rd());
+
+					int min_value = 5;
+					int max_value = 30;
+					std::uniform_int_distribution<int> distribution(min_value, max_value);
+
+					randomInt_X = distribution(generator);
+					randomInt_Y = distribution(generator);
+
+					if (mNaviScript->IsCollideNode(randomInt_X * 100 + randomInt_Y) == false)
+					{
+						break;
+					}
+				}
+
+				mNaviScript->WayNodeListClear();
+				CCollider2D* golemBackCol = thisColList->GetCollider(eCollideType::Background);
+				Vector3 golemBackColPos = golemBackCol->GetColliderPosition();
+
+				// golemsoldier 가 현재 위치한 Node 의 아이디를 지정한다.
+				mNaviScript->SetStartNode(Vector2(golemBackColPos.x, golemBackColPos.y));
+				mNaviScript->SetGoalNode(Vector2(playerCol->GetColliderPosition().x, playerCol->GetColliderPosition().y));
+				// 이 부분에서 A* 알고리즘 구현 (NodeList 구현)
+				UINT stepNum = mNaviScript->SetWayNodeList();
+				mNaviScript->SetAStarNodeList(stepNum);
+				mbMoving = true;
+			}
+			else // mbMoving == ture
+			{
+				CCollider2D* golemBackCol = thisColList->GetCollider(eCollideType::Background);
+				Vector3 golemBackColPos = golemBackCol->GetColliderPosition();
+				// calculate Moveing 
+				Vector2 direction = mNaviScript->GetMovingDirection(Vector2(golemBackColPos.x, golemBackColPos.y));
+				float speed = 0.1f;
+				thisTr->SetPosition(thisPos.x + (direction.x * speed), thisPos.y + (direction.y * speed), 0.0f);
+			}
+			
+			
 
 			if (golemDetectionCol->GetColliderData(eLayerType::Player).id != 0)
 			{
@@ -130,9 +153,11 @@ void CGolemSoldierScript::Update()
 			Vector3 golemBackColPos = golemBackCol->GetColliderPosition();
 
 			// golemsoldier 가 현재 위치한 Node 의 아이디를 지정한다.
-			mNaviScript->SetNodeIdOnThisObj(Vector2(golemBackColPos.x, golemBackColPos.y));
+			mNaviScript->SetStartNode(Vector2(golemBackColPos.x, golemBackColPos.y));
+			mNaviScript->SetGoalNode(Vector2(playerCol->GetColliderPosition().x, playerCol->GetColliderPosition().y));
 			// 이 부분에서 A* 알고리즘 구현 (NodeList 구현)
-			mNaviScript->SetWayNodeList();
+			UINT stepNum = mNaviScript->SetWayNodeList();
+			mNaviScript->SetAStarNodeList(stepNum);
 			
 		}
 

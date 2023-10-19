@@ -153,6 +153,10 @@ void CCollisionMgr::ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCo
 			{
 				leftCol->OnCollisionEnter(rightCol);
 			}
+			else if (leftCol->GetCollideType() == eCollideType::Detection && rightCol->GetCollideType() == eCollideType::Background)
+			{
+				leftCol->OnCollisionEnter(rightCol);
+			}
 			
 		}
 
@@ -167,6 +171,10 @@ void CCollisionMgr::ColliderCollision(CCollider2D* leftCol, CCollider2D* rightCo
 				rightCol->OnCollisionEnter(leftCol);
 			}
 			else if (leftCol->GetCollideType() == eCollideType::Node && rightCol->GetCollideType() == eCollideType::Background)
+			{
+				leftCol->OnCollisionEnter(rightCol);
+			}
+			else if (leftCol->GetCollideType() == eCollideType::Detection && rightCol->GetCollideType() == eCollideType::Background)
 			{
 				leftCol->OnCollisionEnter(rightCol);
 			}

@@ -9,11 +9,13 @@ class CNaviScript :
 public:
     struct sNode
     {
+        UINT id;
         UINT total;
         UINT heuristicValue;
-        UINT curSideValue;
+        UINT stepValue;
         Vector2 nodePos;
-        sNode* ParentNode;
+        //sNode* ParentNode;
+        UINT ParentNodeId;
         //CGameObject* nodeObj;
         bool IsCollide;
     };
@@ -26,9 +28,14 @@ private:
     UINT mMapNum;
     Vector2 mMapPos;
     CScript* OwnerScript;
-    UINT mCurNodeId;
+    UINT mStartNodeId;
+    UINT mGoalNodeId;
+    UINT curStepOnMoving;
+    std::map<UINT, vector<sNode>> mAStarNodeList;
+
+
     UINT mNextNodeId;
-    std::map<UINT, sNode> mAroundNodeList;
+    //std::map<UINT, sNode> mAroundNodeList;
     std::map<UINT, sNode> mWayNodeList;
 
 public:
@@ -40,7 +47,7 @@ public:
     virtual void LateUpdate();
 
     void SetIsCollide(UINT mapNum);
-
+    void SetAStarNodeList(UINT stepNum);
     //void SetGrid(Vector2 mapSize, UINT mapNum);
     void SetScene(CScene* scene) { mCurScene = scene; }
     // map position range (x : -3.1 ~ 3.1, y : -1.7 + 1.7) 
@@ -49,13 +56,17 @@ public:
     void SetMapNum(UINT num) { mMapNum = num; }
     void SetMapPos(Vector2 vec) { mMapPos = vec; };
     void SetOwnerScript(CScript* script) { OwnerScript = script; }
-    //bool IsNodeCollideToBackground(Vector2 nodePos, Vector2 nodeSize, vector<CDungeonMgr::sColliderOnMap> ColList);
-    //void DeleteNodeCollideWithBackCol(std::vector<CGameObject*> mBackColObj);
-    void SetNodeIdOnThisObj(Vector2 startObjPos);
+    void SetStartNode(Vector2 startObjPos);
+    void SetGoalNode(Vector2 goalObjPos);
     void SetAroundNodeList(UINT NodeId);
-    void SetWayNodeList();
+    UINT SetWayNodeList(); // 총 단계의 수를 반환한다.
     void WayNodeListClear();
+    void SetNodeSize(Vector2 size) { mNodeSize = size; }
+    UINT GetNodeId(Vector2 NodePos);
+    UINT GetHeuristicValue(UINT StartId);
     UINT GetNextNode();
+    bool IsCollideNode(UINT nodeId);
+    Vector2 GetMovingDirection(Vector2 curPos);
 
 };
 

@@ -524,10 +524,10 @@ void CDesertDungeonScene::LateUpdate()
 {
 	CScene::LateUpdate();
 	
-	if (golemNaviScript != nullptr)
+	/*if (golemNaviScript != nullptr)
 	{
 		golemNaviScript->DeleteNodeCollideWithBackCol(mTempGameObjects);
-	}
+	}*/
 	
 }
 

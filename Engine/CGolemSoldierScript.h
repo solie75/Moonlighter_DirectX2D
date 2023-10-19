@@ -11,7 +11,7 @@ private:
     CCollider2D* playerCol;
     bool mbLockOn;
     Vector2 mTargetPos;
-
+    bool mbMoving;
 
 public:
     CGolemSoldierScript();
