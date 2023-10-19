@@ -9,6 +9,7 @@ CGolemSoldierScript::CGolemSoldierScript()
 	mbLockOn = false;
 	mTargetPos = Vector2::Zero;
 	mbMoving = false;
+	pauseTime = 0.0f;
 }
 
 CGolemSoldierScript::~CGolemSoldierScript()
@@ -69,6 +70,20 @@ void CGolemSoldierScript::Update()
 
 	if (curState == eState::Idle)
 	{
+		CCollider2D* CdforHit = thisColList->GetCollider(eCollideType::Hit);
+		if (CdforHit->GetColliderData(eLayerType::Player).id != 0)
+		{
+			GetMonsterState()->SetState(eState::Attack);
+			if (CdforHit->GetColliderData(eLayerType::Player).pos.x > thisPos.x)
+			{
+				GetMonsterAimSight()->SetSight(CAimSight::eSight::Right);
+			}
+			else
+			{
+				GetMonsterAimSight()->SetSight(CAimSight::eSight::Left);
+			}
+		}
+
 		if (prevState != eState::Idle)
 		{
 			thisTr->SetScale(Vector3(0.5f, 0.7f, 0.0f));
@@ -87,38 +102,45 @@ void CGolemSoldierScript::Update()
 
 			if (mbMoving == false)
 			{
-				int randomInt_X = 0;
-				int randomInt_Y = 0;
-
-				while (true)
+				pauseTime += CTimeMgr::GetInst()->GetDeltaTime(); // 멈춰있는 시간
+				if (pauseTime > 1.0f)
 				{
-					std::random_device rd;
-					std::mt19937 generator(rd());
+					int randomInt_X = 0;
+					int randomInt_Y = 0;
 
-					int min_value = 5;
-					int max_value = 30;
-					std::uniform_int_distribution<int> distribution(min_value, max_value);
-
-					randomInt_X = distribution(generator);
-					randomInt_Y = distribution(generator);
-
-					if (mNaviScript->IsCollideNode(randomInt_X * 100 + randomInt_Y) == false)
+					while (true)
 					{
-						break;
+						std::random_device rd;
+						std::mt19937 generator(rd());
+
+						int min_value = 5;
+						int max_value = 30;
+						std::uniform_int_distribution<int> distribution(min_value, max_value);
+
+						randomInt_X = distribution(generator);
+						randomInt_Y = distribution(generator);
+
+						if (mNaviScript->IsCollideNode(randomInt_X * 100 + randomInt_Y) == false)
+						{
+							break;
+						}
 					}
+
+					mNaviScript->WayNodeListClear();
+					CCollider2D* golemBackCol = thisColList->GetCollider(eCollideType::Background);
+					Vector3 golemBackColPos = golemBackCol->GetColliderPosition();
+
+					// golemsoldier 가 현재 위치한 Node 의 아이디를 지정한다.
+					mNaviScript->SetStartNode(Vector2(golemBackColPos.x, golemBackColPos.y));
+					mNaviScript->SetGoalNode(randomInt_X * 100 + randomInt_Y);
+					// 이 부분에서 A* 알고리즘 구현 (NodeList 구현)
+					mNaviScript->AStarNodeListClear();
+					UINT stepNum = mNaviScript->SetWayNodeList();
+					
+					mNaviScript->SetAStarNodeList(stepNum);
+					mbMoving = true;
+					pauseTime = 0.0f;
 				}
-
-				mNaviScript->WayNodeListClear();
-				CCollider2D* golemBackCol = thisColList->GetCollider(eCollideType::Background);
-				Vector3 golemBackColPos = golemBackCol->GetColliderPosition();
-
-				// golemsoldier 가 현재 위치한 Node 의 아이디를 지정한다.
-				mNaviScript->SetStartNode(Vector2(golemBackColPos.x, golemBackColPos.y));
-				mNaviScript->SetGoalNode(Vector2(playerCol->GetColliderPosition().x, playerCol->GetColliderPosition().y));
-				// 이 부분에서 A* 알고리즘 구현 (NodeList 구현)
-				UINT stepNum = mNaviScript->SetWayNodeList();
-				mNaviScript->SetAStarNodeList(stepNum);
-				mbMoving = true;
 			}
 			else // mbMoving == ture
 			{
@@ -126,7 +148,12 @@ void CGolemSoldierScript::Update()
 				Vector3 golemBackColPos = golemBackCol->GetColliderPosition();
 				// calculate Moveing 
 				Vector2 direction = mNaviScript->GetMovingDirection(Vector2(golemBackColPos.x, golemBackColPos.y));
-				float speed = 0.1f;
+				if (direction == Vector2(0.0f, 0.0f))
+				{ // goalNode 에 도달한 경우
+					mbMoving = false;
+					mNaviScript->WayNodeListClear();
+				}
+				float speed = 0.005f;
 				thisTr->SetPosition(thisPos.x + (direction.x * speed), thisPos.y + (direction.y * speed), 0.0f);
 			}
 			
@@ -156,9 +183,14 @@ void CGolemSoldierScript::Update()
 			mNaviScript->SetStartNode(Vector2(golemBackColPos.x, golemBackColPos.y));
 			mNaviScript->SetGoalNode(Vector2(playerCol->GetColliderPosition().x, playerCol->GetColliderPosition().y));
 			// 이 부분에서 A* 알고리즘 구현 (NodeList 구현)
+
+			mNaviScript->AStarNodeListClear();
 			UINT stepNum = mNaviScript->SetWayNodeList();
 			mNaviScript->SetAStarNodeList(stepNum);
-			
+
+			Vector2 direction = mNaviScript->GetMovingDirection(Vector2(golemBackColPos.x, golemBackColPos.y));
+			float speed = 0.01f;
+			thisTr->SetPosition(thisPos.x + (direction.x * speed), thisPos.y + (direction.y * speed), 0.0f);
 		}
 
 		

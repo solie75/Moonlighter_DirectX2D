@@ -12,6 +12,7 @@ private:
     bool mbLockOn;
     Vector2 mTargetPos;
     bool mbMoving;
+    float pauseTime; // 스스로 움직이다가. 목표 노드에 도달 했을 때 멈추는 시간
 
 public:
     CGolemSoldierScript();

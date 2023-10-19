@@ -114,6 +114,11 @@ void CNaviScript::SetGoalNode(Vector2 goalObjPos)
 	mGoalNodeId = GetNodeId(goalObjPos);
 }
 
+void CNaviScript::SetGoalNode(UINT goalObjID)
+{
+	mGoalNodeId = goalObjID;
+}
+
 UINT CNaviScript::GetNodeId(Vector2 NodePos)
 {
 	std::map<UINT, sNode>::iterator iter = mTotalNodeList.begin();
@@ -257,14 +262,20 @@ void CNaviScript::WayNodeListClear()
 	mWayNodeList.clear();
 }
 
+void CNaviScript::AStarNodeListClear()
+{
+	mAStarNodeList.clear();
+}
+
 bool CNaviScript::IsCollideNode(UINT nodeId)
 {
 	std::map<UINT, sNode>::iterator iter = mTotalNodeList.find(nodeId);
-	if (iter != mTotalNodeList.end())
+	/*if (iter != mTotalNodeList.end())
 	{
 		return iter->second.IsCollide;
-	}
-	else
+	}*/
+	return iter->second.IsCollide;
+	if(iter == mTotalNodeList.end())
 	{ // 찾으려는 NodeId 가 없는 경우, true 를 반환하여 불가능한 Node 로 취급되게 한다.
 		return true;
 	}
@@ -272,12 +283,27 @@ bool CNaviScript::IsCollideNode(UINT nodeId)
 
 Vector2 CNaviScript::GetMovingDirection(Vector2 curPos)
 {
+	
 	std::map<UINT, sNode>::iterator iterWithWay = mWayNodeList.find(curStepOnMoving);
 	std::map<UINT, sNode>::iterator iterWithTotal = mTotalNodeList.find(iterWithWay->second.id);
-	
 	Vector2 goalNodePos = iterWithTotal->second.nodePos;
-	Vector2::Normalize(Vector2(goalNodePos.x - curPos.x, goalNodePos.y - curPos.y));
-	return Vector2();
+
+	// 현재의 객체의 위치가 일정 수준 당장의 목표 Node 와 가까울 때 당장의 목표 NOde 를 다음 노드로 변경한다.
+	if (Vector2::Distance(curPos, goalNodePos) < 0.01f)
+	{
+		iterWithWay = mWayNodeList.find(curStepOnMoving++);
+		if (curStepOnMoving == mWayNodeList.size()-1)
+		{
+			return Vector2(0.0f, 0.0f);
+		}
+		iterWithTotal = mTotalNodeList.find(iterWithWay->second.id);
+		goalNodePos = iterWithTotal->second.nodePos;
+	}
+	
+	//Vector2::Normalize(Vector2(goalNodePos.x - curPos.x, goalNodePos.y - curPos.y));
+	Vector2 DirectNormal = Vector2(goalNodePos.x - curPos.x, goalNodePos.y - curPos.y);
+	DirectNormal.Normalize();
+	return DirectNormal;
 }
 
 //UINT CNaviScript::GetNextNode(UINT curNodeId, UINT DestNodeId)

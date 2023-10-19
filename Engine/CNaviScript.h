@@ -58,9 +58,11 @@ public:
     void SetOwnerScript(CScript* script) { OwnerScript = script; }
     void SetStartNode(Vector2 startObjPos);
     void SetGoalNode(Vector2 goalObjPos);
+    void SetGoalNode(UINT goalObjID);
     void SetAroundNodeList(UINT NodeId);
     UINT SetWayNodeList(); // 총 단계의 수를 반환한다.
     void WayNodeListClear();
+    void AStarNodeListClear();
     void SetNodeSize(Vector2 size) { mNodeSize = size; }
     UINT GetNodeId(Vector2 NodePos);
     UINT GetHeuristicValue(UINT StartId);
